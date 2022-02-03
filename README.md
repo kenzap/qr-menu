@@ -16,9 +16,7 @@ Map static images with interactive polygons and seats. Used to for seat reservat
 <li>Private venues.</li>
 </ul>
 
-You can export custom created layouts to <a href="https://wordpress.org/plugins/myticket-events/" >MyTicket Events WordPress plugin</a> and view it directly on your website.
-
-To start layout mapping in Cloud visit this link: <a href="https://myticket.kenzap.cloud/" >MyTicket Events WordPress plugin</a>.
+You can export custom created layouts to <a href="https://wordpress.org/plugins/myticket-events/" >MyTicket Events WordPress plugin</a> and view it directly on your website. To start layout mapping in Cloud visit this link: <a href="https://myticket.kenzap.cloud/" >MyTicket Events WordPress plugin</a>.
 
 ![Seat Mapping](https://cdn.kenzap.com/github/img/myticket-2.png)
 
