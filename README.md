@@ -1,23 +1,27 @@
-# E-commerce
+# MyTicket - Seat Mapping
 
-Create and organize products used in e-commerce, orders and checkout.
+Map static images with interactive polygons and seats. Used to for seat reservation systems in WordPress and Kenzap Cloud.
 
-![E-commerce](https://cdn.kenzap.com/github/img/extension-ecommerce.png)
+![Seat Mapping](https://cdn.kenzap.com/github/img/myticket-1.png)
 
-<b>With solution one can:</b>
+<b>This solution is optimized for:</b>
 
 <ul>
-<li>Register ecommerce products</li>
-<li>Manage inventory</li>
-<li>Upload product images</li>
-<li>Set up price variations</li>
-<li>Share products</li>
-<li>Use open API to work with products</li>
-<li>Scale and localize solution</li>
-<li>Set custom notifications</li>
-<li>Collaborate</li>
-<li>View orders</li>
+<li>Large stadium 80,000+ seat reservation.</li>
+<li>Theaters and cinemas.</li>
+<li>Exhibition booth and market spot reservation.</li>
+<li>Beach deck booking.</li>
+<li>Private venues.</li>
+<li>Entertainment events.</li>
+<li>Private venues.</li>
 </ul>
+
+You can export custom created layouts to <a href="https://wordpress.org/plugins/myticket-events/" >MyTicket Events WordPress plugin</a> and view it directly on your website.
+
+To start layout mapping in Cloud visit this link: <a href="https://myticket.kenzap.cloud/" >MyTicket Events WordPress plugin</a>.
+
+![Seat Mapping](https://cdn.kenzap.com/github/img/myticket-2.png)
+
 
 ## Setup
 
