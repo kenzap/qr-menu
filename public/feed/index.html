@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<!-- <meta name="viewport" content="width=device-width"> -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="author" content="Kenzap Pte Ltd">
+	<meta name="viewport" content="width=device-width, user-scalable=no" />
+	<title>Interactive Ordering System</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,500|Roboto" rel="stylesheet">
+	
+	<!-- This part will be replaced by the customizer -->
+	<!-- Customizer start -->
+	<style>
+		:root {
+			--txtColorA: #111111;
+			--txtColorB: #818181;
+			--txtColorC: #ffffff;
+			--bgColorA: #ffffff;
+			--bgColorB: #F7F7F7;
+			--bgColorC: #000000;
+			--linkColorA: #1941DF;
+			--linkColorB: #1941dfd0;
+			--baseColorA: #1941df;
+			--baseColorB: #1941df;
+			--accColorA: #1941df;
+			--accColorB: #1941df;
+			--grayColorA: #F7F7F7;
+			--grayColorB: #c0c0c0;
+			--grayColorC: #818181;
+		}
+	</style>
+	<script>
+
+		const API_KEY = 'bJJ04G0y1HGpOtT8KczDRej20iWOnaauA2Y2UkI8QJxQDQ0AnkfYnm2t4KHuou9c';
+		let config = {"price":{"currency":"SGD","symbol":"S$","style":"left"},"cart":{"max_addition":10},"PREFIX":"/menu"};
+
+	</script>
+	<!-- Customizer end -->
+
+	<!-- Patterned BG https://www.freepik.com/free-photos-vectors/sushi-pattern -->
+	<link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+	<div class="kUNwHA">
+
+		<!-- scroll navigation container -->
+		<div class="scrollable" >
+			<div class="cat-controls">
+				<div class="tags-holder">
+					<div class="cata-sub-nav head">
+						<div class="arrow-holder-prev arrow-holder" style="display: none;">
+							<div class="nav-prev arrow">
+								<span>&lt;</span>
+							</div>
+						</div>
+						<div class="slideset">
+
+						</div>
+						<div class="arrow-holder-next arrow-holder" style="display: none;">
+							<div class="nav-next arrow">
+								<span>&gt;</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- menu contents -->
+			<div class="kenzap-container" style="max-width:670px">
+				
+			</div>
+		</div>
+
+		<!-- checkout bill preview popup -->
+		<div class="cdialog-cnt" style="max-width:670px">
+			<div class="cdialog">
+				<div type="button" class="close" data-dismiss="modal" aria-label="Close">
+				
+				</div>
+				<div class="kp-body">
+
+				</div>
+				<div class="kp-footer">
+
+				</div>
+			</div>
+		</div>
+
+		<!-- meal preview popup -->
+		<div class="mdialog-cnt" style="max-width:670px">
+			<div class="mdialog">
+				<div type="button" class="close" data-dismiss="modal" aria-label="Close">
+				
+				</div>
+				<div class="kp-img">
+					<img src="https://cdn.kenzap.com/loading.png" alt="image">
+				</div>
+				<div class="kp-body">
+					<h2></h2>
+					<p></p>
+					<div class="kp-vars">
+						
+					</div>
+					<div class="kp-note">
+						<textarea placeholder="leave a note for a kitchen"></textarea>
+					</div>
+					<div class="kp-add comp">
+						<div class="quantity buttons_added">
+							<div class="minus"></div><input type="number" disabled="disabled" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><div class="plus"></div>
+						</div>
+						<div class="mbtn dis">
+							<a class="add"><div class="cta">Add</div> <div class="price">$0.00</div></a>
+						</div>
+						<div style="clear:both;float: none;"></div>
+					</div>
+					<div style="clear:both;float: none;"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- fixed cta button cont -->
+		<div class="cta-btn" style="max-width:670px">
+			<div class="mbtn">View basket <span class="price">s$0.00</span></div>
+		</div>
+
+		<!-- loading overlay -->
+		<div class="overlay" style="display: none;">
+			<div class="loader" style="top:35%;display: none;">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+
+		<!-- toast notification -->
+		<div class="snackbar"></div>
+	
+		<!-- plays nice animation upon successful checkout -->
+		<script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+	
+	</div>
+
+	<script defer src="index.js"></script>
+</body>
+</html>

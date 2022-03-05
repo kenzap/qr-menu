@@ -68,21 +68,25 @@ const scriptOutputs = scriptPaths.reduce((files, file) => {
 	const outputPath = parts.slice(pathIndex).join("/")
 
 	// find working folders only
-	if(outputPath.indexOf("home/") != -1 && outputPath.indexOf("_/") != -1){
-		workingFolders.push(parts[parts.length-2]);
-	}
+	// if(outputPath.indexOf("home/") != -1 && outputPath.indexOf("_/") != -1){
+	// 	workingFolders.push(parts[parts.length-2]);
+	// }
 
-	// homepage goes to root
-	if(outputPath.indexOf("home/") != -1){
+	// // homepage goes to root
+	// if(outputPath.indexOf("home/") != -1){
 
-		return { [file]: absolutePath(targetFolder + parts[parts.length-1]), ...files }
+	// 	return { [file]: absolutePath(targetFolder + parts[parts.length-1]), ...files }
 
-	// any other page ordinary route
-	}else{
+	// // any other page ordinary route
+	// }else{
 
-		return { [file]: absolutePath(targetFolder + outputPath), ...files }
-	}
+		// return { [file]: absolutePath(targetFolder + outputPath), ...files }
+	// }
 
+
+	workingFolders.push(parts[parts.length-2]);
+	return { [file]: absolutePath(targetFolder + outputPath), ...files }
+	
 }, {})
 
 /**
@@ -132,19 +136,19 @@ if(prodEnv){
 }
 
 // creates predefined index.html files for browser navigation
-function createIndexes(key){
+// function createIndexes(key){
 
-	let keyF = key.replace('.js','.html');
-	keyF = keyF.replace('home/','');
+// 	let keyF = key.replace('.js','.html');
+// 	keyF = keyF.replace('home/','');
 
-	fs.copyFile('src/_/_index.html', targetFolder + keyF, function (err) {
-		if (err) throw err;
-		// console.log('Error creating '+targetFolder + keyF+' index file, make sure that template index file exists in src/_/_index.html. Error: ' + err);
-	});
+// 	fs.copyFile('src/_/_index.html', targetFolder + keyF, function (err) {
+// 		if (err) throw err;
+// 		// console.log('Error creating '+targetFolder + keyF+' index file, make sure that template index file exists in src/_/_index.html. Error: ' + err);
+// 	});
 
-	// public/home is now moved to root folder, removing instead TODO results in conflicts
-	// if (fs.existsSync(targetFolder + 'home')) fs.rmdirSync(targetFolder + 'home', { recursive: true });
-}
+// 	// public/home is now moved to root folder, removing instead TODO results in conflicts
+// 	// if (fs.existsSync(targetFolder + 'home')) fs.rmdirSync(targetFolder + 'home', { recursive: true });
+// }
 
 const bundles = scriptPaths.map((key) => {
 
@@ -162,9 +166,11 @@ const bundles = scriptPaths.map((key) => {
 		copy({
 			targets: [
 				{ src: ['public/home/*'], dest: 'public' },
-			]
+				// { src: ['src/**/*', '!src/_/*'], dest: 'public' },
+			],
+			// flatten: false
 		}),
-		createIndexes(key),
+		// createIndexes(key),
 	]
 
 	// plugin list for production mode

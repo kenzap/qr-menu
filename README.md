@@ -1,25 +1,28 @@
-# MyTicket - Seat Mapping
+# QR Code menu - Kenzap Cloud Extension
 
-Map static images with interactive polygons and seats. Used to for seat reservation systems in WordPress and Kenzap Cloud.
+With the help of this dashboard extention one can provide QR-code menu visual settings and configurations.
 
-![Seat Mapping](https://cdn.kenzap.com/github/img/myticket-1.png)
+![QR code menu dashboard](https://raw.githubusercontent.com/kenzap/qr-menu/main/preview.png)
 
 <b>This solution is optimized for:</b>
 
 <ul>
-<li>Large stadium 80,000+ seat reservation.</li>
-<li>Theaters and cinemas.</li>
-<li>Exhibition booth and market spot reservation.</li>
-<li>Beach deck booking.</li>
-<li>Private venues.</li>
-<li>Entertainment events.</li>
-<li>Private venues.</li>
+<li>Large chains to process orders online.</li>
+<li>Caterings and restaurants.</li>
+<li>Small cafes.</li>
+<li>Food and beverage business.</li>
+<li>Coffee shops.</li>
+<li>Warungs and hawkers.</li>
+<li>Street stall vendors.</li>
 </ul>
 
-You can export custom created layouts to <a href="https://wordpress.org/plugins/myticket-events/" >MyTicket Events WordPress plugin</a> and view it directly on your website. To start layout mapping in Cloud visit this link: <a href="https://myticket.kenzap.cloud/" >MyTicket Events WordPress plugin</a>.
+The final outcome is to generate QR-code feed that can be published to any static hosting or CDN.
 
-![Seat Mapping](https://cdn.kenzap.com/github/img/myticket-2.png)
+![QR code menu feed preview](https://raw.githubusercontent.com/kenzap/qr-menu/main/preview.png)
 
+To view the dashboard in action please go to: <a href="https://qrmenu.kenzap.cloud/" >QR code menu dashboard</a> and construct your menu directly from there.
+
+You can run and rebuild this extension outside Kenzap Cloud infrastructure.
 
 ## Setup
 

@@ -6,3 +6,68 @@ footer {
   margin-top: 32px;
   margin-bottom: 32px;
 }
+
+.palette {
+  list-style-type: none;
+  display: block;
+  padding: 0;
+}
+.palette li {
+  display: block;
+  float: left;
+}
+.palette input {
+  font-family: inherit;
+  display: block;
+  width: 100%;
+  border: 0;
+  height: 100px;
+  max-width: 162px;
+  outline: 0px;
+  text-align: center;
+  color: #fff;
+  font-size: 13px;
+  border-radius: 0px;
+  cursor: pointer;
+  position: relative;
+  top: 0px;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.palette input:hover {
+  position: relative;
+  top: -5px;
+}
+
+/* Media Queries */
+.qr-cnt {
+  max-width: 200px;
+  border: 1px solid #f0f0f0;
+  position: relative;
+}
+.qr-cnt .qr-download {
+  position: absolute;
+  right: 0;
+  margin-top: -12px;
+  margin-right: -10px;
+  background: white;
+  border-radius: 50%;
+  border: 1px solid #f0f0f0;
+  padding: 8px;
+}
+.qr-cnt .qr-note {
+  position: absolute;
+  font-size: 12px;
+  font-style: italic;
+}
+.qr-cnt .qr-download:hover {
+  transform: scale(1.01);
+}
+
+.nounderline {
+  text-decoration: none !important;
+}
+
+/*# sourceMappingURL=styles.css.map */

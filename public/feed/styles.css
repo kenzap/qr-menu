@@ -1,0 +1,1051 @@
+body {
+  margin: 0;
+  touch-action: pan-y, pan-x;
+}
+
+.kUNwHA :before,
+.kUNwHA :after,
+.kUNwHA * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.kUNwHA textarea,
+.kUNwHA input {
+  outline-color: var(--baseColorA);
+}
+
+.kUNwHA img,
+.kUNwHA ul,
+.kUNwHA li,
+.kUNwHA p,
+.kUNwHA a {
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  border: none;
+  text-decoration: none;
+  list-style: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.kUNwHA input::-webkit-outer-spin-button,
+.kUNwHA input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.kUNwHA input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.kUNwHA {
+  background-repeat: repeat;
+  background-size: 300px;
+  background-color: var(--bgColorA);
+}
+
+.kUNwHA .kenzap-container {
+  max-width: 1270px;
+  padding: 0 15px;
+  margin: 64px auto 0 auto;
+}
+
+.kUNwHA .kenzap-container.fade {
+  opacity: 0.5;
+}
+
+.kUNwHA .kenzap-row {
+  margin: 0 -15px;
+  padding: 24px 15px;
+  border-bottom: 1px solid var(--grayColorA);
+}
+
+.kUNwHA .kenzap-row:hover {
+  cursor: pointer;
+}
+
+.kUNwHA .kenzap-col-5 {
+  width: 45%;
+}
+
+.kUNwHA .kenzap-col-7 {
+  width: 55%;
+}
+
+.kUNwHA .kenzap-col-6 {
+  width: 50%;
+  float: left;
+  padding: 0 15px;
+}
+
+.kUNwHA .cat-controls {
+  overflow: hidden;
+  width: 100%;
+  padding: 0 15px 16px 15px;
+  margin-bottom: 16px;
+  position: fixed;
+  top: 0;
+  /* background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) -50%, var(--txtColorC) 100%);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) -50%, var(--txtColorC) 100%);
+  background: linear-gradient(to top, rgba(255, 255, 255, 0) -50%, var(--txtColorC) 80%);  */
+  background: var(--bgColorA);
+}
+
+.kUNwHA .cat-controls .tags-holder {
+  position: relative;
+  max-height: 62px;
+}
+
+.kUNwHA .cat-controls .slideset .slide {
+  margin-right: 11px;
+}
+
+.kUNwHA .cat-controls .slideset .slide a {
+  background: var(--bgColorB);
+  text-align: center;
+  color: var(--txtColorA);
+  padding: 13px 15px;
+  display: block;
+  border-radius: 4px;
+  border: 2px solid transparent;
+}
+
+body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
+  background: var(--bgColorA);
+  border-color: var(--baseColorA);
+}
+
+.kUNwHA .cata-sub-nav {
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+}
+
+.kUNwHA .cata-sub-nav .slideset {
+  margin: 0;
+  display: flex;
+  -webkit-padding-start: 0px;
+  padding: 15px 0;
+}
+
+.kUNwHA .cata-sub-nav .slideset .slide {
+  display: inline-table;
+}
+
+.kUNwHA .cata-sub-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.kUNwHA .arrow-holder {
+  position: absolute;
+  right: 10px;
+  margin-top: -22px;
+  z-index: 99;
+  top: 50%;
+  margin-top: -12px;
+}
+
+@media screen and (max-width: 992px) {
+  .kUNwHA .arrow-holder {
+    right: 0;
+  }
+}
+@media screen and (max-width: 992px) {
+  .kUNwHA .arrow-holder:after {
+    width: 20px;
+  }
+}
+.kUNwHA .arrow-holder.arrow-holder-prev {
+  right: auto;
+  left: 10px;
+}
+
+@media screen and (max-width: 992px) {
+  .kUNwHA .arrow-holder.arrow-holder-prev {
+    left: 0;
+  }
+}
+.kUNwHA .arrow-holder.arrow-holder-prev:after {
+  transform: rotate(180deg);
+  position: absolute;
+  top: 50%;
+  right: auto;
+  bottom: 0;
+  left: -22px;
+}
+
+@media screen and (max-width: 992px) {
+  .kUNwHA .arrow-holder.arrow-holder-prev:after {
+    left: 0;
+  }
+}
+.kUNwHA .arrow-holder.arrow-holder-next:after {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  bottom: 0;
+  left: auto;
+}
+
+@media screen and (max-width: 992px) {
+  .kUNwHA .arrow-holder.arrow-holder-next:after {
+    right: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .kUNwHA .arrow-holder .arrow {
+    display: none;
+  }
+}
+.kUNwHA .arrow {
+  width: 25px;
+  height: 25px;
+  font-size: 28px;
+  line-height: 25px;
+  color: #323232;
+  text-align: center;
+}
+
+.kUNwHA .arrow:hover {
+  cursor: pointer;
+  color: var(--baseColorA);
+}
+
+.kUNwHA .arrow span {
+  position: relative;
+  z-index: 5;
+}
+
+.kUNwHA .info-box {
+  display: flex;
+  display: -webkit-flex;
+  align-items: start;
+  -webkit-align-items: start;
+}
+
+.kUNwHA .info-box.out {
+  opacity: 0.5;
+}
+
+.kUNwHA .info-box .kp-img img {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+  max-height: 160px;
+  object-fit: cover;
+}
+
+.kUNwHA .info-box .kp-content {
+  padding: 0 25px;
+}
+
+.kUNwHA h2 {
+  font-size: 2rem;
+  padding: 0 25px;
+  margin-top: 0px;
+}
+
+.kUNwHA .kenzap-row > h2:before {
+  display: block;
+  content: " ";
+  margin-top: -100px;
+  height: 100px;
+  visibility: hidden;
+}
+
+.cbtn .kUNwHA .scrollable .kenzap-row:last-child {
+  padding-bottom: 80px;
+}
+
+.kUNwHA .info-box .kp-content h3 {
+  font-size: 1.4rem;
+  margin: 8px 4px 16px 0;
+  color: var(--txtColorA);
+}
+
+.kUNwHA .tag {
+  display: inline-block;
+  background-color: var(--baseColorA);
+  color: var(--txtColorC);
+  border-radius: 20px;
+  padding: 6px 12px;
+}
+
+.kUNwHA .info-box .kp-content .ctag {
+  display: inline-block;
+  padding: 4px 8px;
+  margin-right: 8px;
+  font-size: 0.8rem;
+  line-height: 1;
+  vertical-align: middle;
+  margin-top: -3px;
+}
+
+.kUNwHA .info-box .kp-content .ctag:empty {
+  display: none;
+}
+
+.kUNwHA .info-box .kp-content .ptag {
+  margin-bottom: 8px;
+}
+
+.kUNwHA .info-box .kp-content .ptagc {
+  color: var(--txtColorB);
+  margin-right: 8px;
+  text-decoration: line-through;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.kUNwHA .info-box .kp-content p {
+  line-height: 1.2;
+  color: var(--txtColorB);
+  font-size: 1.2rem;
+  margin: 0 0 16px;
+  font-style: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kUNwHA .kenzap-row p.subnote {
+  margin: -24px 32px 16px 25px;
+  font-style: italic;
+  color: var(--txtColorB);
+  line-height: 1.2;
+}
+
+/* new */
+.kUNwHA .kenzap-row p.subnote:empty {
+  display: none;
+}
+
+.kUNwHA .info-box .kp-content a {
+  line-height: 1.75;
+  color: var(--txtColor);
+  font-size: 16px;
+  margin: 0 0 20px;
+  font-style: normal;
+  padding: 0 0 0 28px;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.kUNwHA .info-box .kp-content a:hover {
+  color: var(--baseColorA);
+}
+
+.kUNwHA .info-box .kp-content a:before {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 20px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--baseColorA);
+  margin: auto;
+}
+
+.kUNwHA.kenzap-sm .kenzap-col-6,
+.kUNwHA.kenzap-xs .kenzap-col-6 {
+  width: 100%;
+}
+
+.kUNwHA.kenzap-sm .info-box,
+.kUNwHA.kenzap-xs .info-box {
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
+
+.kUNwHA.kenzap-sm .info-box .kp-img {
+  margin: 0 0 30px;
+  height: 450px;
+  overflow: hidden;
+}
+
+.kUNwHA.kenzap-xs .info-box .kp-img {
+  margin: 0 0 30px;
+  height: auto;
+  overflow: hidden;
+}
+
+.kUNwHA.kenzap-sm .info-box .kp-content,
+.kUNwHA.kenzap-xs .info-box .kp-content {
+  padding: 0;
+}
+
+.kUNwHA .cdialog-cnt,
+.kUNwHA .mdialog-cnt {
+  position: sticky;
+  overflow: scroll;
+  z-index: 100;
+  display: none;
+  bottom: 0;
+  background-color: var(--bgColorA);
+  margin: auto;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.kUNwHA .mdialog-cnt {
+  z-index: 102;
+}
+
+.kUNwHA .cdialog-cnt {
+  position: fixed;
+  padding-top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.kUNwHA .cdialog-cnt table {
+  width: 100%;
+  margin-top: 16px;
+  padding-bottom: 64px;
+}
+
+.kUNwHA .cdialog-cnt td {
+  padding: 8px 0;
+}
+
+.kUNwHA .cdialog-cnt .price,
+.kUNwHA .cdialog-cnt .summ {
+  text-align: right;
+}
+
+.kUNwHA .cdialog .kp-body,
+.kUNwHA .mdialog .kp-body {
+  padding: 0 15px;
+  padding: 0 15px 32px 15px;
+  background-color: var(--bgColorA);
+}
+
+.kUNwHA .mdialog img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.kUNwHA .mdialog h2 {
+  padding: 8px 8px;
+  margin: -64px -8px 16px -8px;
+  font-size: 1.6rem;
+  background-color: var(--bgColorA);
+  opacity: 0.95;
+  display: table;
+}
+
+.kUNwHA .mdialog h3 {
+  margin-top: 32px;
+}
+
+.kUNwHA .mdialog p {
+  font-size: 1.2rem;
+  margin-bottom: 32px;
+  background-color: var(--bgColorA);
+}
+
+.kUNwHA .cdialog .close,
+.kUNwHA .mdialog .close {
+  transition: all 0.5s ease;
+  background-color: var(--bgColorB);
+  padding: 1.5px 7px;
+  right: 0;
+  position: absolute;
+  -webkit-box-shadow: -4px -2px 6px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: -4px -2px 6px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: -3px 1px 6px 0px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  padding: 0;
+  border: 0;
+  -webkit-appearance: none;
+  float: right;
+  right: 8px;
+  font-size: 38px;
+  top: 8px;
+  height: 48px;
+  width: 48px;
+  text-align: center;
+  border-radius: 24px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.kUNwHA .cdialog .close {
+  top: 128px;
+}
+
+.kUNwHA .cdialog .close:before, .kUNwHA .cdialog .close:after,
+.kUNwHA .mdialog .close:before, .kUNwHA .mdialog .close:after {
+  position: absolute;
+  left: 15px;
+  left: 23px;
+  top: 8px;
+  content: " ";
+  height: 32px;
+  width: 2px;
+  background-color: var(--txtColorB);
+}
+
+.kUNwHA .cdialog .close:before,
+.kUNwHA .mdialog .close:before {
+  transform: rotate(45deg);
+}
+
+.kUNwHA .cdialog .close:after,
+.kUNwHA .mdialog .close:after {
+  transform: rotate(-45deg);
+}
+
+/* https://codepen.io/havardob/pen/dyYXBBr */
+.kUNwHA .mdialog .kp-check,
+.kUNwHA .mdialog .kp-radio {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.kUNwHA .mdialog .tag {
+  font-size: 0.8rem;
+  padding: 2px 8px 4px 8px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.kUNwHA .mdialog .kp-radio label {
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--grayColorA);
+}
+
+.kUNwHA .mdialog .kp-radio label span {
+  display: flex;
+  align-items: center;
+  padding: 8px 8px 8px 8px;
+  border-radius: 99em;
+  transition: 0.25s ease;
+}
+
+.kUNwHA .mdialog .kp-radio label span:before {
+  display: flex;
+  flex-shrink: 0;
+  content: "";
+  background-color: var(--bgColorA);
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  margin-right: 12px;
+  transition: 0.25s ease;
+  box-shadow: inset 0 0 0 0.125em var(--baseColorA);
+}
+
+.kUNwHA .mdialog .kp-radio input {
+  position: absolute;
+  left: -9999px;
+}
+
+.kUNwHA .mdialog .kp-radio input:checked + span:before {
+  box-shadow: inset 0 0 0 0.4375em var(--baseColorA);
+}
+
+.kUNwHA .mdialog .kp-check .price,
+.kUNwHA .mdialog .kp-radio .price {
+  color: var(--txtColorB);
+  text-align: right;
+  display: inline-block;
+  margin: auto 8px auto auto;
+  float: right;
+}
+
+/* https://codepen.io/avstorm/pen/Mowqre */
+.kUNwHA .mdialog .kp-check label {
+  user-select: none;
+  cursor: pointer;
+  margin: 0px 0;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--grayColorA);
+}
+
+.kUNwHA .mdialog .kp-check label input:checked + .checkbox {
+  border-color: var(--baseColorA);
+}
+
+.kUNwHA .mdialog .kp-check label input:checked + .checkbox svg path {
+  fill: var(--baseColorA);
+}
+
+.kUNwHA .mdialog .kp-check label input:checked + .checkbox svg polyline {
+  stroke-dashoffset: 0;
+}
+
+.kUNwHA .mdialog .kp-check label :hover .checkbox svg path {
+  stroke-dashoffset: 0;
+}
+
+.kUNwHA .mdialog .kp-check label .checkbox {
+  position: relative;
+  top: 2px;
+  float: left;
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--grayColorB);
+  border-radius: 3px;
+  margin-left: 8px;
+  margin-right: 12px;
+}
+
+.kUNwHA .mdialog .kp-check label .checkbox svg {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+}
+
+.kUNwHA .mdialog .kp-check label .checkbox svg path {
+  fill: none;
+  stroke: var(--baseColorA);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 71px;
+  stroke-dashoffset: 71px;
+  transition: all 0.6s ease;
+}
+
+.kUNwHA .mdialog .kp-check label .checkbox svg polyline {
+  fill: none;
+  stroke: var(--txtColorC);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 18px;
+  stroke-dashoffset: 18px;
+  transition: all 0.3s ease;
+}
+
+.kUNwHA .mdialog .kp-check label > span {
+  pointer-events: none;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.kUNwHA .mdialog .kp-check label input {
+  position: absolute;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.kUNwHA .mdialog .kp-note {
+  border-top: 1px solid var(--grayColorA);
+  border-bottom: 1px solid var(--grayColorA);
+  padding: 16px 0;
+}
+
+.kUNwHA .mdialog .kp-note textarea {
+  width: 100%;
+  border: none;
+  background: var(--bgColorA);
+  color: var(--txtColorA);
+}
+
+.kUNwHA .mdialog .kp-add {
+  padding: 16px 15px 0 15px;
+  position: sticky;
+  bottom: 0;
+  margin: 0 -15px;
+  /* background: -moz-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, var(--bgColorA) 30%);
+  background: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, var(--bgColorA) 30%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, var(--bgColorA) 30%); */
+  background: var(--bgColorA);
+  z-index: 1000;
+}
+
+.kUNwHA .mdialog .kp-add > div {
+  display: inline-block;
+}
+
+.kUNwHA .mdialog .kp-add .mbtn {
+  float: right;
+}
+
+.kUNwHA .mdialog .kp-add .add > div {
+  line-height: 1.6rem;
+}
+
+.kUNwHA .dis {
+  opacity: 0.5;
+}
+
+.kUNwHA .quantity .input-text.qty {
+  width: 50px;
+  height: 62px;
+  padding: 0 5px;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  border-top: 1px solid var(--grayColorC);
+  border-bottom: 1px solid var(--grayColorC);
+  border-radius: 0;
+  border-color: var(--grayColorC);
+  opacity: 1;
+  color: var(--txtColorA);
+}
+
+.kUNwHA .quantity.buttons_added {
+  text-align: left;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: top;
+  z-index: 1001;
+  background: var(--bgColorA);
+}
+
+.kUNwHA .quantity.buttons_added .minus,
+.kUNwHA .quantity.buttons_added .plus,
+.kUNwHA .quantity.buttons_added input {
+  display: inline-block;
+  margin: 0;
+  vertical-align: top;
+  box-shadow: none;
+  font-size: 32px;
+}
+
+.kUNwHA .quantity.buttons_added .minus,
+.kUNwHA .quantity.buttons_added .plus {
+  padding: 8px 16px 8px;
+  height: 62px;
+  background-color: var(--bgColorA);
+  border: 1px solid var(--grayColorC);
+  color: var(--txtColorA);
+  cursor: pointer;
+  font-size: 32px;
+  display: inline-block;
+  min-width: 50px;
+}
+
+.kUNwHA .quantity.buttons_added .minus {
+  border-top-left-radius: 32px;
+  border-bottom-left-radius: 32px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-color: var(--grayColorC);
+  border-right: 0;
+  padding-top: 5px;
+}
+
+.kUNwHA .quantity.buttons_added .plus {
+  border-top-right-radius: 32px;
+  border-bottom-right-radius: 32px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-color: var(--grayColorC);
+  border-left: 0;
+}
+
+.kUNwHA .quantity.buttons_added .minus:after {
+  content: "-";
+  position: absolute;
+  display: block;
+  height: 64px;
+  line-height: 64px;
+  left: 16px;
+  top: 0px;
+  z-index: 9;
+  background: transparent;
+  vertical-align: middle;
+}
+
+.kUNwHA .quantity.buttons_added .plus:after {
+  content: "+";
+  position: absolute;
+  display: block;
+  height: 64px;
+  line-height: 64px;
+  right: 16px;
+  top: 0px;
+  z-index: 9;
+  background: transparent;
+}
+
+.kUNwHA .quantity input::-webkit-outer-spin-button,
+.kUNwHA .quantity input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin: 0;
+}
+
+.kUNwHA .quantity.buttons_added .minus:focus,
+.kUNwHA .quantity.buttons_added .plus:focus {
+  outline: none;
+}
+
+.kUNwHA .cta-btn,
+.kUNwHA .vaddc {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0px;
+  width: 100%;
+  z-index: 101;
+  background: var(--bgColorA);
+  /* background: -moz-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, var(--bgColorA) 50%);
+  background: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, var(--bgColorA) 50%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, var(--bgColorA) 50%); */
+  line-height: 1;
+  padding: 8px 0 16px 0;
+}
+
+.kUNwHA .cta-btn .mbtn {
+  display: block;
+  text-align: center;
+  margin: 0 15px;
+  padding: 12px 16px;
+  font-size: 1.2rem;
+  z-index: 99;
+  background: var(--baseColorA);
+  color: var(--txtColorC);
+  border-radius: 40px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.kUNwHA .vadd,
+.kUNwHA .mdialog .add {
+  display: block;
+  font-size: 1.2rem;
+  padding: 8px 24px;
+  display: inline-block;
+  background: var(--baseColorA);
+  color: var(--txtColorC);
+  border-radius: 40px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.kUNwHA .vadd {
+  width: 100%;
+  text-align: center;
+  padding: 12px 16px;
+  font-size: 1.1rem;
+}
+
+.kUNwHA .overlay {
+  display: none;
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  top: 0px;
+  text-align: center;
+  vertical-align: middle;
+  height: 100%;
+  opacity: 0.86;
+  background: white;
+}
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+.kUNwHA .snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: var(--bgColorC);
+  color: var(--txtColorC);
+  text-align: center;
+  padding: 4px 12px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 24px;
+  border-radius: 50px;
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+.kUNwHA .snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+.kUNwHA .ptable .note,
+.kUNwHA .ptable input {
+  width: 100%;
+  font-size: 1.2rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--grayColorA);
+  background: var(--bgColorA);
+  color: var(--txtColorA);
+}
+
+.kUNwHA .ptable .note {
+  margin-bottom: 64px;
+}
+
+.kUNwHA .ptable input {
+  margin-bottom: 16px;
+}
+
+.kUNwHA .lplayer {
+  width: 100%;
+  height: 300px;
+  margin: auto;
+  max-width: 300px;
+}
+
+.kUNwHA .loader {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.kUNwHA .loader span:nth-child(1) {
+  animation: opacitychange 1s ease-in-out infinite;
+}
+
+.kUNwHA .loader span:nth-child(2) {
+  animation: opacitychange 1s ease-in-out 0.33s infinite;
+}
+
+.kUNwHA .loader span:nth-child(3) {
+  animation: opacitychange 1s ease-in-out 0.66s infinite;
+}
+
+.kUNwHA .loader span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: var(--baseColorA);
+  margin: 35px 5px;
+  opacity: 0;
+}
+
+@keyframes opacitychange {
+  0%, 100% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+}
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 24px;
+    opacity: 1;
+  }
+}
+@keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 24px;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeout {
+  from {
+    top: 24px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+@keyframes fadeout {
+  from {
+    top: 24px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+@media screen and (max-width: 48em) {
+  /* width 768px */
+  .kUNwHA h2 {
+    padding: 0 0px;
+  }
+
+  .kUNwHA .info-box .kp-content {
+    padding: 0;
+  }
+
+  .kUNwHA .kenzap-row p.subnote {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+@media screen and (max-width: 30em) {
+  .kUNwHA .mdialog .kp-add {
+    text-align: right;
+  }
+
+  .kUNwHA .mdialog .kp-add:not(.comp) .mbtn {
+    margin: 16px 0px 8px 0;
+    width: 100%;
+    float: unset;
+  }
+
+  .kUNwHA .mdialog .kp-add.comp {
+    line-height: 1.4rem;
+    padding-bottom: 52px;
+  }
+
+  .kUNwHA .mdialog .kp-add.comp .add {
+    padding: 8px 32px;
+  }
+
+  .kUNwHA .kp-add.comp .quantity.buttons_added {
+    float: left;
+  }
+
+  .kUNwHA .mdialog .add {
+    width: 100%;
+    text-align: center;
+  }
+
+  .kUNwHA .info-box .kp-content h3 {
+    font-size: 1.2rem;
+    margin: 0px 4px 8px 0;
+  }
+
+  .kUNwHA .info-box .kp-content .ptagc,
+.kUNwHA .info-box .kp-content .ptag {
+    font-size: 0.8rem;
+  }
+
+  .kUNwHA.kenzap-sm .info-box .kp-img,
+.kUNwHA .info-box .kp-img {
+    height: auto;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */
