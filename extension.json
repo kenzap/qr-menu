@@ -17,7 +17,7 @@
         { 
             "title":"QR Menu", 
             "description": "QR-code menu ordering solution that can digitalize any F&B business.", 
-            "icon": "<svg xmlns\"http://www.w3.org/2000/svg\" width=\"64\" height=\"32\" fill=\"currentColor\" class=\"bi bi-pencil-square me-3 mr-md-0 mr-lg-4 text-primary\" viewBox=\"0 0 16 16\" style=\"min-width: 32px;\"><path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"></path><path fill-rule=\"evenodd\" d=\"M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z\"></path></svg>", 
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"64\" height=\"32\" fill=\"currentColor\" class=\"bi bi-qr-code-scan me-3 mr-md-0 mr-lg-4 text-primary\" viewBox=\"0 0 16 16\"><path d=\"M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z\"/><path d=\"M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z\"/><path d=\"M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z\"/><path d=\"M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z\"/><path d=\"M12 9h2V8h-2v1Z\"/></svg>",
             "links": [ 
                 { 
                     "text":"Settings", 
