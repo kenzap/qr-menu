@@ -136,6 +136,12 @@
     setTable();
     initCart();
     getMenu();
+
+    var cb = function cb() {
+      console.log('processed');
+    };
+
+    authUser(cb, false);
     document.addEventListener("scroll", scrollEvents);
   });
 
@@ -227,7 +233,9 @@
         mdialogCnt.style.display = "none";
         document.querySelector(".kUNwHA .cta-btn").style.display = "none";
         closeModal();
-        authUser();
+        var origin = window.location.href;
+        if (origin.indexOf('checkout') == -1) origin += (origin.indexOf('?') == -1 ? '?' : '&') + 'checkout=1';
+        window.location.href = 'https://auth.kenzap.com/?app=' + appID + '&redirect=' + encodeURIComponent(origin);
         document.querySelector(".kUNwHA .overlay").style.display = "block";
         document.querySelector(".kUNwHA .overlay .loader").style.display = "block";
         return;
@@ -748,7 +756,7 @@
     tdialogCnt.querySelector(".kUNwHA .cdialog-cnt .kp-body").innerHTML = html;
   };
 
-  var authUser = function authUser(cb) {
+  var authUser = function authUser(cb, force) {
     var urlParams = new URLSearchParams(window.location.search);
     var ott = urlParams.get('ott') ? urlParams.get('ott') : "";
     var params = new URLSearchParams();
@@ -767,14 +775,13 @@
       return response.json();
     }).then(function (response) {
       if (response.success) {
-        var _table2 = 5;
+        var checkout = urlParams.get('checkout') ? urlParams.get('checkout') : "";
+        if (!checkout) return;
         cart.state.order.kid = response.kid;
         cart.state.order.name = response.name;
-        cart.state.order.from = _table2 + ' - ' + response.name;
+        cart.state.order.from = table + ' - ' + response.name;
         cart.state.order.status = 'new';
         ajaxCheckout();
-      } else {
-        window.location.href = 'https://auth.kenzap.com/?app=' + appID + '&redirect=' + window.location.href;
       }
     })["catch"](function (error) {
       console.error('Error:', error);
@@ -785,13 +792,13 @@
     cart.state.order.idd = localStorage.idd;
     cart.state.order.sid = spaceID;
     cart.state.order.id = typeof cart.state.order.id === 'undefined' ? randomString(8) + Math.floor(Date.now()) : cart.state.order.id;
-    var kenzap_api_key = 'DoSTdhxk6BTIHiYno9XhZ4zorh0ak0MRGMH5T2iP2h1BNo3MtA69irZJp3pZuaiA';
     fetch('https://api-v1.kenzap.cloud/', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer ' + kenzap_api_key
+        'Kenzap-Token': getCookie('kenzap_token'),
+        'Kenzap-Sid': spaceID
       },
       body: JSON.stringify({
         query: {
@@ -1089,7 +1096,7 @@
       localStorage.cart = JSON.stringify(this.state.order);
     },
     clearCart: function clearCart() {
-      for (i in cart.state.order.items) {
+      for (var i in cart.state.order.items) {
         document.querySelector(".kUNwHA .kenzap-row[data-id='" + cart.state.order.items[i].id + "'] .ctag").innerHTML = "";
       }
 
@@ -1098,6 +1105,7 @@
       cart.state.order.items = {};
       localStorage.cart = JSON.stringify(cart.state.order);
       this.refreshCheckoutButton();
+      window.history.replaceState({}, document.title, config.baseURL);
     }
   };
 

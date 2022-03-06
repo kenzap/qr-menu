@@ -2353,6 +2353,7 @@
       data: {},
       tldType: '.kenzap.site',
       newQR: false,
+      baseURL: '',
       downloadName: 'qr-menu.svg',
       ajaxQueue: 0
     },
@@ -2642,7 +2643,7 @@
       modalSuccessBtnFunc: null
     },
     preProcessHTML: function preProcessHTML() {
-      var customizer = "\n            <!-- Customizer start -->\n            <style>\n                :root {\n                    --txtColorA: ".concat(_this.state.data.palette.txtColorA, ";;\n                    --txtColorB: ").concat(_this.state.data.palette.txtColorB, ";\n                    --txtColorC: ").concat(_this.state.data.palette.txtColorC, ";\n                    --bgColorA: ").concat(_this.state.data.palette.bgColorA, ";\n                    --bgColorB: ").concat(_this.state.data.palette.bgColorB, ";\n                    --bgColorC: #000000;\n                    --linkColorA: #1941DF;\n                    --linkColorB: #1941dfd0;\n                    --baseColorA: ").concat(_this.state.data.palette.baseColorA, ";\n                    --baseColorB: #1941df;\n                    --accColorA: #1941df;\n                    --accColorB: #1941df;\n                    --grayColorA: #F7F7F7;\n                    --grayColorB: #c0c0c0;\n                    --grayColorC: #818181;\n                }\n            </style>\n            <script>\n                const API_KEY = 'bJJ04G0y1HGpOtT8KczDRej20iWOnaauA2Y2UkI8QJxQDQ0AnkfYnm2t4KHuou9c';\n                let config = {\"price\":{\"currency\":\"SGD\",\"symbol\":\"S$\",\"style\":\"left\"},\"cart\":{\"max_addition\":").concat(_this.state.data.max_addition, "},\"PREFIX\":\"/menu\"};\n            </script>");
+      var customizer = "\n            <!-- Customizer start -->\n            <style>\n                :root {\n                    --txtColorA: ".concat(_this.state.data.palette.txtColorA, ";;\n                    --txtColorB: ").concat(_this.state.data.palette.txtColorB, ";\n                    --txtColorC: ").concat(_this.state.data.palette.txtColorC, ";\n                    --bgColorA: ").concat(_this.state.data.palette.bgColorA, ";\n                    --bgColorB: ").concat(_this.state.data.palette.bgColorB, ";\n                    --bgColorC: #000000;\n                    --linkColorA: #1941DF;\n                    --linkColorB: #1941dfd0;\n                    --baseColorA: ").concat(_this.state.data.palette.baseColorA, ";\n                    --baseColorB: #1941df;\n                    --accColorA: #1941df;\n                    --accColorB: #1941df;\n                    --grayColorA: #F7F7F7;\n                    --grayColorB: #c0c0c0;\n                    --grayColorC: #818181;\n                }\n            </style>\n            <script>\n                const API_KEY = 'bJJ04G0y1HGpOtT8KczDRej20iWOnaauA2Y2UkI8QJxQDQ0AnkfYnm2t4KHuou9c';\n                let config = {\"price\":{\"currency\":\"SGD\",\"symbol\":\"S$\",\"style\":\"left\"},\"cart\":{\"max_addition\":").concat(_this.state.data.max_addition, "},\"PREFIX\":\"/menu\",\"domain\":\"").concat(_this.state.baseURL, "\"};\n            </script>");
 
       var html = _this.state.html.substring(0, _this.state.html.indexOf('<!-- Customizer start -->')) + customizer + _this.state.html.substring(_this.state.html.indexOf('<!-- Customizer end -->'), _this.state.html.length);
 
@@ -2683,9 +2684,7 @@
         hideLoader();
         console.log('publishHTML response');
 
-        if (response.success) {
-          console.log(response);
-        } else {
+        if (response.success) ; else {
           parseApiError(response);
         }
       })["catch"](function (error) {
@@ -2720,10 +2719,10 @@
           break;
       }
 
-      var link = 'http://' + _this.state.data.slug + _this.state.tldType + postfix;
-      document.querySelector('.preview-link').setAttribute('href', link);
+      _this.state.baseURL = 'http://' + _this.state.data.slug + _this.state.tldType + postfix;
+      document.querySelector('.preview-link').setAttribute('href', _this.state.baseURL);
 
-      _this.genQR('.qr-preview', link);
+      _this.genQR('.qr-preview', _this.state.baseURL);
     },
     loadHomeStructure: function loadHomeStructure() {
       if (!_this.state.firstLoad) return;
