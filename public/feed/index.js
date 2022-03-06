@@ -131,7 +131,7 @@
   var table = '';
   var spaceID = '';
   var CDN = 'https://kenzap-sites.oss-ap-southeast-1.aliyuncs.com';
-  var appID = '66432108790001';
+  var appID = '66432108790002';
   document.addEventListener("DOMContentLoaded", function () {
     setTable();
     initCart();
@@ -200,7 +200,7 @@
       if (cart.state.order.step == 2) {
         var html = '';
         html = '<div class="ptable">';
-        html += '<label for="table">Table number</label>';
+        html += '<label for="table" style="' + (table.length > 0 ? 'display:none;' : '') + '">Table number</label>';
         html += '<input type="number" value="' + table + '" name="table" style="' + (table.length > 0 ? 'display:none;' : '') + '" autocomplete="off" class="table" size="4" pattern="" inputmode="">';
         html += '<label for="note">Note</label>';
         html += '<textarea class="note" name="note" placeholder="leave a note for a kitchen"></textarea>';
