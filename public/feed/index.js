@@ -94,6 +94,24 @@
    */
 
   /**
+   * @name setCookie
+   * @description Set cookie by its name to all .kenzap.com subdomains
+   * @param {string} name - Cookie name.
+   * @param {string} value - Cookie value.
+   * @param {string} days - Number of days when cookie expires.
+   */
+   const setCookie = (name, value, days) => {
+
+      let expires = "";
+      if (days) {
+          let date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          expires = ";expires=" + date.toUTCString();
+      }
+      d.cookie = name + "=" + (escape(value) || "") + expires + ";path=/;domain=.kenzap.com"; 
+  };
+
+  /**
    * @name getCookie
    * @description Read cookie by its name.
    * @param {string} cname - Cookie name.
@@ -233,7 +251,7 @@
         mdialogCnt.style.display = "none";
         document.querySelector(".kUNwHA .cta-btn").style.display = "none";
         closeModal();
-        var origin = window.location.href;
+        var origin = config.baseURL;
         if (origin.indexOf('checkout') == -1) origin += (origin.indexOf('?') == -1 ? '?' : '&') + 'checkout=1';
         window.location.href = 'https://auth.kenzap.com/?app=' + appID + '&redirect=' + encodeURIComponent(origin);
         document.querySelector(".kUNwHA .overlay").style.display = "block";
@@ -774,7 +792,14 @@
     }).then(function (response) {
       return response.json();
     }).then(function (response) {
+      console.log(response);
+
       if (response.success) {
+        if (response.token) {
+          setCookie('kenzap_token', response.token, 1);
+          console.log('setting up token');
+        }
+
         var checkout = urlParams.get('checkout') ? urlParams.get('checkout') : "";
         if (!checkout) return;
         cart.state.order.kid = response.kid;
@@ -782,6 +807,8 @@
         cart.state.order.from = table + ' - ' + response.name;
         cart.state.order.status = 'new';
         ajaxCheckout();
+      } else {
+        alert('Something went wrong. Please try checking out again.');
       }
     })["catch"](function (error) {
       console.error('Error:', error);
