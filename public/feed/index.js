@@ -108,7 +108,7 @@
           date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
           expires = ";expires=" + date.toUTCString();
       }
-      d.cookie = name + "=" + (escape(value) || "") + expires + ";path=/;domain=.kenzap.com"; 
+      document.cookie = name + "=" + (escape(value) || "") + expires + ";path=/;domain=.kenzap.com"; 
   };
 
   /**
@@ -1133,7 +1133,7 @@
       localStorage.cart = JSON.stringify(cart.state.order);
       this.refreshCheckoutButton();
       window.history.replaceState({}, document.title, config.domain);
-    } 
+    }
   };
 
 })();
