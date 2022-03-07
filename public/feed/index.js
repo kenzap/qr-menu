@@ -1133,7 +1133,7 @@
       localStorage.cart = JSON.stringify(cart.state.order);
       this.refreshCheckoutButton();
       window.history.replaceState({}, document.title, config.domain);
-    }
+    } 
   };
 
 })();
