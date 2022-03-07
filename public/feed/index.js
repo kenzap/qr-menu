@@ -252,7 +252,7 @@
         document.querySelector(".kUNwHA .cta-btn").style.display = "none";
         closeModal();
         var domain = config.domain;
-        if (domain.indexOf('checkout') == -1) domain += (domain.indexOf('?') == -1 ? '?' : '&') + 'checkout=1';
+        if (config.domain.indexOf('checkout') == -1) domain += (config.domain.indexOf('?') == -1 ? '?' : '&') + 'checkout=1';
         window.location.href = 'https://auth.kenzap.com/?app=' + appID + '&redirect=' + encodeURIComponent(domain);
         document.querySelector(".kUNwHA .overlay").style.display = "block";
         document.querySelector(".kUNwHA .overlay .loader").style.display = "block";
