@@ -251,9 +251,9 @@
         mdialogCnt.style.display = "none";
         document.querySelector(".kUNwHA .cta-btn").style.display = "none";
         closeModal();
-        var domain = config.domain;
-        if (config.domain.indexOf('checkout') == -1) domain += (config.domain.indexOf('?') == -1 ? '?' : '&') + 'checkout=1';
-        window.location.href = 'https://auth.kenzap.com/?app=' + appID + '&redirect=' + encodeURIComponent(domain);
+        var origin = config.domain;
+        if (origin.indexOf('checkout') == -1) origin += (origin.indexOf('?') == -1 ? '?' : '&') + 'checkout=1';
+        window.location.href = 'https://auth.kenzap.com/?app=' + appID + '&redirect=' + encodeURIComponent(origin);
         document.querySelector(".kUNwHA .overlay").style.display = "block";
         document.querySelector(".kUNwHA .overlay .loader").style.display = "block";
         return;
