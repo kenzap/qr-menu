@@ -251,7 +251,7 @@
         mdialogCnt.style.display = "none";
         document.querySelector(".kUNwHA .cta-btn").style.display = "none";
         closeModal();
-        var origin = config.baseURL;
+        var origin = config.domain;
         if (origin.indexOf('checkout') == -1) origin += (origin.indexOf('?') == -1 ? '?' : '&') + 'checkout=1';
         window.location.href = 'https://auth.kenzap.com/?app=' + appID + '&redirect=' + encodeURIComponent(origin);
         document.querySelector(".kUNwHA .overlay").style.display = "block";
@@ -1132,7 +1132,7 @@
       cart.state.order.items = {};
       localStorage.cart = JSON.stringify(cart.state.order);
       this.refreshCheckoutButton();
-      window.history.replaceState({}, document.title, config.baseURL);
+      window.history.replaceState({}, document.title, config.domain);
     }
   };
 
