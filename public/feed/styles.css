@@ -50,7 +50,7 @@ small {
 }
 
 .test {
-  font-size: 40%;
+  font-size: 90%;
 }
 
 body {
@@ -1102,5 +1102,3 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
     height: auto;
   }
 }
-
-/*# sourceMappingURL=styles.css.map */
