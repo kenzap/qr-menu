@@ -18,7 +18,7 @@ With the help of this dashboard extention one can provide QR-code menu visual se
 
 The final outcome is to generate QR-code feed that can be published to any static hosting or CDN.
 
-![QR code menu feed preview](https://raw.githubusercontent.com/kenzap/qr-menu/main/preview.png)
+![QR code menu feed preview](https://raw.githubusercontent.com/kenzap/qr-menu/main/preview-feed.png)
 
 To view the dashboard in action please go to: <a href="https://qrmenu.kenzap.cloud/" >QR code menu dashboard</a> and construct your menu directly from there.
 
