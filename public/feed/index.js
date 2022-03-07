@@ -793,6 +793,8 @@
       return response.json();
     }).then(function (response) {
       console.log(response);
+      var checkout = urlParams.get('checkout') ? urlParams.get('checkout') : "";
+      if (!checkout) return;
 
       if (response.success) {
         if (response.token) {
@@ -800,15 +802,13 @@
           console.log('setting up token');
         }
 
-        var checkout = urlParams.get('checkout') ? urlParams.get('checkout') : "";
-        if (!checkout) return;
         cart.state.order.kid = response.kid;
         cart.state.order.name = response.name;
         cart.state.order.from = table + ' - ' + response.name;
         cart.state.order.status = 'new';
         ajaxCheckout();
       } else {
-        alert('Something went wrong. Please try checking out again.');
+        alert('Oops, something went wrong. Please try checking out again.');
       }
     })["catch"](function (error) {
       console.error('Error:', error);
