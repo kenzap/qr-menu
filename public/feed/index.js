@@ -798,6 +798,7 @@
 
       if (response.success) {
         if (response.token) {
+          config.token = response.token;
           setCookie('kenzap_token', response.token, 1);
           console.log('setting up token');
         }
@@ -824,7 +825,7 @@
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/x-www-form-urlencoded',
-        'Kenzap-Token': getCookie('kenzap_token'),
+        'Kenzap-Token': config.token,
         'Kenzap-Sid': spaceID
       },
       body: JSON.stringify({
