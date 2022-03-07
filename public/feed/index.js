@@ -1,6 +1,6 @@
 
 (function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
-(function (exports) {
+(function () {
   'use strict';
 
   function _typeof(obj) {
@@ -92,6 +92,24 @@
    * @description Initiates Kenzap Cloud extension header and related scripts. Verifies user sessions, handles SSO, does cloud space navigation, initializes i18n localization. 
    * @param {object} response
    */
+
+  /**
+   * @name setCookie
+   * @description Set cookie by its name to all .kenzap.com subdomains
+   * @param {string} name - Cookie name.
+   * @param {string} value - Cookie value.
+   * @param {string} days - Number of days when cookie expires.
+   */
+   const setCookie = (name, value, days) => {
+
+      let expires = "";
+      if (days) {
+          let date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          expires = ";expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (escape(value) || "") + expires + ";path=/;domain=.kenzap.com"; 
+  };
 
   /**
    * @name getCookie
@@ -1117,23 +1135,6 @@
       window.history.replaceState({}, document.title, config.domain);
     }
   };
-  var setCookie = function setCookie(name, value, days) {
-    var expires = "";
 
-    if (days) {
-      var date = new Date();
-      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-      expires = ";expires=" + date.toUTCString();
-    }
-
-    document.cookie = name + "=" + (escape(value) || "") + expires + ";path=/;domain=.kenzap.com";
-  };
-
-  exports.setCookie = setCookie;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
-
-  return exports;
-
-})({});
+})();
 //# sourceMappingURL=index.js.map
