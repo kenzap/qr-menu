@@ -108,7 +108,7 @@
           date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
           expires = ";expires=" + date.toUTCString();
       }
-      d.cookie = name + "=" + (escape(value) || "") + expires + ";path=/;domain=.kenzap.com"; 
+      document.cookie = name + "=" + (escape(value) || "") + expires + ";path=/;domain=.kenzap.com"; 
   };
 
   /**
@@ -147,7 +147,6 @@
     timer: null
   };
   var table = '';
-  var spaceID = '';
   var CDN = 'https://kenzap-sites.oss-ap-southeast-1.aliyuncs.com';
   var appID = '66432108790002';
   document.addEventListener("DOMContentLoaded", function () {
@@ -327,7 +326,7 @@
     }).then(function (response) {
       if (response.success) {
         products = response;
-        spaceID = response.sid;
+        localStorage.sid = response.sid;
         renderMenu();
         dialogListeners();
         menuListeners();
@@ -374,7 +373,7 @@
               document.querySelector(".kUNwHA .kenzap-row[data-id='" + this._id + "'] img").setAttribute('src', this.src);
             };
 
-            imgl.src = CDN + '/S' + spaceID + '/product-' + products['items'][x]['_id'] + '-1-250.jpeg?' + products['items'][x]['updated'];
+            imgl.src = CDN + '/S' + localStorage.sid + '/product-' + products['items'][x]['_id'] + '-1-250.jpeg?' + products['items'][x]['updated'];
           }
 
           var price = '<span class="tag ptag">' + priceFormat(products['items'][x]['price']) + '</span>';
@@ -501,7 +500,7 @@
           cart.state.product.type = cart.state.product.qty == 0 ? "new" : "update";
           document.querySelector("body").classList.add('kp-modal');
           refreshDialogView();
-          var src = products['items'][x]['img'][0] ? CDN + '/S' + spaceID + '/product-' + products['items'][x]['_id'] + '-1-250.jpeg?' + products['items'][x]['updated'] : 'https://cdn.kenzap.com/loading.png';
+          var src = products['items'][x]['img'][0] ? CDN + '/S' + localStorage.sid + '/product-' + products['items'][x]['_id'] + '-1-250.jpeg?' + products['items'][x]['updated'] : 'https://cdn.kenzap.com/loading.png';
           document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-body > h2").innerHTML = cart.state.product.title;
           document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-body > p").innerHTML = cart.state.product.sdesc;
           document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-img img").setAttribute('src', src);
@@ -513,7 +512,7 @@
             document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-img img").setAttribute('src', this.src);
           };
 
-          imgl.src = CDN + '/S' + spaceID + '/product-' + products['items'][x]['_id'] + '-1-500.jpeg?' + products['items'][x]['updated'];
+          imgl.src = CDN + '/S' + localStorage.sid + '/product-' + products['items'][x]['_id'] + '-1-500.jpeg?' + products['items'][x]['updated'];
           var html_vars = '';
           if (_typeof(products['items'][x].variations !== 'undefined')) for (var _v in products['items'][x].variations) {
             var type = '';
@@ -798,6 +797,7 @@
 
       if (response.success) {
         if (response.token) {
+          config.token = response.token;
           setCookie('kenzap_token', response.token, 1);
           console.log('setting up token');
         }
@@ -817,22 +817,22 @@
 
   var ajaxCheckout = function ajaxCheckout() {
     cart.state.order.idd = localStorage.idd;
-    cart.state.order.sid = spaceID;
+    cart.state.order.sid = localStorage.sid;
     cart.state.order.id = typeof cart.state.order.id === 'undefined' ? randomString(8) + Math.floor(Date.now()) : cart.state.order.id;
     fetch('https://api-v1.kenzap.cloud/', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/x-www-form-urlencoded',
-        'Kenzap-Token': getCookie('kenzap_token'),
-        'Kenzap-Sid': spaceID
+        'Kenzap-Token': config.token,
+        'Kenzap-Sid': localStorage.sid
       },
       body: JSON.stringify({
         query: {
           order: {
             type: 'create',
             key: 'ecommerce-order',
-            sid: spaceID,
+            sid: localStorage.sid,
             data: cart.state.order
           }
         }

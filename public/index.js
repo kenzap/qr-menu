@@ -2351,10 +2351,12 @@
       firstLoad: true,
       html: '',
       data: {},
+      e_data: {},
       tldType: '.kenzap.site',
       newQR: false,
       baseURL: '',
       downloadName: 'qr-menu.svg',
+      API_key: '',
       ajaxQueue: 0
     },
     init: function init() {
@@ -2376,6 +2378,10 @@
         },
         body: JSON.stringify({
           query: {
+            keys: {
+              type: 'api-key',
+              keys: ['public']
+            },
             locale: {
               type: 'locale',
               id: getCookie('lang')
@@ -2384,6 +2390,11 @@
               type: 'get',
               key: 'qrmenu-settings',
               fields: ['mode', 'palette', 'categories', 'max_addition', 'slug', 'total_tables', 'table_number', 'updated']
+            },
+            ecommerce_settings: {
+              type: 'get',
+              key: 'ecommerce-settings',
+              fields: ['currency', 'currency_symb', 'currency_symb_loc']
             }
           }
         })
@@ -2430,6 +2441,8 @@
         text: __('QR menu')
       }]);
       _this.state.data = response.settings;
+      _this.state.e_data = response.ecommerce_settings;
+      _this.state.API_key = response.keys.public_token;
 
       for (var field in response.settings) {
         if (typeof response.settings[field] === "undefined") continue;
@@ -2649,7 +2662,7 @@
       modalSuccessBtnFunc: null
     },
     preProcessHTML: function preProcessHTML() {
-      var customizer = "\n            <!-- Customizer start -->\n            <style>\n                :root {\n                    --txtColorA: ".concat(_this.state.data.palette.txtColorA, ";;\n                    --txtColorB: ").concat(_this.state.data.palette.txtColorB, ";\n                    --txtColorC: ").concat(_this.state.data.palette.txtColorC, ";\n                    --bgColorA: ").concat(_this.state.data.palette.bgColorA, ";\n                    --bgColorB: ").concat(_this.state.data.palette.bgColorB, ";\n                    --bgColorC: #000000;\n                    --linkColorA: #1941DF;\n                    --linkColorB: #1941dfd0;\n                    --baseColorA: ").concat(_this.state.data.palette.baseColorA, ";\n                    --baseColorB: #1941df;\n                    --accColorA: #1941df;\n                    --accColorB: #1941df;\n                    --grayColorA: #F7F7F7;\n                    --grayColorB: #c0c0c0;\n                    --grayColorC: #818181;\n                }\n                body{\n                    font-family: Poppins, sans-serif\n                }\n            </style>\n            <script>\n                const API_KEY = 'bJJ04G0y1HGpOtT8KczDRej20iWOnaauA2Y2UkI8QJxQDQ0AnkfYnm2t4KHuou9c';\n                let config = {\"price\":{\"currency\":\"SGD\",\"symbol\":\"S$\",\"style\":\"left\"},\"cart\":{\"max_addition\":").concat(_this.state.data.max_addition, "},\"PREFIX\":\"/menu\",\"domain\":\"").concat(_this.state.baseURL, "\"};\n            </script>");
+      var customizer = "\n            <!-- Customizer start -->\n            <style>\n                :root {\n                    --txtColorA: ".concat(_this.state.data.palette.txtColorA, ";;\n                    --txtColorB: ").concat(_this.state.data.palette.txtColorB, ";\n                    --txtColorC: ").concat(_this.state.data.palette.txtColorC, ";\n                    --bgColorA: ").concat(_this.state.data.palette.bgColorA, ";\n                    --bgColorB: ").concat(_this.state.data.palette.bgColorB, ";\n                    --bgColorC: #000000;\n                    --linkColorA: #1941DF;\n                    --linkColorB: #1941dfd0;\n                    --baseColorA: ").concat(_this.state.data.palette.baseColorA, ";\n                    --baseColorB: #1941df;\n                    --accColorA: #1941df;\n                    --accColorB: #1941df;\n                    --grayColorA: #F7F7F7;\n                    --grayColorB: #c0c0c0;\n                    --grayColorC: #818181;\n                }\n                body{\n                    font-family: Poppins, sans-serif\n                }\n            </style>\n            <script>\n                const API_KEY = '").concat(_this.state.API_key, "';\n                let config = {\"price\":{\"currency\":\"").concat(_this.state.e_data.currency ? _this.state.e_data.currency : "USD", "\",\"symbol\":\"").concat(_this.state.e_data.currency_symb ? _this.state.e_data.currency_symb : "$", "\",\"style\":\"").concat(_this.state.e_data.currency_symb_loc ? _this.state.e_data.currency_symb_loc : "left", "\"},\"cart\":{\"max_addition\":").concat(_this.state.data.max_addition, "},\"PREFIX\":\"/menu\",\"domain\":\"").concat(_this.state.baseURL, "\"};\n            </script>");
 
       var html = _this.state.html.substring(0, _this.state.html.indexOf('<!-- Customizer start -->')) + customizer + _this.state.html.substring(_this.state.html.indexOf('<!-- Customizer end -->'), _this.state.html.length);
 
