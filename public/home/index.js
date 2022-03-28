@@ -2678,10 +2678,10 @@
         name: 'index.html'
       }, {
         type: 'github',
-        url: 'https://raw.githubusercontent.com/kenzap/qr-menu/dev/public/feed/index.js'
+        url: 'https://raw.githubusercontent.com/kenzap/qr-menu/main/public/feed/index.js'
       }, {
         type: 'github',
-        url: 'https://raw.githubusercontent.com/kenzap/qr-menu/dev/public/feed/styles.css'
+        url: 'https://raw.githubusercontent.com/kenzap/qr-menu/main/public/feed/styles.css'
       }];
       var params = new URLSearchParams();
       params.append("cmd", "publish_site");

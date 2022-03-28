@@ -769,6 +769,7 @@
     html += '<h3>Order received!</h3>';
     html += '<p>Thank you for your order, you can close the window or return to the menu.</p>';
     html += '<lottie-player src="https://assets8.lottiefiles.com/packages/lf20_fefIZO.json"  background="transparent"  speed="1" class="lplayer" style="width: 300px; height: 300px;" loop  autoplay></lottie-player>';
+    html += '<h4>Summary</h4>';
     html += '<table>';
     var total = 0;
     var lastOrder = JSON.parse(localStorage.lastOrder);
