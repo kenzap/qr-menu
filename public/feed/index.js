@@ -769,6 +769,17 @@
     html += '<h3>Order received!</h3>';
     html += '<p>Thank you for your order, you can close the window or return to the menu.</p>';
     html += '<lottie-player src="https://assets8.lottiefiles.com/packages/lf20_fefIZO.json"  background="transparent"  speed="1" class="lplayer" style="width: 300px; height: 300px;" loop  autoplay></lottie-player>';
+    html += '<table>';
+    var total = 0;
+    var lastOrder = JSON.parse(localStorage.lastOrder);
+
+    for (var p in lastOrder.items) {
+      total += parseFloat(lastOrder.items[p].priceF);
+      html += '<tr><td data-id="' + lastOrder.items[p].id + '" class="checkt">' + lastOrder.items[p].qty + ' x ' + lastOrder.items[p].title + '</td><td></td><td class="price"><strong>' + priceFormat(lastOrder.items[p].price) + '</strong></td></tr>';
+    }
+
+    html += '<tr><td class="summ" colspan="3">Total <strong>' + priceFormat(total) + '</strong></td></tr>';
+    html += '</table>';
     html += '</div>';
     tdialogCnt.querySelector(".kUNwHA .cdialog-cnt .kp-body").innerHTML = html;
   };
@@ -819,6 +830,7 @@
     cart.state.order.idd = localStorage.idd;
     cart.state.order.sid = localStorage.sid;
     cart.state.order.id = typeof cart.state.order.id === 'undefined' ? randomString(8) + Math.floor(Date.now()) : cart.state.order.id;
+    localStorage.lastOrder = JSON.stringify(cart.state.order);
     fetch('https://api-v1.kenzap.cloud/', {
       method: 'post',
       headers: {
