@@ -2683,6 +2683,7 @@
         type: 'github',
         url: 'https://raw.githubusercontent.com/kenzap/qr-menu/main/public/feed/styles.css'
       }];
+      data.files_etc = [];
       var params = new URLSearchParams();
       params.append("cmd", "publish_site");
       params.append("key", "qrmenu");
