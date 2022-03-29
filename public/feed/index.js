@@ -842,7 +842,7 @@
         cart.clearCart();
         setBtnStep(4);
       } else {
-        alert("Error occured. Please try again!");
+        alert('Error: ' + JSON.stringify(response));
       }
     })["catch"](function (error) {
       console.error('Error:', error);
