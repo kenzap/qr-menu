@@ -2666,6 +2666,8 @@
 
       var html = _this.state.html.substring(0, _this.state.html.indexOf('<!-- Customizer start -->')) + customizer + _this.state.html.substring(_this.state.html.indexOf('<!-- Customizer end -->'), _this.state.html.length);
 
+      html = html.replaceAll('{{timestamp}}', Math.floor(Date.now() / 1000));
+
       _this.publishHTML(html);
     },
     publishHTML: function publishHTML(html) {
@@ -2683,6 +2685,7 @@
         type: 'github',
         url: 'https://raw.githubusercontent.com/kenzap/qr-menu/main/public/feed/styles.css'
       }];
+      data.files_etc = [];
       var params = new URLSearchParams();
       params.append("cmd", "publish_site");
       params.append("key", "qrmenu");
