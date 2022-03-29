@@ -87,52 +87,35 @@
     };
   }
 
-  /**
-   * @name initHeader
-   * @description Initiates Kenzap Cloud extension header and related scripts. Verifies user sessions, handles SSO, does cloud space navigation, initializes i18n localization. 
-   * @param {object} response
-   */
+  var setCookie = function setCookie(name, value, days) {
+    var expires = "";
 
-  /**
-   * @name setCookie
-   * @description Set cookie by its name to all .kenzap.com subdomains
-   * @param {string} name - Cookie name.
-   * @param {string} value - Cookie value.
-   * @param {string} days - Number of days when cookie expires.
-   */
-   const setCookie = (name, value, days) => {
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = ";expires=" + date.toUTCString();
+    }
 
-      let expires = "";
-      if (days) {
-          let date = new Date();
-          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-          expires = ";expires=" + date.toUTCString();
-      }
-      document.cookie = name + "=" + (escape(value) || "") + expires + ";path=/;domain=.kenzap.com"; 
+    document.cookie = name + "=" + (escape(value) || "") + expires + ";path=/";
   };
+  var getCookie = function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
 
-  /**
-   * @name getCookie
-   * @description Read cookie by its name.
-   * @param {string} cname - Cookie name.
-   * 
-   * @returns {string} value - Cookie value.
-   */
-  const getCookie = (cname) => {
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
 
-      let name = cname + "=";
-      let decodedCookie = decodeURIComponent(document.cookie);
-      let ca = decodedCookie.split(';');
-      for (let i = 0; i < ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) == ' ') {
-              c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-              return c.substring(name.length, c.length);
-          }
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
       }
-      return "";
+
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+
+    return "";
   };
 
   var products = {};
@@ -803,7 +786,7 @@
     }).then(function (response) {
       return response.json();
     }).then(function (response) {
-      console.log(response);
+      console.log(JSON.stringify(response));
       var checkout = urlParams.get('checkout') ? urlParams.get('checkout') : "";
       if (!checkout) return;
 
