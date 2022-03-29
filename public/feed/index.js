@@ -776,6 +776,7 @@
     params.append("app", appID);
     params.append("ott", ott);
     params.append("token", getCookie('kenzap_token'));
+    config.token = getCookie('kenzap_token');
     fetch('https://api-v1.kenzap.cloud/auth/', {
       method: 'post',
       headers: {
