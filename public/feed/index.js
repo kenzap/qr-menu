@@ -816,7 +816,7 @@
     cart.state.order.sid = localStorage.sid;
     cart.state.order.id = typeof cart.state.order.id === 'undefined' ? randomString(8) + Math.floor(Date.now()) : cart.state.order.id;
     localStorage.lastOrder = JSON.stringify(cart.state.order);
-    alert(config.token);
+    alert('token: ' + config.token);
     fetch('https://api-v1.kenzap.cloud/', {
       method: 'post',
       headers: {
