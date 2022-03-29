@@ -820,6 +820,7 @@
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ' + API_KEY,
         'Kenzap-Token': config.token,
         'Kenzap-Sid': localStorage.sid
       },

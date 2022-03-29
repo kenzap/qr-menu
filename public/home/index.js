@@ -2438,7 +2438,7 @@
       }]);
       _this.state.data = response.settings;
       _this.state.e_data = response.ecommerce_settings;
-      _this.state.API_key = response.keys.public_token;
+      _this.state.API_key = response.keys.private_token;
 
       for (var field in response.settings) {
         if (typeof response.settings[field] === "undefined") continue;
