@@ -786,7 +786,7 @@
     }).then(function (response) {
       return response.json();
     }).then(function (response) {
-      alert(JSON.stringify(response));
+      alert('err' + JSON.stringify(response));
       var checkout = urlParams.get('checkout') ? urlParams.get('checkout') : "";
       if (!checkout) return;
 
