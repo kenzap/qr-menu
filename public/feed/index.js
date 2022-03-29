@@ -787,7 +787,6 @@
     }).then(function (response) {
       return response.json();
     }).then(function (response) {
-      alert('err' + JSON.stringify(response));
       var checkout = urlParams.get('checkout') ? urlParams.get('checkout') : "";
       if (!checkout) return;
 
@@ -816,7 +815,6 @@
     cart.state.order.sid = localStorage.sid;
     cart.state.order.id = typeof cart.state.order.id === 'undefined' ? randomString(8) + Math.floor(Date.now()) : cart.state.order.id;
     localStorage.lastOrder = JSON.stringify(cart.state.order);
-    alert('token 2 ' + config.token);
     fetch('https://api-v1.kenzap.cloud/', {
       method: 'post',
       headers: {
@@ -843,7 +841,7 @@
         cart.clearCart();
         setBtnStep(4);
       } else {
-        alert('error' + JSON.stringify(response));
+        alert("Error occured. Please try again!");
       }
     })["catch"](function (error) {
       console.error('Error:', error);

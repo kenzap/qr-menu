@@ -2376,7 +2376,7 @@
           query: {
             keys: {
               type: 'api-key',
-              keys: ['public']
+              keys: ['private']
             },
             locale: {
               type: 'locale',
