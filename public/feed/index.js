@@ -87,6 +87,8 @@
     };
   }
 
+  var CDN = 'https://kenzap-sites.oss-ap-southeast-1.aliyuncs.com';
+  var appID = '66432108790002';
   var setCookie = function setCookie(name, value, days) {
     var expires = "";
 
@@ -117,38 +119,49 @@
 
     return "";
   };
+  var priceFormat = function priceFormat(price) {
+    price = makeNumber(price);
+    var priceF = parseFloat(price).toFixed(2);
 
-  var scroll = {
-    state: 0,
-    last_state: 0,
-    state_prev: 0,
-    fp: 0,
-    el_id: "",
-    direction: "",
-    offsets: {},
-    timer: null
+    switch (config.price.style) {
+      case 'left':
+        priceF = config.price.symbol + priceF;
+        break;
+
+      case 'right':
+        priceF = priceF + config.price.symbol;
+        break;
+    }
+
+    return priceF;
   };
-  var table = '';
-  var CDN = 'https://kenzap-sites.oss-ap-southeast-1.aliyuncs.com';
-  var appID = '66432108790002';
-  document.addEventListener("DOMContentLoaded", function () {
-    setTable();
-    initCart();
-    getMenu();
-
-    var cb = function cb() {
-      console.log('processed');
-    };
-
-    authUser(cb, false);
-    document.addEventListener("scroll", scrollEvents);
-  });
-
-  var setTable = function setTable() {
-    var urlParams = new URLSearchParams(window.location.search);
-    table = urlParams.get('table') ? urlParams.get('table') : "";
+  var makeNumber = function makeNumber(price) {
+    price = price == "" ? 0 : price;
+    return price;
   };
+  var randomString$1 = function randomString(length_) {
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz'.split('');
 
+    if (typeof length_ !== "number") {
+      length_ = Math.floor(Math.random() * chars.length_);
+    }
+
+    var str = '';
+
+    for (var i = 0; i < length_; i++) {
+      str += chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    return str;
+  };
+  var convertToSlug = function convertToSlug(str) {
+    return str.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-');
+  };
+  var vibrate = function vibrate() {
+    if (window.navigator && window.navigator.vibrate) {
+      navigator.vibrate(20);
+    }
+  };
   var toast = function toast(msg) {
     var t = document.querySelector(".kUNwHA .snackbar");
     t.innerHTML = msg;
@@ -158,6 +171,146 @@
     }, 2200);
   };
 
+  var cart = {
+    state: {
+      total: 0,
+      count: 0,
+      index: 0,
+      product: {
+        variations: []
+      },
+      order: {}
+    },
+    resetButton: function resetButton() {
+      this.state.total = 0;
+      this.state.count = 0;
+    },
+    refreshButton: function refreshButton() {
+      this.state.product.qty = parseInt(document.querySelector(".kUNwHA .qty").value);
+      this.state.product.price = products[this.state.index].priced == "" ? parseFloat(products[this.state.index].price) : parseFloat(products[this.state.index].priced);
+      this.state.product.note = document.querySelector(".kUNwHA .kp-note textarea").value;
+      var cb_count = 0;
+      var checkbox_list = document.querySelectorAll(".kUNwHA .mdialog .kp-check input[type=checkbox]");
+
+      var _iterator = _createForOfIteratorHelper(checkbox_list),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var cb = _step.value;
+
+          if (cb.checked) {
+            cb_count++;
+            this.state.product.price += parseFloat(cb.dataset.price);
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      var ra_count = 0;
+      var radio_list = document.querySelectorAll(".kUNwHA .mdialog .kp-radio input[type=radio]");
+
+      var _iterator2 = _createForOfIteratorHelper(radio_list),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var ra = _step2.value;
+
+          if (ra.checked) {
+            ra_count++;
+            this.state.product.price += parseFloat(ra.dataset.price);
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      this.state.product.priceF = parseFloat(this.state.product.price * this.state.product.qty);
+      document.querySelector(".kUNwHA .add .price").innerHTML = priceFormat(this.state.product.priceF);
+      var dis = false;
+      if (this.state.product.priceF == 0) dis = true;
+
+      for (var v in cart.state.product.variations) {
+        if (cart.state.product.variations[v].allow == false) dis = true;
+      }
+
+      document.querySelector(".kUNwHA .kp-add .mbtn .add").style.background = "";
+
+      if (cart.state.product.type == 'update' && this.state.product.qty > 0) {
+        document.querySelector(".kUNwHA .kp-add .mbtn .cta").innerHTML = "Update";
+      }
+
+      if (cart.state.product.type == 'update' && this.state.product.qty == 0) {
+        document.querySelector(".kUNwHA .kp-add .mbtn .cta").innerHTML = "Remove";
+        if (document.querySelector(".kUNwHA .kp-add .btn .add")) document.querySelector(".kUNwHA .kp-add .btn .add").style.background = "#df1960";
+        dis = false;
+      }
+
+      if (cart.state.product.type == 'new') {
+        document.querySelector(".kUNwHA .kp-add .mbtn .cta").innerHTML = "Add";
+      }
+
+      if (dis) {
+        document.querySelector(".kUNwHA .kp-add .mbtn").classList.add("dis");
+      } else {
+        document.querySelector(".kUNwHA .kp-add .mbtn").classList.remove("dis");
+      }
+    },
+    refreshCheckoutButton: function refreshCheckoutButton() {
+      var total = 0;
+
+      for (var p in this.state.order.items) {
+        total += parseFloat(this.state.order.items[p].priceF);
+      }
+
+      this.state.order.total = total;
+
+      if (total > 0) {
+        document.querySelector("body").classList.add("cbtn");
+        setBtnStep(1);
+        document.querySelector(".kUNwHA .cta-btn .price").innerHTML = priceFormat(total);
+      } else {
+        document.querySelector(".kUNwHA .cta-btn").style.display = "none";
+        document.querySelector("body").classList.remove("cbtn");
+      }
+    },
+    addToCart: function addToCart() {
+      this.state.order.items[this.state.product.id] = this.state.product;
+      console.log(this.state.order.items);
+
+      if (this.state.product.qty == 0) {
+        this.removeFromCart(this.state.product.id);
+      } else {
+        document.querySelector(".kUNwHA .kenzap-row[data-id='" + this.state.product.id + "'] .ctag").innerHTML = this.state.product.qty;
+      }
+
+      localStorage.cart = JSON.stringify(this.state.order);
+      cart.refreshCheckoutButton();
+    },
+    removeFromCart: function removeFromCart(id) {
+      delete this.state.order.items[id];
+      document.querySelector(".kUNwHA .kenzap-row[data-id='" + id + "'] .ctag").innerHTML = "";
+      localStorage.cart = JSON.stringify(this.state.order);
+    },
+    clearCart: function clearCart() {
+      for (var i in cart.state.order.items) {
+        document.querySelector(".kUNwHA .kenzap-row[data-id='" + cart.state.order.items[i].id + "'] .ctag").innerHTML = "";
+      }
+
+      cart.state.order = {};
+      cart.state.order.created = Math.floor(Date.now() / 1000);
+      cart.state.order.items = {};
+      localStorage.cart = JSON.stringify(cart.state.order);
+      this.refreshCheckoutButton();
+      window.history.replaceState({}, document.title, config.domain);
+    }
+  };
   var initCart = function initCart() {
     setBtnStep(1);
 
@@ -190,63 +343,6 @@
     if (!localStorage.idd) localStorage.idd = randomString(8) + Math.floor(Date.now());
     cart.refreshCheckoutButton();
   };
-
-  var btnListeners = function btnListeners() {
-    document.querySelector(".kUNwHA .cta-btn .mbtn").addEventListener('click', function (e) {
-      document.querySelector("body").classList.add('kp-modal');
-      refreshDialogView();
-
-      if (cart.state.order.step == 1) {
-        viewCheckoutModal();
-        setBtnStep(2);
-        return;
-      }
-
-      if (cart.state.order.step == 2) {
-        var html = '';
-        html = '<div class="ptable">';
-        html += '<label for="table" style="' + (table.length > 0 ? 'display:none;' : '') + '">Table number</label>';
-        html += '<input type="number" value="' + table + '" name="table" style="' + (table.length > 0 ? 'display:none;' : '') + '" autocomplete="off" class="table" size="4" pattern="" inputmode="">';
-        html += '<label for="note">Note</label>';
-        html += '<textarea class="note" name="note" placeholder="leave a note for a kitchen"></textarea>';
-        html += '</div>';
-        document.querySelector(".kUNwHA .cdialog-cnt .kp-body").innerHTML = html;
-        document.querySelector(".kUNwHA .cdialog-cnt .ptable .table").focus();
-        setBtnStep(3);
-        return;
-      }
-
-      if (cart.state.order.step == 3) {
-        var _table = document.querySelector(".kUNwHA .cdialog-cnt .ptable .table").value;
-        var note = document.querySelector(".kUNwHA .cdialog-cnt .ptable .note").value;
-
-        if (_table == "") {
-          alert("Please enter table number");
-          return;
-        }
-
-        cart.state.order.table = _table;
-        cart.state.order.note = note;
-        localStorage.cart = JSON.stringify(cart.state.order);
-        var mdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
-        mdialogCnt.style.display = "none";
-        document.querySelector(".kUNwHA .cta-btn").style.display = "none";
-        closeModal();
-        var origin = config.domain;
-        if (origin.indexOf('checkout') == -1) origin += (origin.indexOf('?') == -1 ? '?' : '&') + 'checkout=1';
-        window.location.href = 'https://auth.kenzap.com/?app=' + appID + '&redirect=' + encodeURIComponent(origin);
-        document.querySelector(".kUNwHA .overlay").style.display = "block";
-        document.querySelector(".kUNwHA .overlay .loader").style.display = "block";
-        return;
-      }
-
-      if (cart.state.order.step == 4) {
-        closeModal();
-        return;
-      }
-    });
-  };
-
   var setBtnStep = function setBtnStep(step) {
     document.querySelector(".kUNwHA .cta-btn").style.display = "block";
 
@@ -273,16 +369,16 @@
     }
   };
 
-  var getMenu = function getMenu() {
-    localStorage.sid = config.sid;
-    renderMenu();
-    dialogListeners();
-    menuListeners();
-    sliderListeners();
-    btnListeners();
-    console.log(products);
+  var scroll = {
+    state: 0,
+    last_state: 0,
+    state_prev: 0,
+    fp: 0,
+    el_id: "",
+    direction: "",
+    offsets: {},
+    timer: null
   };
-
   var renderMenu = function renderMenu() {
     var rows = settings.categories.split('\n');
     var html_slider = '';
@@ -313,7 +409,6 @@
             imgl._id = products[x]['_id'];
 
             imgl.onload = function () {
-              console.log('adding' + this.src);
               document.querySelector(".kUNwHA .kenzap-row[data-id='" + this._id + "'] img").setAttribute('src', this.src);
             };
 
@@ -371,50 +466,6 @@
       menu_container.innerHTML = html_menu;
     }
   };
-
-  var dialogListeners = function dialogListeners() {
-    var close = document.querySelector(".kUNwHA .mdialog .close");
-    close.addEventListener('click', function (e) {
-      closeModal();
-    });
-    var close2 = document.querySelector(".kUNwHA .cdialog .close");
-    close2.addEventListener('click', function (e) {
-      var cdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
-      cdialogCnt.style.display = "none";
-      setBtnStep(1);
-      closeModal();
-    });
-    window.addEventListener("resize", refreshDialogView);
-    window.addEventListener("orientationchange", refreshDialogView);
-  };
-
-  var closeModal = function closeModal() {
-    var mdialogCnt = document.querySelector(".kUNwHA .mdialog-cnt");
-    mdialogCnt.style.display = "none";
-    document.querySelector(".kUNwHA .overlay").style.display = "none";
-    document.querySelector(".kUNwHA .scrollable").style.height = 'auto';
-    document.querySelector(".kUNwHA .scrollable").style.overflowY = 'scroll';
-    document.querySelector("body").style.overflowY = 'auto';
-    document.querySelector("body").style.height = 'auto';
-    setTimeout(function () {
-      document.querySelector("body").classList.remove('kp-modal');
-    }, 300);
-    document.documentElement.scrollTop = scroll.last_state;
-    var cdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
-    cdialogCnt.style.display = "none";
-    cart.refreshCheckoutButton();
-  };
-
-  var refreshDialogView = function refreshDialogView() {
-    if (document.querySelector("body").classList.contains('kp-modal')) {
-      document.querySelector("body").style.height = '100vh';
-      document.querySelector("body").style.overflowY = 'hidden';
-      document.querySelector(".kUNwHA .scrollable").style.height = '100vh';
-      document.querySelector(".kUNwHA .scrollable").style.overflowY = 'hidden';
-      document.querySelector(".kUNwHA .mdialog-cnt").style.height = window.screen.availHeight - 160 + "px";
-    }
-  };
-
   var menuListeners = function menuListeners() {
     var row_list = document.querySelectorAll(".kUNwHA .kenzap-row");
 
@@ -458,48 +509,50 @@
 
           imgl.src = CDN + '/S' + localStorage.sid + '/product-' + products[x]['_id'] + '-1-500.jpeg?' + products[x]['updated'];
           var html_vars = '';
-          if (_typeof(products[x].variations !== 'undefined')) for (var _v in products[x].variations) {
+          if (_typeof(products[x].variations !== 'undefined')) for (var v in products[x].variations) {
             var type = '';
-            if (products[x].variations[_v].type == 'checkbox') type = 'check';
-            if (products[x].variations[_v].type == 'radio') type = 'radio';
-            if (typeof cart.state.product.variations[_v] === 'undefined') cart.state.product.variations[_v] = {
-              title: products[x].variations[_v].title,
-              required: products[x].variations[_v].required,
-              allow: products[x].variations[_v].required == '1' ? false : true
+            if (products[x].variations[v].type == 'checkbox') type = 'check';
+            if (products[x].variations[v].type == 'radio') type = 'radio';
+            if (typeof cart.state.product.variations[v] === 'undefined') cart.state.product.variations[v] = {
+              title: products[x].variations[v].title,
+              required: products[x].variations[v].required,
+              allow: products[x].variations[v].required == '1' ? false : true
             };
             html_vars += '\
-                <h3>' + products[x].variations[_v].title + (products[x].variations[_v].required == '1' ? ' <span class="tag">required</span>' : '') + '</h3>\
+                <h3>' + products[x].variations[v].title + (products[x].variations[v].required == '1' ? ' <span class="tag">required</span>' : '') + '</h3>\
                 <div class="kp-' + type + '">';
 
-            for (var d in products[x].variations[_v].data) {
+            for (var d in products[x].variations[v].data) {
               var checked = false;
 
-              if (typeof cart.state.product.variations[_v] !== 'undefined' && typeof cart.state.product.variations[_v].list !== 'undefined' && typeof cart.state.product.variations[_v].list["_" + d] !== 'undefined') {
+              if (typeof cart.state.product.variations[v] !== 'undefined' && typeof cart.state.product.variations[v].list !== 'undefined' && typeof cart.state.product.variations[v].list["_" + d] !== 'undefined') {
                 checked = true;
               }
+
+              products[x].variations[v].data[d]['price'] = makeNumber(products[x].variations[v].data[d]['price']);
 
               switch (type) {
                 case 'check':
                   html_vars += '\
                             <label>\
-                                <input type="checkbox" data-required="' + products[x].variations[_v].required + '" data-indexv="' + _v + '" data-index="' + d + '" data-title="' + products[x].variations[_v].data[d]['title'] + '" data-price="' + products[x].variations[_v].data[d]['price'] + '" ' + (checked ? 'checked="checked"' : '') + '>\
+                                <input type="checkbox" data-required="' + products[x].variations[v].required + '" data-indexv="' + v + '" data-index="' + d + '" data-title="' + products[x].variations[v].data[d]['title'] + '" data-price="' + products[x].variations[v].data[d]['price'] + '" ' + (checked ? 'checked="checked"' : '') + '>\
                                 <div class="checkbox">\
                                     <svg width="20px" height="20px" viewBox="0 0 20 20">\
                                         <path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>\
                                         <polyline points="4 11 8 15 16 6"></polyline>\
                                     </svg>\
                                 </div>\
-                                <span>' + products[x].variations[_v].data[d]['title'] + '</span>\
-                                <div class="price">+ ' + priceFormat(products[x].variations[_v].data[d]['price']) + '</div>\
+                                <span>' + products[x].variations[v].data[d]['title'] + '</span>\
+                                <div class="price">+ ' + priceFormat(products[x].variations[v].data[d]['price']) + '</div>\
                             </label>';
                   break;
 
                 case 'radio':
                   html_vars += '\
                             <label>\
-                                <input type="radio" data-required="' + products[x].variations[_v].required + '" data-indexv="' + _v + '" name="radio" data-index="' + d + '" data-title="' + products[x].variations[_v].data[d]['title'] + '" data-price="' + products[x].variations[_v].data[d]['price'] + '" ' + (checked ? 'checked="checked"' : '') + ' />\
-                                <span>' + products[x].variations[_v].data[d]['title'] + '</span>\
-                                <div class="price">+ ' + priceFormat(products[x].variations[_v].data[d]['price']) + '</div>\
+                                <input type="radio" data-required="' + products[x].variations[v].required + '" data-indexv="' + v + '" name="radio" data-index="' + d + '" data-title="' + products[x].variations[v].data[d]['title'] + '" data-price="' + products[x].variations[v].data[d]['price'] + '" ' + (checked ? 'checked="checked"' : '') + ' />\
+                                <span>' + products[x].variations[v].data[d]['title'] + '</span>\
+                                <div class="price">+ ' + priceFormat(products[x].variations[v].data[d]['price']) + '</div>\
                             </label>';
                   break;
               }
@@ -585,6 +638,7 @@
                 try {
                   for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
                     var rag = _step6.value;
+                    console.log(rag.dataset.price);
 
                     if (rag.checked) {
                       cart.state.product.variations[v].list["_" + rag.dataset.index] = {
@@ -654,6 +708,169 @@
       vibrate();
     });
   };
+  var sliderListeners = function sliderListeners() {
+    var slide_list = document.querySelectorAll(".kUNwHA .slideset .slide");
+
+    var _iterator7 = _createForOfIteratorHelper(slide_list),
+        _step7;
+
+    try {
+      for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+        var slide = _step7.value;
+        var scrollDiv = slide.offsetLeft;
+        scroll.offsets[slide.dataset.href] = scrollDiv;
+        slide.addEventListener('click', function (e) {
+          var sto = document.documentElement.scrollTop;
+          setTimeout(function (el) {
+            var _iterator8 = _createForOfIteratorHelper(document.querySelectorAll(".kUNwHA .slide")),
+                _step8;
+
+            try {
+              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+                var l = _step8.value;
+                l.classList.remove("active");
+              }
+            } catch (err) {
+              _iterator8.e(err);
+            } finally {
+              _iterator8.f();
+            }
+
+            el.classList.add("active");
+          }, 250, this);
+        });
+      }
+    } catch (err) {
+      _iterator7.e(err);
+    } finally {
+      _iterator7.f();
+    }
+  };
+  var refreshDialogView = function refreshDialogView() {
+    if (document.querySelector("body").classList.contains('kp-modal')) {
+      document.querySelector("body").style.height = '100vh';
+      document.querySelector("body").style.overflowY = 'hidden';
+      document.querySelector(".kUNwHA .scrollable").style.height = '100vh';
+      document.querySelector(".kUNwHA .scrollable").style.overflowY = 'hidden';
+      document.querySelector(".kUNwHA .mdialog-cnt").style.height = window.screen.availHeight - 160 + "px";
+    }
+  };
+  var closeModal = function closeModal() {
+    var mdialogCnt = document.querySelector(".kUNwHA .mdialog-cnt");
+    mdialogCnt.style.display = "none";
+    document.querySelector(".kUNwHA .overlay").style.display = "none";
+    document.querySelector(".kUNwHA .scrollable").style.height = 'auto';
+    document.querySelector(".kUNwHA .scrollable").style.overflowY = 'scroll';
+    document.querySelector("body").style.overflowY = 'auto';
+    document.querySelector("body").style.height = 'auto';
+    setTimeout(function () {
+      document.querySelector("body").classList.remove('kp-modal');
+    }, 300);
+    document.documentElement.scrollTop = scroll.last_state;
+    var cdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
+    cdialogCnt.style.display = "none";
+    cart.refreshCheckoutButton();
+  };
+
+  var table = '';
+  document.addEventListener("DOMContentLoaded", function () {
+    setTable();
+    initCart();
+    getMenu();
+
+    var cb = function cb() {
+      console.log('processed');
+    };
+
+    authUser(cb, false);
+    document.addEventListener("scroll", scrollEvents);
+  });
+
+  var setTable = function setTable() {
+    var urlParams = new URLSearchParams(window.location.search);
+    table = urlParams.get('table') ? urlParams.get('table') : "";
+  };
+
+  var btnListeners = function btnListeners() {
+    document.querySelector(".kUNwHA .cta-btn .mbtn").addEventListener('click', function (e) {
+      document.querySelector("body").classList.add('kp-modal');
+      refreshDialogView();
+
+      if (cart.state.order.step == 1) {
+        viewCheckoutModal();
+        setBtnStep(2);
+        return;
+      }
+
+      if (cart.state.order.step == 2) {
+        var html = '';
+        html = '<div class="ptable">';
+        html += '<label for="table" style="' + (table.length > 0 ? 'display:none;' : '') + '">Table number</label>';
+        html += '<input type="number" value="' + table + '" name="table" style="' + (table.length > 0 ? 'display:none;' : '') + '" autocomplete="off" class="table" size="4" pattern="" inputmode="">';
+        html += '<label for="note">Note</label>';
+        html += '<textarea class="note" name="note" placeholder="leave a note for a kitchen"></textarea>';
+        html += '</div>';
+        document.querySelector(".kUNwHA .cdialog-cnt .kp-body").innerHTML = html;
+        document.querySelector(".kUNwHA .cdialog-cnt .ptable .table").focus();
+        setBtnStep(3);
+        return;
+      }
+
+      if (cart.state.order.step == 3) {
+        var _table = document.querySelector(".kUNwHA .cdialog-cnt .ptable .table").value;
+        var note = document.querySelector(".kUNwHA .cdialog-cnt .ptable .note").value;
+
+        if (_table == "") {
+          alert("Please enter table number");
+          return;
+        }
+
+        cart.state.order.table = _table;
+        cart.state.order.note = note;
+        localStorage.cart = JSON.stringify(cart.state.order);
+        var mdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
+        mdialogCnt.style.display = "none";
+        document.querySelector(".kUNwHA .cta-btn").style.display = "none";
+        closeModal();
+        var origin = config.domain;
+        if (origin.indexOf('checkout') == -1) origin += (origin.indexOf('?') == -1 ? '?' : '&') + 'checkout=1';
+        window.location.href = 'https://auth.kenzap.com/?app=' + appID + '&redirect=' + encodeURIComponent(origin);
+        document.querySelector(".kUNwHA .overlay").style.display = "block";
+        document.querySelector(".kUNwHA .overlay .loader").style.display = "block";
+        return;
+      }
+
+      if (cart.state.order.step == 4) {
+        closeModal();
+        return;
+      }
+    });
+  };
+
+  var getMenu = function getMenu() {
+    localStorage.sid = config.sid;
+    renderMenu();
+    dialogListeners();
+    menuListeners();
+    sliderListeners();
+    btnListeners();
+  };
+
+  var dialogListeners = function dialogListeners() {
+    var close = document.querySelector(".kUNwHA .mdialog .close");
+    close.addEventListener('click', function (e) {
+      closeModal();
+    });
+    var close2 = document.querySelector(".kUNwHA .cdialog .close");
+    close2.addEventListener('click', function (e) {
+      var cdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
+      cdialogCnt.style.display = "none";
+      setBtnStep(1);
+      closeModal();
+    });
+    window.addEventListener("resize", refreshDialogView);
+    window.addEventListener("orientationchange", refreshDialogView);
+  };
 
   var viewCheckoutModal = function viewCheckoutModal() {
     var cdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
@@ -672,12 +889,12 @@
     html += '</table>';
     cdialogCnt.querySelector(".kUNwHA .cdialog-cnt .kp-body").innerHTML = html;
 
-    var _iterator7 = _createForOfIteratorHelper(cdialogCnt.querySelectorAll(".kUNwHA .cdialog-cnt .kp-body .checkt")),
-        _step7;
+    var _iterator = _createForOfIteratorHelper(cdialogCnt.querySelectorAll(".kUNwHA .cdialog-cnt .kp-body .checkt")),
+        _step;
 
     try {
-      for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-        var td = _step7.value;
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var td = _step.value;
         td.addEventListener('click', function (e) {
           var c = confirm("Remove " + this.innerHTML + "?");
 
@@ -698,9 +915,9 @@
         });
       }
     } catch (err) {
-      _iterator7.e(err);
+      _iterator.e(err);
     } finally {
-      _iterator7.f();
+      _iterator.f();
     }
   };
 
@@ -774,7 +991,7 @@
   var ajaxCheckout = function ajaxCheckout() {
     cart.state.order.idd = localStorage.idd;
     cart.state.order.sid = localStorage.sid;
-    cart.state.order.id = typeof cart.state.order.id === 'undefined' ? randomString(8) + Math.floor(Date.now()) : cart.state.order.id;
+    cart.state.order.id = typeof cart.state.order.id === 'undefined' ? randomString$1(8) + Math.floor(Date.now()) : cart.state.order.id;
     localStorage.lastOrder = JSON.stringify(cart.state.order);
     fetch('https://api-v1.kenzap.cloud/', {
       method: 'post',
@@ -810,63 +1027,18 @@
     });
   };
 
-  var vibrate = function vibrate() {
-    if (window.navigator && window.navigator.vibrate) {
-      navigator.vibrate(20);
-    }
-  };
-
-  var sliderListeners = function sliderListeners() {
-    var slide_list = document.querySelectorAll(".kUNwHA .slideset .slide");
-
-    var _iterator8 = _createForOfIteratorHelper(slide_list),
-        _step8;
-
-    try {
-      for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-        var slide = _step8.value;
-        var scrollDiv = slide.offsetLeft;
-        scroll.offsets[slide.dataset.href] = scrollDiv;
-        slide.addEventListener('click', function (e) {
-          var sto = document.documentElement.scrollTop;
-          setTimeout(function (el) {
-            var _iterator9 = _createForOfIteratorHelper(document.querySelectorAll(".kUNwHA .slide")),
-                _step9;
-
-            try {
-              for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-                var l = _step9.value;
-                l.classList.remove("active");
-              }
-            } catch (err) {
-              _iterator9.e(err);
-            } finally {
-              _iterator9.f();
-            }
-
-            el.classList.add("active");
-          }, 250, this);
-        });
-      }
-    } catch (err) {
-      _iterator8.e(err);
-    } finally {
-      _iterator8.f();
-    }
-  };
-
   var scrollEvents = function scrollEvents() {
     var h_list = document.querySelectorAll(".kUNwHA .kenzap-row h2");
     var diff_prev = 0;
     var diff = 0;
     scroll.state = document.documentElement.scrollTop;
 
-    var _iterator10 = _createForOfIteratorHelper(h_list),
-        _step10;
+    var _iterator2 = _createForOfIteratorHelper(h_list),
+        _step2;
 
     try {
-      for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
-        var h = _step10.value;
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var h = _step2.value;
         diff = h.offsetTop - document.documentElement.scrollTop;
         scroll.direction = "down";
 
@@ -880,9 +1052,9 @@
         diff_prev = diff;
       }
     } catch (err) {
-      _iterator10.e(err);
+      _iterator2.e(err);
     } finally {
-      _iterator10.f();
+      _iterator2.f();
     }
 
     if (scroll.state_prev != scroll.state) scroll.state_prev = scroll.state;
@@ -896,18 +1068,18 @@
           behavior: 'smooth'
         });
 
-        var _iterator11 = _createForOfIteratorHelper(document.querySelectorAll(".kUNwHA .slide")),
-            _step11;
+        var _iterator3 = _createForOfIteratorHelper(document.querySelectorAll(".kUNwHA .slide")),
+            _step3;
 
         try {
-          for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-            var l = _step11.value;
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var l = _step3.value;
             l.classList.remove("active");
           }
         } catch (err) {
-          _iterator11.e(err);
+          _iterator3.e(err);
         } finally {
-          _iterator11.f();
+          _iterator3.f();
         }
 
         document.querySelector(".kUNwHA [data-href='" + el_id + "']").classList.add("active");
@@ -915,183 +1087,6 @@
     }
 
     scroll.el_id = "";
-  };
-
-  var convertToSlug = function convertToSlug(str) {
-    return str.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-');
-  };
-
-  var priceFormat = function priceFormat(price) {
-    var priceF = parseFloat(price).toFixed(2);
-
-    switch (config.price.style) {
-      case 'left':
-        priceF = config.price.symbol + priceF;
-        break;
-
-      case 'right':
-        priceF = priceF + config.price.symbol;
-        break;
-    }
-
-    return priceF;
-  };
-
-  var randomString = function randomString(length_) {
-    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz'.split('');
-
-    if (typeof length_ !== "number") {
-      length_ = Math.floor(Math.random() * chars.length_);
-    }
-
-    var str = '';
-
-    for (var i = 0; i < length_; i++) {
-      str += chars[Math.floor(Math.random() * chars.length)];
-    }
-
-    return str;
-  };
-
-  var cart = {
-    state: {
-      total: 0,
-      count: 0,
-      index: 0,
-      product: {
-        variations: []
-      },
-      order: {}
-    },
-    resetButton: function resetButton() {
-      this.state.total = 0;
-      this.state.count = 0;
-    },
-    refreshButton: function refreshButton() {
-      this.state.product.qty = parseInt(document.querySelector(".kUNwHA .qty").value);
-      this.state.product.price = products[this.state.index].priced == "" ? parseFloat(products[this.state.index].price) : parseFloat(products[this.state.index].priced);
-      this.state.product.note = document.querySelector(".kUNwHA .kp-note textarea").value;
-      var cb_count = 0;
-      var checkbox_list = document.querySelectorAll(".kUNwHA .mdialog .kp-check input[type=checkbox]");
-
-      var _iterator12 = _createForOfIteratorHelper(checkbox_list),
-          _step12;
-
-      try {
-        for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
-          var cb = _step12.value;
-
-          if (cb.checked) {
-            cb_count++;
-            this.state.product.price += parseFloat(cb.dataset.price);
-          }
-        }
-      } catch (err) {
-        _iterator12.e(err);
-      } finally {
-        _iterator12.f();
-      }
-
-      var ra_count = 0;
-      var radio_list = document.querySelectorAll(".kUNwHA .mdialog .kp-radio input[type=radio]");
-
-      var _iterator13 = _createForOfIteratorHelper(radio_list),
-          _step13;
-
-      try {
-        for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-          var ra = _step13.value;
-
-          if (ra.checked) {
-            ra_count++;
-            this.state.product.price += parseFloat(ra.dataset.price);
-          }
-        }
-      } catch (err) {
-        _iterator13.e(err);
-      } finally {
-        _iterator13.f();
-      }
-
-      this.state.product.priceF = parseFloat(this.state.product.price * this.state.product.qty);
-      document.querySelector(".kUNwHA .add .price").innerHTML = priceFormat(this.state.product.priceF);
-      var dis = false;
-      if (this.state.product.priceF == 0) dis = true;
-
-      for (v in cart.state.product.variations) {
-        if (cart.state.product.variations[v].allow == false) dis = true;
-      }
-
-      document.querySelector(".kUNwHA .kp-add .mbtn .add").style.background = "";
-
-      if (cart.state.product.type == 'update' && this.state.product.qty > 0) {
-        document.querySelector(".kUNwHA .kp-add .mbtn .cta").innerHTML = "Update";
-      }
-
-      if (cart.state.product.type == 'update' && this.state.product.qty == 0) {
-        document.querySelector(".kUNwHA .kp-add .mbtn .cta").innerHTML = "Remove";
-        document.querySelector(".kUNwHA .kp-add .btn .add").style.background = "#df1960";
-        dis = false;
-      }
-
-      if (cart.state.product.type == 'new') {
-        document.querySelector(".kUNwHA .kp-add .mbtn .cta").innerHTML = "Add";
-      }
-
-      if (dis) {
-        document.querySelector(".kUNwHA .kp-add .mbtn").classList.add("dis");
-      } else {
-        document.querySelector(".kUNwHA .kp-add .mbtn").classList.remove("dis");
-      }
-    },
-    refreshCheckoutButton: function refreshCheckoutButton() {
-      var total = 0;
-
-      for (var p in this.state.order.items) {
-        total += parseFloat(this.state.order.items[p].priceF);
-      }
-
-      this.state.order.total = total;
-
-      if (total > 0) {
-        document.querySelector("body").classList.add("cbtn");
-        setBtnStep(1);
-        document.querySelector(".kUNwHA .cta-btn .price").innerHTML = priceFormat(total);
-      } else {
-        document.querySelector(".kUNwHA .cta-btn").style.display = "none";
-        document.querySelector("body").classList.remove("cbtn");
-      }
-    },
-    addToCart: function addToCart() {
-      this.state.order.items[this.state.product.id] = this.state.product;
-      console.log(this.state.order.items);
-
-      if (this.state.product.qty == 0) {
-        this.removeFromCart(this.state.product.id);
-      } else {
-        document.querySelector(".kUNwHA .kenzap-row[data-id='" + this.state.product.id + "'] .ctag").innerHTML = this.state.product.qty;
-      }
-
-      localStorage.cart = JSON.stringify(this.state.order);
-      cart.refreshCheckoutButton();
-    },
-    removeFromCart: function removeFromCart(id) {
-      delete this.state.order.items[id];
-      document.querySelector(".kUNwHA .kenzap-row[data-id='" + id + "'] .ctag").innerHTML = "";
-      localStorage.cart = JSON.stringify(this.state.order);
-    },
-    clearCart: function clearCart() {
-      for (var i in cart.state.order.items) {
-        document.querySelector(".kUNwHA .kenzap-row[data-id='" + cart.state.order.items[i].id + "'] .ctag").innerHTML = "";
-      }
-
-      cart.state.order = {};
-      cart.state.order.created = Math.floor(Date.now() / 1000);
-      cart.state.order.items = {};
-      localStorage.cart = JSON.stringify(cart.state.order);
-      this.refreshCheckoutButton();
-      window.history.replaceState({}, document.title, config.domain);
-    }
   };
 
 })();

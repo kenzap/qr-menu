@@ -123,11 +123,11 @@ body {
 }
 
 .kUNwHA .kenzap-col-5 {
-  width: 45%;
+  width: 40%;
 }
 
 .kUNwHA .kenzap-col-7 {
-  width: 55%;
+  width: 60%;
 }
 
 .kUNwHA .kenzap-col-6 {
@@ -912,7 +912,7 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   vertical-align: middle;
   height: 100%;
   opacity: 0.86;
-  background: white;
+  background: rgb(255, 255, 255);
 }
 
 /* The snackbar - position it at the bottom and in the middle of the screen */
@@ -927,7 +927,7 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   position: fixed;
   z-index: 1;
   left: 50%;
-  top: 24px;
+  top: 100px;
   border-radius: 50px;
 }
 
@@ -1009,7 +1009,7 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
     opacity: 0;
   }
   to {
-    top: 24px;
+    top: 100px;
     opacity: 1;
   }
 }
@@ -1019,13 +1019,13 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
     opacity: 0;
   }
   to {
-    top: 24px;
+    top: 100px;
     opacity: 1;
   }
 }
 @-webkit-keyframes fadeout {
   from {
-    top: 24px;
+    top: 100px;
     opacity: 1;
   }
   to {
@@ -1035,7 +1035,7 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
 }
 @keyframes fadeout {
   from {
-    top: 24px;
+    top: 100px;
     opacity: 1;
   }
   to {
@@ -1102,3 +1102,5 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
     height: auto;
   }
 }
+
+/*# sourceMappingURL=styles.css.map */
