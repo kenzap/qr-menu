@@ -156,12 +156,12 @@
   };
 
   /**
-   * @name getSiteId
+   * @name spaceID
    * @description Gets current Kenzap Cloud space ID identifier from the URL.
    * 
    * @returns {string} id - Kenzap Cloud space ID.
    */
-  const getSiteId = () => {
+  const spaceID = () => {
       
       let urlParams = new URLSearchParams(window.location.search);
       let id = urlParams.get('sid') ? urlParams.get('sid') : "";
@@ -170,19 +170,82 @@
   };
 
   /**
+   * @name getCookie
+   * @description Read cookie by its name.
+   * @param {string} cname - Cookie name.
+   * 
+   * @returns {string} value - Cookie value.
+   */
+  const getCookie$1 = (cname) => {
+
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  };
+
+  /**
+   * @name headers
+   * @description Default headers object for all Kenzap Cloud fetch queries. 
+   * @param {object} headers
+   */
+   const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + getCookie$1('kenzap_api_key'),
+      'Kenzap-Locale': getCookie$1('locale') ? getCookie$1('locale') : "en",
+      'Kenzap-Header': (localStorage.hasOwnProperty('header') && localStorage.hasOwnProperty('header-version')) ? localStorage.getItem('header-version') : 0,
+      'Kenzap-Token': getCookie$1('kenzap_token'),
+      'Kenzap-Sid': spaceID(),
+  };
+
+  /**
    * @name parseApiError
    * @description Set default logics for different API Error responses.
    * @param {object} object - API response.
    */
-  const parseApiError = (data) => {
-   
+   const parseApiError = (data) => {
+
+      // outout to frontend console
+      console.log(data);
+
+      // unstructured failure
+      if(isNaN(data.code)){
+      
+          // structure failure data
+          let log = data;
+          try{ log = JSON.stringify(log); }catch(e){ }
+
+          let params = new URLSearchParams();
+          params.append("cmd", "report");
+          params.append("sid", spaceID());
+          params.append("token", getCookie$1('kenzap_token'));
+          params.append("data", log);
+          
+          // report error
+          fetch('https://api-v1.kenzap.cloud/error/', { method: 'post', headers: { 'Accept': 'application/json', 'Content-type': 'application/x-www-form-urlencoded', }, body: params });
+
+          alert('Can not connect to Kenzap Cloud');  
+          return;
+      }
+      
+      // handle cloud error codes
       switch(data.code){
 
           // unauthorized
           case 401:
 
               // dev mode
-              if(window.location.href.indexOf('localhost')){ 
+              if(window.location.href.indexOf('localhost')!=-1){ 
 
                   alert(data.reason); 
                   return; 
@@ -318,7 +381,7 @@
   };
 
   var HTMLContent = function HTMLContent(__) {
-    return "\n        <div class=\"container p-edit\">\n            <div class=\"d-flex justify-content-between bd-highlight mb-3\">\n                <nav class=\"bc\" aria-label=\"breadcrumb\"></nav>\n                <div>\n                    <a style=\"margin-right:16px;\" class=\"preview-link nounderline\" target=\"_blank\" href=\"#\">".concat(__('preview'), "<i class=\"mdi mdi-monitor\"></i></a>\n                    <button class=\"btn btn-primary btn-publish\" type=\"button\">").concat(__('Publish menu'), "</button>\n                </div>\n            </div>\n            <div class=\"row\">\n\n                <div class=\"col-lg-12 grid-margin stretch-card\">\n                    <div class=\"card border-white shadow-sm\">\n                        <div class=\"card-body\">\n                        <h4 class=\"card-title\">").concat(__('Settings'), "</h4>\n                        <p class=\"form-text\">\n                            ").concat(__('Go to <a href="' + link('https://ecommerce.kenzap.cloud/product-list/') + '">ecommerce</a></code> dashboard to populate menu products.'), "\n                        </p>\n   \n                        <div class=\"qr-list mb-5 \">\n                            <div class=\"row table_number_cont d-none\">\n                                <div class=\"col-lg-4\">\n                                    <select id=\"table_number\" class=\"form-select inp\" data-type=\"select\" aria-label=\"Table number picker\">\n                                        <option selected>Table 1</option>\n                                    </select>\n                                    <p class=\"form-text\">").concat(__('Pick table number to download the QR-code sticker.'), "</p>\n                                </div>\n                            </div>\n                            <div id=\"qr-main\" class=\"qr-cnt form-group mr-2\">\n                                <a href=\"#\" class=\"qr-download mb-3\">\n                                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" fill=\"currentColor\" class=\"bi bi-cloud-download\" viewBox=\"0 0 16 16\">\n                                        <path d=\"M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z\"/>\n                                        <path d=\"M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z\"/>\n                                    </svg>\n                                </a>\n                                <div class=\"qr-preview\"> </div>\n                                <div class=\"qr-note text-danger d-none\" style=\"\">").concat(__('* qr-code updated'), "</div>\n                            </div>\n                        </div>\n\n                        <a href='data:image/svg+xml;utf8,<svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"10\"></circle></svg>' download=\"qr-menu.svg\" class=\"d-none d-link\">download</a>\n\n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title \">").concat(__('Table selection'), "</h5>\n                            <p class=\"form-text mb-3\" style=\"\">").concat(__('After changing table selection setting, please update your QR-code prints.'), "</p>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <div class=\"form-check\">\n                                        <label class=\"form-check-label status-publish form-label\">\n                                            <input type=\"radio\" class=\"form-check-input inp\" data-type=\"radio\" name=\"mode\" id=\"mode0\" value=\"0\" checked=\"true\"> ").concat(__('Manual'), "\n                                            <p class=\"form-text\">").concat(__('Force users to pick up table number upon checkout.'), "</p>\n                                        </label>\n                                    </div>\n                                    <div class=\"form-check\">\n                                        <label class=\"form-check-label status-publish form-label\">\n                                            <input type=\"radio\" class=\"form-check-input\" data-type=\"radio\" name=\"mode\" id=\"mode1\" value=\"1\"> ").concat(__('Automatic'), "\n                                            <p class=\"form-text\">").concat(__('Link table number directly with the QR-code sticker.'), "</p>\n\n                                            <div class=\"total_tables_cont d-none\">\n                                                <input id=\"total_tables\" class=\"form-control inp\" data-type=\"number\" type=\"number\" placeholder=\"").concat(__('Total number of tables'), "\" value=\"10\" aria-label=\"total number of tables\">\n                                                <p class=\"form-text\">").concat(__('Total number of tables. Each table has individual QR-code sticker.'), "</p>\n                                            </div>\n                                        </label>\n                                    </div>\n                                    <div class=\"form-check\">\n                                        <label class=\"form-check-label status-publish form-label\">\n                                            <input type=\"radio\" class=\"form-check-input\" data-type=\"radio\" name=\"mode\" id=\"mode2\" value=\"2\"> ").concat(__('No table mode'), "\n                                            <p class=\"form-text\">").concat(__('Do not ask users for table number upon checkout.'), "</p>\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>\n                            \n                        </div>\n\n                        <div class=\"form-group mb-5\">\n                            <h5 class=\"card-title mb-3\">").concat(__('Color palette'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-10\">\n                                    <ul id=\"palette\" class=\"palette inp\" data-type=\"palette\">\n                                        <li ><input type=\"text\" maxlength=\"7\" data-key=\"baseColorA\" value=\"#1941df\" style=\"background: #1941df;\"></li>\n                                        <li ><input type=\"text\" maxlength=\"7\" data-key=\"bgColorA\" value=\"#000000\" style=\"background: #000000;\"></li>\n                                        <li ><input type=\"text\" maxlength=\"7\" data-key=\"bgColorB\" value=\"#494949\" style=\"background: #494949;\"></li>\n                                        <li ><input type=\"text\" maxlength=\"7\" data-key=\"txtColorB\" value=\"#b8b8b8\" style=\"background: #b8b8b8;\"></li>\n                                        <li ><input type=\"text\" maxlength=\"7\" data-key=\"txtColorC\" value=\"#ffffff\" style=\"background: #ffffff;\"></li>\n                                        <li ><input type=\"text\" maxlength=\"7\" data-key=\"txtColorA\" value=\"#ffffff\" style=\"background: #ffffff;\"></li>\n                                    </ul> \n                                </div>\n                            </div>\n                        </div>\n                    \n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title mb-3\">").concat(__('Menu categories'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <textarea class=\"form-control inp\" id=\"categories\" data-type=\"textarea\" rows=\"8\"></textarea>\n                                    <p class=\"form-text\">").concat(__('Provide one menu category per line. Categories are case-sensitive.'), " <a href=\"").concat(link('https://ecommerce.kenzap.cloud/product-list/'), "\">Available categories</a>.</p>\n                                </div>\n                            </div> \n                        </div>\n\n                        <div class=\"form-group mb-3\">\n                            <h5 class=\"card-title mb-3\">").concat(__('Public link'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <div class=\"input-group\">\n                                        <div class=\"input-group input-group-lg\">\n                                            <input id=\"slug\" type=\"text\" data-type=\"text\" style=\"text-align:right;\" class=\"form-control val-tld inp\" aria-label=\"\">\n                                            <button class=\"btn btn-sm btn-outline-primary dropdown-toggle btn-tld\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">.kenzap.site</button>\n                                            <ul class=\"dropdown-menu dropdown-menu-end domain-list\">\n                                                <li><a class=\"dropdown-item\" href=\"#\" data-key='.kenzap.site'>.kenzap.site</a></li>\n                                                <li><a class=\"dropdown-item d-none\" href=\"#\" data-key='.warung.menu'>.warung.menu</a></li>\n                                                <li><a class=\"dropdown-item d-none\" href=\"#\" data-key='.kenzap.tech'>.kenzap.tech</a></li>\n                                                <li><hr class=\"dropdown-divider\"></li>\n                                                <li><a class=\"dropdown-item\" href=\"#\" data-key='custom'>My domain</a></li>\n                                            </ul>\n                                        </div>\n                                        <p class=\"form-text\">").concat(__('Public link where users can preview your menu. Ex.: myresto.kenzap.site. For branded link visit '), " <a href=\"").concat(link('https://dashboard.kenzap.cloud/domain/'), "\">").concat(__('domain dashboard'), "</a>.</p>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"form-group mb-3 d-none\">\n                            <h5 class=\"card-title mb-3\">").concat(__('Public link'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <div class=\"input-group input-group-lg\">\n                                        <span class=\"input-group-text\" id=\"space-domain\">").concat('http://menu' + getSiteId() + '.kenzap.site/', "</span>\n                                        <input type=\"text\" class=\"form-control d-none\" data-type=\"text\" aria-label=\"Menu link\" aria-describedby=\"inputGroup-sizing-lg\">\n                                    </div>\n                                    <p class=\"form-text\">").concat(__('Public link where users can preview your menu. For branded link visit '), " <a href=\"").concat(link('https://dashboard.kenzap.cloud/domain/'), "\">domain dashboard</a></p>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title mb-3\">").concat(__('Cart addition'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <input id=\"max_addition\" type=\"range\" data-type=\"range\" value=\"0\" class=\"form-range inp\" min=\"0\" max=\"100\" >\n                                    <p class=\"form-text\">").concat(__('Maximum number of items per cart. If set to 0 cart addition is disabled. Currently '), "<span id=\"max_addition_val\">0</span>.</p>\n                                </div>\n                            </div> \n                        </div>\n\n                        <div class=\"table-responsive d-none\">\n                            <table class=\"table table-hover table-borderless align-middle table-striped table-p-list\" style=\"min-width: 800px;\">\n                                <thead>\n                                    <tr>\n                                    <th>").concat(__('ID'), "</th>\n                                    <th>").concat(__('Title'), "</th>\n                                    <th style=\"display:none;\">Zones</th>\n                                    <th style=\"display:none;\">Seats</th>\n                                    <th style=\"text-align:right;\"></th>\n                                    </tr>\n                                </thead>\n                                <tbody class=\"layout_list\">\n                                    <tr>\n                                    <td></td><td></td><td></td><td></td><td></td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n\n        <div class=\"modal\" tabindex=\"-1\">\n            <div class=\"modal-dialog\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h5 class=\"modal-title\"></h5>\n                        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n                    </div>\n                    <div class=\"modal-body\">\n\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-primary btn-modal\"></button>\n                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\"></button>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"position-fixed bottom-0 p-2 m-4 end-0 align-items-center\">\n            <div class=\"toast hide align-items-center text-white bg-dark border-0\" role=\"alert\" aria-live=\"assertive\"\n                aria-atomic=\"true\" data-bs-delay=\"3000\">\n                <div class=\"d-flex\">\n                    <div class=\"toast-body\"></div>\n                    <button type=\"button\" class=\"btn-close btn-close-white me-2 m-auto\" data-bs-dismiss=\"toast\"\n                        aria-label=\"Close\"></button>\n                </div>\n            </div>\n        </div>\n        \n    ");
+    return "\n        <div class=\"container p-edit\">\n            <div class=\"d-flex justify-content-between bd-highlight mb-3\">\n                <nav class=\"bc\" aria-label=\"breadcrumb\"></nav>\n                <div>\n                    <a style=\"margin-right:16px;\" class=\"preview-link nounderline\" target=\"_blank\" href=\"#\">".concat(__('preview'), "<i class=\"mdi mdi-monitor\"></i></a>\n                    <button class=\"btn btn-primary btn-publish\" type=\"button\">").concat(__('Publish menu'), "</button>\n                </div>\n            </div>\n            <div class=\"row\">\n\n                <div class=\"col-lg-12 grid-margin stretch-card\">\n                    <div class=\"card border-white shadow-sm\">\n                        <div class=\"card-body\">\n                        <h4 class=\"card-title\">").concat(__('Settings'), "</h4>\n                        <p class=\"form-text\">\n                            ").concat(__('Go to <a href="' + link('https://ecommerce.kenzap.cloud/product-list/') + '">ecommerce</a></code> dashboard to populate menu products.'), "\n                        </p>\n   \n                        <div class=\"qr-list mb-5 \">\n                            <div class=\"row table_number_cont d-none\">\n                                <div class=\"col-lg-4\">\n                                    <select id=\"table_number\" class=\"form-select inp\" data-type=\"select\" aria-label=\"Table number picker\">\n                                        <option selected>Table 1</option>\n                                    </select>\n                                    <p class=\"form-text\">").concat(__('Pick table number to download the QR-code sticker.'), "</p>\n                                </div>\n                            </div>\n                            <div id=\"qr-main\" class=\"qr-cnt form-group mr-2\">\n                                <a href=\"#\" class=\"qr-download mb-3\">\n                                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" fill=\"currentColor\" class=\"bi bi-cloud-download\" viewBox=\"0 0 16 16\">\n                                        <path d=\"M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z\"/>\n                                        <path d=\"M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z\"/>\n                                    </svg>\n                                </a>\n                                <div class=\"qr-preview\"> </div>\n                                <div class=\"qr-note text-danger d-none\" style=\"\">").concat(__('* qr-code updated'), "</div>\n                            </div>\n                        </div>\n\n                        <a href='data:image/svg+xml;utf8,<svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"10\"></circle></svg>' download=\"qr-menu.svg\" class=\"d-none d-link\">download</a>\n\n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title \">").concat(__('Table selection'), "</h5>\n                            <p class=\"form-text mb-3\" style=\"\">").concat(__('After changing table selection setting, please update your QR-code prints.'), "</p>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <div class=\"form-check\">\n                                        <label class=\"form-check-label status-publish form-label\">\n                                            <input type=\"radio\" class=\"form-check-input inp\" data-type=\"radio\" name=\"mode\" id=\"mode0\" value=\"0\" checked=\"true\"> ").concat(__('Manual'), "\n                                            <p class=\"form-text\">").concat(__('Force users to pick up table number upon checkout.'), "</p>\n                                        </label>\n                                    </div>\n                                    <div class=\"form-check\">\n                                        <label class=\"form-check-label status-publish form-label\">\n                                            <input type=\"radio\" class=\"form-check-input\" data-type=\"radio\" name=\"mode\" id=\"mode1\" value=\"1\"> ").concat(__('Automatic'), "\n                                            <p class=\"form-text\">").concat(__('Link table number directly with the QR-code sticker.'), "</p>\n\n                                            <div class=\"total_tables_cont d-none\">\n                                                <input id=\"total_tables\" class=\"form-control inp\" data-type=\"number\" type=\"number\" placeholder=\"").concat(__('Total number of tables'), "\" value=\"10\" aria-label=\"total number of tables\">\n                                                <p class=\"form-text\">").concat(__('Total number of tables. Each table has individual QR-code sticker.'), "</p>\n                                            </div>\n                                        </label>\n                                    </div>\n                                    <div class=\"form-check\">\n                                        <label class=\"form-check-label status-publish form-label\">\n                                            <input type=\"radio\" class=\"form-check-input\" data-type=\"radio\" name=\"mode\" id=\"mode2\" value=\"2\"> ").concat(__('No table mode'), "\n                                            <p class=\"form-text\">").concat(__('Do not ask users for table number upon checkout.'), "</p>\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>\n                            \n                        </div>\n\n                        <div class=\"form-group mb-5\">\n                            <h5 class=\"card-title mb-3\">").concat(__('Color palette'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-10\">\n                                    <ul id=\"palette\" class=\"palette inp\" data-type=\"palette\">\n                                        <li ><input type=\"text\" maxlength=\"7\" data-key=\"baseColorA\" value=\"#1941df\" style=\"background: #1941df;\"></li>\n                                        <li ><input type=\"text\" maxlength=\"7\" data-key=\"bgColorA\" value=\"#000000\" style=\"background: #000000;\"></li>\n                                        <li ><input type=\"text\" maxlength=\"7\" data-key=\"bgColorB\" value=\"#494949\" style=\"background: #494949;\"></li>\n                                        <li ><input type=\"text\" maxlength=\"7\" data-key=\"txtColorB\" value=\"#b8b8b8\" style=\"background: #b8b8b8;\"></li>\n                                        <li ><input type=\"text\" maxlength=\"7\" data-key=\"txtColorC\" value=\"#ffffff\" style=\"background: #ffffff;\"></li>\n                                        <li ><input type=\"text\" maxlength=\"7\" data-key=\"txtColorA\" value=\"#ffffff\" style=\"background: #ffffff;\"></li>\n                                    </ul> \n                                </div>\n                            </div>\n                        </div>\n                    \n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title mb-3\">").concat(__('Menu categories'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <textarea class=\"form-control inp\" id=\"categories\" data-type=\"textarea\" rows=\"8\"></textarea>\n                                    <p class=\"form-text\">").concat(__('Provide one menu category per line. Categories are case-sensitive.'), " <a href=\"").concat(link('https://ecommerce.kenzap.cloud/product-list/'), "\">Available categories</a>.</p>\n                                </div>\n                            </div> \n                        </div>\n\n                        <div class=\"form-group mb-3\">\n                            <h5 class=\"card-title mb-3\">").concat(__('Public link'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <div class=\"input-group\">\n                                        <div class=\"input-group input-group-lg\">\n                                            <input id=\"slug\" type=\"text\" data-type=\"text\" style=\"text-align:right;\" class=\"form-control val-tld inp\" aria-label=\"\">\n                                            <button class=\"btn btn-sm btn-outline-primary dropdown-toggle btn-tld\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">.kenzap.site</button>\n                                            <ul class=\"dropdown-menu dropdown-menu-end domain-list\">\n                                                <li><a class=\"dropdown-item\" href=\"#\" data-key='.kenzap.site'>.kenzap.site</a></li>\n                                                <li><a class=\"dropdown-item d-none\" href=\"#\" data-key='.warung.menu'>.warung.menu</a></li>\n                                                <li><a class=\"dropdown-item d-none\" href=\"#\" data-key='.kenzap.tech'>.kenzap.tech</a></li>\n                                                <li><hr class=\"dropdown-divider\"></li>\n                                                <li><a class=\"dropdown-item\" href=\"#\" data-key='custom'>My domain</a></li>\n                                            </ul>\n                                        </div>\n                                        <p class=\"form-text\">").concat(__('Public link where users can preview your menu. Ex.: myresto.kenzap.site. For branded link visit '), " <a href=\"").concat(link('https://dashboard.kenzap.cloud/domain/'), "\">").concat(__('domain dashboard'), "</a>.</p>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"form-group mb-3 d-none\">\n                            <h5 class=\"card-title mb-3\">").concat(__('Public link'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <div class=\"input-group input-group-lg\">\n                                        <span class=\"input-group-text\" id=\"space-domain\">").concat('http://menu' + spaceID() + '.kenzap.site/', "</span>\n                                        <input type=\"text\" class=\"form-control d-none\" data-type=\"text\" aria-label=\"Menu link\" aria-describedby=\"inputGroup-sizing-lg\">\n                                    </div>\n                                    <p class=\"form-text\">").concat(__('Public link where users can preview your menu. For branded link visit '), " <a href=\"").concat(link('https://dashboard.kenzap.cloud/domain/'), "\">domain dashboard</a></p>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title mb-3\">").concat(__('Cart addition'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <input id=\"max_addition\" type=\"range\" data-type=\"range\" value=\"0\" class=\"form-range inp\" min=\"0\" max=\"100\" >\n                                    <p class=\"form-text\">").concat(__('Maximum number of items per cart. If set to 0 cart addition is disabled. Currently '), "<span id=\"max_addition_val\">0</span>.</p>\n                                </div>\n                            </div> \n                        </div>\n\n                        <div class=\"table-responsive d-none\">\n                            <table class=\"table table-hover table-borderless align-middle table-striped table-p-list\" style=\"min-width: 800px;\">\n                                <thead>\n                                    <tr>\n                                    <th>").concat(__('ID'), "</th>\n                                    <th>").concat(__('Title'), "</th>\n                                    <th style=\"display:none;\">Zones</th>\n                                    <th style=\"display:none;\">Seats</th>\n                                    <th style=\"text-align:right;\"></th>\n                                    </tr>\n                                </thead>\n                                <tbody class=\"layout_list\">\n                                    <tr>\n                                    <td></td><td></td><td></td><td></td><td></td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n\n        <div class=\"modal\" tabindex=\"-1\">\n            <div class=\"modal-dialog\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h5 class=\"modal-title\"></h5>\n                        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n                    </div>\n                    <div class=\"modal-body\">\n\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-primary btn-modal\"></button>\n                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\"></button>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"position-fixed bottom-0 p-2 m-4 end-0 align-items-center\">\n            <div class=\"toast hide align-items-center text-white bg-dark border-0\" role=\"alert\" aria-live=\"assertive\"\n                aria-atomic=\"true\" data-bs-delay=\"3000\">\n                <div class=\"d-flex\">\n                    <div class=\"toast-body\"></div>\n                    <button type=\"button\" class=\"btn-close btn-close-white me-2 m-auto\" data-bs-dismiss=\"toast\"\n                        aria-label=\"Close\"></button>\n                </div>\n            </div>\n        </div>\n        \n    ");
   };
 
   /**
@@ -744,7 +807,7 @@
           newData = qr8BitByte(data);
           break;
         case "Kanji":
-          newData = qrKanji();
+          newData = qrKanji(data);
           break;
         default:
           throw "mode:" + mode;
@@ -1933,11 +1996,61 @@
   //---------------------------------------------------------------------
 
   const qrKanji = function(data) {
-    {
+    let _mode = QRMode.MODE_KANJI;
+
+    let stringToBytes = stringToBytesFuncs["SJIS"];
+    if (!stringToBytes) {
       throw "sjis not supported.";
     }
+    !(function(c, code) {
+      // self test for sjis support.
+      let test = stringToBytes(c);
+      if (test.length != 2 || ((test[0] << 8) | test[1]) != code) {
+        throw "sjis not supported.";
+      }
+    })("\u53cb", 0x9746);
+
+    let _bytes = stringToBytes(data);
 
     let _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(_) {
+      return ~~(_bytes.length / 2);
+    };
+
+    _this.write = function(buffer) {
+      let data = _bytes;
+
+      let i = 0;
+
+      while (i + 1 < data.length) {
+        let c = ((0xff & data[i]) << 8) | (0xff & data[i + 1]);
+
+        if (0x8140 <= c && c <= 0x9ffc) {
+          c -= 0x8140;
+        } else if (0xe040 <= c && c <= 0xebbf) {
+          c -= 0xc140;
+        } else {
+          throw "illegal char at " + (i + 1) + "/" + c;
+        }
+
+        c = ((c >>> 8) & 0xff) * 0xc0 + (c & 0xff);
+
+        buffer.put(c, 13);
+
+        i += 2;
+      }
+
+      if (i < data.length) {
+        throw "illegal char at " + (i + 1);
+      }
+    };
+
+    return _this;
   };
 
   //=====================================================================
@@ -2364,19 +2477,12 @@
       if (_this.state.firstLoad) showLoader();
       fetch('https://api-v1.kenzap.cloud/', {
         method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'text/plain',
-          'Authorization': 'Bearer ' + getCookie('kenzap_api_key'),
-          'Kenzap-Header': localStorage.hasOwnProperty('header'),
-          'Kenzap-Token': getCookie('kenzap_token'),
-          'Kenzap-Sid': getSiteId()
-        },
+        headers: headers,
         body: JSON.stringify({
           query: {
             keys: {
               type: 'api-key',
-              keys: ['private']
+              keys: ['121']
             },
             locale: {
               type: 'locale',
@@ -2438,7 +2544,7 @@
       }]);
       _this.state.data = response.settings;
       _this.state.e_data = response.ecommerce_settings;
-      _this.state.API_key = response.keys.private_token;
+      _this.state.API_key = response.keys[0].token;
 
       for (var field in response.settings) {
         if (typeof response.settings[field] === "undefined") continue;
@@ -2556,19 +2662,14 @@
         }
 
         if (_this.state.data.mode != data.mode) _this.state.newQR = true;
+        if (_this.state.data.slug != data.slug) _this.state.newQR = true;
         _this.state.data = data;
 
         _this.preProcessHTML();
 
         fetch('https://api-v1.kenzap.cloud/', {
           method: 'post',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'text/plain',
-            'Authorization': 'Bearer ' + getCookie('kenzap_api_key'),
-            'Kenzap-Token': getCookie('kenzap_token'),
-            'Kenzap-Sid': getSiteId()
-          },
+          headers: headers,
           body: JSON.stringify({
             query: {
               settings: {
@@ -2658,13 +2759,48 @@
       modalSuccessBtnFunc: null
     },
     preProcessHTML: function preProcessHTML() {
-      var customizer = "\n            <!-- Customizer start -->\n            <style>\n                :root {\n                    --txtColorA: ".concat(_this.state.data.palette.txtColorA, ";;\n                    --txtColorB: ").concat(_this.state.data.palette.txtColorB, ";\n                    --txtColorC: ").concat(_this.state.data.palette.txtColorC, ";\n                    --bgColorA: ").concat(_this.state.data.palette.bgColorA, ";\n                    --bgColorB: ").concat(_this.state.data.palette.bgColorB, ";\n                    --bgColorC: #000000;\n                    --linkColorA: #1941DF;\n                    --linkColorB: #1941dfd0;\n                    --baseColorA: ").concat(_this.state.data.palette.baseColorA, ";\n                    --baseColorB: #1941df;\n                    --accColorA: #1941df;\n                    --accColorB: #1941df;\n                    --grayColorA: #F7F7F7;\n                    --grayColorB: #c0c0c0;\n                    --grayColorC: #818181;\n                }\n                body{\n                    font-family: Poppins, sans-serif\n                }\n            </style>\n            <script>\n                const API_KEY = '").concat(_this.state.API_key, "';\n                let config = {\"price\":{\"currency\":\"").concat(_this.state.e_data.currency ? _this.state.e_data.currency : "USD", "\",\"symbol\":\"").concat(_this.state.e_data.currency_symb ? _this.state.e_data.currency_symb : "$", "\",\"style\":\"").concat(_this.state.e_data.currency_symb_loc ? _this.state.e_data.currency_symb_loc : "left", "\"},\"cart\":{\"max_addition\":").concat(_this.state.data.max_addition, "},\"PREFIX\":\"/menu\",\"domain\":\"").concat(_this.state.baseURL, "\"};\n            </script>");
+      var limit = 1000;
+      var offset = 0;
+      fetch('https://api-v1.kenzap.cloud/', {
+        method: 'post',
+        headers: headers,
+        body: JSON.stringify({
+          query: {
+            items: {
+              type: 'find',
+              key: 'ecommerce-product',
+              fields: ['_id', 'img', 'status', 'price', 'priced', 'title', 'cats', 'sdesc', 'ldesc', 'variations', 'updated'],
+              limit: limit,
+              offset: offset,
+              sortby: {
+                field: 'created',
+                order: 'ASC'
+              }
+            },
+            settings: {
+              type: 'get',
+              key: 'qrmenu-settings',
+              fields: ['mode', 'palette', 'categories']
+            }
+          }
+        })
+      }).then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        if (response.success) {
+          var customizer = "\n                        <!-- Customizer start -->\n                        <style>\n                            :root {\n                                --txtColorA: ".concat(_this.state.data.palette.txtColorA, ";;\n                                --txtColorB: ").concat(_this.state.data.palette.txtColorB, ";\n                                --txtColorC: ").concat(_this.state.data.palette.txtColorC, ";\n                                --bgColorA: ").concat(_this.state.data.palette.bgColorA, ";\n                                --bgColorB: ").concat(_this.state.data.palette.bgColorB, ";\n                                --bgColorC: #000000;\n                                --linkColorA: #1941DF;\n                                --linkColorB: #1941dfd0;\n                                --baseColorA: ").concat(_this.state.data.palette.baseColorA, ";\n                                --baseColorB: #1941df;\n                                --accColorA: #1941df;\n                                --accColorB: #1941df;\n                                --grayColorA: #F7F7F7;\n                                --grayColorB: #c0c0c0;\n                                --grayColorC: #818181;\n                            }\n                            body{\n                                font-family: Poppins, sans-serif\n                            }\n                        </style>\n                        <script>\n                            const API_KEY = '").concat(_this.state.API_key, "';\n                            let config = {\"price\":{\"currency\":\"").concat(_this.state.e_data.currency ? _this.state.e_data.currency : "USD", "\",\"symbol\":\"").concat(_this.state.e_data.currency_symb ? _this.state.e_data.currency_symb : "$", "\",\"style\":\"").concat(_this.state.e_data.currency_symb_loc ? _this.state.e_data.currency_symb_loc : "left", "\"},\"cart\":{\"max_addition\":").concat(_this.state.data.max_addition, "},\"PREFIX\":\"/menu\",\"domain\":\"").concat(_this.state.baseURL, "\",\"sid\":\"").concat(spaceID(), "\"};\n                            let products = ").concat(JSON.stringify(response.items), ";\n                            let settings = ").concat(JSON.stringify(response.settings), ";\n                        </script>");
 
-      var html = _this.state.html.substring(0, _this.state.html.indexOf('<!-- Customizer start -->')) + customizer + _this.state.html.substring(_this.state.html.indexOf('<!-- Customizer end -->'), _this.state.html.length);
+          var html = _this.state.html.substring(0, _this.state.html.indexOf('<!-- Customizer start -->')) + customizer + _this.state.html.substring(_this.state.html.indexOf('<!-- Customizer end -->'), _this.state.html.length);
 
-      html = html.replace(/{{timestamp}}/g, Math.floor(Date.now() / 1000));
+          html = html.replace(/{{timestamp}}/g, Math.floor(Date.now() / 1000));
 
-      _this.publishHTML(html);
+          _this.publishHTML(html);
+        } else {
+          parseApiError(response);
+        }
+      })["catch"](function (error) {
+        parseApiError(error);
+      });
     },
     publishHTML: function publishHTML(html) {
       var d = document;
@@ -2687,7 +2823,7 @@
       params.append("key", "qrmenu");
       params.append("data", JSON.stringify(data));
       params.append("html", html);
-      params.append("sid", getSiteId());
+      params.append("sid", spaceID());
       params.append("token", getCookie('kenzap_token'));
       fetch('https://siteapi.kenzap.cloud/v1/', {
         method: 'post',

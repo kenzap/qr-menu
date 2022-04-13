@@ -275,55 +275,17 @@
   };
 
   var getMenu = function getMenu() {
-    var limit = 1000;
-    var offset = 0;
-    fetch('https://api-v1.kenzap.cloud/', {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'text/plain',
-        'Authorization': 'Bearer ' + API_KEY
-      },
-      body: JSON.stringify({
-        query: {
-          items: {
-            type: 'find',
-            key: 'ecommerce-product',
-            fields: ['_id', 'id', 'img', 'status', 'price', 'priced', 'title', 'cats', 'sdesc', 'ldesc', 'variations', 'updated'],
-            limit: limit,
-            offset: offset,
-            sortby: {
-              field: 'created',
-              order: 'ASC'
-            }
-          },
-          settings: {
-            type: 'get',
-            key: 'qrmenu-settings',
-            fields: ['mode', 'palette', 'categories']
-          }
-        }
-      })
-    }).then(function (response) {
-      return response.json();
-    }).then(function (response) {
-      if (response.success) {
-        products = response;
-        localStorage.sid = response.sid;
-        renderMenu();
-        dialogListeners();
-        menuListeners();
-        sliderListeners();
-        btnListeners();
-        console.log(response);
-      }
-    })["catch"](function (error) {
-      console.error('Error:', error);
-    });
+    localStorage.sid = config.sid;
+    renderMenu();
+    dialogListeners();
+    menuListeners();
+    sliderListeners();
+    btnListeners();
+    console.log(products);
   };
 
   var renderMenu = function renderMenu() {
-    var rows = products.settings.categories.split('\n');
+    var rows = settings.categories.split('\n');
     var html_slider = '';
     var html_menu = '';
     var title = '';
@@ -340,32 +302,32 @@
         console.log(note);
         html_slider += '<div class="slide" data-href="' + convertToSlug(cat) + '"><a href="#' + convertToSlug(cat) + '" class=" cl">' + cat + '</a></div>';
 
-        for (var x in products['items']) {
-          products['items'][x].id = products['items'][x]._id;
-          if (typeof products['items'][x]['cats'] === 'undefined') continue;
-          if (products['items'][x]['cats'] == null) continue;
-          if (!products['items'][x]['cats'].includes(cat)) continue;
+        for (var x in products) {
+          products[x].id = products[x]._id;
+          if (typeof products[x]['cats'] === 'undefined') continue;
+          if (products[x]['cats'] == null) continue;
+          if (!products[x]['cats'].includes(cat)) continue;
           var img = 'https://cdn.kenzap.com/loading.png';
 
-          if (products['items'][x]['img'][0] || products['items'][x]['img'][0] == 'true') {
+          if (products[x]['img'][0] || products[x]['img'][0] == 'true') {
             var imgl = new Image();
-            imgl._id = products['items'][x]['_id'];
+            imgl._id = products[x]['_id'];
 
             imgl.onload = function () {
               console.log('adding' + this.src);
               document.querySelector(".kUNwHA .kenzap-row[data-id='" + this._id + "'] img").setAttribute('src', this.src);
             };
 
-            imgl.src = CDN + '/S' + localStorage.sid + '/product-' + products['items'][x]['_id'] + '-1-250.jpeg?' + products['items'][x]['updated'];
+            imgl.src = CDN + '/S' + localStorage.sid + '/product-' + products[x]['_id'] + '-1-250.jpeg?' + products[x]['updated'];
           }
 
-          var price = '<span class="tag ptag">' + priceFormat(products['items'][x]['price']) + '</span>';
+          var price = '<span class="tag ptag">' + priceFormat(products[x]['price']) + '</span>';
 
-          if (products['items'][x]['priced'] != '') {
-            price = '<span class="ptagc">' + priceFormat(products['items'][x]['price']) + '</span> <span class="tag ptag">' + priceFormat(products['items'][x]['priced']) + '</span>';
+          if (products[x]['priced'] != '') {
+            price = '<span class="ptagc">' + priceFormat(products[x]['price']) + '</span> <span class="tag ptag">' + priceFormat(products[x]['priced']) + '</span>';
           }
 
-          var ctag = typeof cart.state.order.items[products['items'][x]['_id']] === 'undefined' ? "" : cart.state.order.items[products['items'][x]['_id']].qty;
+          var ctag = typeof cart.state.order.items[products[x]['_id']] === 'undefined' ? "" : cart.state.order.items[products[x]['_id']].qty;
           var show_heading = '';
 
           if (title != cat) {
@@ -374,19 +336,19 @@
           }
 
           html_menu += '\
-            <div class="kenzap-row" data-index="' + x + '" data-id="' + products['items'][x]['_id'] + '">\
+            <div class="kenzap-row" data-index="' + x + '" data-id="' + products[x]['_id'] + '">\
                 ' + show_heading + '\
                 <div class="info-box">\
                     <div class="kenzap-col-7">\
                         <div class="kp-content">\
-                            <h3><span class="tag ctag">' + ctag + '</span>' + products['items'][x]['title'] + '</h3>\
-                            <p>' + products['items'][x]['sdesc'] + '</p>\
+                            <h3><span class="tag ctag">' + ctag + '</span>' + products[x]['title'] + '</h3>\
+                            <p>' + products[x]['sdesc'] + '</p>\
                             ' + price + '\
                         </div>\
                     </div>\
                     <div class="kenzap-col-5">\
                         <div class="kp-img">\
-                            <img src="' + img + '" alt="' + products['items'][x]['title'] + '">\
+                            <img src="' + img + '" alt="' + products[x]['title'] + '">\
                         </div>\
                     </div>\
                 </div>\
@@ -466,15 +428,15 @@
         row.addEventListener('click', function (e) {
           var x = this.dataset.index;
           cart.state.index = x;
-          var product_id = products['items'][x].id;
+          var product_id = products[x].id;
           var mdialogCnt = document.querySelector(".kUNwHA .mdialog-cnt");
           scroll.last_state = scroll.state;
           cart.state.total = 0;
           cart.state.count = 0;
           cart.state.product = typeof cart.state.order.items[product_id] === 'undefined' ? {
-            id: products['items'][x].id,
-            title: products['items'][x].title,
-            sdesc: products['items'][x].sdesc,
+            id: products[x].id,
+            title: products[x].title,
+            sdesc: products[x].sdesc,
             index: x,
             qty: 0,
             note: "",
@@ -483,7 +445,7 @@
           cart.state.product.type = cart.state.product.qty == 0 ? "new" : "update";
           document.querySelector("body").classList.add('kp-modal');
           refreshDialogView();
-          var src = products['items'][x]['img'][0] ? CDN + '/S' + localStorage.sid + '/product-' + products['items'][x]['_id'] + '-1-250.jpeg?' + products['items'][x]['updated'] : 'https://cdn.kenzap.com/loading.png';
+          var src = products[x]['img'][0] ? CDN + '/S' + localStorage.sid + '/product-' + products[x]['_id'] + '-1-250.jpeg?' + products[x]['updated'] : 'https://cdn.kenzap.com/loading.png';
           document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-body > h2").innerHTML = cart.state.product.title;
           document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-body > p").innerHTML = cart.state.product.sdesc;
           document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-img img").setAttribute('src', src);
@@ -495,22 +457,22 @@
             document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-img img").setAttribute('src', this.src);
           };
 
-          imgl.src = CDN + '/S' + localStorage.sid + '/product-' + products['items'][x]['_id'] + '-1-500.jpeg?' + products['items'][x]['updated'];
+          imgl.src = CDN + '/S' + localStorage.sid + '/product-' + products[x]['_id'] + '-1-500.jpeg?' + products[x]['updated'];
           var html_vars = '';
-          if (_typeof(products['items'][x].variations !== 'undefined')) for (var _v in products['items'][x].variations) {
+          if (_typeof(products[x].variations !== 'undefined')) for (var _v in products[x].variations) {
             var type = '';
-            if (products['items'][x].variations[_v].type == 'checkbox') type = 'check';
-            if (products['items'][x].variations[_v].type == 'radio') type = 'radio';
+            if (products[x].variations[_v].type == 'checkbox') type = 'check';
+            if (products[x].variations[_v].type == 'radio') type = 'radio';
             if (typeof cart.state.product.variations[_v] === 'undefined') cart.state.product.variations[_v] = {
-              title: products['items'][x].variations[_v].title,
-              required: products['items'][x].variations[_v].required,
-              allow: products['items'][x].variations[_v].required == '1' ? false : true
+              title: products[x].variations[_v].title,
+              required: products[x].variations[_v].required,
+              allow: products[x].variations[_v].required == '1' ? false : true
             };
             html_vars += '\
-                <h3>' + products['items'][x].variations[_v].title + (products['items'][x].variations[_v].required == '1' ? ' <span class="tag">required</span>' : '') + '</h3>\
+                <h3>' + products[x].variations[_v].title + (products[x].variations[_v].required == '1' ? ' <span class="tag">required</span>' : '') + '</h3>\
                 <div class="kp-' + type + '">';
 
-            for (var d in products['items'][x].variations[_v].data) {
+            for (var d in products[x].variations[_v].data) {
               var checked = false;
 
               if (typeof cart.state.product.variations[_v] !== 'undefined' && typeof cart.state.product.variations[_v].list !== 'undefined' && typeof cart.state.product.variations[_v].list["_" + d] !== 'undefined') {
@@ -521,24 +483,24 @@
                 case 'check':
                   html_vars += '\
                             <label>\
-                                <input type="checkbox" data-required="' + products['items'][x].variations[_v].required + '" data-indexv="' + _v + '" data-index="' + d + '" data-title="' + products['items'][x].variations[_v].data[d]['title'] + '" data-price="' + products['items'][x].variations[_v].data[d]['price'] + '" ' + (checked ? 'checked="checked"' : '') + '>\
+                                <input type="checkbox" data-required="' + products[x].variations[_v].required + '" data-indexv="' + _v + '" data-index="' + d + '" data-title="' + products[x].variations[_v].data[d]['title'] + '" data-price="' + products[x].variations[_v].data[d]['price'] + '" ' + (checked ? 'checked="checked"' : '') + '>\
                                 <div class="checkbox">\
                                     <svg width="20px" height="20px" viewBox="0 0 20 20">\
                                         <path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>\
                                         <polyline points="4 11 8 15 16 6"></polyline>\
                                     </svg>\
                                 </div>\
-                                <span>' + products['items'][x].variations[_v].data[d]['title'] + '</span>\
-                                <div class="price">+ ' + priceFormat(products['items'][x].variations[_v].data[d]['price']) + '</div>\
+                                <span>' + products[x].variations[_v].data[d]['title'] + '</span>\
+                                <div class="price">+ ' + priceFormat(products[x].variations[_v].data[d]['price']) + '</div>\
                             </label>';
                   break;
 
                 case 'radio':
                   html_vars += '\
                             <label>\
-                                <input type="radio" data-required="' + products['items'][x].variations[_v].required + '" data-indexv="' + _v + '" name="radio" data-index="' + d + '" data-title="' + products['items'][x].variations[_v].data[d]['title'] + '" data-price="' + products['items'][x].variations[_v].data[d]['price'] + '" ' + (checked ? 'checked="checked"' : '') + ' />\
-                                <span>' + products['items'][x].variations[_v].data[d]['title'] + '</span>\
-                                <div class="price">+ ' + priceFormat(products['items'][x].variations[_v].data[d]['price']) + '</div>\
+                                <input type="radio" data-required="' + products[x].variations[_v].required + '" data-indexv="' + _v + '" name="radio" data-index="' + d + '" data-title="' + products[x].variations[_v].data[d]['title'] + '" data-price="' + products[x].variations[_v].data[d]['price'] + '" ' + (checked ? 'checked="checked"' : '') + ' />\
+                                <span>' + products[x].variations[_v].data[d]['title'] + '</span>\
+                                <div class="price">+ ' + priceFormat(products[x].variations[_v].data[d]['price']) + '</div>\
                             </label>';
                   break;
               }
@@ -1008,7 +970,7 @@
     },
     refreshButton: function refreshButton() {
       this.state.product.qty = parseInt(document.querySelector(".kUNwHA .qty").value);
-      this.state.product.price = products['items'][this.state.index].priced == "" ? parseFloat(products['items'][this.state.index].price) : parseFloat(products['items'][this.state.index].priced);
+      this.state.product.price = products[this.state.index].priced == "" ? parseFloat(products[this.state.index].price) : parseFloat(products[this.state.index].priced);
       this.state.product.note = document.querySelector(".kUNwHA .kp-note textarea").value;
       var cb_count = 0;
       var checkbox_list = document.querySelectorAll(".kUNwHA .mdialog .kp-check input[type=checkbox]");
