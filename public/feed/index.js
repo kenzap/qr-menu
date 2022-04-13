@@ -118,7 +118,6 @@
     return "";
   };
 
-  var products = {};
   var scroll = {
     state: 0,
     last_state: 0,
