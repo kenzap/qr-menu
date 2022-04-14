@@ -868,6 +868,10 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   padding: 8px 0 16px 0;
 }
 
+.kUNwHA .cta-btn {
+  display: flex;
+}
+
 .kUNwHA .cta-btn .mbtn {
   display: block;
   text-align: center;
@@ -880,6 +884,22 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   border-radius: 40px;
   cursor: pointer;
   text-align: center;
+  flex-grow: 1;
+}
+
+.kUNwHA .cta-btn .mbtnMore {
+  background: var(--baseColorA);
+  color: var(--bgColorA);
+  padding: 8px;
+  border-radius: 50px;
+  min-width: 43px;
+  display: none;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.kUNwHA .cta-btn .mbtnMore > svg {
+  margin: auto;
 }
 
 .kUNwHA .vadd,
@@ -994,6 +1014,11 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   opacity: 0;
 }
 
+/* my account modal */
+.kUNwHA .account .lplayer {
+  height: auto;
+}
+
 @keyframes opacitychange {
   0%, 100% {
     opacity: 0;
@@ -1102,5 +1127,3 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
     height: auto;
   }
 }
-
-/*# sourceMappingURL=styles.css.map */
