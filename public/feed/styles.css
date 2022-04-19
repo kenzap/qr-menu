@@ -467,7 +467,7 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
 .kUNwHA .cdialog-cnt table {
   width: 100%;
   margin-top: 16px;
-  padding-bottom: 64px;
+  padding-bottom: 16px;
 }
 
 .kUNwHA .cdialog-cnt td {
@@ -1014,11 +1014,173 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   opacity: 0;
 }
 
+/* bagdes */
+.kUNwHA .badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+.kUNwHA .btn-warning {
+  color: #000;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.kUNwHA .btn-success {
+  color: #fff;
+  background-color: #198754;
+  border-color: #198754;
+}
+
+.kUNwHA .btn-primary {
+  color: #fff;
+  background-color: #1941df;
+  border-color: #1941df;
+}
+
+.kUNwHA .btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+/* my account modal */
+.kUNwHA table.cart-table {
+  padding: 32px 0 64px;
+}
+
+.kUNwHA .cart-table .qty,
+.kUNwHA .cart-table .prod {
+  text-align: left;
+}
+
+.kUNwHA .cart-table .qty,
+.kUNwHA .cart-table .price,
+.kUNwHA .cart-table .prod {
+  vertical-align: top;
+}
+
 /* my account modal */
 .kUNwHA .account .lplayer {
   height: auto;
 }
 
+.kUNwHA .account .lottie-cont {
+  min-height: 250px;
+}
+
+.kUNwHA .account .accordion {
+  list-style: none;
+  padding: 0;
+}
+
+.kUNwHA .account .accordion .inner {
+  overflow: hidden;
+  display: none;
+  padding: 16px;
+}
+
+.kUNwHA .account .accordion .inner.show {
+  display: block;
+  color: var(--txtColorA);
+}
+
+.kUNwHA .account .accordion .inner p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 0.1px;
+  color: #7d8794;
+  display: inline-block;
+  margin: 0 0 20px;
+}
+
+.kUNwHA .account .accordion li {
+  margin: 0 0 10px;
+}
+
+.kUNwHA .account .accordion li .timago {
+  padding: 0 8px;
+}
+
+.kUNwHA .account .accordion li a.toggle {
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  display: block;
+  color: var(--txtColorA);
+  background: var(--bgColorB);
+  padding: 16px;
+  font-weight: 500;
+  font-size: inherit;
+  outline: none;
+  transition: color 0.2s ease-out, background-color 0.2s ease-out;
+  position: relative;
+}
+
+.kUNwHA .account .accordion li a.active,
+.kUNwHA .account .accordion li a.toggle:hover {
+  color: var(--txtColorC);
+  background: var(--txtColorA);
+}
+
+.kUNwHA .account .accordion li a.toggle:hover .plusminus:before,
+.kUNwHA .account .accordion li a.toggle:hover .plusminus:after {
+  background-color: var(--txtColorC);
+}
+
+.kUNwHA .account .accordion li a.toggle .plusminus,
+.kUNwHA .account .accordion li a.toggle svg {
+  font-size: 20px;
+  margin: 1px 0 0;
+  position: absolute;
+  right: 29px;
+  top: 17px;
+}
+
+.kUNwHA .account .accordion li a.toggle .plusminus {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+.kUNwHA .account .accordion li a.toggle .plusminus.active:before {
+  transform: translatey(-50%) rotate(-90deg);
+  opacity: 0;
+}
+.kUNwHA .account .accordion li a.toggle .plusminus.active:after {
+  transform: translatey(-50%) rotate(0);
+  background-color: var(--txtColorC);
+}
+.kUNwHA .account .accordion li a.toggle .plusminus:before, .kUNwHA .account .accordion li a.toggle .plusminus:after {
+  content: "";
+  display: block;
+  background-color: var(--txtColorA);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transition: 0.35s;
+  width: 100%;
+  height: 3px;
+}
+.kUNwHA .account .accordion li a.toggle .plusminus:before {
+  transform: translatey(-50%);
+}
+.kUNwHA .account .accordion li a.toggle .plusminus:after {
+  transform: translatey(-50%) rotate(90deg);
+}
+
+@media screen and (max-width: 360px) {
+  .kUNwHA .account .accordion li a.toggle .plusminus {
+    display: none;
+  }
+}
 @keyframes opacitychange {
   0%, 100% {
     opacity: 0;
