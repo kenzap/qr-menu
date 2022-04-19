@@ -1076,6 +1076,10 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   min-height: 250px;
 }
 
+.kUNwHA .account .orders {
+  margin-bottom: 64px;
+}
+
 .kUNwHA .account .accordion {
   list-style: none;
   padding: 0;
