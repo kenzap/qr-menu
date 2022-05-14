@@ -50,6 +50,7 @@
         "rollup-plugin-livereload": "^2.0.5",
         "rollup-plugin-replace-html-vars": "^1.0.3",
         "rollup-plugin-serve": "^1.1.0",
+        "serve": "^13.0.2",
         "transformation-matrix": "^2.11.1"
     }
 }

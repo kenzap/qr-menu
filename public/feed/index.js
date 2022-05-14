@@ -1,1 +1,1748 @@
-!function(){"use strict";function t(e){return t="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},t(e)}function e(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,o=new Array(e);r<e;r++)o[r]=t[r];return o}function r(t,r){var o="undefined"!=typeof Symbol&&t[Symbol.iterator]||t["@@iterator"];if(!o){if(Array.isArray(t)||(o=function(t,r){if(t){if("string"==typeof t)return e(t,r);var o=Object.prototype.toString.call(t).slice(8,-1);return"Object"===o&&t.constructor&&(o=t.constructor.name),"Map"===o||"Set"===o?Array.from(t):"Arguments"===o||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(o)?e(t,r):void 0}}(t))||r&&t&&"number"==typeof t.length){o&&(t=o);var a=0,n=function(){};return{s:n,n:function(){return a>=t.length?{done:!0}:{done:!1,value:t[a++]}},e:function(t){throw t},f:n}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var c,i=!0,d=!1;return{s:function(){o=o.call(t)},n:function(){var t=o.next();return i=t.done,t},e:function(t){d=!0,c=t},f:function(){try{i||null==o.return||o.return()}finally{if(d)throw c}}}}var o="https://kenzap-sites.oss-ap-southeast-1.aliyuncs.com",a="66432108790002",n=function(t){return(""+t).length<2?"0"+t:t},c=function(t){for(var e=t+"=",r=decodeURIComponent(document.cookie).split(";"),o=0;o<r.length;o++){for(var a=r[o];" "==a.charAt(0);)a=a.substring(1);if(0==a.indexOf(e))return a.substring(e.length,a.length)}return""},i=function(t){return t=s(t),(Math.round(100*parseFloat(t))/100).toFixed(2)},d=function(t){t=s(t);var e=i(t);switch(config.price.style){case"left":e=config.price.symbol+e;break;case"right":e+=config.price.symbol}return e},s=function(t){return t=""==t?0:t},l=function(t){var e="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz".split("");"number"!=typeof t&&(t=Math.floor(Math.random()*e.length_));for(var r="",o=0;o<t;o++)r+=e[Math.floor(Math.random()*e.length)];return r},u=function(t){return t.toLowerCase().replace(/[^\w ]+/g,"").replace(/ +/g,"-")},p=function(){window.navigator&&window.navigator.vibrate&&navigator.vibrate(20)},m=function(t){var e=document.querySelector(".kUNwHA .snackbar");e.innerHTML=t,e.classList.add("show"),setTimeout((function(){e.className=e.className.replace("show","")}),2200)},y=function(t){for(var e=function(t,e){return e.forEach((function(e,r){t=t.replace("%"+(r+1)+"$",e)})),t},r=arguments.length,o=new Array(r>1?r-1:0),a=1;a<r;a++)o[a-1]=arguments[a];return void 0===i18n.state.locale.values[t]?e(t,o):e(i18n.state.locale.values[t],o)},v=function(t,e){switch(e){case"new":return'<div class="badge btn-warning text-dark fw-light">'+t("New")+"</div>";case"processing":return'<div class="badge btn-warning text-dark fw-light">'+t("Cooking")+"</div>";case"completed":return'<div class="badge btn-success text-dark fw-light">'+t("Served")+"</div>";default:return'<div class="badge btn-primary text-dark fw-light">'+t("Processing")+"</div>"}},f={state:{total:0,count:0,index:0,product:{variations:[]},order:{}},resetButton:function(){f.state.total=0,f.state.count=0},refreshButton:function(){f.state.product.qty=parseInt(document.querySelector(".kUNwHA .mdialog .qty").value),f.state.product.price=""==products[f.state.index].priced?parseFloat(products[f.state.index].price):parseFloat(products[f.state.index].priced),f.state.product.note=document.querySelector(".kUNwHA .mdialog .kp-note textarea").value;var t,e=r(document.querySelectorAll(".kUNwHA .mdialog .kp-check input[type=checkbox]"));try{for(e.s();!(t=e.n()).done;){var o=t.value;o.checked&&(f.state.product.price+=parseFloat(o.dataset.price))}}catch(t){e.e(t)}finally{e.f()}var a,n=r(document.querySelectorAll(".kUNwHA .mdialog .kp-radio input[type=radio]"));try{for(n.s();!(a=n.n()).done;){var c=a.value;c.checked&&(f.state.product.price+=parseFloat(c.dataset.price))}}catch(t){n.e(t)}finally{n.f()}f.state.product.priceF=parseFloat(f.state.product.price*f.state.product.qty),document.querySelector(".kUNwHA .mdialog .add .price").innerHTML=d(f.state.product.priceF);var i=!1;for(var s in 0==f.state.product.priceF&&(i=!0),f.state.product.variations)0==f.state.product.variations[s].allow&&(i=!0);document.querySelector(".kUNwHA .mdialog .kp-add .mbtn .add").style.background="","update"==f.state.product.type&&f.state.product.qty>0&&(document.querySelector(".kUNwHA .mdialog .kp-add .mbtn .cta").innerHTML=y("Update")),"update"==f.state.product.type&&0==f.state.product.qty&&(document.querySelector(".kUNwHA .mdialog .kp-add .mbtn .cta").innerHTML=y("Remove"),document.querySelector(".kUNwHA .mdialog .kp-add .btn .add")&&(document.querySelector(".kUNwHA .mdialog .kp-add .btn .add").style.background="#df1960"),i=!1),"new"==f.state.product.type&&(document.querySelector(".kUNwHA .mdialog .kp-add .mbtn .cta").innerHTML=y("Add")),i?document.querySelector(".kUNwHA .mdialog .kp-add .mbtn").classList.add("dis"):document.querySelector(".kUNwHA .mdialog .kp-add .mbtn").classList.remove("dis")},refreshCheckoutButton:function(){var t=0;for(var e in f.state.order.items)t+=parseFloat(f.state.order.items[e].priceF);f.state.order.total=t,t>0?(document.querySelector("body").classList.add("cbtn"),g(1),document.querySelector(".kUNwHA .cta-btn .price").innerHTML=d(t)):(document.querySelector(".kUNwHA .cta-btn .mbtn").innerHTML=y("cart empty"),document.querySelector("body").classList.remove("cbtn"))},addToCart:function(){f.state.order.items.push(f.state.product),0==f.state.product.qty?f.removeFromCart(f.state.product.id):document.querySelector(".kUNwHA .kenzap-row[data-id='"+f.state.product.id+"'] .ctag").innerHTML=f.state.product.qty,localStorage.cart=JSON.stringify(f.state.order),f.refreshCheckoutButton()},removeFromCart:function(t){f.state.order.items=f.state.order.items.filter((function(e){return e.id!=t})),delete f.state.order.items[t],document.querySelector(".kUNwHA .kenzap-row[data-id='"+t+"'] .ctag").innerHTML="",localStorage.cart=JSON.stringify(f.state.order)},clearCart:function(){for(var t in f.state.order.items)document.querySelector(".kUNwHA .kenzap-row[data-id='"+f.state.order.items[t].id+"'] .ctag").innerHTML="";f.state.order={},f.state.order.created=Math.floor(Date.now()/1e3),f.state.order.items=[],localStorage.cart=JSON.stringify(f.state.order),f.refreshCheckoutButton(),window.history.replaceState({},document.title,config.domain)}},h=function(t,e){var r="";for(var o in e.variations){var a="";for(var n in e.variations[o].list)a+=e.variations[o].list[n].title+" ";r+="<div><b>"+e.variations[o].title+"</b> <span>"+a+"</span></div> ",void 0!==e.variations[o].note&&e.variations[o].note.length>0&&(r+="<div><b>"+y("Note")+"</b> "+e.variations[o].note+"</div> ")}return'<tr><td data-id="'+e.id+'" data-title="'+y(e.title)+'" class="checkt"><div>'+y(e.title)+"</div><div>"+r+'</div></td><td class="qty">'+e.qty+'</td><td class="price"><strong>'+d(e.price)+"</strong></td></tr>"},g=function(t){switch(document.querySelector(".kUNwHA .cta-btn").style.display="flex",t){case 1:f.state.order.step=t,document.querySelector(".kUNwHA .cta-btn .mbtn").innerHTML=y("Cart")+' <span class="price">s$0.00</span>';break;case 2:f.state.order.step=t,document.querySelector(".kUNwHA .cta-btn .mbtn").innerHTML=y("Continue");break;case 3:f.state.order.step=t,document.querySelector(".kUNwHA .cta-btn .mbtn").innerHTML=y("Checkout");break;case 4:f.state.order.step=t,document.querySelector(".kUNwHA .cta-btn .mbtn").innerHTML=y("Back to menu")}};const k=()=>{let t=new URLSearchParams(window.location.search);return t.get("sid")?t.get("sid"):""},w=t=>{let e=t+"=",r=decodeURIComponent(document.cookie).split(";");for(let t=0;t<r.length;t++){let o=r[t];for(;" "==o.charAt(0);)o=o.substring(1);if(0==o.indexOf(e))return o.substring(e.length,o.length)}return""};w("kenzap_api_key"),w("locale")&&w("locale"),(()=>{let t=localStorage.hasOwnProperty("header")&&localStorage.hasOwnProperty("header-version")?localStorage.getItem("header-version"):0,e=window.location.hostname+"/"+k()+"/"+w("locale");e!=w("check")&&(t=0,console.log("refresh")),((t,e,r)=>{let o="";if(r){let t=new Date;t.setTime(t.getTime()+24*r*60*60*1e3),o=";expires="+t.toUTCString()}document.cookie=t+"="+(escape(e)||"")+o+";path=/;domain=.kenzap.cloud"})("check",e,5)})(),w("kenzap_token"),k();var S={state:0,last_state:0,state_prev:0,fp:0,el_id:"",direction:"",offsets:{},timer:null},b=function(){document.querySelector("body").classList.contains("kp-modal")&&(document.querySelector("body").style.height="100vh",document.querySelector("body").style.overflowY="hidden",document.querySelector(".kUNwHA .scrollable").style.height="100vh",document.querySelector(".kUNwHA .scrollable").style.overflowY="hidden",document.querySelector(".kUNwHA .mdialog-cnt").style.height=window.screen.availHeight-160+"px")},q=function(){document.querySelector(".kUNwHA .mdialog-cnt").style.display="none",document.querySelector(".kUNwHA .overlay").style.display="none",document.querySelector(".kUNwHA .scrollable").style.height="auto",document.querySelector(".kUNwHA .scrollable").style.overflowY="scroll",document.querySelector("body").style.overflowY="auto",document.querySelector("body").style.height="auto",setTimeout((function(){document.querySelector("body").classList.remove("kp-modal")}),300),document.documentElement.scrollTop=S.last_state,document.querySelector(".kUNwHA .cdialog-cnt").style.display="none",f.refreshCheckoutButton(),document.querySelector(".kUNwHA .cta-btn").style.display="flex",-1!=window.location.href.indexOf("#editing")&&history.pushState({pageID:"feed"},"Feed",window.location.pathname+window.location.search)},A=function(t){var e=document.querySelector(".kUNwHA .cdialog-cnt");e.style.display="block",document.querySelector(".kUNwHA .overlay").style.display="block",document.querySelector(".kUNwHA .cta-btn").style.display="none",document.querySelector("body").classList.add("kp-modal"),history.pushState({pageID:"feed"},"Feed",window.location.pathname+window.location.search+"#account"),b();var r='\n        <div class="account">\n            <h3>'.concat(y("Last order status"),' <span class="statusLast"></span></h3>\n            <p>').concat(y("View last order activity and updates."),'</p>\n            <div class="lottie-cont"></div>\n            ');"new"==t&&(r='\n            <div class="account">\n                <h3>'.concat(y("Order received!"),' <span class="statusLast"></span></h3>\n                <p>').concat(y("Thank you for placing your order. You can now close the window or return to the menu."),'</p>\n                <div class="lottie-cont"></div>\n                ')),r+="\n            <h4>".concat(y("Summary"),'</h4>\n            <div class="orders">'),H(r,e),r+="</div>",r+="</div>",e.querySelector(".kUNwHA .cdialog-cnt .kp-body").innerHTML=r},H=function(t,e){var o,a=[],n=Date.now()/1e3|0,c=r(function(){var t=[];try{t=JSON.parse(localStorage.orderIDs)}catch(t){}return t}());try{for(c.s();!(o=c.n()).done;){var i=o.value;i.time>n-2592e3&&a.push(i.id)}}catch(t){c.e(t)}finally{c.f()}fetch("https://api-v1.kenzap.cloud/",{method:"post",headers:{Accept:"application/json","Content-type":"application/x-www-form-urlencoded",Authorization:"Bearer "+API_KEY,"Kenzap-Token":config.token,"Kenzap-Sid":localStorage.sid},body:JSON.stringify({query:{user:{type:"authenticate",fields:["avatar"],token:w("kenzap_token")},orders:{type:"find",key:"ecommerce-order",fields:["_id","status","items","created"],id:a,limit:10,sortby:{field:"created",order:"DESC"}}}})}).then((function(t){return t.json()})).then((function(t){if((()=>{let t=document.querySelector(".loader");t&&(t.style.display="none")})(),t.success){var o,a=!0,n="cooking",c='<ul class="accordion">',i=r(t.orders);try{for(i.s();!(o=i.n()).done;){var d=o.value;a&&(document.querySelector(".statusLast").innerHTML=v(y,d.status),"completed"==d.status&&(n="serving")),c+=N(d),a=!1}}catch(t){i.e(t)}finally{i.f()}switch(n){case"cooking":document.querySelector(".account .lottie-cont").innerHTML='<lottie-player src="https://assets8.lottiefiles.com/packages/lf20_fefIZO.json" background="transparent" speed="1" class="lplayer" style="width: 300px; height: auto;" loop autoplay></lottie-player>';break;case"serving":document.querySelector(".account .lottie-cont").innerHTML='<lottie-player src="https://assets9.lottiefiles.com/packages/lf20_thgy1p9c.json" background="transparent" speed="1" class="lplayer" style="width: 300px; height: auto;" loop autoplay></lottie-player>'}c+="</ul>",e.querySelector(".kUNwHA .orders").innerHTML=c,((t,e)=>{if(document.querySelector(t))for(let r of document.querySelectorAll(t))r.removeEventListener("click",e,!0),r.addEventListener("click",e,!0)})(".kUNwHA .accordion .toggle",(function(t){t.preventDefault(),t.currentTarget.classList.contains("active")?(t.currentTarget.classList.remove("active"),t.currentTarget.parentElement.querySelector(".inner").classList.remove("show"),t.currentTarget.parentElement.querySelector(".plusminus").classList.remove("active")):(t.currentTarget.classList.add("active"),t.currentTarget.parentElement.querySelector(".inner").classList.add("show"),t.currentTarget.parentElement.querySelector(".plusminus").classList.add("active"))})),document.querySelector(".kUNwHA .cta-btn").style.display="none"}else m(y("Please make your first order")),U()})).catch((function(t){(t=>{if(console.log(t),isNaN(t.code)){let e=t;try{e=JSON.stringify(e)}catch(t){}let r=new URLSearchParams;return r.append("cmd","report"),r.append("sid",k()),r.append("token",w("kenzap_token")),r.append("data",e),fetch("https://api-v1.kenzap.cloud/error/",{method:"post",headers:{Accept:"application/json","Content-type":"application/x-www-form-urlencoded"},body:r}),void alert("Can not connect to Kenzap Cloud")}if(401===t.code){if(-1!=window.location.href.indexOf("localhost"))return void alert(t.reason);location.href="https://auth.kenzap.com/?app=65432108792785&redirect="+window.location.href}else alert(t.reason)})(t)}))},N=function(t){var e='<li>\n        <a class="toggle" href="#">\n            #'.concat(t._id.substr(0,5),' <span class="timago">').concat(function(t,e,r){var o=(e=parseInt(e))-(r=parseInt(r));if(o<60)return"moments ago";if(o<3600)return parseInt(o/60)+" minutes ago";if(o<86400)return parseInt(o/60/24)+" hours ago";var a=new Date(1e3*r),n=[t("Jan"),t("Feb"),t("Mar"),t("Apr"),t("May"),t("Jun"),t("Jul"),t("Aug"),t("Sep"),t("Oct"),t("Nov"),t("Dec")],c=a.getFullYear(),i=n[a.getMonth()],d=a.getDate();return a.getHours(),a.getMinutes(),a.getSeconds(),d+" "+i+" "+c}(y,Date.now()/1e3|0,t.created),"</span> ").concat(v(y,t.status),'<div class="plusminus"></div>\n        </a>\n        <div class="inner">\n            <table>\n                <tr><th><div class="me-1 me-sm-3">').concat(y("Product"),'</div></th><th class="qty"><div class="me-1 me-sm-3">').concat(y("Qty"),'</div></th><th class="price"><div class="me-1 me-sm-3">').concat(y("Total"),"</div></th><th></th></tr>");for(var r in t.items)e+=h(0,t.items[r]);return e+="</table>\n        </div>\n    </li>"},U=function(){document.querySelector(".kUNwHA .mdialog-cnt").style.display="none",document.querySelector(".kUNwHA .overlay").style.display="none",document.querySelector(".kUNwHA .scrollable").style.height="auto",document.querySelector(".kUNwHA .scrollable").style.overflowY="scroll",document.querySelector("body").style.overflowY="auto",document.querySelector("body").style.height="auto",setTimeout((function(){document.querySelector("body").classList.remove("kp-modal")}),300),document.documentElement.scrollTop=scroll.last_state,document.querySelector(".kUNwHA .cdialog-cnt").style.display="none",document.querySelector(".kUNwHA .cta-btn").style.display="flex","undefined"!=typeof cart&&cart.refreshCheckoutButton()},L="";document.addEventListener("DOMContentLoaded",(function(){config.moreButton&&(document.querySelector(".kUNwHA .cta-btn .mbtnMore").style.display="flex",document.querySelector(".kUNwHA .cta-btn .mbtnMore").addEventListener("click",(function(t){A("")}))),T(),function(){g(1);try{var t=localStorage.cart;void 0===(t=t?JSON.parse(t):{created:Math.floor(Date.now()/1e3)}).items&&(t.items=[]),t.created+3600<Math.floor(Date.now()/1e3)&&(t.items=[],t.created=Math.floor(Date.now()/1e3)),f.state.order=t}catch(t){f.state.order.created=Math.floor(Date.now()/1e3),f.state.order.items=[]}localStorage.idd||(localStorage.idd=l(8)+Math.floor(Date.now())),f.refreshCheckoutButton()}(),x();C((function(){console.log("processed")}),!1),document.addEventListener("scroll",E)}));var T=function(){var t=new URLSearchParams(window.location.search);L=t.get("table")?t.get("table"):""},x=function(){localStorage.sid=config.sid,function(){var t,e=settings.categories.split("\n"),a="",n="",c="",i=r(e);try{for(i.s();!(t=i.n()).done;){var s=t.value.split("|"),l=s[0].trim(),p=null==s[1]?"":s[1].trim();a+='<div class="slide" data-href="'+u(l)+'"><a href="#'+u(l)+'" class=" cl">'+y(l)+"</a></div>";var m=function(t){if(products[t].id=products[t]._id,void 0===products[t].cats)return"continue";if(null==products[t].cats)return"continue";if(!products[t].cats.includes(l))return"continue";var e;if(products[t].img[0]||"true"==products[t].img[0]){var r=new Image;r._id=products[t]._id,r.updated=products[t].updated,(e=r).onload=function(){document.querySelector(".kUNwHA .kenzap-row[data-id='"+e._id+"'] img").setAttribute("src",e.src)},e.src=o+"/S"+localStorage.sid+"/product-"+e._id+"-1-250.jpeg?"+e.updated}var a='<span class="tag ptag">'+d(products[t].price)+"</span>";""!=products[t].priced&&(a='<span class="ptagc">'+d(products[t].price)+'</span> <span class="tag ptag">'+d(products[t].priced)+"</span>");var i=f.state.order.items.find((function(e){return e.id==products[t]._id})),s=void 0===i?"":i.qty,m="";c!=l&&(m='<h2 id="'+u(c=l)+'">'+y(c)+'</h2><p class="subnote">'+y(p)+"</p>"),n+='            <div class="kenzap-row" data-index="'+t+'" data-id="'+products[t]._id+'">                '+m+'                <div class="info-box">                    <div class="kenzap-col-7">                        <div class="kp-content">                            <h3><span class="tag ctag">'+s+"</span>"+y(products[t].title)+"</h3>                            <p>"+y(products[t].sdesc)+"</p>                            "+a+'                        </div>                    </div>                    <div class="kenzap-col-5">                        <div class="kp-img">                            <img src="https://cdn.kenzap.com/loading.png" alt="'+products[t].title+'">                        </div>                    </div>                </div>                            </div>'};for(var v in products)m(v)}}catch(t){i.e(t)}finally{i.f()}var h=document.querySelector(".kUNwHA .slideset"),g=document.querySelector(".kUNwHA .kenzap-container");""==n?g.innerHTML=y("Please add products and specify categories first"):(h.innerHTML=a,g.innerHTML=n)}(),_(),function(){var e,a=r(document.querySelectorAll(".kUNwHA .kenzap-row"));try{for(a.s();!(e=a.n()).done;)e.value.addEventListener("click",(function(e){var a=e.currentTarget.dataset.index;f.state.index=a;var n=products[a].id,c=document.querySelector(".kUNwHA .mdialog-cnt");S.last_state=S.state,f.state.total=0,f.state.count=0;var i=f.state.order.items.find((function(t){return t.id==n}));f.state.product=void 0===i?{id:products[a].id,title:products[a].title,sdesc:products[a].sdesc,index:a,qty:0,note:"",variations:[]}:i,f.state.product.type=0==f.state.product.qty?"new":"update",document.querySelector("body").classList.add("kp-modal"),history.pushState({pageID:"feed"},"Feed",window.location.pathname+window.location.search+"#editing"),b();var l=products[a].img[0]?o+"/S"+localStorage.sid+"/product-"+products[a]._id+"-1-250.jpeg?"+products[a].updated:"https://cdn.kenzap.com/loading.png";document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-body > h2").innerHTML=y(f.state.product.title),document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-body > p").innerHTML=y(f.state.product.sdesc),document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-img img").setAttribute("src",l),document.querySelector(".kUNwHA .mdialog .qty").value=f.state.count=f.state.product.qty,document.querySelector(".kUNwHA .mdialog .kp-note textarea").value=f.state.product.note;var u,p=new Image;p._id=products[a]._id,p.updated=products[a].updated,(u=p).onload=function(){document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-img img").setAttribute("src",u.src)},u.src=o+"/S"+localStorage.sid+"/product-"+u._id+"-1-500.jpeg?"+u.updated;var m="";if(t("undefined"!==products[a].variations))for(var v in products[a].variations){var h="";for(var g in"checkbox"==products[a].variations[v].type&&(h="check"),"radio"==products[a].variations[v].type&&(h="radio"),void 0===f.state.product.variations[v]&&(f.state.product.variations[v]={title:products[a].variations[v].title,required:products[a].variations[v].required,allow:"1"!=products[a].variations[v].required}),m+="                <h3>"+y(products[a].variations[v].title)+("1"==products[a].variations[v].required?' <span class="tag">'+y("required")+"</span>":"")+'</h3>                <div class="kp-'+h+'">',products[a].variations[v].data){var k=!1;switch(void 0!==f.state.product.variations[v]&&void 0!==f.state.product.variations[v].list&&void 0!==f.state.product.variations[v].list["_"+g]&&(k=!0),products[a].variations[v].data[g].price=s(products[a].variations[v].data[g].price),h){case"check":m+='                            <label>                                <input type="checkbox" data-required="'+products[a].variations[v].required+'" data-indexv="'+v+'" data-index="'+g+'" data-title="'+products[a].variations[v].data[g].title+'" data-price="'+products[a].variations[v].data[g].price+'" '+(k?'checked="checked"':"")+'>                                <div class="checkbox">                                    <svg width="20px" height="20px" viewBox="0 0 20 20">                                        <path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>                                        <polyline points="4 11 8 15 16 6"></polyline>                                    </svg>                                </div>                                <span>'+y(products[a].variations[v].data[g].title)+'</span>                                <div class="price">+ '+d(products[a].variations[v].data[g].price)+"</div>                            </label>";break;case"radio":m+='                            <label>                                <input type="radio" data-required="'+products[a].variations[v].required+'" data-indexv="'+v+'" name="radio'+v+'" data-index="'+g+'" data-title="'+products[a].variations[v].data[g].title+'" data-price="'+products[a].variations[v].data[g].price+'" '+(k?'checked="checked"':"")+" />                                <span>"+y(products[a].variations[v].data[g].title)+'</span>                                <div class="price">+ '+d(products[a].variations[v].data[g].price)+"</div>                            </label>"}}m+="</div>"}document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-vars").innerHTML=m,f.refreshButton(),c.style.display="block",document.querySelector(".kUNwHA .overlay").style.display="block";var w,q=r(document.querySelectorAll(".kUNwHA .mdialog .kp-check input[type=checkbox]"));try{var A=function(){var t=w.value;t.addEventListener("change",(function(){var e=parseInt(t.dataset.indexv);f.state.product.variations[e].list={};var o,a=0,n=r(document.querySelectorAll(".kUNwHA .mdialog .kp-check input[type=checkbox][data-indexv='"+e+"']"));try{for(n.s();!(o=n.n()).done;){var c=o.value;"1"==t.dataset.required?a&&(f.state.product.variations[e].allow=!0):f.state.product.variations[e].allow=!0,c.checked&&(f.state.product.variations[e].list["_"+c.dataset.index]={title:c.dataset.title,price:parseFloat(c.dataset.price)},a+=1)}}catch(t){n.e(t)}finally{n.f()}f.refreshButton()}))};for(q.s();!(w=q.n()).done;)A()}catch(t){q.e(t)}finally{q.f()}var H,N=r(document.querySelectorAll(".kUNwHA .mdialog .kp-radio input[type=radio]"));try{var U=function(){var t=H.value;t.addEventListener("change",(function(){var e=parseInt(t.dataset.indexv);f.state.product.variations[e].list={};var o,a=0,n=r(document.querySelectorAll(".kUNwHA .mdialog .kp-radio input[type=radio][data-indexv='"+e+"']"));try{for(n.s();!(o=n.n()).done;){var c=o.value;c.checked&&(f.state.product.variations[e].list["_"+c.dataset.index]={title:c.dataset.title,price:parseFloat(c.dataset.price)},a+=1),"1"==t.dataset.required?a&&(f.state.product.variations[e].allow=!0):f.state.product.variations[e].allow=!0}}catch(t){n.e(t)}finally{n.f()}f.refreshButton()}))};for(N.s();!(H=N.n()).done;)U()}catch(t){N.e(t)}finally{N.f()}}))}catch(t){a.e(t)}finally{a.f()}var n=document.querySelector(".kUNwHA .mdialog .qty");document.querySelector(".kUNwHA .mdialog .plus").addEventListener("click",(function(t){f.state.count<config.cart.max_addition&&(f.state.count+=1),n.value=f.state.count,f.refreshButton(),p()})),document.querySelector(".kUNwHA .mdialog .minus").addEventListener("click",(function(t){f.state.count>0&&(f.state.count-=1),n.value=f.state.count,f.refreshButton(),p()})),document.querySelector(".kUNwHA .mdialog .add").addEventListener("click",(function(t){t.currentTarget.parentNode.classList.contains("dis")?alert(y("Please select required fields")):(f.addToCart(),q(),m(y("Cart updated")),p())}))}(),function(){var t,e=r(document.querySelectorAll(".kUNwHA .slideset .slide"));try{for(e.s();!(t=e.n()).done;){var o=t.value,a=o.offsetLeft;S.offsets[o.dataset.href]=a,o.addEventListener("click",(function(t){document.documentElement.scrollTop,setTimeout((function(t){var e,o=r(document.querySelectorAll(".kUNwHA .slide"));try{for(o.s();!(e=o.n()).done;)e.value.classList.remove("active")}catch(t){o.e(t)}finally{o.f()}t.classList.add("active")}),250,this)}))}}catch(t){e.e(t)}finally{e.f()}}(),document.querySelector(".kUNwHA .cta-btn .mbtn").addEventListener("click",(function(t){if(document.querySelector("body").classList.add("kp-modal"),history.pushState({pageID:"feed"},"Feed",window.location.pathname+window.location.search+"#checkout"),b(),1==f.state.order.step)return 0==f.state.order.total?void m(y("Cart is empty")):(M(),void g(2));if(2==f.state.order.step){if(0==f.state.order.total)return void m(y("Cart is empty"));var e="";return e='<div class="ptable">',e+='<label for="table" style="'+(L.length>0?"display:none;":"")+'">'+y("Table number")+"</label>",e+='<input type="number" value="'+L+'" name="table" style="'+(L.length>0?"display:none;":"")+'" autocomplete="off" class="table" size="4" pattern="" inputmode="">',e+='<label for="note">'+y("Note")+"</label>",e+='<textarea class="note" name="note" placeholder="'+y("leave a note for a kitchen")+'"></textarea>',e+="</div>",document.querySelector(".kUNwHA .cdialog-cnt .kp-body").innerHTML=e,document.querySelector(".kUNwHA .cdialog-cnt .ptable .table").focus(),void g(3)}if(3==f.state.order.step){var r=document.querySelector(".kUNwHA .cdialog-cnt .ptable .table").value,o=document.querySelector(".kUNwHA .cdialog-cnt .ptable .note").value;if(""==r)return void alert("Please enter table number");f.state.order.table=r,f.state.order.note=o,localStorage.cart=JSON.stringify(f.state.order),document.querySelector(".kUNwHA .cdialog-cnt").style.display="none",q();var n=config.domain;return-1==n.indexOf("checkout")&&(n+=(-1==n.indexOf("?")?"?":"&")+"checkout=1"),window.location.href="https://auth.kenzap.com/?app="+a+"&redirect="+encodeURIComponent(n),document.querySelector(".kUNwHA .overlay").style.display="block",void(document.querySelector(".kUNwHA .overlay .loader").style.display="block")}4!=f.state.order.step||q()}))},_=function(){document.querySelector(".kUNwHA .mdialog .close").addEventListener("click",(function(t){q()})),document.querySelector(".kUNwHA .cdialog .close").addEventListener("click",(function(t){document.querySelector(".kUNwHA .cdialog-cnt").style.display="none",g(1),q()})),window.addEventListener("resize",b),window.addEventListener("orientationchange",b),window.addEventListener("hashchange",(function(t){if(document.querySelector("body").classList.contains("kp-modal"))return t.preventDefault(),q(),!1}))},M=function t(){var e=document.querySelector(".kUNwHA .cdialog-cnt");b(),e.style.display="block",document.querySelector(".kUNwHA .overlay").style.display="block";var o='\n        <table class="cart-table">\n\n            <tr><th><div class="prod me-1 me-sm-3">'.concat(y("Product"),'</div></th><th class="qty"><div class="me-1 me-sm-3">').concat(y("Qty"),'</div></th><th class="price"><div class="me-1 me-sm-3">').concat(y("Total"),"</div></th><th></th></tr>");for(var a in f.state.order.items)o+=h(0,f.state.order.items[a]);o+=function(t,e,r){var o="";if(o+='<tr><td colspan="4"><div class="price" style="margin-top:16px;">'.concat(y("Amount:")," <b>").concat(d(r.total),"</b></div></td></tr>"),e.price.tax_calc){var a=r.total*parseFloat(e.price.tax_rate)/100;t.state.order.total_tax=i(a),t.state.order.total_tax_rate=i(e.price.tax_rate),o+='<tr><td colspan="4"><div class="price ">'.concat(e.price.tax_display+" ("+e.price.tax_rate+"%):"," <b>").concat(d(a),"</b></div></td></tr>"),t.state.order.total_with_tax=i(a+r.total),o+='<tr><td colspan="4"><div class="price ">'.concat(y("Total:")," <b>").concat(d(a+r.total),"</b></div></td></tr>")}return o}(f,config,f.state.order),o+="\n        </table>",e.querySelector(".kUNwHA .cdialog-cnt .kp-body").innerHTML=o;var n,c=r(e.querySelectorAll(".kUNwHA .cdialog-cnt .kp-body .checkt"));try{for(c.s();!(n=c.n()).done;){n.value.addEventListener("click",(function(e){if(confirm("Remove "+e.currentTarget.dataset.title+"?")){if(document.querySelector(".kUNwHA .kenzap-row[data-id='"+e.currentTarget.dataset.id+"'] .ctag").innerHTML="",f.removeFromCart(e.currentTarget.dataset.id),f.refreshCheckoutButton(),0==Object.keys(f.state.order.items).length)return g(1),void q();t(),g(2)}}))}}catch(t){c.e(t)}finally{c.f()}},C=function(t,e){console.log(f.state.order);var r=new URLSearchParams(window.location.search),o=r.get("ott")?r.get("ott"):"",n=new URLSearchParams;n.append("cmd","get_state"),n.append("app",a),n.append("ott",o),n.append("token",c("kenzap_token")),config.token=c("kenzap_token"),fetch("https://api-v1.kenzap.cloud/auth/",{method:"post",headers:{Accept:"application/json","Content-type":"application/x-www-form-urlencoded"},body:n}).then((function(t){return t.json()})).then((function(t){(r.get("checkout")?r.get("checkout"):"")&&(t.success?(t.token&&(config.token=t.token,function(t,e,r){var o="";if(r){var a=new Date;a.setTime(a.getTime()+24*r*60*60*1e3),o=";expires="+a.toUTCString()}document.cookie=t+"="+(escape(e)||"")+o+";path=/"}("kenzap_token",t.token,1),console.log("setting up token")),f.state.order.kid=t.kid,f.state.order.name=t.name,f.state.order.from=L+" - "+t.name,f.state.order.status="new",z()):alert("Oops, something went wrong. Please try checking out again."))})).catch((function(t){console.error("Error:",t)}))},z=function(){f.state.order.idd=localStorage.idd,f.state.order.sid=localStorage.sid,f.state.order.id=void 0===f.state.order.id?l(8)+Math.floor(Date.now()):f.state.order.id,localStorage.lastOrder=JSON.stringify(f.state.order);var t=new Date;f.state.order.created_ymd=t.getUTCFullYear()+""+n(t.getUTCMonth()+1)+n(t.getUTCDate()),f.state.order.created_ym=t.getUTCFullYear()+""+n(t.getUTCMonth()+1),f.state.order.created_y=t.getUTCFullYear()+"",fetch("https://api-v1.kenzap.cloud/",{method:"post",headers:{Accept:"application/json","Content-type":"application/x-www-form-urlencoded",Authorization:"Bearer "+API_KEY,"Kenzap-Token":config.token,"Kenzap-Sid":localStorage.sid},body:JSON.stringify({query:{order:{type:"create",key:"ecommerce-order",sid:localStorage.sid,data:f.state.order}}})}).then((function(t){return t.json()})).then((function(t){t.success?(!function(t){var e=[];try{e=JSON.parse(localStorage.orderIDs)}catch(t){}var r=Date.now()/1e3|0,o=new Date(r),a={time:r,date:o.getFullYear()+""+(o.getMonth()+1)+o.getDate(),id:t};e.push(a),localStorage.orderIDs=JSON.stringify(e)}(t.order.id),A("new"),f.clearCart(),g(4)):alert("Error: "+JSON.stringify(t))})).catch((function(t){console.error("Error:",t)}))},E=function(){var t=document.querySelectorAll(".kUNwHA .kenzap-row h2"),e=0,o=0;S.state=document.documentElement.scrollTop;var a,n=r(t);try{for(n.s();!(a=n.n()).done;){var c=a.value;o=c.offsetTop-document.documentElement.scrollTop,S.direction="down",o<0&&e>o&&(o=e,S.el_id=c.id),e=o}}catch(t){n.e(t)}finally{n.f()}if(S.state_prev!=S.state&&(S.state_prev=S.state),""!=S.el_id){var i=document.querySelector(".kUNwHA .cata-sub-nav");S.timer&&clearTimeout(S.timer),S.timer=setTimeout((function(t){i.scrollTo({left:S.offsets[t],behavior:"smooth"});var e,o=r(document.querySelectorAll(".kUNwHA .slide"));try{for(o.s();!(e=o.n()).done;){e.value.classList.remove("active")}}catch(t){o.e(t)}finally{o.f()}document.querySelector(".kUNwHA [data-href='"+t+"']").classList.add("active")}),200,S.el_id)}S.el_id=""}}();
+
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function () {
+  'use strict';
+
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+
+  function _createForOfIteratorHelper(o, allowArrayLike) {
+    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+
+    if (!it) {
+      if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+        if (it) o = it;
+        var i = 0;
+
+        var F = function () {};
+
+        return {
+          s: F,
+          n: function () {
+            if (i >= o.length) return {
+              done: true
+            };
+            return {
+              done: false,
+              value: o[i++]
+            };
+          },
+          e: function (e) {
+            throw e;
+          },
+          f: F
+        };
+      }
+
+      throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+
+    var normalCompletion = true,
+        didErr = false,
+        err;
+    return {
+      s: function () {
+        it = it.call(o);
+      },
+      n: function () {
+        var step = it.next();
+        normalCompletion = step.done;
+        return step;
+      },
+      e: function (e) {
+        didErr = true;
+        err = e;
+      },
+      f: function () {
+        try {
+          if (!normalCompletion && it.return != null) it.return();
+        } finally {
+          if (didErr) throw err;
+        }
+      }
+    };
+  }
+
+  var CDN = 'https://kenzap-sites.oss-ap-southeast-1.aliyuncs.com';
+  var appID = '66432108790002';
+  var mt = function mt(val) {
+    return ("" + val).length < 2 ? "0" + val : val;
+  };
+  var getPrice = function getPrice(product) {
+    var price = {
+      html: null,
+      priced: null
+    };
+    price.html = '<span class="tag ptag">' + priceFormat(product['price']) + '</span>';
+
+    if (product['priced'] != '') {
+      price.html = '<span class="ptagc">' + priceFormat(product['price']) + '</span> <span class="tag ptag">' + priceFormat(product['priced']) + '</span>';
+      price.priced = product['priced'];
+    }
+
+    if (product['discounts']) {
+      var discounted = false;
+      var d = new Date();
+      var month = mt(d.getMonth() + 1);
+      var day = mt(d.getDate());
+      var year = mt(d.getFullYear());
+      product['discounts'].forEach(function (el) {
+        switch (el.availability) {
+          case 'always':
+            discounted = true;
+            break;
+
+          case 'weekly':
+            if (el.dow[d.getDay() - 1]) {
+              discounted = true;
+            } else {
+              break;
+            }
+
+          case 'hourly':
+            var from = new Date(month + "/" + day + "/" + year + ' ' + el.hours.from + ':00').getTime();
+            var to = new Date(month + "/" + day + "/" + year + ' ' + el.hours.to + ':00').getTime();
+
+            if (from > Date.now() / 1000 | 0 > to) {
+              discounted = true;
+            }
+
+            break;
+        }
+
+        if (discounted) {
+          if (el.type == 'percent') {
+            price.priced = makeNumber(product['price']) * ((100 - el.percent) / 100);
+          } else if (el.type == 'value') {
+            price.priced = el.value;
+          }
+
+          price.html = "<span class=\"ptagc\">".concat(priceFormat(product['price']), "</span> <span class=\"tag ptag\">").concat(priceFormat(price.priced), "</span>");
+          if (el.note) price.html += "<div class=\"pricenote\">".concat(el.note, "</div>");
+        }
+      });
+    }
+
+    return price;
+  };
+  var setCookie$1 = function setCookie(name, value, days) {
+    var expires = "";
+
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = ";expires=" + date.toUTCString();
+    }
+
+    document.cookie = name + "=" + (escape(value) || "") + expires + ";path=/";
+  };
+  var getCookie$1 = function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+
+    return "";
+  };
+  var priceNorm = function priceNorm(price) {
+    price = makeNumber(price);
+    var priceF = (Math.round(parseFloat(price) * 100) / 100).toFixed(2);
+    return priceF;
+  };
+  var priceFormat = function priceFormat(price) {
+    price = makeNumber(price);
+    var priceF = priceNorm(price);
+
+    switch (config.price.style) {
+      case 'left':
+        priceF = config.price.symbol + priceF;
+        break;
+
+      case 'right':
+        priceF = priceF + config.price.symbol;
+        break;
+    }
+
+    return priceF;
+  };
+  var makeNumber = function makeNumber(price) {
+    price = price == "" ? 0 : price;
+    return price;
+  };
+  var randomString = function randomString(length_) {
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz'.split('');
+
+    if (typeof length_ !== "number") {
+      length_ = Math.floor(Math.random() * chars.length_);
+    }
+
+    var str = '';
+
+    for (var i = 0; i < length_; i++) {
+      str += chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    return str;
+  };
+  var convertToSlug = function convertToSlug(str) {
+    return str.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-');
+  };
+  var vibrate = function vibrate() {
+    if (window.navigator && window.navigator.vibrate) {
+      navigator.vibrate(20);
+    }
+  };
+  var toast = function toast(msg) {
+    var t = document.querySelector(".kUNwHA .snackbar");
+    t.innerHTML = msg;
+    t.classList.add("show");
+    setTimeout(function () {
+      t.className = t.className.replace("show", "");
+    }, 2200);
+  };
+  var __ = function __(text) {
+    var match = function match(input, pa) {
+      pa.forEach(function (p, i) {
+        input = input.replace('%' + (i + 1) + '$', p);
+      });
+      return input;
+    };
+
+    for (var _len = arguments.length, p = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      p[_key - 1] = arguments[_key];
+    }
+
+    if (i18n.state.locale.values[text] === undefined) return match(text, p);
+    return match(i18n.state.locale.values[text], p);
+  };
+  var renderStatus = function renderStatus(__, status) {
+    switch (status) {
+      case 'new':
+        return '<div class="badge btn-warning text-dark fw-light">' + __('New') + '</div>';
+
+      case 'processing':
+        return '<div class="badge btn-warning text-dark fw-light">' + __('Cooking') + '</div>';
+
+      case 'paid':
+        return '<div class="badge btn-warning text-dark fw-light">' + __('New') + '</div>';
+
+      case 'completed':
+        return '<div class="badge btn-success text-dark fw-light">' + __('Served') + '</div>';
+
+      case 'canceled':
+        return '<div class="badge btn-secondary text-dark fw-light">' + __('Canceled') + '</div>';
+
+      case 'refunded':
+        return '<div class="badge btn-secondary text-dark fw-light">' + __('Refunded') + '</div>';
+
+      case 'failed':
+        return '<div class="badge btn-secondary text-dark fw-light">' + __('Failed') + '</div>';
+
+      default:
+        return '<div class="badge btn-primary text-dark fw-light">' + __('Processing') + '</div>';
+    }
+  };
+  var timeConverterAgo = function timeConverterAgo(__, now, time) {
+    now = parseInt(now);
+    time = parseInt(time);
+    var past = now - time;
+    if (past < 60) return 'moments ago';
+    if (past < 3600) return parseInt(past / 60) + ' minutes ago';
+    if (past < 86400) return parseInt(past / 60 / 24) + ' hours ago';
+    var a = new Date(time * 1000);
+    var months = [__('Jan'), __('Feb'), __('Mar'), __('Apr'), __('May'), __('Jun'), __('Jul'), __('Aug'), __('Sep'), __('Oct'), __('Nov'), __('Dec')];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    a.getHours();
+    a.getMinutes();
+    a.getSeconds();
+    var time = date + ' ' + month + ' ' + year;
+    return time;
+  };
+
+  var cart$1 = {
+    state: {
+      total: 0,
+      count: 0,
+      index: 0,
+      product: {
+        variations: []
+      },
+      order: {}
+    },
+    resetButton: function resetButton() {
+      cart$1.state.total = 0;
+      cart$1.state.count = 0;
+    },
+    refreshButton: function refreshButton() {
+      products[cart$1.state.index].priced = getPrice(products[cart$1.state.index]).priced;
+      cart$1.state.product.qty = parseInt(document.querySelector(".kUNwHA .mdialog .qty").value);
+      cart$1.state.product.price = products[cart$1.state.index].priced ? parseFloat(products[cart$1.state.index].priced) : parseFloat(products[cart$1.state.index].price);
+      cart$1.state.product.note = document.querySelector(".kUNwHA .mdialog .kp-note textarea").value;
+      var cb_count = 0;
+      var checkbox_list = document.querySelectorAll(".kUNwHA .mdialog .kp-check input[type=checkbox]");
+
+      var _iterator = _createForOfIteratorHelper(checkbox_list),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var cb = _step.value;
+
+          if (cb.checked) {
+            cb_count++;
+            cart$1.state.product.price += parseFloat(cb.dataset.price);
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      var ra_count = 0;
+      var radio_list = document.querySelectorAll(".kUNwHA .mdialog .kp-radio input[type=radio]");
+
+      var _iterator2 = _createForOfIteratorHelper(radio_list),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var ra = _step2.value;
+
+          if (ra.checked) {
+            ra_count++;
+            cart$1.state.product.price += parseFloat(ra.dataset.price);
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      cart$1.state.product.priceF = parseFloat(cart$1.state.product.price * cart$1.state.product.qty);
+      document.querySelector(".kUNwHA .mdialog .add .price").innerHTML = priceFormat(cart$1.state.product.priceF);
+      var dis = false;
+      if (cart$1.state.product.priceF == 0) dis = true;
+
+      for (var v in cart$1.state.product.variations) {
+        if (cart$1.state.product.variations[v].allow == false) dis = true;
+      }
+
+      document.querySelector(".kUNwHA .mdialog .kp-add .mbtn .add").style.background = "";
+
+      if (cart$1.state.product.type == 'update' && cart$1.state.product.qty > 0) {
+        document.querySelector(".kUNwHA .mdialog .kp-add .mbtn .cta").innerHTML = __("Update");
+      }
+
+      if (cart$1.state.product.type == 'update' && cart$1.state.product.qty == 0) {
+        document.querySelector(".kUNwHA .mdialog .kp-add .mbtn .cta").innerHTML = __("Remove");
+        if (document.querySelector(".kUNwHA .mdialog .kp-add .btn .add")) document.querySelector(".kUNwHA .mdialog .kp-add .btn .add").style.background = "#df1960";
+        dis = false;
+      }
+
+      if (cart$1.state.product.type == 'new') {
+        document.querySelector(".kUNwHA .mdialog .kp-add .mbtn .cta").innerHTML = __("Add");
+      }
+
+      if (dis) {
+        document.querySelector(".kUNwHA .mdialog .kp-add .mbtn").classList.add("dis");
+      } else {
+        document.querySelector(".kUNwHA .mdialog .kp-add .mbtn").classList.remove("dis");
+      }
+    },
+    refreshCheckoutButton: function refreshCheckoutButton() {
+      var total = 0;
+
+      for (var p in cart$1.state.order.items) {
+        total += parseFloat(cart$1.state.order.items[p].priceF);
+      }
+
+      cart$1.state.order.total = total;
+
+      if (total > 0) {
+        document.querySelector("body").classList.add("cbtn");
+        setBtnStep(1);
+        document.querySelector(".kUNwHA .cta-btn .price").innerHTML = priceFormat(total);
+      } else {
+        document.querySelector(".kUNwHA .cta-btn .mbtn").innerHTML = __("cart empty");
+        document.querySelector("body").classList.remove("cbtn");
+      }
+    },
+    addToCart: function addToCart() {
+      cart$1.state.order.items = cart$1.state.order.items.filter(function (el) {
+        return el.id != cart$1.state.product.id;
+      });
+      cart$1.state.order.items.push(cart$1.state.product);
+
+      if (cart$1.state.product.qty == 0) {
+        cart$1.removeFromCart(cart$1.state.product.id);
+      } else {
+        document.querySelector(".kUNwHA .kenzap-row[data-id='" + cart$1.state.product.id + "'] .ctag").innerHTML = cart$1.state.product.qty;
+      }
+
+      localStorage.cart = JSON.stringify(cart$1.state.order);
+      cart$1.refreshCheckoutButton();
+    },
+    removeFromCart: function removeFromCart(id) {
+      cart$1.state.order.items = cart$1.state.order.items.filter(function (el) {
+        return el.id != id;
+      });
+      delete cart$1.state.order.items[id];
+      document.querySelector(".kUNwHA .kenzap-row[data-id='" + id + "'] .ctag").innerHTML = "";
+      localStorage.cart = JSON.stringify(cart$1.state.order);
+    },
+    clearCart: function clearCart() {
+      for (var i in cart$1.state.order.items) {
+        document.querySelector(".kUNwHA .kenzap-row[data-id='" + cart$1.state.order.items[i].id + "'] .ctag").innerHTML = "";
+      }
+
+      cart$1.state.order = {};
+      cart$1.state.order.created = Math.floor(Date.now() / 1000);
+      cart$1.state.order.items = [];
+      localStorage.cart = JSON.stringify(cart$1.state.order);
+      cart$1.refreshCheckoutButton();
+      window.history.replaceState({}, document.title, config.domain);
+    }
+  };
+  var addOrderHistory = function addOrderHistory(id) {
+    var pastOrders = [];
+
+    try {
+      pastOrders = JSON.parse(localStorage.orderIDs);
+    } catch (e) {}
+
+    var timestamp = Date.now() / 1000 | 0;
+    var date = new Date(timestamp);
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var obj = {
+      time: timestamp,
+      date: year + '' + month + '' + day,
+      id: id
+    };
+    pastOrders.push(obj);
+    localStorage.orderIDs = JSON.stringify(pastOrders);
+  };
+  var initCart = function initCart() {
+    setBtnStep(1);
+
+    try {
+      var order = localStorage.cart;
+
+      if (!order) {
+        order = {
+          created: Math.floor(Date.now() / 1000)
+        };
+      } else {
+        order = JSON.parse(order);
+      }
+
+      if (typeof order.items === 'undefined') {
+        order.items = [];
+      }
+
+      if (order.created + 3600 < Math.floor(Date.now() / 1000)) {
+        order.items = [];
+        order.created = Math.floor(Date.now() / 1000);
+      }
+
+      cart$1.state.order = order;
+    } catch (e) {
+      cart$1.state.order.created = Math.floor(Date.now() / 1000);
+      cart$1.state.order.items = [];
+    }
+
+    if (!localStorage.idd) localStorage.idd = randomString(8) + Math.floor(Date.now());
+    cart$1.refreshCheckoutButton();
+  };
+  var structOrderRow = function structOrderRow(type, row) {
+    var vars = '';
+
+    for (var v in row.variations) {
+      var list = '';
+
+      for (var l in row.variations[v].list) {
+        list += row.variations[v].list[l].title + " ";
+      }
+
+      vars += '<div><b>' + row.variations[v].title + "</b> <span>" + list + "</span></div> ";
+      if (row.variations[v].note !== undefined && row.variations[v].note.length > 0) vars += "<div><b>" + __('Note') + "</b> " + row.variations[v].note + "</div> ";
+    }
+
+    return '<tr><td data-id="' + row.id + '" data-title="' + __(row.title) + '" class="checkt"><div>' + __(row.title) + '</div><div>' + vars + '</div></td><td class="qty">' + row.qty + '</td><td class="price"><strong>' + priceFormat(row.price) + '</strong></td></tr>';
+  };
+  var structOrderTotals = function structOrderTotals(cart, settings, order) {
+    var html = "",
+        grand_total_temp = parseFloat(order.total);
+    cart.state.order.price = {
+      grand_total: 0,
+      total: parseFloat(order.total),
+      discount_percent: 0,
+      discount_total: 0,
+      fee_total: 0,
+      tax_total: 0,
+      tax_percent: 0
+    };
+    html += "<tr><td colspan=\"4\"><div class=\"price\" style=\"margin-top:16px;\">".concat(__('Subtotal'), " <b>").concat(priceFormat(cart.state.order.price.total), "</b></div></td></tr>");
+
+    if (settings.price.fee_calc) {
+      cart.state.order.price.fee_total = parseFloat(settings.price.fee_percent * cart.state.order.price.total) / 100;
+      cart.state.order.price.fee_percent = settings.price.fee_percent;
+      html += "<tr><td colspan=\"4\"><div class=\"price\" >".concat(__(settings.price.fee_display), " <b>").concat(priceFormat(cart.state.order.price.fee_total), "</b></div></td></tr>");
+      grand_total_temp += cart.state.order.price.fee_total;
+    }
+
+    if (settings.price.tax_calc) {
+      cart.state.order.price.tax_total = (cart.state.order.price.fee_total + cart.state.order.price.total) * parseFloat(settings.price.tax_percent) / 100;
+      cart.state.order.price.tax_percent = settings.price.tax_percent;
+      html += "<tr><td colspan=\"4\"><div class=\"price \">".concat(settings.price.tax_display, " <b>").concat(priceFormat(cart.state.order.price.tax_total), "</b></div></td></tr>");
+      grand_total_temp += cart.state.order.price.tax_total;
+    }
+
+    cart.state.order.price.grand_total = priceNorm(grand_total_temp);
+    html += "<tr><td colspan=\"4\"><div class=\"price \" style=\"font-size:19px;font-weight:700;\">".concat(__('Total'), " <b>").concat(priceFormat(cart.state.order.price.grand_total), "</b></div></td></tr>");
+    return html;
+  };
+  var setBtnStep = function setBtnStep(step) {
+    document.querySelector(".kUNwHA .cta-btn").style.display = "flex";
+
+    switch (step) {
+      case 1:
+        cart$1.state.order.step = step;
+        document.querySelector(".kUNwHA .cta-btn .mbtn").innerHTML = __('Cart') + ' <span class="price">s$0.00</span>';
+        break;
+
+      case 2:
+        cart$1.state.order.step = step;
+        document.querySelector(".kUNwHA .cta-btn .mbtn").innerHTML = __('Continue');
+        break;
+
+      case 3:
+        cart$1.state.order.step = step;
+        document.querySelector(".kUNwHA .cta-btn .mbtn").innerHTML = __('Checkout');
+        break;
+
+      case 4:
+        cart$1.state.order.step = step;
+        document.querySelector(".kUNwHA .cta-btn .mbtn").innerHTML = __('Back to menu');
+        break;
+    }
+  };
+
+  /**
+   * @name initHeader
+   * @description Initiates Kenzap Cloud extension header and related scripts. Verifies user sessions, handles SSO, does cloud space navigation, initializes i18n localization. 
+   * @param {object} response
+   */
+
+  /**
+   * @name hideLoader
+   * @description Removes full screen three dots loader.
+   */
+  const hideLoader = () => {
+
+      let el = document.querySelector(".loader");
+      if (el) el.style.display = 'none';
+  };
+
+  /**
+   * @name spaceID
+   * @description Gets current Kenzap Cloud space ID identifier from the URL.
+   * 
+   * @returns {string} id - Kenzap Cloud space ID.
+   */
+   const spaceID = () => {
+      
+      let urlParams = new URLSearchParams(window.location.search);
+      let id = urlParams.get('sid') ? urlParams.get('sid') : "";
+
+      return id;
+  };
+
+  /**
+   * @name setCookie
+   * @description Set cookie by its name to all .kenzap.cloud subdomains
+   * @param {string} name - Cookie name.
+   * @param {string} value - Cookie value.
+   * @param {string} days - Number of days when cookie expires.
+   */
+   const setCookie = (name, value, days) => {
+
+      let expires = "";
+      if (days) {
+          let date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          expires = ";expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (escape(value) || "") + expires + ";path=/;domain=.kenzap.cloud"; 
+  };
+
+  /**
+   * @name getCookie
+   * @description Read cookie by its name.
+   * @param {string} cname - Cookie name.
+   * 
+   * @returns {string} value - Cookie value.
+   */
+  const getCookie = (cname) => {
+
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  };
+
+  /**
+   * @name checkHeader
+   * @description This function tracks UI updates, creates header version checksum and compares it after every page reload
+   * @param {object} object - API response.
+   */
+   const checkHeader = () => {
+
+      let version = (localStorage.hasOwnProperty('header') && localStorage.hasOwnProperty('header-version')) ? localStorage.getItem('header-version') : 0;
+      let check = window.location.hostname + '/' + spaceID() + '/' + getCookie('locale');
+      if(check != getCookie('check')){ version = 0; console.log('refresh'); }
+      
+      setCookie('check', check, 5);
+
+      return version
+  };
+
+  /**
+   * @name headers
+   * @description Default headers object for all Kenzap Cloud fetch queries. 
+   * @param {object} headers
+   */
+   ({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + getCookie('kenzap_api_key'),
+      'Kenzap-Locale': getCookie('locale') ? getCookie('locale') : "en",
+      'Kenzap-Header': checkHeader(),
+      'Kenzap-Token': getCookie('kenzap_token'),
+      'Kenzap-Sid': spaceID(),
+  });
+
+  /**
+   * @name parseApiError
+   * @description Set default logics for different API Error responses.
+   * @param {object} object - API response.
+   */
+   const parseApiError = (data) => {
+
+      // outout to frontend console
+      console.log(data);
+
+      // unstructured failure
+      if(isNaN(data.code)){
+      
+          // structure failure data
+          let log = data;
+          try{ log = JSON.stringify(log); }catch(e){ }
+
+          let params = new URLSearchParams();
+          params.append("cmd", "report");
+          params.append("sid", spaceID());
+          params.append("token", getCookie('kenzap_token'));
+          params.append("data", log);
+          
+          // report error
+          fetch('https://api-v1.kenzap.cloud/error/', { method: 'post', headers: { 'Accept': 'application/json', 'Content-type': 'application/x-www-form-urlencoded', }, body: params });
+
+          alert('Can not connect to Kenzap Cloud');  
+          return;
+      }
+      
+      // handle cloud error codes
+      switch(data.code){
+
+          // unauthorized
+          case 401:
+
+              // dev mode
+              if(window.location.href.indexOf('localhost')!=-1){ 
+
+                  alert(data.reason); 
+                  return; 
+              }
+
+              // production mode
+              location.href="https://auth.kenzap.com/?app=65432108792785&redirect="+window.location.href; break;
+          
+          // something else
+          default:
+
+              alert(data.reason); 
+              break;
+      }
+  };
+
+  /**
+   * @name onClick
+   * @description One row click event listener declaration. Works with one or many HTML selectors.
+   * @param {string} sel - HTML selector, id, class, etc.
+   * @param {string} fn - callback function fired on click event.
+   */
+  const onClick = (sel, fn) => {
+
+      if(document.querySelector(sel)) for( let e of document.querySelectorAll(sel) ){
+
+          e.removeEventListener('click', fn, true);
+          e.addEventListener('click', fn, true);
+      }
+  };
+
+  var scroll$1 = {
+    state: 0,
+    last_state: 0,
+    state_prev: 0,
+    fp: 0,
+    el_id: "",
+    direction: "",
+    offsets: {},
+    timer: null
+  };
+  var renderMenu = function renderMenu() {
+    var rows = settings.categories.split('\n');
+    var html_slider = '';
+    var html_menu = '';
+    var title = '';
+
+    var _iterator = _createForOfIteratorHelper(rows),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var c = _step.value;
+        var val = c.split('|');
+        var cat = val[0].trim();
+        var note = val[1] == null ? '' : val[1].trim();
+        html_slider += '<div class="slide" data-href="' + convertToSlug(cat) + '"><a href="#' + convertToSlug(cat) + '" class=" cl">' + __(cat) + '</a></div>';
+
+        var _loop = function _loop(x) {
+          products[x].id = products[x]._id;
+          if (typeof products[x]['cats'] === 'undefined') return "continue";
+          if (products[x]['cats'] == null) return "continue";
+          if (!products[x]['cats'].includes(cat)) return "continue";
+          var img = 'https://cdn.kenzap.com/loading.png';
+
+          if (products[x]['img'][0] || products[x]['img'][0] == 'true') {
+            var imgl = new Image();
+            imgl._id = products[x]['_id'];
+            imgl.updated = products[x]['updated'];
+
+            (function (i) {
+              i.onload = function () {
+                document.querySelector(".kUNwHA .kenzap-row[data-id='" + i._id + "'] img").setAttribute('src', i.src);
+              };
+
+              i.src = CDN + '/S' + localStorage.sid + '/product-' + i._id + '-1-250.jpeg?' + i.updated;
+            })(imgl);
+          }
+
+          var info = '';
+          if (products[x]['stock']) if (products[x]['stock']['management']) if (parseInt(products[x]['stock']['qty']) == 0) {
+            info = __('sold out');
+          }
+          var item_cart = cart$1.state.order.items.find(function (el) {
+            return el.id == products[x]['_id'];
+          });
+          var ctag = typeof item_cart === 'undefined' ? "" : item_cart.qty;
+          var show_heading = '';
+
+          if (title != cat) {
+            title = cat;
+            show_heading = '<h2 id="' + convertToSlug(title) + '">' + __(title) + '</h2><p class="subnote">' + __(note) + '</p>';
+          }
+
+          html_menu += "\n            <div class=\"kenzap-row\" data-nostock=\"".concat(info ? true : false, "\" data-index=\"").concat(x, "\" data-id=\"").concat(products[x]['_id'], "\">\n                ").concat(show_heading, "\n                <div class=\"info-box\">\n                    <div class=\"kenzap-col-7\">\n                        <div class=\"kp-content\">\n                            <h3><span class=\"tag ctag\">").concat(ctag, "</span>").concat(__(products[x]['title']), "</h3>\n                            <p>").concat(__(products[x]['sdesc']), "</p>\n                            ").concat(info ? '<span class="tag ptag">' + __('sold out') + '</span>' : getPrice(products[x]).html, "\n                        </div>\n                    </div>\n                    <div class=\"kenzap-col-5\">\n                        <div class=\"kp-img\">\n                            <img src=\"").concat(img, "\" alt=\"").concat(products[x]['title'], "\">\n                            <div class=\"kp-info\">").concat(info, "</div>\n                        </div>\n                    </div>\n                </div>\n            </div> ");
+        };
+
+        for (var x in products) {
+          var _ret = _loop(x);
+
+          if (_ret === "continue") continue;
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    var slider_container = document.querySelector(".kUNwHA .slideset");
+    var menu_container = document.querySelector(".kUNwHA .kenzap-container");
+
+    if (html_menu == '') {
+      menu_container.innerHTML = __("Please add products and specify categories first");
+    } else {
+      slider_container.innerHTML = html_slider;
+      menu_container.innerHTML = html_menu;
+    }
+  };
+  var menuListeners = function menuListeners() {
+    var row_list = document.querySelectorAll(".kUNwHA .kenzap-row");
+
+    var _iterator2 = _createForOfIteratorHelper(row_list),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var row = _step2.value;
+        row.addEventListener('click', function (e) {
+          if (e.currentTarget.dataset.nostock == 'true') {
+            alert(__('Product sold out'));
+            return false;
+          }
+
+          var x = e.currentTarget.dataset.index;
+          cart$1.state.index = x;
+          var product_id = products[x].id;
+          var mdialogCnt = document.querySelector(".kUNwHA .mdialog-cnt");
+          scroll$1.last_state = scroll$1.state;
+          cart$1.state.total = 0;
+          cart$1.state.count = 0;
+          var item_cart = cart$1.state.order.items.find(function (el) {
+            return el.id == product_id;
+          });
+          cart$1.state.product = typeof item_cart === 'undefined' ? {
+            id: products[x].id,
+            title: products[x].title,
+            sdesc: products[x].sdesc,
+            index: x,
+            qty: 0,
+            note: "",
+            variations: []
+          } : item_cart;
+          cart$1.state.product.type = cart$1.state.product.qty == 0 ? "new" : "update";
+          document.querySelector("body").classList.add('kp-modal');
+          history.pushState({
+            pageID: 'feed'
+          }, 'Feed', window.location.pathname + window.location.search + "#editing");
+          refreshDialogView();
+          var src = products[x]['img'][0] ? CDN + '/S' + localStorage.sid + '/product-' + products[x]['_id'] + '-1-250.jpeg?' + products[x]['updated'] : 'https://cdn.kenzap.com/loading.png';
+          document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-body > h2").innerHTML = __(cart$1.state.product.title);
+          document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-body > p").innerHTML = __(cart$1.state.product.sdesc);
+          document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-img img").setAttribute('src', src);
+          document.querySelector(".kUNwHA .mdialog .qty").value = cart$1.state.count = cart$1.state.product.qty;
+          document.querySelector(".kUNwHA .mdialog .kp-note textarea").value = cart$1.state.product.note;
+          var imgl = new Image();
+          imgl._id = products[x]['_id'];
+          imgl.updated = products[x]['updated'];
+
+          (function (i) {
+            i.onload = function () {
+              document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-img img").setAttribute('src', i.src);
+            };
+
+            i.src = CDN + '/S' + localStorage.sid + '/product-' + i._id + '-1-500.jpeg?' + i.updated;
+          })(imgl);
+
+          var html_vars = '';
+          if (_typeof(products[x].variations !== 'undefined')) for (var v in products[x].variations) {
+            var type = '';
+            if (products[x].variations[v].type == 'checkbox') type = 'check';
+            if (products[x].variations[v].type == 'radio') type = 'radio';
+            if (typeof cart$1.state.product.variations[v] === 'undefined') cart$1.state.product.variations[v] = {
+              title: products[x].variations[v].title,
+              required: products[x].variations[v].required,
+              allow: products[x].variations[v].required == '1' ? false : true
+            };
+            html_vars += '\
+                <h3>' + __(products[x].variations[v].title) + (products[x].variations[v].required == '1' ? ' <span class="tag">' + __('required') + '</span>' : '') + '</h3>\
+                <div class="kp-' + type + '">';
+
+            for (var d in products[x].variations[v].data) {
+              var checked = false;
+
+              if (typeof cart$1.state.product.variations[v] !== 'undefined' && typeof cart$1.state.product.variations[v].list !== 'undefined' && typeof cart$1.state.product.variations[v].list["_" + d] !== 'undefined') {
+                checked = true;
+              }
+
+              products[x].variations[v].data[d]['price'] = makeNumber(products[x].variations[v].data[d]['price']);
+
+              switch (type) {
+                case 'check':
+                  html_vars += "\n                                <label>\n                                    <input type=\"checkbox\" data-required=\"".concat(products[x].variations[v].required, "\" data-indexv=\"").concat(v, "\" data-index=\"").concat(d, "\" data-title=\"").concat(products[x].variations[v].data[d]['title'], "\" data-price=\"").concat(products[x].variations[v].data[d]['price'], "\" ").concat(checked ? 'checked="checked"' : '', ">\n                                    <div class=\"checkbox\">\n                                        <svg width=\"20px\" height=\"20px\" viewBox=\"0 0 20 20\">\n                                            <path d=\"M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z\"></path>\n                                            <polyline points=\"4 11 8 15 16 6\"></polyline>\n                                        </svg>\n                                    </div>\n                                    <span>").concat(__(products[x].variations[v].data[d]['title']), "</span>\n                                    <div class=\"price\">+ ").concat(priceFormat(products[x].variations[v].data[d]['price']), "</div>\n                                </label>");
+                  break;
+
+                case 'radio':
+                  html_vars += "\n                                <label>\n                                    <input type=\"radio\" data-required=\"".concat(products[x].variations[v].required, "\" data-indexv=\"").concat(v, "\" name=\"radio").concat(v, "\" data-index=\"").concat(d, "\" data-title=\"").concat(products[x].variations[v].data[d]['title'], "\" data-price=\"").concat(products[x].variations[v].data[d]['price'], "\" ").concat(checked ? 'checked="checked"' : '', " />\n                                    <span>").concat(__(products[x].variations[v].data[d]['title']), "</span>\n                                    <div class=\"price\">+ ").concat(priceFormat(products[x].variations[v].data[d]['price']), "</div>\n                                </label>");
+                  break;
+              }
+            }
+
+            html_vars += '</div>';
+          }
+          document.querySelector(".kUNwHA .mdialog-cnt .mdialog .kp-vars").innerHTML = html_vars;
+          cart$1.refreshButton();
+          mdialogCnt.style.display = "block";
+          document.querySelector(".kUNwHA .overlay").style.display = "block";
+          var checkbox_list = document.querySelectorAll(".kUNwHA .mdialog .kp-check input[type=checkbox]");
+
+          var _iterator3 = _createForOfIteratorHelper(checkbox_list),
+              _step3;
+
+          try {
+            var _loop2 = function _loop2() {
+              var cb = _step3.value;
+              cb.addEventListener('change', function () {
+                var v = parseInt(cb.dataset.indexv);
+                cart$1.state.product.variations[v].list = {};
+                var count = 0;
+
+                var _iterator5 = _createForOfIteratorHelper(document.querySelectorAll(".kUNwHA .mdialog .kp-check input[type=checkbox][data-indexv='" + v + "']")),
+                    _step5;
+
+                try {
+                  for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+                    var cbg = _step5.value;
+
+                    if (cb.dataset.required == "1") {
+                      if (count) cart$1.state.product.variations[v].allow = true;
+                    } else {
+                      cart$1.state.product.variations[v].allow = true;
+                    }
+
+                    if (cbg.checked) {
+                      cart$1.state.product.variations[v].list["_" + cbg.dataset.index] = {
+                        title: cbg.dataset.title,
+                        price: parseFloat(cbg.dataset.price)
+                      };
+                      count += 1;
+                    }
+                  }
+                } catch (err) {
+                  _iterator5.e(err);
+                } finally {
+                  _iterator5.f();
+                }
+
+                cart$1.refreshButton();
+              });
+            };
+
+            for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+              _loop2();
+            }
+          } catch (err) {
+            _iterator3.e(err);
+          } finally {
+            _iterator3.f();
+          }
+
+          var radio_list = document.querySelectorAll(".kUNwHA .mdialog .kp-radio input[type=radio]");
+
+          var _iterator4 = _createForOfIteratorHelper(radio_list),
+              _step4;
+
+          try {
+            var _loop3 = function _loop3() {
+              var cb = _step4.value;
+              cb.addEventListener('change', function () {
+                var v = parseInt(cb.dataset.indexv);
+                cart$1.state.product.variations[v].list = {};
+                var count = 0;
+
+                var _iterator6 = _createForOfIteratorHelper(document.querySelectorAll(".kUNwHA .mdialog .kp-radio input[type=radio][data-indexv='" + v + "']")),
+                    _step6;
+
+                try {
+                  for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+                    var rag = _step6.value;
+
+                    if (rag.checked) {
+                      cart$1.state.product.variations[v].list["_" + rag.dataset.index] = {
+                        title: rag.dataset.title,
+                        price: parseFloat(rag.dataset.price)
+                      };
+                      count += 1;
+                    }
+
+                    if (cb.dataset.required == "1") {
+                      if (count) cart$1.state.product.variations[v].allow = true;
+                    } else {
+                      cart$1.state.product.variations[v].allow = true;
+                    }
+                  }
+                } catch (err) {
+                  _iterator6.e(err);
+                } finally {
+                  _iterator6.f();
+                }
+
+                cart$1.refreshButton();
+              });
+            };
+
+            for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+              _loop3();
+            }
+          } catch (err) {
+            _iterator4.e(err);
+          } finally {
+            _iterator4.f();
+          }
+        });
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+
+    var qty = document.querySelector(".kUNwHA .mdialog .qty");
+    var plus = document.querySelector(".kUNwHA .mdialog .plus");
+    plus.addEventListener('click', function (e) {
+      if (cart$1.state.count < config.cart.max_addition) cart$1.state.count += 1;
+      qty.value = cart$1.state.count;
+      cart$1.refreshButton();
+      vibrate();
+    });
+    var minus = document.querySelector(".kUNwHA .mdialog .minus");
+    minus.addEventListener('click', function (e) {
+      if (cart$1.state.count > 0) cart$1.state.count -= 1;
+      qty.value = cart$1.state.count;
+      cart$1.refreshButton();
+      vibrate();
+    });
+    var add = document.querySelector(".kUNwHA .mdialog .add");
+    add.addEventListener('click', function (e) {
+      if (e.currentTarget.parentNode.classList.contains("dis")) {
+        alert(__("Please select required fields"));
+        return;
+      }
+
+      cart$1.addToCart();
+      closeModal$1();
+      toast(__("Cart updated"));
+      vibrate();
+    });
+  };
+  var sliderListeners = function sliderListeners() {
+    var slide_list = document.querySelectorAll(".kUNwHA .slideset .slide");
+
+    var _iterator7 = _createForOfIteratorHelper(slide_list),
+        _step7;
+
+    try {
+      for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+        var slide = _step7.value;
+        var scrollDiv = slide.offsetLeft;
+        scroll$1.offsets[slide.dataset.href] = scrollDiv;
+        slide.addEventListener('click', function (e) {
+          var sto = document.documentElement.scrollTop;
+          setTimeout(function (el) {
+            var _iterator8 = _createForOfIteratorHelper(document.querySelectorAll(".kUNwHA .slide")),
+                _step8;
+
+            try {
+              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+                var l = _step8.value;
+                l.classList.remove("active");
+              }
+            } catch (err) {
+              _iterator8.e(err);
+            } finally {
+              _iterator8.f();
+            }
+
+            el.classList.add("active");
+          }, 250, this);
+        });
+      }
+    } catch (err) {
+      _iterator7.e(err);
+    } finally {
+      _iterator7.f();
+    }
+  };
+  var refreshDialogView = function refreshDialogView() {
+    if (document.querySelector("body").classList.contains('kp-modal')) {
+      document.querySelector("body").style.height = '100vh';
+      document.querySelector("body").style.overflowY = 'hidden';
+      document.querySelector(".kUNwHA .scrollable").style.height = '100vh';
+      document.querySelector(".kUNwHA .scrollable").style.overflowY = 'hidden';
+      document.querySelector(".kUNwHA .mdialog-cnt").style.height = window.screen.availHeight - 160 + "px";
+    }
+  };
+  var closeModal$1 = function closeModal() {
+    var mdialogCnt = document.querySelector(".kUNwHA .mdialog-cnt");
+    mdialogCnt.style.display = "none";
+    document.querySelector(".kUNwHA .overlay").style.display = "none";
+    document.querySelector(".kUNwHA .scrollable").style.height = 'auto';
+    document.querySelector(".kUNwHA .scrollable").style.overflowY = 'scroll';
+    document.querySelector("body").style.overflowY = 'auto';
+    document.querySelector("body").style.height = 'auto';
+    setTimeout(function () {
+      document.querySelector("body").classList.remove('kp-modal');
+    }, 300);
+    document.documentElement.scrollTop = scroll$1.last_state;
+    var cdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
+    cdialogCnt.style.display = "none";
+    cart$1.refreshCheckoutButton();
+    document.querySelector(".kUNwHA .cta-btn").style.display = "flex";
+    if (window.location.href.indexOf("#editing") == -1) return;
+    history.pushState({
+      pageID: 'feed'
+    }, 'Feed', window.location.pathname + window.location.search);
+  };
+
+  var account = {
+    initModal: function initModal(t) {
+      var cdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
+      cdialogCnt.style.display = "block";
+      document.querySelector(".kUNwHA .overlay").style.display = "block";
+      document.querySelector(".kUNwHA .cta-btn").style.display = "none";
+      document.querySelector("body").classList.add('kp-modal');
+      history.pushState({
+        pageID: 'feed'
+      }, 'Feed', window.location.pathname + window.location.search + "#account");
+      refreshDialogView();
+      var html = "\n        <div class=\"account\">\n            <h3><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"bell\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\">\n            <path d=\"M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z\"></path>\n            </svg>".concat(__('Order received'), " <span class=\"statusLast\"></span></h3>\n            <p>").concat(__('You can track your order from the table below or click on the bell to call waiter.'), "</p>\n            <div class=\"lottie-cont\"></div>\n            ");
+
+      if (t == 'new') {
+        html = "\n            <div class=\"account\">\n                <h3><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"bell\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\">\n                <path d=\"M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z\"></path>\n                </svg>".concat(__('Order received!'), " <span class=\"statusLast\"></span></h3>\n                <p>").concat(__('Thank you for placing your order. You can track your order from the table below or click on the bell to call waiter.'), "</p>\n                <div class=\"lottie-cont\"></div>\n                ");
+      }
+
+      html += "\n            <h4>".concat(__('Orders'), "</h4>\n            <div class=\"orders\">");
+      loadOrders(html, cdialogCnt);
+      html += '</div>';
+      html += '</div>';
+      cdialogCnt.querySelector(".kUNwHA .cdialog-cnt .kp-body").innerHTML = html;
+      onClick('.kUNwHA .bell', function (e) {
+        var c = confirm(__('Call waiter?'));
+        if (!c) return;
+        document.querySelector('.kUNwHA .bell').classList.add('dn');
+        var urlParams = new URLSearchParams(window.location.search);
+        var table = urlParams.get('table') ? urlParams.get('table') : "";
+        fetch('https://api-v1.kenzap.cloud/ecommerce/', {
+          method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Bearer ' + API_KEY,
+            'Kenzap-Token': config.token,
+            'Kenzap-Sid': localStorage.sid
+          },
+          body: JSON.stringify({
+            query: {
+              notify: {
+                type: 'notify',
+                key: 'ecommerce-message',
+                sid: localStorage.sid,
+                data: {
+                  channel: "waiter",
+                  idd: localStorage.idd,
+                  msg: "table " + table + " is calling",
+                  color: "danger"
+                }
+              }
+            }
+          })
+        }).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          if (response.success) {
+            toast(__("Calling, please wait a moment!"));
+          } else {
+            document.querySelector('.kUNwHA .bell').classList.remove('dn');
+            toast(__("Oops, please try again"));
+          }
+        })["catch"](function (error) {
+          parseApiError(error);
+        });
+      });
+    }
+  };
+
+  var loadOrders = function loadOrders(html, cdialogCnt) {
+    var term = localStorage.idd;
+    fetch('https://api-v1.kenzap.cloud/', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ' + API_KEY,
+        'Kenzap-Token': config.token,
+        'Kenzap-Sid': localStorage.sid
+      },
+      body: JSON.stringify({
+        query: {
+          user: {
+            type: 'authenticate',
+            fields: ['avatar'],
+            token: getCookie('kenzap_token')
+          },
+          orders: {
+            type: 'find',
+            key: 'ecommerce-order',
+            fields: ['id', '_id', 'status', 'items', 'created'],
+            term: term != '' ? 'idd=\'' + term + '\'' : '',
+            limit: 10,
+            sortby: {
+              field: 'created',
+              order: 'DESC'
+            }
+          }
+        }
+      })
+    }).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      hideLoader();
+
+      if (response.success) {
+        var first = true;
+        var lottie = 'cooking';
+        var ohtml = '<ul class="accordion">';
+
+        var _iterator = _createForOfIteratorHelper(response.orders),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var order = _step.value;
+
+            if (first) {
+              document.querySelector('.statusLast').innerHTML = renderStatus(__, order.status);
+
+              if (order.status == 'completed') {
+                lottie = 'serving';
+              }
+            }
+
+            ohtml += structOrders(first, order);
+            first = false;
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+
+        switch (lottie) {
+          case 'cooking':
+            document.querySelector('.account .lottie-cont').innerHTML = '<lottie-player src="https://assets8.lottiefiles.com/packages/lf20_fefIZO.json" background="transparent" speed="1" class="lplayer" style="width: 300px; height: auto;" loop autoplay></lottie-player>';
+            break;
+
+          case 'serving':
+            document.querySelector('.account .lottie-cont').innerHTML = '<lottie-player src="https://assets9.lottiefiles.com/packages/lf20_thgy1p9c.json" background="transparent" speed="1" class="lplayer" style="width: 300px; height: auto;" loop autoplay></lottie-player>';
+            break;
+        }
+
+        ohtml += '</ul>';
+        cdialogCnt.querySelector(".kUNwHA .orders").innerHTML = ohtml;
+        onClick('.kUNwHA .accordion .cancel-order', function (e) {
+          e.preventDefault();
+
+          if (!confirm(__('Cancel order?'))) {
+            return false;
+          }
+
+          var el = e.currentTarget;
+          fetch('https://api-v1.kenzap.cloud/ecommerce/', {
+            method: 'post',
+            headers: {
+              'Accept': 'application/json',
+              'Content-type': 'application/x-www-form-urlencoded',
+              'Authorization': 'Bearer ' + API_KEY,
+              'Kenzap-Token': config.token,
+              'Kenzap-Sid': localStorage.sid
+            },
+            body: JSON.stringify({
+              query: {
+                status: {
+                  type: 'update-order-status',
+                  id: el.dataset._id,
+                  status: "canceled"
+                }
+              }
+            })
+          }).then(function (response) {
+            return response.json();
+          }).then(function (response) {
+            hideLoader();
+
+            if (response.success) {
+              el.parentElement.parentElement.querySelector('.badge').innerHTML = __('Canceled');
+              toast(__("Order #" + el.dataset.id + " canceled"));
+              el.remove();
+              closeModal();
+            }
+          })["catch"](function (error) {
+            parseApiError(error);
+          });
+        });
+        onClick('.kUNwHA .accordion .toggle', function (e) {
+          e.preventDefault();
+
+          if (e.currentTarget.classList.contains('active')) {
+            e.currentTarget.classList.remove('active');
+            e.currentTarget.parentElement.querySelector('.inner').classList.remove('show');
+            e.currentTarget.parentElement.querySelector('.plusminus').classList.remove('active');
+          } else {
+            e.currentTarget.classList.add('active');
+            e.currentTarget.parentElement.querySelector('.inner').classList.add('show');
+            e.currentTarget.parentElement.querySelector('.plusminus').classList.add('active');
+          }
+        });
+        document.querySelector(".kUNwHA .cta-btn").style.display = "none";
+      } else {
+        toast(__("Please make your first order"));
+        closeModal();
+      }
+    })["catch"](function (error) {
+      parseApiError(error);
+    });
+  };
+
+  var structOrders = function structOrders(first, order) {
+    var html = "<li>\n        <a class=\"toggle ".concat(first ? 'active' : '', " \" href=\"#\">\n            #").concat(order.id, " <span class=\"timago\">").concat(timeConverterAgo(__, Date.now() / 1000 | 0, order.created), "</span> ").concat(renderStatus(__, order.status), "<div class=\"plusminus ").concat(first ? 'active' : '', "\"></div>\n        </a>\n        <div class=\"inner ").concat(first ? 'show' : '', "\">\n            <table>\n                <tr><th><div class=\"me-1 me-sm-3\">").concat(__('Product'), "</div></th><th class=\"qty\"><div class=\"me-1 me-sm-3\">").concat(__('Qty'), "</div></th><th class=\"price\"><div class=\"me-1 me-sm-3\">").concat(__('Total'), "</div></th><th></th></tr>");
+
+    for (var item in order.items) {
+      html += structOrderRow('history', order.items[item]);
+    }
+
+    html += "</table> \n            <div class=\"tag cancel-order ".concat(order.status != 'new' ? 'dn' : '', "\" data-id=\"").concat(order.id, "\" data-_id=\"").concat(order._id, "\">").concat(__('Cancel order'), "</div>\n        </div>\n    </li>");
+    return html;
+  };
+  var closeModal = function closeModal() {
+    var mdialogCnt = document.querySelector(".kUNwHA .mdialog-cnt");
+    mdialogCnt.style.display = "none";
+    document.querySelector(".kUNwHA .overlay").style.display = "none";
+    document.querySelector(".kUNwHA .scrollable").style.height = 'auto';
+    document.querySelector(".kUNwHA .scrollable").style.overflowY = 'scroll';
+    document.querySelector("body").style.overflowY = 'auto';
+    document.querySelector("body").style.height = 'auto';
+    setTimeout(function () {
+      document.querySelector("body").classList.remove('kp-modal');
+    }, 300);
+    document.documentElement.scrollTop = scroll.last_state;
+    var cdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
+    cdialogCnt.style.display = "none";
+    document.querySelector(".kUNwHA .cta-btn").style.display = "flex";
+    if (typeof cart === 'undefined') return;
+    cart.refreshCheckoutButton();
+  };
+
+  var table = '';
+
+  var getData = function getData() {
+    var limit = 1000;
+    var offset = 0;
+    var query = {
+      products: {
+        type: 'get-products',
+        key: 'ecommerce-product',
+        fields: ['_id', 'img', 'status', 'price', 'priced', 'title', 'cats', 'sdesc', 'ldesc', 'stock', 'discounts', 'variations', 'updated'],
+        limit: limit,
+        offset: offset,
+        sortby: {
+          field: 'created',
+          order: 'ASC'
+        }
+      }
+    };
+    fetch('https://api-v1.kenzap.cloud/ecommerce/', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/x-www-form-urlencoded',
+        'Kenzap-Sid': config.sid
+      },
+      body: JSON.stringify({
+        query: query
+      })
+    }).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      if (response.success) {
+        products = response.products;
+        setTable();
+        initCart();
+        getMenu();
+
+        authUser();
+        document.addEventListener("scroll", scrollEvents);
+      } else {
+        alert(__('Oops, something went wrong. Please try again.'));
+      }
+    })["catch"](function (error) {
+      console.error('Error:', error);
+    });
+  };
+
+  getData();
+  document.addEventListener("DOMContentLoaded", function () {
+    if (config.moreButton) {
+      document.querySelector('.kUNwHA .cta-btn .mbtnMore').style.display = "flex";
+      document.querySelector(".kUNwHA .cta-btn .mbtnMore").addEventListener('click', function (e) {
+        account.initModal('');
+      });
+    }
+  });
+
+  var setTable = function setTable() {
+    var urlParams = new URLSearchParams(window.location.search);
+    table = urlParams.get('table') ? urlParams.get('table') : "";
+  };
+
+  var btnListeners = function btnListeners() {
+    document.querySelector(".kUNwHA .cta-btn .mbtn").addEventListener('click', function (e) {
+      document.querySelector("body").classList.add('kp-modal');
+      history.pushState({
+        pageID: 'feed'
+      }, 'Feed', window.location.pathname + window.location.search + "#checkout");
+      refreshDialogView();
+
+      if (cart$1.state.order.step == 1) {
+        if (cart$1.state.order.total == 0) {
+          toast(__("Cart is empty"));
+          return;
+        }
+
+        viewCheckoutModal();
+        setBtnStep(2);
+        return;
+      }
+
+      if (cart$1.state.order.step == 2) {
+        if (cart$1.state.order.total == 0) {
+          toast(__("Cart is empty"));
+          return;
+        }
+
+        if (config.fast_checkout == "2") {
+          var urlParams = new URLSearchParams(window.location.search);
+          cart$1.state.order.kid = "0";
+          cart$1.state.order.name = "dine-in";
+          cart$1.state.order.from = urlParams.get('table') ? "table " + urlParams.get('table') : "dine-in";
+          cart$1.state.order.status = 'new';
+          closeModal$1();
+          toast(__("Checking out"));
+          ajaxCheckout();
+          return;
+        }
+
+        var html = '';
+        html = '<div class="ptable">';
+        html += '<label for="table" style="' + (table.length > 0 ? 'display:none;' : '') + '">' + __('Table number') + '</label>';
+        html += '<input type="number" value="' + table + '" name="table" style="' + (table.length > 0 ? 'display:none;' : '') + '" autocomplete="off" class="table" size="4" pattern="" inputmode="">';
+        html += '<label for="note">' + __('Note') + '</label>';
+        html += '<textarea class="note" name="note" placeholder="' + __('leave a note for a kitchen') + '"></textarea>';
+        html += '</div>';
+        document.querySelector(".kUNwHA .cdialog-cnt .kp-body").innerHTML = html;
+        document.querySelector(".kUNwHA .cdialog-cnt .ptable .table").focus();
+        setBtnStep(3);
+        return;
+      }
+
+      if (cart$1.state.order.step == 3) {
+        var _table = document.querySelector(".kUNwHA .cdialog-cnt .ptable .table").value;
+        var note = document.querySelector(".kUNwHA .cdialog-cnt .ptable .note").value;
+
+        if (_table == "") {
+          alert("Please enter table number");
+          return;
+        }
+
+        cart$1.state.order.table = _table;
+        cart$1.state.order.note = note;
+        localStorage.cart = JSON.stringify(cart$1.state.order);
+        var mdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
+        mdialogCnt.style.display = "none";
+        closeModal$1();
+        var origin = config.domain;
+        if (origin.indexOf('checkout') == -1) origin += (origin.indexOf('?') == -1 ? '?' : '&') + 'checkout=1';
+        window.location.href = 'https://auth.kenzap.com/?app=' + appID + '&redirect=' + encodeURIComponent(origin);
+        document.querySelector(".kUNwHA .overlay").style.display = "block";
+        document.querySelector(".kUNwHA .overlay .loader").style.display = "block";
+        return;
+      }
+
+      if (cart$1.state.order.step == 4) {
+        closeModal$1();
+        return;
+      }
+    });
+  };
+
+  var getMenu = function getMenu() {
+    localStorage.sid = config.sid;
+    renderMenu();
+    dialogListeners();
+    menuListeners();
+    sliderListeners();
+    btnListeners();
+  };
+
+  var dialogListeners = function dialogListeners() {
+    var close = document.querySelector(".kUNwHA .mdialog .close");
+    close.addEventListener('click', function (e) {
+      closeModal$1();
+    });
+    var close2 = document.querySelector(".kUNwHA .cdialog .close");
+    close2.addEventListener('click', function (e) {
+      var cdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
+      cdialogCnt.style.display = "none";
+      setBtnStep(1);
+      closeModal$1();
+    });
+    window.addEventListener("resize", refreshDialogView);
+    window.addEventListener("orientationchange", refreshDialogView);
+    window.addEventListener("hashchange", function (e) {
+      if (document.querySelector('body').classList.contains('kp-modal')) {
+        e.preventDefault();
+        closeModal$1();
+        return false;
+      }
+    });
+  };
+
+  var viewCheckoutModal = function viewCheckoutModal() {
+    var cdialogCnt = document.querySelector(".kUNwHA .cdialog-cnt");
+    refreshDialogView();
+    cdialogCnt.style.display = "block";
+    document.querySelector(".kUNwHA .overlay").style.display = "block";
+    var html = "\n        <table class=\"cart-table\">\n\n            <tr><th><div class=\"prod me-1 me-sm-3\">".concat(__('Product'), "</div></th><th class=\"qty\"><div class=\"me-1 me-sm-3\">").concat(__('Qty'), "</div></th><th class=\"price\"><div class=\"me-1 me-sm-3\">").concat(__('Total'), "</div></th><th></th></tr>");
+
+    for (var p in cart$1.state.order.items) {
+      html += structOrderRow('cart', cart$1.state.order.items[p]);
+    }
+
+    html += structOrderTotals(cart$1, config, cart$1.state.order);
+    html += "\n        </table>";
+    cdialogCnt.querySelector(".kUNwHA .cdialog-cnt .kp-body").innerHTML = html;
+
+    var _iterator = _createForOfIteratorHelper(cdialogCnt.querySelectorAll(".kUNwHA .cdialog-cnt .kp-body .checkt")),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var td = _step.value;
+        td.addEventListener('click', function (e) {
+          var c = confirm("Remove " + e.currentTarget.dataset.title + "?");
+
+          if (c) {
+            document.querySelector(".kUNwHA .kenzap-row[data-id='" + e.currentTarget.dataset.id + "'] .ctag").innerHTML = "";
+            cart$1.removeFromCart(e.currentTarget.dataset.id);
+            cart$1.refreshCheckoutButton();
+
+            if (Object.keys(cart$1.state.order.items).length == 0) {
+              setBtnStep(1);
+              closeModal$1();
+              return;
+            }
+
+            viewCheckoutModal();
+            setBtnStep(2);
+          }
+        });
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  };
+
+  var authUser = function authUser(cb, force) {
+    console.log(cart$1.state.order);
+    var urlParams = new URLSearchParams(window.location.search);
+    var ott = urlParams.get('ott') ? urlParams.get('ott') : "";
+    var params = new URLSearchParams();
+    params.append("cmd", "get_state");
+    params.append("app", appID);
+    params.append("ott", ott);
+    params.append("token", getCookie$1('kenzap_token'));
+    config.token = getCookie$1('kenzap_token');
+    fetch('https://api-v1.kenzap.cloud/auth/', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/x-www-form-urlencoded'
+      },
+      body: params
+    }).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      var checkout = urlParams.get('checkout') ? urlParams.get('checkout') : "";
+      if (!checkout) return;
+
+      if (response.success) {
+        if (response.token) {
+          config.token = response.token;
+          setCookie$1('kenzap_token', response.token, 1);
+          console.log('setting up token');
+        }
+
+        cart$1.state.order.kid = response.kid;
+        cart$1.state.order.name = response.name;
+        cart$1.state.order.from = table + ' - ' + response.name;
+        cart$1.state.order.status = 'new';
+        ajaxCheckout();
+      } else {
+        alert(__('Oops, something went wrong. Please try checking out again.'));
+      }
+    })["catch"](function (error) {
+      console.error('Error:', error);
+    });
+  };
+
+  var ajaxCheckout = function ajaxCheckout() {
+    cart$1.state.order.idd = localStorage.idd;
+    cart$1.state.order.sid = localStorage.sid;
+    cart$1.state.order.id = typeof cart$1.state.order.id === 'undefined' ? randomString(8) + Math.floor(Date.now()) : cart$1.state.order.id;
+    localStorage.lastOrder = JSON.stringify(cart$1.state.order);
+    var dateObj = new Date();
+    cart$1.state.order['created_ymd'] = dateObj.getUTCFullYear() + '' + mt(dateObj.getUTCMonth() + 1) + '' + mt(dateObj.getUTCDate());
+    cart$1.state.order['created_ym'] = dateObj.getUTCFullYear() + '' + mt(dateObj.getUTCMonth() + 1);
+    cart$1.state.order['created_y'] = dateObj.getUTCFullYear() + '';
+    fetch('https://api-v1.kenzap.cloud/ecommerce/', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ' + API_KEY,
+        'Kenzap-Token': config.token,
+        'Kenzap-Sid': localStorage.sid
+      },
+      body: JSON.stringify({
+        query: {
+          order: {
+            type: 'create-order',
+            key: 'ecommerce-order',
+            sid: localStorage.sid,
+            data: cart$1.state.order
+          }
+        }
+      })
+    }).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      if (response.success) {
+        addOrderHistory(response.order.id);
+        account.initModal('new');
+        cart$1.clearCart();
+        setBtnStep(4);
+      } else {
+        alert('Error: ' + JSON.stringify(response));
+      }
+    })["catch"](function (error) {
+      console.error('Error:', error);
+    });
+  };
+
+  var scrollEvents = function scrollEvents() {
+    var h_list = document.querySelectorAll(".kUNwHA .kenzap-row h2");
+    var diff_prev = 0;
+    var diff = 0;
+    scroll$1.state = document.documentElement.scrollTop;
+
+    var _iterator2 = _createForOfIteratorHelper(h_list),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var h = _step2.value;
+        diff = h.offsetTop - document.documentElement.scrollTop;
+        scroll$1.direction = "down";
+
+        if (diff < 0) {
+          if (diff_prev > diff) {
+            diff = diff_prev;
+            scroll$1.el_id = h.id;
+          }
+        }
+
+        diff_prev = diff;
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+
+    if (scroll$1.state_prev != scroll$1.state) scroll$1.state_prev = scroll$1.state;
+
+    if (scroll$1.el_id != "") {
+      var sc = document.querySelector(".kUNwHA .cata-sub-nav");
+      if (scroll$1.timer) clearTimeout(scroll$1.timer);
+      scroll$1.timer = setTimeout(function (el_id) {
+        sc.scrollTo({
+          left: scroll$1.offsets[el_id],
+          behavior: 'smooth'
+        });
+
+        var _iterator3 = _createForOfIteratorHelper(document.querySelectorAll(".kUNwHA .slide")),
+            _step3;
+
+        try {
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var l = _step3.value;
+            l.classList.remove("active");
+          }
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
+
+        document.querySelector(".kUNwHA [data-href='" + el_id + "']").classList.add("active");
+      }, 200, scroll$1.el_id);
+    }
+
+    scroll$1.el_id = "";
+  };
+
+})();
+//# sourceMappingURL=index.js.map
