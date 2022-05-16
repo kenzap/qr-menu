@@ -56,6 +56,7 @@ small {
 body {
   margin: 0;
   touch-action: pan-y, pan-x;
+  background-color: var(--bgColorA);
 }
 
 .kUNwHA :before,
@@ -898,7 +899,7 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
 }
 
 .kUNwHA .cta-btn {
-  display: flex;
+  display: none;
 }
 
 .kUNwHA .cta-btn .mbtn {
@@ -1109,6 +1110,10 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   margin-bottom: 32px;
 }
 
+.kUNwHA .account .orders .subtotal {
+  font-size: 1.2rem;
+}
+
 .kUNwHA .account .accordion {
   list-style: none;
   padding: 0;
@@ -1170,6 +1175,7 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
 .kUNwHA .account .cancel-order {
   float: right;
   font-size: 0.8rem;
+  margin-right: 8px;
 }
 
 .kUNwHA .account .statusLast {
