@@ -929,6 +929,8 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
 
 .kUNwHA .cta-btn .mbtnMore > svg {
   margin: auto;
+  color: var(--txtColorC);
+  color: var(--txtColorC);
 }
 
 .kUNwHA .vadd,
