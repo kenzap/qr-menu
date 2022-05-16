@@ -1163,12 +1163,13 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   font-size: 20px;
   margin: 1px 0 0;
   position: absolute;
-  right: 29px;
+  right: 16px;
   top: 17px;
 }
 
 .kUNwHA .account .cancel-order {
   float: right;
+  font-size: 0.8rem;
 }
 
 .kUNwHA .account .statusLast {
@@ -1189,6 +1190,13 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   -moz-transform-origin: 50% 4px;
   animation: ring 4s 0.7s ease-in-out infinite;
   transform-origin: 50% 4px;
+}
+
+.kUNwHA .cart-table .vars,
+.kUNwHA .account .vars {
+  font-size: 0.8rem;
+  padding-left: 8px;
+  border-left: 1px solid var(--baseColorA);
 }
 
 @-webkit-keyframes ring {
@@ -1433,8 +1441,8 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   top: 50%;
   left: 0;
   transition: 0.35s;
-  width: 100%;
-  height: 3px;
+  width: 90%;
+  height: 2px;
 }
 .kUNwHA .account .accordion li a.toggle .plusminus:before {
   transform: translatey(-50%);
@@ -1529,7 +1537,7 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   }
 
   .kUNwHA .mdialog .kp-add.comp .add {
-    padding: 8px 32px;
+    padding: 8px 16px;
   }
 
   .kUNwHA .kp-add.comp .quantity.buttons_added {
