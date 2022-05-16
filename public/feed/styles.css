@@ -1158,17 +1158,6 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   position: relative;
 }
 
-.kUNwHA .account .accordion li a.active,
-.kUNwHA .account .accordion li a.toggle:hover {
-  color: var(--txtColorC);
-  background: var(--txtColorA);
-}
-
-.kUNwHA .account .accordion li a.toggle:hover .plusminus:before,
-.kUNwHA .account .accordion li a.toggle:hover .plusminus:after {
-  background-color: var(--txtColorC);
-}
-
 .kUNwHA .account .accordion li a.toggle .plusminus,
 .kUNwHA .account .accordion li a.toggle svg {
   font-size: 20px;
@@ -1435,7 +1424,6 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
 }
 .kUNwHA .account .accordion li a.toggle .plusminus.active:after {
   transform: translatey(-50%) rotate(0);
-  background-color: var(--txtColorC);
 }
 .kUNwHA .account .accordion li a.toggle .plusminus:before, .kUNwHA .account .accordion li a.toggle .plusminus:after {
   content: "";
