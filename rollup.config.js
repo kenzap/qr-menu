@@ -96,12 +96,22 @@ if(prodEnv){
 		if (fs.existsSync( key )){
 			
 			var temp = fs.readFileSync( key, {encoding:'utf8', flag:'r'});
-			var q1 = new RegExp(/__\('(.*?)'/g);
-			var q2 = new RegExp(/__\("(.*?)"/g);
-			var result;
+			var regex = [
+				new RegExp(/__\('(.*?)'/g),
+				new RegExp(/__\("(.*?)"/g),
+				new RegExp(/__html\('(.*?)'/g),
+				new RegExp(/__html\("(.*?)"/g),
+				new RegExp(/__attr\('(.*?)'/g),
+				new RegExp(/__attr\("(.*?)"/g),
+				new RegExp(/__src\('(.*?)'/g),
+				new RegExp(/__src\("(.*?)"/g)
+			]
 
-			while (result = q1.exec(temp)) { defJS['texts'][result[1]] = result[1]; }
-			while (result = q2.exec(temp)) { defJS['texts'][result[1]] = result[1]; }
+			var result; regex.forEach(reg => { while (result = reg.exec(temp)){ 
+				
+				defJS['texts'][result[1]] = result[1]; 
+			
+			} });
 
 			// write default locale
 			fs.writeFileSync( targetFolder + 'locales/default.json', JSON.stringify(defJS) ); 

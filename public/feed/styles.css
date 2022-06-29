@@ -166,7 +166,7 @@ body {
   right: 8px;
   bottom: 8px;
   left: 8px;
-  background: #fff;
+  background-color: var(--bgColorA);
   border-radius: 4px;
   transition: all 0.1s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -228,8 +228,8 @@ body {
   letter-spacing: -1px;
 }
 
-.lang-post {
-  height: 100%;
+ul.lang-post {
+  height: auto;
   overflow-x: hidden;
   overflow-y: auto;
   margin-bottom: 20px;
@@ -237,9 +237,9 @@ body {
 }
 
 @media screen and (max-width: 767px) {
-  .lang-post {
+  ul.lang-post {
     padding: 0 8px;
-    height: 100%;
+    height: auto;
   }
 }
 .lang-post li {
@@ -271,22 +271,11 @@ body {
 
 @media screen and (max-width: 450px) {
   ul.lang-post {
-    padding: 8px 8px 40px 8px;
+    padding: 8px;
     height: auto;
-    position: absolute;
-    bottom: 0;
-    margin: auto;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    text-align: center;
   }
   .lang-post li {
     width: 90%;
-    float: left;
-    margin-left: 16px;
   }
 }
 .kUNwHA .cat-controls {
