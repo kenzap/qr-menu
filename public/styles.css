@@ -44,10 +44,27 @@ footer {
   -moz-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
+  width: 50px;
+  height: 80px;
+  padding: 0px;
+  border-radius: 0px !important;
+  border-width: 0px !important;
 }
 .palette input:hover {
   position: relative;
   top: -5px;
+}
+
+.form-control-color::-moz-color-swatch {
+  height: 80px;
+  border-radius: 0;
+  border: unset;
+}
+
+.form-control-color::-webkit-color-swatch {
+  height: 80px;
+  border-radius: 0;
+  border: unset;
 }
 
 /* Media Queries */
