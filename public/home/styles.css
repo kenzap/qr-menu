@@ -7,6 +7,15 @@ footer {
   margin-bottom: 32px;
 }
 
+.po {
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .toast {
+    width: auto;
+  }
+}
 .palette {
   list-style-type: none;
   display: block;
