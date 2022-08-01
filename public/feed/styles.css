@@ -808,22 +808,27 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   border-bottom: 1px solid var(--grayColorA);
 }
 
+.kUNwHA .cdialog-cnt .ptable label input:checked + .checkbox,
 .kUNwHA .mdialog .kp-check label input:checked + .checkbox {
   border-color: var(--baseColorA);
 }
 
+.kUNwHA .cdialog-cnt .ptable label input:checked + .checkbox svg path,
 .kUNwHA .mdialog .kp-check label input:checked + .checkbox svg path {
   fill: var(--baseColorA);
 }
 
+.kUNwHA .cdialog-cnt .ptable label input:checked + .checkbox svg polyline,
 .kUNwHA .mdialog .kp-check label input:checked + .checkbox svg polyline {
   stroke-dashoffset: 0;
 }
 
+.kUNwHA .cdialog-cnt .ptable label :hover .checkbox svg path,
 .kUNwHA .mdialog .kp-check label :hover .checkbox svg path {
   stroke-dashoffset: 0;
 }
 
+.kUNwHA .cdialog-cnt .ptable label .checkbox,
 .kUNwHA .mdialog .kp-check label .checkbox {
   position: relative;
   top: 2px;
@@ -837,12 +842,14 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   margin-right: 12px;
 }
 
+.kUNwHA .cdialog-cnt .ptable label .checkbox svg,
 .kUNwHA .mdialog .kp-check label .checkbox svg {
   position: absolute;
   top: -2px;
   left: -2px;
 }
 
+.kUNwHA .cdialog-cnt .ptable label .checkbox svg path,
 .kUNwHA .mdialog .kp-check label .checkbox svg path {
   fill: none;
   stroke: var(--baseColorA);
@@ -854,6 +861,7 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   transition: all 0.6s ease;
 }
 
+.kUNwHA .cdialog-cnt .ptable label .checkbox svg polyline,
 .kUNwHA .mdialog .kp-check label .checkbox svg polyline {
   fill: none;
   stroke: var(--txtColorC);
