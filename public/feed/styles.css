@@ -873,16 +873,16 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   transition: all 0.3s ease;
 }
 
-.kUNwHA .cdialog-cnt .ptable label.sel-pickup {
+.kUNwHA .cdialog-cnt .ptable label.takeaway {
   display: block;
   margin-bottom: 16px;
 }
 
-.kUNwHA .cdialog-cnt .ptable label.sel-pickup label input {
+.kUNwHA .cdialog-cnt .ptable label.takeaway input {
   display: none;
 }
 
-.kUNwHA .cdialog-cnt .ptable label.sel-pickup .checkbox {
+.kUNwHA .cdialog-cnt .ptable label.takeaway .checkbox {
   margin-left: 0;
 }
 
