@@ -49,6 +49,10 @@ small {
   font-size: 80%;
 }
 
+.d-none {
+  display: none;
+}
+
 .test {
   font-size: 90%;
 }
