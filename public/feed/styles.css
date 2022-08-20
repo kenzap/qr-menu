@@ -289,6 +289,7 @@ ul.lang-post {
   margin-bottom: 16px;
   position: fixed;
   top: 0;
+  z-index: 1;
   /* background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) -50%, var(--txtColorC) 100%);
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) -50%, var(--txtColorC) 100%);
   background: linear-gradient(to top, rgba(255, 255, 255, 0) -50%, var(--txtColorC) 80%);  */
