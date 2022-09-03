@@ -839,8 +839,8 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
   top: 2px;
   float: left;
   margin-right: 8px;
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
   border: 2px solid var(--grayColorB);
   border-radius: 3px;
   margin-left: 8px;
@@ -881,6 +881,7 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
 .kUNwHA .cdialog-cnt .ptable label.takeaway {
   display: block;
   margin-bottom: 16px;
+  font-size: 24px;
 }
 
 .kUNwHA .cdialog-cnt .ptable label.takeaway input {
