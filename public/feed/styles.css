@@ -50,7 +50,7 @@ small {
 }
 
 .d-none {
-  display: none;
+  display: none !important;
 }
 
 .test {
@@ -1720,11 +1720,13 @@ body:not(.kp-modal) .kUNwHA .cat-controls .slideset .slide.active a {
     margin: 0px 4px 8px 0;
   }
   .kUNwHA .info-box .kp-content .ptagc,
-.kUNwHA .info-box .kp-content .ptag {
+  .kUNwHA .info-box .kp-content .ptag {
     font-size: 0.8rem;
   }
   .kUNwHA.kenzap-sm .info-box .kp-img,
-.kUNwHA .info-box .kp-img {
+  .kUNwHA .info-box .kp-img {
     height: auto;
   }
 }
+
+/*# sourceMappingURL=styles.css.map */

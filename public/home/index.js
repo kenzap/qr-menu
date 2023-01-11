@@ -1,1 +1,3690 @@
-!function(){"use strict";function e(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,a=new Array(t);n<t;n++)a[n]=e[n];return a}function t(t,n){var a="undefined"!=typeof Symbol&&t[Symbol.iterator]||t["@@iterator"];if(!a){if(Array.isArray(t)||(a=function(t,n){if(t){if("string"==typeof t)return e(t,n);var a=Object.prototype.toString.call(t).slice(8,-1);return"Object"===a&&t.constructor&&(a=t.constructor.name),"Map"===a||"Set"===a?Array.from(t):"Arguments"===a||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a)?e(t,n):void 0}}(t))||n&&t&&"number"==typeof t.length){a&&(t=a);var o=0,r=function(){};return{s:r,n:function(){return o>=t.length?{done:!0}:{done:!1,value:t[o++]}},e:function(e){throw e},f:r}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var c,l=!0,i=!1;return{s:function(){a=a.call(t)},n:function(){var e=a.next();return l=e.done,e},e:function(e){i=!0,c=e},f:function(){try{l||null==a.return||a.return()}finally{if(i)throw c}}}}const n=(e,t,...n)=>{let a=(e,t)=>(t.forEach(((t,n)=>{e=e.replace("%"+(n+1)+"$",t)})),e);return void 0===window.i18n||void 0===window.i18n.state.locale.values[e]?a(e,n):a(t(window.i18n.state.locale.values[e]),n)},a=(e,...t)=>{if(0===(e=String(e)).length)return"";return n(e,(e=>e.replace(/[&<>'"]/g,(e=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&apos;",'"':"&quot;"}[e])))),...t)},o=()=>{let e=document.querySelector(".loader");e&&(e.style.display="block")},r=()=>{let e=document.querySelector(".loader");e&&(e.style.display="none")},c=e=>{let t=new URLSearchParams(window.location.search),n=t.get("sid")?t.get("sid"):"",a=-1==e.indexOf("?")?"?sid="+n:"&sid="+n;return e+a},l=()=>{let e=new URLSearchParams(window.location.search);return e.get("sid")?e.get("sid"):""},i=e=>{let t=e+"=",n=decodeURIComponent(document.cookie).split(";");for(let e=0;e<n.length;e++){let a=n[e];for(;" "==a.charAt(0);)a=a.substring(1);if(0==a.indexOf(t))return a.substring(t.length,a.length)}return""},s={Accept:"application/json","Content-Type":"application/json",Authorization:"Bearer "+i("kenzap_api_key"),"Kenzap-Locale":i("locale")?i("locale"):"en","Kenzap-Header":(()=>{let e=localStorage.hasOwnProperty("header")&&localStorage.hasOwnProperty("header-version")?localStorage.getItem("header-version"):0,t=window.location.hostname+"/"+l()+"/"+i("locale");return t!=i("check")&&(e=0,console.log("refresh")),((e,t,n)=>{let a="";if(n){let e=new Date;e.setTime(e.getTime()+24*n*60*60*1e3),a=";expires="+e.toUTCString()}document.cookie=e+"="+(escape(t)||"")+a+";path=/;domain=.kenzap.cloud"})("check",t,5),e})(),"Kenzap-Token":i("kenzap_token"),"Kenzap-Sid":l()},d=e=>{if(console.log(e),isNaN(e.code)){let t=e;try{t=JSON.stringify(t)}catch(e){}let n=new URLSearchParams;return n.append("cmd","report"),n.append("sid",l()),n.append("token",i("kenzap_token")),n.append("data",t),fetch("https://api-v1.kenzap.cloud/error/",{method:"post",headers:{Accept:"application/json","Content-type":"application/x-www-form-urlencoded"},body:n}),void alert("Can not connect to Kenzap Cloud")}if(401===e.code){if(-1!=window.location.href.indexOf("localhost"))return void alert(e.reason);location.href="https://auth.kenzap.com/?app=65432108792785&redirect="+window.location.href}else alert(e.reason)},u=(e,t)=>{if(document.querySelector(e))for(let n of document.querySelectorAll(e))n.removeEventListener("click",t,!0),n.addEventListener("click",t,!0)},m=(e,t)=>{if(document.querySelector(e))for(let n of document.querySelectorAll(e))n.removeEventListener("change",t,!0),n.addEventListener("change",t,!0)},h=e=>{let t=new MouseEvent("click",{bubbles:!0,cancelable:!0,view:window});e.dispatchEvent(t)},f=e=>{if(!document.querySelector(".toast")){let e='\n        <div class="position-fixed bottom-0 p-2 m-4 end-0 align-items-center">\n            <div class="toast hide align-items-center text-white bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">\n                <div class="d-flex">\n                    <div class="toast-body"></div>\n                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>\n                </div>\n            </div>\n        </div>';document.querySelector("body > div")&&document.querySelector("body > div").insertAdjacentHTML("afterend",e)}let t=new bootstrap.Toast(document.querySelector(".toast"));document.querySelector(".toast .toast-body").innerHTML=e,t.show()};var p=[{code:"ab",name:"Abkhazian"},{code:"aa",name:"Afar"},{code:"af",name:"Afrikaans"},{code:"ak",name:"Akan"},{code:"sq",name:"Albanian"},{code:"am",name:"Amharic"},{code:"ar",name:"Arabic"},{code:"an",name:"Aragonese"},{code:"hy",name:"Armenian"},{code:"as",name:"Assamese"},{code:"av",name:"Avaric"},{code:"ae",name:"Avestan"},{code:"ay",name:"Aymara"},{code:"az",name:"Azerbaijani"},{code:"bm",name:"Bambara"},{code:"ba",name:"Bashkir"},{code:"eu",name:"Basque"},{code:"be",name:"Belarusian"},{code:"bn",name:"Bengali"},{code:"bh",name:"Bihari languages"},{code:"bi",name:"Bislama"},{code:"bs",name:"Bosnian"},{code:"br",name:"Breton"},{code:"bg",name:"Bulgarian"},{code:"my",name:"Burmese"},{code:"ca",name:"Catalan, Valencian"},{code:"km",name:"Central Khmer"},{code:"ch",name:"Chamorro"},{code:"ce",name:"Chechen"},{code:"ny",name:"Chichewa, Chewa, Nyanja"},{code:"zh",name:"Chinese",native:"简体中文"},{code:"cu",name:"Church Slavonic, Old Bulgarian, Old Church Slavonic"},{code:"cv",name:"Chuvash"},{code:"kw",name:"Cornish"},{code:"co",name:"Corsican"},{code:"cr",name:"Cree"},{code:"hr",name:"Croatian"},{code:"cs",name:"Czech"},{code:"da",name:"Danish"},{code:"dv",name:"Divehi, Dhivehi, Maldivian"},{code:"nl",name:"Dutch, Flemish"},{code:"dz",name:"Dzongkha"},{code:"en",name:"English",native:"English"},{code:"eo",name:"Esperanto"},{code:"et",name:"Estonian"},{code:"ee",name:"Ewe"},{code:"fo",name:"Faroese"},{code:"fj",name:"Fijian"},{code:"fi",name:"Finnish"},{code:"fr",name:"French"},{code:"ff",name:"Fulah"},{code:"gd",name:"Gaelic, Scottish Gaelic"},{code:"gl",name:"Galician"},{code:"lg",name:"Ganda"},{code:"ka",name:"Georgian"},{code:"de",name:"German"},{code:"ki",name:"Gikuyu, Kikuyu"},{code:"el",name:"Greek (Modern)"},{code:"kl",name:"Greenlandic, Kalaallisut"},{code:"gn",name:"Guarani"},{code:"gu",name:"Gujarati"},{code:"ht",name:"Haitian, Haitian Creole"},{code:"ha",name:"Hausa"},{code:"he",name:"Hebrew"},{code:"hz",name:"Herero"},{code:"hi",name:"Hindi"},{code:"ho",name:"Hiri Motu"},{code:"hu",name:"Hungarian"},{code:"is",name:"Icelandic"},{code:"io",name:"Ido"},{code:"ig",name:"Igbo"},{code:"id",name:"Indonesian"},{code:"ia",name:"Interlingua (International Auxiliary Language Association)"},{code:"ie",name:"Interlingue"},{code:"iu",name:"Inuktitut"},{code:"ik",name:"Inupiaq"},{code:"ga",name:"Irish"},{code:"it",name:"Italian"},{code:"ja",name:"Japanese"},{code:"jv",name:"Javanese"},{code:"kn",name:"Kannada"},{code:"kr",name:"Kanuri"},{code:"ks",name:"Kashmiri"},{code:"kk",name:"Kazakh"},{code:"rw",name:"Kinyarwanda"},{code:"kv",name:"Komi"},{code:"kg",name:"Kongo"},{code:"ko",name:"Korean"},{code:"kj",name:"Kwanyama, Kuanyama"},{code:"ku",name:"Kurdish"},{code:"ky",name:"Kyrgyz"},{code:"lo",name:"Lao"},{code:"la",name:"Latin"},{code:"lv",name:"Latvian"},{code:"lb",name:"Letzeburgesch, Luxembourgish"},{code:"li",name:"Limburgish, Limburgan, Limburger"},{code:"ln",name:"Lingala"},{code:"lt",name:"Lithuanian"},{code:"lu",name:"Luba-Katanga"},{code:"mk",name:"Macedonian"},{code:"mg",name:"Malagasy"},{code:"ms",name:"Malay"},{code:"ml",name:"Malayalam"},{code:"mt",name:"Maltese"},{code:"gv",name:"Manx"},{code:"mi",name:"Maori"},{code:"mr",name:"Marathi"},{code:"mh",name:"Marshallese"},{code:"ro",name:"Moldovan, Moldavian, Romanian"},{code:"mn",name:"Mongolian"},{code:"na",name:"Nauru"},{code:"nv",name:"Navajo, Navaho"},{code:"nd",name:"Northern Ndebele"},{code:"ng",name:"Ndonga"},{code:"ne",name:"Nepali"},{code:"se",name:"Northern Sami"},{code:"no",name:"Norwegian"},{code:"nb",name:"Norwegian Bokmål"},{code:"nn",name:"Norwegian Nynorsk"},{code:"ii",name:"Nuosu, Sichuan Yi"},{code:"oc",name:"Occitan (post 1500)"},{code:"oj",name:"Ojibwa"},{code:"or",name:"Oriya"},{code:"om",name:"Oromo"},{code:"os",name:"Ossetian, Ossetic"},{code:"pi",name:"Pali"},{code:"pa",name:"Panjabi, Punjabi"},{code:"ps",name:"Pashto, Pushto"},{code:"fa",name:"Persian"},{code:"pl",name:"Polish"},{code:"pt",name:"Portuguese"},{code:"qu",name:"Quechua"},{code:"rm",name:"Romansh"},{code:"rn",name:"Rundi"},{code:"ru",name:"Russian"},{code:"sm",name:"Samoan"},{code:"sg",name:"Sango"},{code:"sa",name:"Sanskrit"},{code:"sc",name:"Sardinian"},{code:"sr",name:"Serbian"},{code:"sn",name:"Shona"},{code:"sd",name:"Sindhi"},{code:"si",name:"Sinhala, Sinhalese"},{code:"sk",name:"Slovak"},{code:"sl",name:"Slovenian"},{code:"so",name:"Somali"},{code:"st",name:"Sotho, Southern"},{code:"nr",name:"South Ndebele"},{code:"es",name:"Spanish, Castilian"},{code:"su",name:"Sundanese"},{code:"sw",name:"Swahili"},{code:"ss",name:"Swati"},{code:"sv",name:"Swedish"},{code:"tl",name:"Tagalog"},{code:"ty",name:"Tahitian"},{code:"tg",name:"Tajik"},{code:"ta",name:"Tamil"},{code:"tt",name:"Tatar"},{code:"te",name:"Telugu"},{code:"th",name:"Thai"},{code:"bo",name:"Tibetan"},{code:"ti",name:"Tigrinya"},{code:"to",name:"Tonga (Tonga Islands)"},{code:"ts",name:"Tsonga"},{code:"tn",name:"Tswana"},{code:"tr",name:"Turkish"},{code:"tk",name:"Turkmen"},{code:"tw",name:"Twi"},{code:"ug",name:"Uighur, Uyghur"},{code:"uk",name:"Ukrainian"},{code:"ur",name:"Urdu"},{code:"uz",name:"Uzbek"},{code:"ve",name:"Venda"},{code:"vi",name:"Vietnamese"},{code:"vo",name:"Volap_k"},{code:"wa",name:"Walloon"},{code:"cy",name:"Welsh"},{code:"fy",name:"Western Frisian"},{code:"wo",name:"Wolof"},{code:"xh",name:"Xhosa"},{code:"yi",name:"Yiddish"},{code:"yo",name:"Yoruba"},{code:"za",name:"Zhuang, Chuang"},{code:"zu",name:"Zulu"}],g=function(e){for(var t=e+"=",n=decodeURIComponent(document.cookie).split(";"),a=0;a<n.length;a++){for(var o=n[a];" "==o.charAt(0);)o=o.substring(1);if(0==o.indexOf(t))return o.substring(t.length,o.length)}return""};class b{constructor(e,t){this._typeNumber=e,this._errorCorrectionLevel=C[t],this._modules=null,this._moduleCount=0,this._dataCache=null,this._dataList=[],this.makeImpl=(e,t)=>{this._moduleCount=4*this._typeNumber+17,this._modules=function(e){let t=new Array(e);for(let n=0;n<e;n+=1){t[n]=new Array(e);for(let a=0;a<e;a+=1)t[n][a]=null}return t}(this._moduleCount),this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this._moduleCount-7,0),this.setupPositionProbePattern(0,this._moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(e,t),this._typeNumber>=7&&this.setupTypeNumber(e),null==this._dataCache&&(this._dataCache=this.createData(this._typeNumber,this._errorCorrectionLevel,this._dataList)),this.mapData(this._dataCache,t)},this.setupPositionProbePattern=(e,t)=>{for(let n=-1;n<=7;n+=1)if(!(e+n<=-1||this._moduleCount<=e+n))for(let a=-1;a<=7;a+=1)t+a<=-1||this._moduleCount<=t+a||(this._modules[e+n][t+a]=0<=n&&n<=6&&(0==a||6==a)||0<=a&&a<=6&&(0==n||6==n)||2<=n&&n<=4&&2<=a&&a<=4)},this.getBestMaskPattern=()=>{let e=0,t=0;for(let n=0;n<8;n+=1){this.makeImpl(!0,n);let a=P.getLostPoint(this);(0==n||e>a)&&(e=a,t=n)}return t},this.setupTimingPattern=()=>{for(let e=8;e<this._moduleCount-8;e+=1)null==this._modules[e][6]&&(this._modules[e][6]=e%2==0);for(let e=8;e<this._moduleCount-8;e+=1)null==this._modules[6][e]&&(this._modules[6][e]=e%2==0)},this.setupPositionAdjustPattern=()=>{let e=P.getPatternPosition(this._typeNumber);for(let t=0;t<e.length;t+=1)for(let n=0;n<e.length;n+=1){let a=e[t],o=e[n];if(null==this._modules[a][o])for(let e=-2;e<=2;e+=1)for(let t=-2;t<=2;t+=1)this._modules[a+e][o+t]=-2==e||2==e||-2==t||2==t||0==e&&0==t}},this.setupTypeNumber=e=>{let t=P.getBCHTypeNumber(this._typeNumber);for(let n=0;n<18;n+=1){const a=!e&&1==(t>>n&1);this._modules[Math.floor(n/3)][n%3+this._moduleCount-8-3]=a}for(let n=0;n<18;n+=1){const a=!e&&1==(t>>n&1);this._modules[n%3+this._moduleCount-8-3][Math.floor(n/3)]=a}},this.setupTypeInfo=(e,t)=>{let n=this._errorCorrectionLevel<<3|t,a=P.getBCHTypeInfo(n);for(let t=0;t<15;t+=1){const n=!e&&1==(a>>t&1);t<6?this._modules[t][8]=n:t<8?this._modules[t+1][8]=n:this._modules[this._moduleCount-15+t][8]=n}for(let t=0;t<15;t+=1){const n=!e&&1==(a>>t&1);t<8?this._modules[8][this._moduleCount-t-1]=n:t<9?this._modules[8][15-t-1+1]=n:this._modules[8][15-t-1]=n}this._modules[this._moduleCount-8][8]=!e},this.mapData=(e,t)=>{let n=-1,a=this._moduleCount-1,o=7,r=0,c=P.getMaskFunction(t);for(let t=this._moduleCount-1;t>0;t-=2)for(6==t&&(t-=1);;){for(let n=0;n<2;n+=1)if(null==this._modules[a][t-n]){let l=!1;r<e.length&&(l=1==(e[r]>>>o&1)),c(a,t-n)&&(l=!l),this._modules[a][t-n]=l,o-=1,-1==o&&(r+=1,o=7)}if(a+=n,a<0||this._moduleCount<=a){a-=n,n=-n;break}}},this.createBytes=(e,t)=>{let n=0,a=0,o=0,r=new Array(t.length),c=new Array(t.length);for(let l=0;l<t.length;l+=1){let i=t[l].dataCount,s=t[l].totalCount-i;a=Math.max(a,i),o=Math.max(o,s),r[l]=new Array(i);for(let t=0;t<r[l].length;t+=1)r[l][t]=255&e.getBuffer()[t+n];n+=i;let d=P.getErrorCorrectPolynomial(s),u=E(r[l],d.getLength()-1).mod(d);c[l]=new Array(d.getLength()-1);for(let e=0;e<c[l].length;e+=1){let t=e+u.getLength()-c[l].length;c[l][e]=t>=0?u.getAt(t):0}}let l=0;for(let e=0;e<t.length;e+=1)l+=t[e].totalCount;let i=new Array(l),s=0;for(let e=0;e<a;e+=1)for(let n=0;n<t.length;n+=1)e<r[n].length&&(i[s]=r[n][e],s+=1);for(let e=0;e<o;e+=1)for(let n=0;n<t.length;n+=1)e<c[n].length&&(i[s]=c[n][e],s+=1);return i},this.createData=(e,t,n)=>{let a=N.getRSBlocks(e,t),o=R();for(let t=0;t<n.length;t+=1){let a=n[t];o.put(a.getMode(),4),o.put(a.getLength(),P.getLengthInBits(a.getMode(),e)),a.write(o)}let r=0;for(let e=0;e<a.length;e+=1)r+=a[e].dataCount;if(o.getLengthInBits()>8*r)throw"code length overflow. ("+o.getLengthInBits()+">"+8*r+")";for(o.getLengthInBits()+4<=8*r&&o.put(0,4);o.getLengthInBits()%8!=0;)o.putBit(!1);for(;!(o.getLengthInBits()>=8*r||(o.put(236,8),o.getLengthInBits()>=8*r));)o.put(17,8);return this.createBytes(o,a)}}addData(e,t){let n=null;switch(t=t||"Byte"){case"Numeric":n=I(e);break;case"Alphanumeric":n=H(e);break;case"Byte":n=j(e);break;case"Kanji":n=O(e);break;default:throw"mode:"+t}this._dataList.push(n),this._dataCache=null}isDark(e,t){if(e<0||this._moduleCount<=e||t<0||this._moduleCount<=t)throw e+","+t;return this._modules[e][t]}getModuleCount(){return this._moduleCount}make(){if(this._typeNumber<1){let e=1;for(;e<40;e++){let t=N.getRSBlocks(e,this._errorCorrectionLevel),n=R();for(let t=0;t<this._dataList.length;t++){let a=this._dataList[t];n.put(a.getMode(),4),n.put(a.getLength(),P.getLengthInBits(a.getMode(),e)),a.write(n)}let a=0;for(let e=0;e<t.length;e++)a+=t[e].dataCount;if(n.getLengthInBits()<=8*a)break}this._typeNumber=e}this.makeImpl(!1,this.getBestMaskPattern())}createSvgTag({drawCell:e,cellColor:t,cellSize:n,margin:a,bg:o,obstruction:r}){e=e||((e,a,o,r)=>'<rect width="'+n+'" height="'+n+'" x="'+o+'" y="'+r+'" fill="'+t(e,a)+'" shape-rendering="crispEdges"  />'),t=t||(()=>"black"),n=n||2,a=void 0===a?4*n:a;let c=this.getModuleCount()*n+2*a,l="";l+='<svg version="1.1"',l+=' xmlns="http://www.w3.org/2000/svg"',l+=' xmlns:xlink="http://www.w3.org/1999/xlink"',l+=' viewBox="0 0 '+c+" "+c+'" ',l+=' preserveAspectRatio="xMinYMin meet">',o||(o={enabled:!0,fill:"white"}),o.enabled&&(l+='<rect width="100%" height="100%" fill="'+o.fill+'" x="0" y="0"/>');const i=this.getModuleCount(),s=i*n+2*a;let d,u;if(r){const{width:e,height:t}=r,n=[Math.ceil(e*i),Math.ceil(t*i)];d=n.map((e=>Math.floor(i/2-e/2))),u=n.map((e=>Math.ceil(i/2+e/2)))}for(let t=0;t<i;t+=1){const o=t*n+a;for(let c=0;c<i;c+=1){const i=c*n+a;if(r&&c>=d[0]&&c<u[0]&&t>=d[1]&&t<u[1]){if(c==d[0]&&t==d[1]){const e='x="'+(s*(1-r.width)*.5).toFixed(3)+'" y="'+(s*(1-r.height)*.5).toFixed(3)+'" width="'+(s*r.width).toFixed(3)+'" height="'+(s*r.height).toFixed(3)+'" preserveAspectRatio="xMidYMid meet" ';r.path?l+="<image "+e+'xlink:href="'+r.path+'" />':l+="<svg "+e+r.svgData.substring(4)}}else this.isDark(t,c)&&(l+=e(c,t,i,o))}}return l+="</svg>",l}createImgTag(e,t){e=e||2,t=void 0===t?4*e:t;let n=this.getModuleCount()*e+2*t,a=t,o=n-t,r=this;return U(n,n,(function(t,n){if(a<=t&&t<o&&a<=n&&n<o){let o=Math.floor((t-a)/e),c=Math.floor((n-a)/e);return r.isDark(c,o)?0:1}return 1}))}}const y={default:function(e){let t=[];for(let n=0;n<e.length;n+=1){let a=e.charCodeAt(n);t.push(255&a)}return t}},v=y.default,k=1,w=2,_=4,x=8,C={L:1,M:0,Q:3,H:2},S=0,L=1,A=2,q=3,M=4,T=5,B=6,z=7,P=function(){const e=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],t=1335,n=7973;let a={},o=function(e){let t=0;for(;0!=e;)t+=1,e>>>=1;return t};return a.getBCHTypeInfo=function(e){let n=e<<10;for(;o(n)-o(t)>=0;)n^=t<<o(n)-o(t);return 21522^(e<<10|n)},a.getBCHTypeNumber=function(e){let t=e<<12;for(;o(t)-o(n)>=0;)t^=n<<o(t)-o(n);return e<<12|t},a.getPatternPosition=function(t){return e[t-1]},a.getMaskFunction=function(e){switch(e){case S:return function(e,t){return(e+t)%2==0};case L:return function(e,t){return e%2==0};case A:return function(e,t){return t%3==0};case q:return function(e,t){return(e+t)%3==0};case M:return function(e,t){return(Math.floor(e/2)+Math.floor(t/3))%2==0};case T:return function(e,t){return e*t%2+e*t%3==0};case B:return function(e,t){return(e*t%2+e*t%3)%2==0};case z:return function(e,t){return(e*t%3+(e+t)%2)%2==0};default:throw"bad maskPattern:"+e}},a.getErrorCorrectPolynomial=function(e){let t=E([1],0);for(let n=0;n<e;n+=1)t=t.multiply(E([1,D.gexp(n)],0));return t},a.getLengthInBits=function(e,t){if(1<=t&&t<10)switch(e){case k:return 10;case w:return 9;case _:case x:return 8;default:throw"mode:"+e}else if(t<27)switch(e){case k:return 12;case w:return 11;case _:return 16;case x:return 10;default:throw"mode:"+e}else{if(!(t<41))throw"type:"+t;switch(e){case k:return 14;case w:return 13;case _:return 16;case x:return 12;default:throw"mode:"+e}}},a.getLostPoint=function(e){let t=e.getModuleCount(),n=0;for(let a=0;a<t;a+=1)for(let o=0;o<t;o+=1){let r=0,c=e.isDark(a,o);for(let n=-1;n<=1;n+=1)if(!(a+n<0||t<=a+n))for(let l=-1;l<=1;l+=1)o+l<0||t<=o+l||0==n&&0==l||c==e.isDark(a+n,o+l)&&(r+=1);r>5&&(n+=3+r-5)}for(let a=0;a<t-1;a+=1)for(let o=0;o<t-1;o+=1){let t=0;e.isDark(a,o)&&(t+=1),e.isDark(a+1,o)&&(t+=1),e.isDark(a,o+1)&&(t+=1),e.isDark(a+1,o+1)&&(t+=1),0!=t&&4!=t||(n+=3)}for(let a=0;a<t;a+=1)for(let o=0;o<t-6;o+=1)e.isDark(a,o)&&!e.isDark(a,o+1)&&e.isDark(a,o+2)&&e.isDark(a,o+3)&&e.isDark(a,o+4)&&!e.isDark(a,o+5)&&e.isDark(a,o+6)&&(n+=40);for(let a=0;a<t;a+=1)for(let o=0;o<t-6;o+=1)e.isDark(o,a)&&!e.isDark(o+1,a)&&e.isDark(o+2,a)&&e.isDark(o+3,a)&&e.isDark(o+4,a)&&!e.isDark(o+5,a)&&e.isDark(o+6,a)&&(n+=40);let a=0;for(let n=0;n<t;n+=1)for(let o=0;o<t;o+=1)e.isDark(o,n)&&(a+=1);return n+=10*(Math.abs(100*a/t/t-50)/5),n},a}();let D=function(){let e=new Array(256),t=new Array(256);for(let t=0;t<8;t+=1)e[t]=1<<t;for(let t=8;t<256;t+=1)e[t]=e[t-4]^e[t-5]^e[t-6]^e[t-8];for(let n=0;n<255;n+=1)t[e[n]]=n;let n={glog:function(e){if(e<1)throw"glog("+e+")";return t[e]},gexp:function(t){for(;t<0;)t+=255;for(;t>=256;)t-=255;return e[t]}};return n}();function E(e,t){if(void 0===e.length)throw e.length+"/"+t;let n=function(){let n=0;for(;n<e.length&&0==e[n];)n+=1;let a=new Array(e.length-n+t);for(let t=0;t<e.length-n;t+=1)a[t]=e[t+n];return a}(),a={getAt:function(e){return n[e]},getLength:function(){return n.length},multiply:function(e){let t=new Array(a.getLength()+e.getLength()-1);for(let n=0;n<a.getLength();n+=1)for(let o=0;o<e.getLength();o+=1)t[n+o]^=D.gexp(D.glog(a.getAt(n))+D.glog(e.getAt(o)));return E(t,0)},mod:function(e){if(a.getLength()-e.getLength()<0)return a;let t=D.glog(a.getAt(0))-D.glog(e.getAt(0)),n=new Array(a.getLength());for(let e=0;e<a.getLength();e+=1)n[e]=a.getAt(e);for(let a=0;a<e.getLength();a+=1)n[a]^=D.gexp(D.glog(e.getAt(a))+t);return E(n,0).mod(e)}};return a}const N=function(){let e=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12,7,37,13],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],t=function(e,t){let n={};return n.totalCount=e,n.dataCount=t,n},n={};return n.getRSBlocks=function(n,a){let o=function(t,n){switch(n){case C.L:return e[4*(t-1)+0];case C.M:return e[4*(t-1)+1];case C.Q:return e[4*(t-1)+2];case C.H:return e[4*(t-1)+3];default:return}}(n,a);if(void 0===o)throw"bad rs block @ typeNumber:"+n+"/errorCorrectionLevel:"+a;let r=o.length/3,c=[];for(let e=0;e<r;e+=1){let n=o[3*e+0],a=o[3*e+1],r=o[3*e+2];for(let e=0;e<n;e+=1)c.push(t(a,r))}return c},n}();let R=function(){let e=[],t=0,n={getBuffer:function(){return e},getAt:function(t){let n=Math.floor(t/8);return 1==(e[n]>>>7-t%8&1)},put:function(e,t){for(let a=0;a<t;a+=1)n.putBit(1==(e>>>t-a-1&1))},getLengthInBits:function(){return t},putBit:function(n){let a=Math.floor(t/8);e.length<=a&&e.push(0),n&&(e[a]|=128>>>t%8),t+=1}};return n},I=function(e){let t=k,n=e,a={getMode:function(){return t},getLength:function(e){return n.length},write:function(e){let t=n,a=0;for(;a+2<t.length;)e.put(o(t.substring(a,a+3)),10),a+=3;a<t.length&&(t.length-a==1?e.put(o(t.substring(a,a+1)),4):t.length-a==2&&e.put(o(t.substring(a,a+2)),7))}};const o=function(e){let t=0;for(let n=0;n<e.length;n+=1)t=10*t+r(e.charAt(n));return t},r=function(e){if("0"<=e&&e<="9")return e.charCodeAt(0)-"0".charCodeAt(0);throw"illegal char :"+e};return a};const H=function(e){let t=w,n=e,a={getMode:function(){return t},getLength:function(e){return n.length},write:function(e){let t=n,a=0;for(;a+1<t.length;)e.put(45*o(t.charAt(a))+o(t.charAt(a+1)),11),a+=2;a<t.length&&e.put(o(t.charAt(a)),6)}};const o=function(e){if("0"<=e&&e<="9")return e.charCodeAt(0)-"0".charCodeAt(0);if("A"<=e&&e<="Z")return e.charCodeAt(0)-"A".charCodeAt(0)+10;switch(e){case" ":return 36;case"$":return 37;case"%":return 38;case"*":return 39;case"+":return 40;case"-":return 41;case".":return 42;case"/":return 43;case":":return 44;default:throw"illegal char :"+e}};return a},j=function(e){let t=_,n=v(e),a={getMode:function(){return t},getLength:function(e){return n.length},write:function(e){for(let t=0;t<n.length;t+=1)e.put(n[t],8)}};return a},O=function(e){let t=x,n=y.SJIS;if(!n)throw"sjis not supported.";!function(e,t){let a=n("友");if(2!=a.length||38726!=(a[0]<<8|a[1]))throw"sjis not supported."}();let a=n(e),o={getMode:function(){return t},getLength:function(e){return~~(a.length/2)},write:function(e){let t=a,n=0;for(;n+1<t.length;){let a=(255&t[n])<<8|255&t[n+1];if(33088<=a&&a<=40956)a-=33088;else{if(!(57408<=a&&a<=60351))throw"illegal char at "+(n+1)+"/"+a;a-=49472}a=192*(a>>>8&255)+(255&a),e.put(a,13),n+=2}if(n<t.length)throw"illegal char at "+(n+1)}};return o};let F=function(){let e=[],t={writeByte:function(t){e.push(255&t)},writeShort:function(e){t.writeByte(e),t.writeByte(e>>>8)},writeBytes:function(e,n,a){n=n||0,a=a||e.length;for(let o=0;o<a;o+=1)t.writeByte(e[o+n])},writeString:function(e){for(let n=0;n<e.length;n+=1)t.writeByte(e.charCodeAt(n))},toByteArray:function(){return e},toString:function(){let t="";t+="[";for(let n=0;n<e.length;n+=1)n>0&&(t+=","),t+=e[n];return t+="]",t}};return t};const U=function(e,t,n,a){let o=function(e,t){let n=e,a=t,o=new Array(e*t),r={setPixel:function(e,t,a){o[t*n+e]=a},write:function(e){e.writeString("GIF87a"),e.writeShort(n),e.writeShort(a),e.writeByte(128),e.writeByte(0),e.writeByte(0),e.writeByte(0),e.writeByte(0),e.writeByte(0),e.writeByte(255),e.writeByte(255),e.writeByte(255),e.writeString(","),e.writeShort(0),e.writeShort(0),e.writeShort(n),e.writeShort(a),e.writeByte(0);let t=c(2);e.writeByte(2);let o=0;for(;t.length-o>255;)e.writeByte(255),e.writeBytes(t,o,255),o+=255;e.writeByte(t.length-o),e.writeBytes(t,o,t.length-o),e.writeByte(0),e.writeString(";")}};const c=function(e){let t=1<<e,n=1+(1<<e),a=e+1,r=l();for(let e=0;e<t;e+=1)r.add(String.fromCharCode(e));r.add(String.fromCharCode(t)),r.add(String.fromCharCode(n));let c=F(),i=function(e){let t=e,n=0,a=0;return{write:function(e,o){if(e>>>o!=0)throw"length over";for(;n+o>=8;)t.writeByte(255&(e<<n|a)),o-=8-n,e>>>=8-n,a=0,n=0;a|=e<<n,n+=o},flush:function(){n>0&&t.writeByte(a)}}}(c);i.write(t,a);let s=0,d=String.fromCharCode(o[s]);for(s+=1;s<o.length;){let e=String.fromCharCode(o[s]);s+=1,r.contains(d+e)?d+=e:(i.write(r.indexOf(d),a),r.size()<4095&&(r.size()==1<<a&&(a+=1),r.add(d+e)),d=e)}return i.write(r.indexOf(d),a),i.write(n,a),i.flush(),c.toByteArray()},l=function(){let e={},t=0,n={add:function(a){if(n.contains(a))throw"dup key:"+a;e[a]=t,t+=1},size:function(){return t},indexOf:function(t){return e[t]},contains:function(t){return void 0!==e[t]}};return n};return r}(e,t);for(let a=0;a<t;a+=1)for(let t=0;t<e;t+=1)o.setPixel(t,a,n(t,a));let r=F();o.write(r);let c=function(){let e=0,t=0,n=0,a="",o={},r=function(e){a+=String.fromCharCode(c(63&e))};const c=function(e){if(e<0);else{if(e<26)return 65+e;if(e<52)return e-26+97;if(e<62)return e-52+48;if(62==e)return 43;if(63==e)return 47}throw"n:"+e};return o.writeByte=function(a){for(e=e<<8|255&a,t+=8,n+=1;t>=6;)r(e>>>t-6),t-=6},o.flush=function(){if(t>0&&(r(e<<6-t),e=0,t=0),n%3!=0){let e=3-n%3;for(let t=0;t<e;t+=1)a+="="}},o.toString=function(){return a},o}(),l=r.toByteArray();for(let e=0;e<l.length;e+=1)c.writeByte(l[e]);c.flush();let i="";return i+="<img",i+=' src="',i+="data:image/gif;base64,",i+=c,i+='"',i+=' width="',i+=e,i+='"',i+=' height="',i+=t,i+='"',a&&(i+=' alt="',i+=a,i+='"'),i+="/>",i};y["UTF-8"]=function(e){return function(e){let t=[];for(let n=0;n<e.length;n++){let a=e.charCodeAt(n);a<128?t.push(a):a<2048?t.push(192|a>>6,128|63&a):a<55296||a>=57344?t.push(224|a>>12,128|a>>6&63,128|63&a):(n++,a=65536+((1023&a)<<10|1023&e.charCodeAt(n)),t.push(240|a>>18,128|a>>12&63,128|a>>6&63,128|63&a))}return t}(e)};var K={state:{firstLoad:!0,html:"",data:{},ecommerce_settings:{},available_locales:[],tldType:".kenzap.site",newQR:!1,baseURL:"",downloadName:"qr-menu.svg",API_key:"",ajaxQueue:0},init:function(){K.getData(),K.getQRHTML()},getData:function(){K.state.firstLoad&&o(),fetch("https://api-v1.kenzap.cloud/",{method:"post",headers:s,body:JSON.stringify({query:{keys:{type:"api-key",keys:["121"]},locale:{type:"locale",source:["extension"],key:"qr-menu"},settings:{type:"get",key:"qrmenu-settings",fields:["mode","palette","categories","locales","max_addition","slug","total_tables","table_number","aggregation","orders_cancelable","fast_checkout","checkout_takeaway_field","checkout_takeaway_phone_field","checkout_takeaway_address_field","checkout_notes_field","updated"]},ecommerce_settings:{type:"get",key:"ecommerce-settings",fields:["currency","currency_symb","currency_symb_loc","tax_calc","tax_auto_rate","tax_percent","tax_display","fee_calc","fee_percent","fee_display","add_products","add_products_list"]},available_locales:{type:"find",key:"locale-qr-menu",fields:["_id","language","location","locale","ext","updated"]}}})}).then((function(e){return e.json()})).then((function(e){e.success?((e=>{if(e.header&&localStorage.setItem("header",e.header),!document.querySelector("#k-script")){let e=document.createElement("div");e.innerHTML=localStorage.getItem("header"),e=e.firstChild,document.body.prepend(e),Function(document.querySelector("#k-script").innerHTML).call("test")}e.locale&&window.i18n.init(e.locale)})(e),K.loadHomeStructure(),K.renderPage(e),K.initListeners(),K.initFooter(),K.state.firstLoad=!1):d(e)})).catch((function(e){console.error("Error:",e)}))},getQRHTML:function(){fetch("/feed/index.html",{method:"get",headers:{}}).then((function(e){return e.text()})).then((function(e){K.state.html=e})).catch((function(e){console.error("Error:",e)}))},renderPage:function(e){(e=>{let t='<ol class="breadcrumb mt-2 mb-0">';for(let n of e)void 0===n.link?t+=`<li class="breadcrumb-item">${n.text}</li>`:t+=`<li class="breadcrumb-item"><a href="${n.link}">${n.text}</a></li>`;t+="</ol>",document.querySelector(".bc").innerHTML=t})([{link:c("https://dashboard.kenzap.cloud?launcher=qr-menu"),text:a("Dashboard")},{text:a("QR menu")}]),K.state.data=e.settings,K.state.ecommerce_settings=e.ecommerce_settings,K.state.available_locales=e.available_locales,console.log(K.state.available_locales);var t="";for(var o in K.state.available_locales.forEach((function(e,o){var r=p.filter((function(t){return t.code===e.language}));K.state.available_locales[o].language=r[0].name,K.state.available_locales[o].language_native=r[0].native?a(r[0].native):r[0].name,t+='<span data-code="'.concat(e,'" data-language="').concat(r[0].name,'" data-language-native="').concat(((e,...t)=>0===(e=String(e)).length?"":n(e,(e=>e.replace(/[<>'"]/g,(e=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&apos;",'"':"&quot;"}[e])))),...t))(r[0].native),'" class="badge rounded-pill me-2 mb-2 bg-primary fs-6">').concat(a(r[0].name),"</span>")})),document.querySelector("#lang-badges").innerHTML=t,e.settings)if(void 0!==e.settings[o]&&""!=e.settings[o]&&document.querySelector("#"+o))switch(document.querySelector("#"+o).dataset.type){case"text":case"email":case"emails":case"number":case"select":case"textarea":document.querySelector("#"+o).value=e.settings[o];break;case"range":document.querySelector("#"+o).value=e.settings[o],document.querySelector("#"+o+"_val").innerHTML=e.settings[o];break;case"palette":for(var l in e.settings[o])document.querySelector('[data-key="'+l+'"]').value=e.settings[o][l],document.querySelector('[data-key="'+l+'"]').style.backgroundColor=e.settings[o][l];break;case"radio":e.settings[o]&&document.querySelector("#"+o+e.settings[o]).setAttribute("checked",!0);break;case"checkbox":e.settings[o]&&document.querySelector("#"+o).setAttribute("checked","true"==e.settings[o])}K.listeners.modeRefresh(),r()},initListeners:function(){u(".rename-layout",K.listeners.renameLayout),u(".duplicate-layout",K.listeners.duplicateLayout),u(".remove-layout",K.listeners.removeLayout),u(".qr-download",K.listeners.qrDownload),m(".palette input",K.listeners.paletteRefresh),m("#max_addition",K.listeners.maxAdditionRange),m("#total_tables",K.listeners.totalTablesRefresh),m("#table_number",K.listeners.tableNumberRefresh),m('[name="mode"]',K.listeners.modeRefresh),m("#checkout_takeaway_field",K.listeners.toggleTakeaway),K.listeners.toggleTakeaway(),K.state.firstLoad&&(u(".btn-publish",K.listeners.publish),u(".domain-list li a",K.listeners.domainChange),u(".btn-modal",K.listeners.modalSuccessBtn),K.listeners.hashRequest(),K.listeners.setDefaults())},listeners:{publish:function(e){if(e.preventDefault(),document.querySelector("#slug").value.length<4)alert(a("Please provide a longer public link"));else if(document.querySelector("#categories").value.length<3)alert(a("Please provide at least one menu category"));else{o();var n,c={},l=t(document.querySelectorAll(".inp"));try{for(l.s();!(n=l.n()).done;){var i=n.value;switch(i.dataset.type){case"text":case"email":case"emails":case"number":case"select":case"textarea":case"range":c[i.id]=i.value;break;case"radio":c[i.getAttribute("name")]=i.parentElement.parentElement.parentElement.querySelector("input:checked").value;break;case"checkbox":c[i.getAttribute("name")]=i.checked;break;case"palette":null==c[i.id]&&(c[i.id]={});var u,m=t(i.querySelectorAll("input"));try{for(m.s();!(u=m.n()).done;){var h=u.value;c[i.id][h.dataset.key]=h.value}}catch(e){m.e(e)}finally{m.f()}}}}catch(e){l.e(e)}finally{l.f()}K.state.data.mode!=c.mode&&(K.state.newQR=!0),K.state.data.slug!=c.slug&&(K.state.newQR=!0),K.state.data=c,K.preProcessHTML(),fetch("https://api-v1.kenzap.cloud/",{method:"post",headers:s,body:JSON.stringify({query:{settings:{type:"set",key:"qrmenu-settings",data:c}}})}).then((function(e){return e.json()})).then((function(e){e.success?(f("Applying changes"),K.state.newQR&&(K.refreshURL(),document.querySelector(".qr-note").classList.remove("d-none")),r()):d(e)})).catch((function(e){console.error("Error:",e)}))}},hashRequest:function(e){if("#preview"==window.location.hash){var t=document.querySelector(".preview-link");window.location.replace(t.getAttribute("href"))}if("#qrcode"==window.location.hash){var n=document.querySelector(".qr-download");h(n)}},setDefaults:function(e){0==K.state.available_locales.length&&(K.state.available_locales=[{language:"English",lang:"en"}]),""==document.querySelector("#slug").value&&(document.querySelector("#slug").value="menu"+l())},paletteRefresh:function(e){e.preventDefault(),e.currentTarget.style.backgroundColor=e.currentTarget.value},maxAdditionRange:function(e){document.querySelector("#max_addition_val").innerHTML=e.currentTarget.value},totalTablesRefresh:function(e){K.listeners.genTableSelect()},tableNumberRefresh:function(e){K.refreshURL()},modeRefresh:function(e){1==parseInt(document.querySelector('[name="mode"]').parentElement.parentElement.parentElement.querySelector("input:checked").value)?(document.querySelector(".total_tables_cont").classList.remove("d-none"),document.querySelector(".table_number_cont").classList.remove("d-none"),K.listeners.genTableSelect()):(document.querySelector(".total_tables_cont").classList.add("d-none"),document.querySelector(".table_number_cont").classList.add("d-none")),K.refreshURL()},genTableSelect:function(e){var t=document.querySelector("#total_tables").value;""==t&&(t=1);for(var n='<option value="1" selected>'.concat(a("Table")," #1</option>"),o=1;o<t;o++)n+='<option value="'.concat(o+1,'">').concat(a("Table")," #").concat(o+1,"</option>");document.querySelector("#table_number").innerHTML=n},qrDownload:function(e){e.preventDefault();var t="data:image/svg+xml;utf8,"+e.currentTarget.parentNode.querySelector(".qr-preview").innerHTML,n=document.querySelector(".d-link");n.setAttribute("href",t),n.setAttribute("download",K.state.downloadName),h(n)},domainChange:function(e){e.preventDefault(),document.querySelector(".btn-tld").innerHTML=e.currentTarget.innerHTML,K.state.tldType=e.currentTarget.dataset.key},toggleTakeaway:function(e){document.querySelector("#checkout_takeaway_field").checked?(document.querySelector("#checkout_takeaway_phone_field").parentElement.parentElement.parentElement.classList.remove("d-none"),document.querySelector("#checkout_takeaway_address_field").parentElement.parentElement.parentElement.classList.remove("d-none")):(document.querySelector("#checkout_takeaway_phone_field").parentElement.parentElement.parentElement.classList.add("d-none"),document.querySelector("#checkout_takeaway_address_field").parentElement.parentElement.parentElement.classList.add("d-none"))},modalSuccessBtn:function(e){K.listeners.modalSuccessBtnFunc(e)},modalSuccessBtnFunc:null},preProcessHTML:function(){var e={items:{type:"find",key:"ecommerce-product",fields:["_id","img","status","price","priced","title","cats","sdesc","ldesc","variations","updated"],limit:1e3,offset:0,sortby:{field:"created",order:"ASC"}},settings:{type:"get",key:"qrmenu-settings",fields:["mode","palette","categories","categories","checkout_notes_field","checkout_takeaway_field","checkout_takeaway_phone_field","checkout_takeaway_address_field"]}};K.state.available_locales.forEach((function(t,n){e["locale_"+t.locale]={type:"locale",locales:[{key:"qr-menu",source:"extension",locale:t.locale},{key:"ecommerce",source:"extension",locale:t.locale},{key:"ecommerce",source:"content",locale:t.locale}]}})),fetch("https://api-v1.kenzap.cloud/",{method:"post",headers:s,body:JSON.stringify({query:e})}).then((function(e){return e.json()})).then((function(e){e.success?K.renderMenuHTML(e):d(e)})).catch((function(e){d(e)}))},publishHTML:function(e,t){var n=document,a={};a.domain=n.querySelector("#slug").value+K.state.tldType,a.files=[{type:"raw",data:t,name:"index.html"},{type:"github",url:"https://raw.githubusercontent.com/kenzap/qr-menu/main/public/feed/index.js"},{type:"github",url:"https://raw.githubusercontent.com/kenzap/qr-menu/main/public/feed/styles.css"}],a.files_etc=[];var o=new URLSearchParams;o.append("cmd","publish_site_v2"),o.append("key","qrmenu"),o.append("flush",!1),o.append("folder",e),o.append("data",JSON.stringify(a)),o.append("html",t),o.append("sid",l()),o.append("token",g("kenzap_token")),fetch("https://siteapi.kenzap.cloud/v1/",{method:"post",headers:{Accept:"application/json","Content-type":"application/x-www-form-urlencoded"},body:o}).then((function(e){return e.json()})).then((function(e){r(),e.success||d(e)})).catch((function(e){console.error("Error:",e)}))},flushHTML:function(e){var t=document,n={};n.domain=t.querySelector("#slug").value+K.state.tldType,n.files=[],n.files_etc=[];var a=new URLSearchParams;a.append("cmd","publish_site"),a.append("key","qrmenu"),a.append("flush",!0),a.append("folder",""),a.append("data",JSON.stringify(n)),a.append("html",""),a.append("sid",l()),a.append("token",g("kenzap_token")),fetch("https://siteapi.kenzap.cloud/v1/",{method:"post",headers:{Accept:"application/json","Content-type":"application/x-www-form-urlencoded"},body:a}).then((function(e){return e.json()})).then((function(t){r(),t.success?(K.refreshURL(),K.renderMenuHTML(e)):d(e)})).catch((function(e){console.error("Error:",e)}))},genQR:function(e,t){var n=new b(0,"H");n.addData(t),n.make(),document.querySelector(e).innerHTML=n.createSvgTag({})},renderMenuHTML:function(e){var t=1;K.state.available_locales.forEach((function(n){var a="\n                        \x3c!-- Customizer start --\x3e\n                        <style>\n                            :root {\n                                --txtColorA: ".concat(K.state.data.palette.txtColorA,";;\n                                --txtColorB: ").concat(K.state.data.palette.txtColorB,";\n                                --txtColorC: ").concat(K.state.data.palette.txtColorC,";\n                                --bgColorA: ").concat(K.state.data.palette.bgColorA,";\n                                --bgColorB: ").concat(K.state.data.palette.bgColorB,";\n                                --bgColorC: #000000;\n                                --linkColorA: #1941DF;\n                                --linkColorB: #1941dfd0;\n                                --baseColorA: ").concat(K.state.data.palette.baseColorA,";\n                                --baseColorB: #1941df;\n                                --accColorA: #1941df;\n                                --accColorB: #1941df;\n                                --grayColorA: #F7F7F7;\n                                --grayColorB: #c0c0c0;\n                                --grayColorC: #818181;\n                            }\n                            body{\n                                font-family: Poppins, sans-serif\n                            }\n                        </style>\n                        <script>\n                            const API_KEY = '").concat(K.state.API_key,'\';\n                            let config = {"price":{"fee_calc":"').concat(K.state.ecommerce_settings.fee_calc?K.state.ecommerce_settings.fee_calc:"",'","fee_percent":"').concat(K.state.ecommerce_settings.fee_percent?K.state.ecommerce_settings.fee_percent:"",'","fee_display":"').concat(K.state.ecommerce_settings.fee_display?K.state.ecommerce_settings.fee_display:"",'","tax_calc":"').concat(K.state.ecommerce_settings.tax_calc?K.state.ecommerce_settings.tax_calc:"",'","tax_percent":"').concat(K.state.ecommerce_settings.tax_percent?K.state.ecommerce_settings.tax_percent:"",'","tax_display":"').concat(K.state.ecommerce_settings.tax_display?K.state.ecommerce_settings.tax_display:"",'","currency":"').concat(K.state.ecommerce_settings.currency?K.state.ecommerce_settings.currency:"USD",'","symbol":"').concat(K.state.ecommerce_settings.currency_symb?K.state.ecommerce_settings.currency_symb:"$",'","style":"').concat(K.state.ecommerce_settings.currency_symb_loc?K.state.ecommerce_settings.currency_symb_loc:"left",'"},"cart":{"max_addition":').concat(K.state.data.max_addition,'},"PREFIX":"/menu","domain":"').concat(K.state.baseURL,'","fast_checkout":"').concat(K.state.data.fast_checkout,'","aggregation":"').concat(K.state.data.aggregation,'","orders_cancelable":"').concat(K.state.data.orders_cancelable,'","sid":"').concat(l(),'","available_locales":').concat(JSON.stringify(K.state.available_locales),',"add_products":"').concat(K.state.ecommerce_settings.add_products?K.state.ecommerce_settings.add_products:"",'","add_products_list":"').concat(K.state.ecommerce_settings.add_products_list?K.state.ecommerce_settings.add_products_list:"",'","moreButton":true};\n                            let products = ').concat(JSON.stringify(e.items),";\n                            let settings = ").concat(JSON.stringify(e.settings),';\n                            let i18n = {"state":{"locale": ').concat(JSON.stringify(e["locale_"+n.locale])," } };\n                        <\/script>"),o=K.state.html.substring(0,K.state.html.indexOf("\x3c!-- Customizer start --\x3e"))+a+K.state.html.substring(K.state.html.indexOf("\x3c!-- Customizer end --\x3e"),K.state.html.length);o=o.replace(/{{timestamp}}/g,Math.floor(Date.now()/1e3)),setTimeout((function(e,t){K.publishHTML(e,t)}),100*t,n.locale,o),t++})),f("New menu is publised")},refreshURL:function(){var e=parseInt(document.querySelector('[name="mode"]').parentElement.parentElement.parentElement.querySelector("input:checked").value),t=document.querySelector("#table_number").value;""==t&&(t=1);var n="";switch(K.state.downloadName="qr-menu.svg",e){case 0:break;case 1:n="?table="+t,K.state.downloadName="qr-menu-table-"+t+".svg";break;case 2:n="?table=0",K.state.downloadName="qr-menu-no-table-mode.svg"}K.state.baseURL="http://"+K.state.data.slug+K.state.tldType+n,document.querySelector(".p-links").innerHTML="";var a="";K.state.available_locales.forEach((function(e,t){var o="http://"+K.state.data.slug+K.state.tldType+"/"+e.locale+"/"+n;""==a&&(a=o),K.state.available_locales[t].link=o;var r='<li><a target="_blank" data-locale="'+e.locale+'" href="'+o+'">'+o+"</a></li>",c=document.createElement("div");c.innerHTML=r,document.querySelector(".p-links").append(c)})),document.querySelector(".preview-link").setAttribute("href",a),K.genQR(".qr-preview",a)},loadHomeStructure:function(){K.state.firstLoad&&(document.querySelector("#contents").innerHTML='\n        <div class="container p-edit">\n            <div class="d-md-flex justify-content-between bd-highlight mb-3">\n                <nav class="bc" aria-label="breadcrumb"></nav>\n                <div>\n                    <a class="preview-link nounderline d-md-inline-block d-none me-3" target="_blank" href="#">'.concat(a("preview"),'<i class="mdi mdi-monitor"></i></a>\n                    <button class="btn btn-primary btn-publish mt-3 mb-1 mt-md-0 mb-md-0" type="button">').concat(a("Publish menu"),'</button>\n                </div>\n            </div>\n            <div class="row">\n                <div class="col-lg-12 grid-margin stretch-card">\n\n                    <div class="api-key-warn alert alert-warning d-flex align-items-center d-none" role="alert">\n                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle flex-shrink-0 me-2" viewBox="0 0 16 16">\n                            <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>\n                            <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>\n                        </svg>\n                        <div>\n                            ').concat(a('Please define %1$API key%2$ with the following permissions "Frontend / Read &amp; write / Isolated".','<a href="'+c("https://dashboard.kenzap.cloud/access/")+'">',"</a>"),'\n                        </div>\n                    </div>\n\n                    <div class="card border-white shadow-sm">\n                        <div class="card-body">\n                        <h4 class="card-title">').concat(a("Settings"),'</h4>\n                        <p class="form-text">\n                            ').concat(a("Go to %1$https://ecommerce.kenzap.cloud/product-list/%2$ecommerce%3$ dashboard to populate menu products.",'<code><a href="','">',"</a></code>"),'\n                        </p>\n   \n                        <div class="qr-list mb-5 ">\n                            <div class="row table_number_cont d-none">\n                                <div class="col-lg-4">\n                                    <select id="table_number" class="form-select inp" data-type="select" aria-label="Table number picker">\n                                        <option selected>Table 1</option>\n                                    </select>\n                                    <p class="form-text">').concat(a("Pick table number to download the QR-code sticker."),'</p>\n                                </div>\n                            </div>\n                            <div id="qr-main" class="qr-cnt form-group mr-2">\n                                <a href="#" class="qr-download mb-3">\n                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">\n                                        <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>\n                                        <path d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>\n                                    </svg>\n                                </a>\n                                <div class="qr-preview"> </div>\n                                <div class="qr-note text-danger d-none" style="">').concat(a("* qr-code updated"),'</div>\n                            </div>\n                        </div>\n\n                        <a href=\'data:image/svg+xml;utf8,<svg viewBox="0 0 20 20" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="10"></circle></svg>\' download="qr-menu.svg" class="d-none d-link">download</a>\n\n                        <div class="form-group mb-4">\n                            <h5 class="card-title ">').concat(a("Table selection"),'</h5>\n                            <p class="form-text mb-3" style="">').concat(a("After changing table selection setting, please update your QR-code prints."),'</p>\n                            <div class="row">\n                                <div class="col-lg-6">\n                                    <div class="form-check">\n                                        <label class="form-check-label status-publish form-label">\n                                            <input type="radio" class="form-check-input inp" data-type="radio" name="mode" id="mode0" value="0" checked="true"> ').concat(a("Manual"),'\n                                            <p class="form-text">').concat(a("Force users to pick up table number upon checkout."),'</p>\n                                        </label>\n                                    </div>\n                                    <div class="form-check">\n                                        <label class="form-check-label status-publish form-label">\n                                            <input type="radio" class="form-check-input" data-type="radio" name="mode" id="mode1" value="1"> ').concat(a("Automatic"),'\n                                            <p class="form-text">').concat(a("Link table number directly with the QR-code sticker."),'</p>\n\n                                            <div class="total_tables_cont d-none">\n                                                <input id="total_tables" class="form-control inp" data-type="number" type="number" placeholder="').concat(a("Total number of tables"),'" value="10" aria-label="total number of tables">\n                                                <p class="form-text">').concat(a("Total number of tables. Each table has individual QR-code sticker."),'</p>\n                                            </div>\n                                        </label>\n                                    </div>\n                                    <div class="form-check">\n                                        <label class="form-check-label status-publish form-label">\n                                            <input type="radio" class="form-check-input" data-type="radio" name="mode" id="mode2" value="2"> ').concat(a("No table mode"),'\n                                            <p class="form-text">').concat(a("Do not ask users for table number upon checkout."),'</p>\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>    \n                        </div>\n\n                        <div class="form-group mb-5">\n                            <h5 class="card-title mb-3">').concat(a("Color palette"),'</h5>\n                            <div class="row">\n                                <div class="col-lg-10">\n                                    <ul id="palette" class="palette inp" data-type="palette">\n                                        <li> <input type="color" class="border border-secondary form-control form-control-color" data-key="baseColorA" value="#1941df" style="width:50px" title="Choose your base color"> </li>\n                                        <li> <input type="color" class="border border-secondary form-control form-control-color" data-key="bgColorA" value="#000000" style="width:50px" title="Main background color"> </li>\n                                        <li> <input type="color" class="border border-secondary form-control form-control-color" data-key="bgColorB" value="#494949" style="width:50px" title="Light background color"> </li>\n                                        <li> <input type="color" class="border border-secondary form-control form-control-color" data-key="txtColorB" value="#b8b8b8" style="width:50px" title="Secondary text color"> </li>\n                                        <li> <input type="color" class="border border-secondary form-control form-control-color" data-key="txtColorC" value="#ffffff" style="width:50px" title="Light text color"> </li>\n                                        <li> <input type="color" class="border border-secondary form-control form-control-color" data-key="txtColorA" value="#ffffff" style="width:50px" title="Main text color"> </li>\n                                    </ul> \n                                    <div class="clearfix"></div>\n                                    <p class="form-text">').concat(a("Click on block above to pick custom color"),'</p>\n                                </div>\n                            </div>\n                        </div>\n                    \n                        <div class="form-group mb-4">\n                            <h5 class="card-title mb-3">').concat(a("Menu categories"),'</h5>\n                            <div class="row">\n                                <div class="col-lg-6">\n                                    <textarea class="form-control inp" id="categories" data-type="textarea" rows="8"></textarea>\n                                    <p class="form-text">').concat(a("Provide one menu category per line. Categories are case-sensitive."),' <a href="').concat(c("https://ecommerce.kenzap.cloud/product-list/"),'">Available categories</a>.</p>\n                                </div>\n                            </div> \n                        </div>\n\n                        <div class="form-group mb-4">\n                            <h5 class="card-title mb-3">').concat(a("Translations"),'</h5>\n                            <div class="row">\n                                <div class="col-lg-6">\n                                    <div id="lang-badges"></div>\n                                    <textarea class="form-control inp d-none" id="locales" data-type="textarea" rows="4"></textarea>\n                                    <p class="form-text">').concat(a("To add more translations go to "),' <a href="').concat(c("https://translate.kenzap.cloud/edit/?ext=qr-menu&slug=qr-menu"),'">translation dashboard</a>.</p>\n                                </div>\n                            </div> \n                        </div>\n\n                        <div class="form-group mb-3">\n                            <h5 class="card-title mb-3">').concat(a("Public link"),'</h5>\n                            <div class="row">\n                                <div class="col-lg-6">\n                                    <div class="input-group">\n                                        <div class="input-group input-group-lg">\n                                            <input id="slug" type="text" data-type="text" style="text-align:right;" class="form-control val-tld inp" aria-label="">\n                                            <button class="btn btn-sm btn-outline-primary dropdown-toggle btn-tld" data-bs-toggle="dropdown" aria-expanded="false">.kenzap.site</button>\n                                            <ul class="dropdown-menu dropdown-menu-end domain-list">\n                                                <li><a class="dropdown-item" href="#" data-key=\'.kenzap.site\'>.kenzap.site</a></li>\n                                                <li><a class="dropdown-item d-none" href="#" data-key=\'.warung.menu\'>.warung.menu</a></li>\n                                                <li><a class="dropdown-item d-none" href="#" data-key=\'.kenzap.tech\'>.kenzap.tech</a></li>\n                                                <li><hr class="dropdown-divider"></li>\n                                                <li><a class="dropdown-item" href="#" data-key=\'custom\'>My domain</a></li>\n                                            </ul>\n                                        </div>\n                                        <p class="form-text">').concat(a("Public link where users can preview your menu. Ex.: myresto.kenzap.site. For branded link visit "),' <a href="').concat(c("https://dashboard.kenzap.cloud/domain/"),'">').concat(a("domain dashboard"),'</a>.</p>\n                                        <ul class="p-links mt-3">\n\n                                        </ul>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class="form-group mb-3 d-none">\n                            <h5 class="card-title mb-3">').concat(a("Public link"),'</h5>\n                            <div class="row">\n                                <div class="col-lg-6">\n                                    <div class="input-group input-group-lg">\n                                        <span class="input-group-text" id="space-domain">').concat("http://menu"+l()+".kenzap.site/",'</span>\n                                        <input type="text" class="form-control d-none" data-type="text" aria-label="Menu link" aria-describedby="inputGroup-sizing-lg">\n                                    </div>\n                                    <p class="form-text">').concat(a("Public link where users can preview your menu. For branded link visit "),' <a href="').concat(c("https://dashboard.kenzap.cloud/domain/"),'">domain dashboard</a></p>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class="form-group mb-4">\n                            <h5 class="card-title mb-3">').concat(a("Cart addition"),'</h5>\n                            <div class="row">\n                                <div class="col-lg-6">\n                                    <input id="max_addition" type="range" data-type="range" value="10" class="form-range inp" min="0" max="100" >\n                                    <p class="form-text">').concat(a("Maximum number of items per cart. If set to 0 cart addition is disabled. Currently "),'<span id="max_addition_val">0</span>.</p>\n                                </div>\n                            </div> \n                        </div>\n\n                        <div class="form-group mb-4">\n                            <h5 class="card-title ">').concat(a("Aggregate orders"),'</h5>\n                            <p class="form-text mb-3" style="">').concat(a("Unite orders into one if table number is the same."),'</p>\n                            <div class="row">\n                                <div class="col-12">\n                                    <div class="form-check mb-3">\n                                        <input class="form-check-input inp" name="aggregation" type="checkbox" data-type="checkbox" value="1" id="aggregation">\n                                        <label class="form-check-label" for="aggregation">\n                                        ').concat(a("Aggregate"),'\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class="form-group mb-4">\n                            <h5 class="card-title ">').concat(a("Order cancelation"),'</h5>\n                            <p class="form-text mb-3" style="">').concat(a("Allow users to cancel newly placed orders. Completed orders are not cancelable."),'</p>\n                            <div class="row">\n                                <div class="col-12">\n                                    <div class="form-check mb-3">\n                                        <input class="form-check-input inp" name="orders_cancelable" type="checkbox" data-type="checkbox" value="1" id="orders_cancelable">\n                                        <label class="form-check-label" for="orders_cancelable">\n                                        ').concat(a("Allow"),'\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class="form-group mb-4">\n                            <h5 class="card-title ">').concat(a("Fast checkout"),'</h5>\n                            <p class="form-text mb-3" style="">').concat(a("With fast checkout users can skip additional information entry and sign in."),'</p>\n                            <div class="row" id="fast_checkout" data-type="radio">\n                                <div class="col-lg-6">\n                                    <div class="form-check">\n                                        <label class="form-check-label status-publish form-label">\n                                            <input type="radio" class="form-check-input inp" data-type="radio" name="fast_checkout" id="fast_checkout0" value="0"  > ').concat(a("Default"),'\n                                            <p class="form-text">').concat(a("Ask for table number, additional notes and force users to sign in when necessary."),'</p>\n                                        </label>\n                                    </div>\n                                    <div class="form-check">\n                                        <label class="form-check-label status-publish form-label">\n                                            <input type="radio" class="form-check-input" data-type="radio" name="fast_checkout" id="fast_checkout2" value="2" checked="true"> ').concat(a("Fast checkout"),'\n                                            <p class="form-text">').concat(a("Do not force users to sign in or enter additional information."),'</p>\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>    \n                        </div>\n\n                        <div class="form-group mb-4">\n                            <h5 class="card-title ">').concat(a("Extra checkout fields"),'</h5>\n                            <p class="form-text mb-3" style="">').concat(a("Provide extra fields for checkout page."),'</p>\n                            <div class="row">\n                                <div class="col-12">\n                                    <div class="form-check mb-3">\n                                        <input class="form-check-input inp" name="checkout_notes_field" type="checkbox" data-type="checkbox" value="1" id="checkout_notes_field">\n                                        <label class="form-check-label" for="checkout_notes_field">\n                                        ').concat(a("Notes input field"),'\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>   \n                            <div class="row">\n                                <div class="col-12">\n                                    <div class="form-check mb-3">\n                                        <input class="form-check-input inp" name="checkout_takeaway_field" type="checkbox" data-type="checkbox" value="1" id="checkout_takeaway_field">\n                                        <label class="form-check-label" for="checkout_takeaway_field">\n                                        ').concat(a("Take away checkbox field"),'\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>   \n                            <div class="row d-none">\n                                <div class="col-12">\n                                    <div class="form-check mb-3">\n                                        <input class="form-check-input inp" name="checkout_takeaway_phone_field" type="checkbox" data-type="checkbox" value="1" id="checkout_takeaway_phone_field">\n                                        <label class="form-check-label" for="checkout_takeaway_phone_field">\n                                        ').concat(a("Take away phone number field"),'\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>   \n                            <div class="row d-none">\n                                <div class="col-12">\n                                    <div class="form-check mb-3">\n                                        <input class="form-check-input inp" name="checkout_takeaway_address_field" type="checkbox" data-type="checkbox" value="1" id="checkout_takeaway_address_field">\n                                        <label class="form-check-label" for="checkout_takeaway_address_field">\n                                        ').concat(a("Take away address field"),'\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>   \n                        </div>\n\n                        <div class="table-responsive d-none">\n                            <table class="table table-hover table-borderless align-middle table-striped table-p-list" style="min-width: 800px;">\n                                <thead>\n                                    <tr>\n                                    <th>').concat(a("ID"),"</th>\n                                    <th>").concat(a("Title"),'</th>\n                                    <th style="display:none;">Zones</th>\n                                    <th style="display:none;">Seats</th>\n                                    <th style="text-align:right;"></th>\n                                    </tr>\n                                </thead>\n                                <tbody class="layout_list">\n                                    <tr>\n                                    <td></td><td></td><td></td><td></td><td></td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n\n        <div class="modal" tabindex="-1">\n            <div class="modal-dialog">\n                <div class="modal-content">\n                    <div class="modal-header">\n                        <h5 class="modal-title"></h5>\n                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>\n                    </div>\n                    <div class="modal-body">\n\n                    </div>\n                    <div class="modal-footer">\n                        <button type="button" class="btn btn-primary btn-modal"></button>\n                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"></button>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div class="position-fixed bottom-0 p-2 m-4 end-0 align-items-center">\n            <div class="toast hide align-items-center text-white bg-dark border-0" role="alert" aria-live="assertive"\n                aria-atomic="true" data-bs-delay="3000">\n                <div class="d-flex">\n                    <div class="toast-body"></div>\n                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"\n                        aria-label="Close"></button>\n                </div>\n            </div>\n        </div>\n        \n    '))},initFooter:function(){var e,t;e=a("Created by %1$Kenzap%2$. ❤️ Licensed %3$GPL3%4$.",'<a class="text-muted" href="https://kenzap.com/" target="_blank">',"</a>",'<a class="text-muted" href="https://github.com/kenzap/qr-menu" target="_blank">',"</a>"),t="",document.querySelector("footer .row").innerHTML=`\n    <div class="d-sm-flex justify-content-center justify-content-sm-between">\n        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">${e}</span>\n        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-muted">${t}</span>\n    </div>`}};K.init()}();
+
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function () {
+  'use strict';
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+    return arr2;
+  }
+  function _createForOfIteratorHelper(o, allowArrayLike) {
+    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+    if (!it) {
+      if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+        if (it) o = it;
+        var i = 0;
+        var F = function () {};
+        return {
+          s: F,
+          n: function () {
+            if (i >= o.length) return {
+              done: true
+            };
+            return {
+              done: false,
+              value: o[i++]
+            };
+          },
+          e: function (e) {
+            throw e;
+          },
+          f: F
+        };
+      }
+      throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+    var normalCompletion = true,
+      didErr = false,
+      err;
+    return {
+      s: function () {
+        it = it.call(o);
+      },
+      n: function () {
+        var step = it.next();
+        normalCompletion = step.done;
+        return step;
+      },
+      e: function (e) {
+        didErr = true;
+        err = e;
+      },
+      f: function () {
+        try {
+          if (!normalCompletion && it.return != null) it.return();
+        } finally {
+          if (didErr) throw err;
+        }
+      }
+    };
+  }
+
+  /**
+   * @name initHeader
+   * @description Initiates Kenzap Cloud extension header and related scripts. Verifies user sessions, handles SSO, does cloud space navigation, initializes i18n localization. 
+   * @param {object} response
+   */
+  const initHeader = (response) => {
+
+      // cache header from backend
+      if(response.header) localStorage.setItem('header', response.header);
+    
+      // load header to html if not present
+      if(!document.querySelector("#k-script")){
+    
+          let child = document.createElement('div');
+          child.innerHTML = localStorage.getItem('header');
+          child = child.firstChild;
+          document.body.prepend(child);
+    
+          // run header scripts
+          Function(document.querySelector("#k-script").innerHTML).call('test');
+      }
+    
+      // load locales if present
+      if(response.locale) window.i18n.init(response.locale); 
+  };
+
+  /*
+   * Translates string based on preloaded i18n locale values.
+   * 
+   * @param text {String} text to translate
+   * @param cb {Function} callback function to escape text variable
+   * @param p {String} list of parameters, to be replaced with %1$, %2$..
+   * @returns {String} - text
+   */
+  const __esc = (text, cb, ...p) => {
+
+      let match = (input, pa) => {
+
+          pa.forEach((p, i) => { input = input.replace('%'+(i+1)+'$', p); }); 
+          
+          return input;
+      };
+
+      if(typeof window.i18n === 'undefined') return match(text, p);
+      if(window.i18n.state.locale.values[text] === undefined) return match(text, p);
+
+      return match(cb(window.i18n.state.locale.values[text]), p);
+  };
+
+  /*
+   * Converts special characters `&`, `<`, `>`, `"`, `'` to HTML entities and does translation
+   * 
+   * @param text {String}  text
+   * @returns {String} - text
+   */
+  const __attr = (text, ...p) => {
+
+      text = String(text);
+
+      if(text.length === 0){
+  		return '';
+  	}
+
+      let cb = (text) => {
+
+          return text.replace(/[<>'"]/g, tag => (
+              {
+                  '&': '&amp;',
+                  '<': '&lt;',
+                  '>': '&gt;',
+                  "'": '&apos;',
+                  '"': '&quot;'
+              } [tag]));
+      };
+
+      return __esc(text, cb, ...p);
+  };
+
+  /*
+   * Converts special characters `&`, `<`, `>`, `"`, `'` to HTML entities and does translations
+   * 
+   * @param text {String}  text
+   * @returns {String} - text
+   */
+  const __html = (text, ...p) => {
+
+      text = String(text);
+
+      if(text.length === 0){
+  		return '';
+  	}
+
+      let cb = (text) => {
+
+          return text.replace(/[&<>'"]/g, tag => (
+              {
+                  '&': '&amp;',
+                  '<': '&lt;',
+                  '>': '&gt;',
+                  "'": '&apos;',
+                  '"': '&quot;'
+              } [tag]));
+      };
+
+      return __esc(text, cb, ...p);
+  };
+
+  /**
+   * @name showLoader
+   * @description Initiates full screen three dots loader.
+   */
+  const showLoader = () => {
+
+      let el = document.querySelector(".loader");
+      if (el) el.style.display = 'block';
+  };
+
+  /**
+   * @name hideLoader
+   * @description Removes full screen three dots loader.
+   */
+  const hideLoader = () => {
+
+      let el = document.querySelector(".loader");
+      if (el) el.style.display = 'none';
+  };
+
+  /**
+   * @name initFooter
+   * @description Removes full screen three dots loader.
+   * @param {string} left - Text or html code to be present on the left bottom side of screen
+   * @param {string} right - Text or html code to be present on the left bottom side of screen
+   */
+  const initFooter = (left, right) => {
+
+      document.querySelector("footer .row").innerHTML = `
+    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">${left}</span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-muted">${right}</span>
+    </div>`;
+  };
+
+  /**
+   * @name link
+   * @description Handles Cloud navigation links between extensions and its pages. Takes care of custom url parameters.
+   * @param {string} slug - Any inbound link
+   * 
+   * @returns {string} link - Returns original link with kenzp cloud space ID identifier.
+   */
+  const link = (slug) => {
+      
+      let urlParams = new URLSearchParams(window.location.search);
+      let sid = urlParams.get('sid') ? urlParams.get('sid') : "";
+
+      let postfix = slug.indexOf('?') == -1 ? '?sid='+sid : '&sid='+sid;
+
+      return slug + postfix;
+  };
+
+  /**
+   * @name spaceID
+   * @description Gets current Kenzap Cloud space ID identifier from the URL.
+   * 
+   * @returns {string} id - Kenzap Cloud space ID.
+   */
+   const spaceID = () => {
+      
+      let urlParams = new URLSearchParams(window.location.search);
+      let id = urlParams.get('sid') ? urlParams.get('sid') : "";
+
+      return id;
+  };
+
+  /**
+   * @name setCookie
+   * @description Set cookie by its name to all .kenzap.cloud subdomains
+   * @param {string} name - Cookie name.
+   * @param {string} value - Cookie value.
+   * @param {string} days - Number of days when cookie expires.
+   */
+   const setCookie = (name, value, days) => {
+
+      let expires = "";
+      if (days) {
+          let date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          expires = ";expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (escape(value) || "") + expires + ";path=/;domain=.kenzap.cloud"; 
+  };
+
+  /**
+   * @name getCookie
+   * @description Read cookie by its name.
+   * @param {string} cname - Cookie name.
+   * 
+   * @returns {string} value - Cookie value.
+   */
+  const getCookie$1 = (cname) => {
+
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  };
+
+  /**
+   * @name checkHeader
+   * @description This function tracks UI updates, creates header version checksum and compares it after every page reload
+   * @param {object} object - API response.
+   */
+   const checkHeader = () => {
+
+      let version = (localStorage.hasOwnProperty('header') && localStorage.hasOwnProperty('header-version')) ? localStorage.getItem('header-version') : 0;
+      let check = window.location.hostname + '/' + spaceID() + '/' + getCookie$1('locale');
+      if(check != getCookie$1('check')){ version = 0; console.log('refresh'); }
+      
+      setCookie('check', check, 5);
+
+      return version
+  };
+
+  /**
+   * @name headers
+   * @description Default headers object for all Kenzap Cloud fetch queries.
+   * @param {object} headers
+   */
+   const H = () => {
+
+      return {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + getCookie$1('kenzap_api_key'),
+          'Kenzap-Locale': getCookie$1('locale') ? getCookie$1('locale') : "en",
+          'Kenzap-Header': checkHeader(),
+          'Kenzap-Token': getCookie$1('kenzap_token'),
+          'Kenzap-Sid': spaceID()
+      }
+  };
+
+  /**
+   * @name headers
+   * @description Default headers object for all Kenzap Cloud fetch queries. 
+   * @param {object} headers
+   * @deprecated
+   */
+   ({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + getCookie$1('kenzap_api_key'),
+      'Kenzap-Locale': getCookie$1('locale') ? getCookie$1('locale') : "en",
+      'Kenzap-Header': checkHeader(),
+      'Kenzap-Token': getCookie$1('kenzap_token'),
+      'Kenzap-Sid': spaceID(),
+  });
+
+  /**
+   * @name parseApiError
+   * @description Set default logics for different API Error responses.
+   * @param {object} object - API response.
+   */
+   const parseApiError = (data) => {
+
+      // outout to frontend console
+      console.log(data);
+
+      // unstructured failure
+      if(isNaN(data.code)){
+      
+          // structure failure data
+          let log = data;
+          try{ log = JSON.stringify(log); }catch(e){ }
+
+          let params = new URLSearchParams();
+          params.append("cmd", "report");
+          params.append("sid", spaceID());
+          params.append("token", getCookie$1('kenzap_token'));
+          params.append("data", log);
+          
+          // report error
+          fetch('https://api-v1.kenzap.cloud/error/', { method: 'post', headers: { 'Accept': 'application/json', 'Content-type': 'application/x-www-form-urlencoded', }, body: params });
+
+          alert('Can not connect to Kenzap Cloud');  
+          return;
+      }
+      
+      // handle cloud error codes
+      switch(data.code){
+
+          // unauthorized
+          case 401:
+
+              // dev mode
+              if(window.location.href.indexOf('localhost')!=-1){ 
+
+                  alert(data.reason); 
+                  return; 
+              }
+
+              // production mode
+              location.href="https://auth.kenzap.com/?app=65432108792785&redirect="+window.location.href; break;
+          
+          // something else
+          default:
+
+              alert(data.reason); 
+              break;
+      }
+  };
+
+  /**
+   * @name initBreadcrumbs
+   * @description Render ui breadcrumbs.
+   * @param {array} data - List of link objects containing link text and url. If url is missing then renders breadcrumb as static text. Requires html holder with .bc class.
+   */
+  const initBreadcrumbs = (data) => {
+
+      let html = '<ol class="breadcrumb mt-2 mb-0">';
+      for(let bc of data){
+          
+          if(typeof(bc.link) === 'undefined'){
+
+              html += `<li class="breadcrumb-item">${ bc.text }</li>`;
+          }else {
+
+              html += `<li class="breadcrumb-item"><a href="${ bc.link }">${ bc.text }</a></li>`;
+          }
+      }
+      html += '</ol>';
+      
+      document.querySelector(".bc").innerHTML = html;
+  };
+
+  /**
+   * @name onClick
+   * @description One row click event listener declaration. Works with one or many HTML selectors.
+   * @param {string} sel - HTML selector, id, class, etc.
+   * @param {string} fn - callback function fired on click event.
+   */
+  const onClick = (sel, fn) => {
+
+      if(document.querySelector(sel)) for( let e of document.querySelectorAll(sel) ){
+
+          e.removeEventListener('click', fn, true);
+          e.addEventListener('click', fn, true);
+      }
+  };
+
+  /**
+   * @name onChange
+   * @description One row change event listener declaration. Works with one or many HTML selectors.
+   * @param {string} sel - HTML selector, id, class, etc.
+   * @param {string} fn - callback function fired on click event.
+   */
+  const onChange = (sel, fn) => {
+
+      if(document.querySelector(sel)) for( let e of document.querySelectorAll(sel) ){
+
+          e.removeEventListener('change', fn, true);
+          e.addEventListener('change', fn, true);
+      }
+  };
+
+  /**
+   * @name simulateClick
+   * @description Trigger on click event without user interaction.
+   * @param {string} elem - HTML selector, id, class, etc.
+   */
+   const simulateClick = (elem) => {
+
+  	// create our event (with options)
+  	let evt = new MouseEvent('click', {
+  		bubbles: true,
+  		cancelable: true,
+  		view: window
+  	});
+
+  	// if cancelled, don't dispatch the event
+  	!elem.dispatchEvent(evt);
+  };
+
+  /**
+   * @name toast
+   * @description Triggers toast notification. Adds toast html to the page if missing.
+   * @param {string} text - Toast notification.
+   */
+   const toast = (text) => {
+
+      // only add once
+      if(!document.querySelector(".toast")){
+
+          let html = `
+        <div class="toast-cont position-fixed bottom-0 p-2 m-4 end-0 align-items-center" style="z-index:10000;">
+            <div class="toast hide align-items-center text-white bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                <div class="d-flex">
+                    <div class="toast-body"></div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>`;
+          if(document.querySelector('body > div')) document.querySelector('body > div').insertAdjacentHTML('afterend', html);
+      }
+
+      let toast = new bootstrap.Toast(document.querySelector('.toast'));
+      document.querySelector('.toast .toast-body').innerHTML = text;  
+      toast.show();
+  };
+
+  var languages = [{
+    code: 'ab',
+    name: 'Abkhazian'
+  }, {
+    code: 'aa',
+    name: 'Afar'
+  }, {
+    code: 'af',
+    name: 'Afrikaans'
+  }, {
+    code: 'ak',
+    name: 'Akan'
+  }, {
+    code: 'sq',
+    name: 'Albanian'
+  }, {
+    code: 'am',
+    name: 'Amharic'
+  }, {
+    code: 'ar',
+    name: 'Arabic'
+  }, {
+    code: 'an',
+    name: 'Aragonese'
+  }, {
+    code: 'hy',
+    name: 'Armenian'
+  }, {
+    code: 'as',
+    name: 'Assamese'
+  }, {
+    code: 'av',
+    name: 'Avaric'
+  }, {
+    code: 'ae',
+    name: 'Avestan'
+  }, {
+    code: 'ay',
+    name: 'Aymara'
+  }, {
+    code: 'az',
+    name: 'Azerbaijani'
+  }, {
+    code: 'bm',
+    name: 'Bambara'
+  }, {
+    code: 'ba',
+    name: 'Bashkir'
+  }, {
+    code: 'eu',
+    name: 'Basque'
+  }, {
+    code: 'be',
+    name: 'Belarusian'
+  }, {
+    code: 'bn',
+    name: 'Bengali'
+  }, {
+    code: 'bh',
+    name: 'Bihari languages'
+  }, {
+    code: 'bi',
+    name: 'Bislama'
+  }, {
+    code: 'bs',
+    name: 'Bosnian'
+  }, {
+    code: 'br',
+    name: 'Breton'
+  }, {
+    code: 'bg',
+    name: 'Bulgarian'
+  }, {
+    code: 'my',
+    name: 'Burmese'
+  }, {
+    code: 'ca',
+    name: 'Catalan, Valencian'
+  }, {
+    code: 'km',
+    name: 'Central Khmer'
+  }, {
+    code: 'ch',
+    name: 'Chamorro'
+  }, {
+    code: 'ce',
+    name: 'Chechen'
+  }, {
+    code: 'ny',
+    name: 'Chichewa, Chewa, Nyanja'
+  }, {
+    code: 'zh',
+    name: 'Chinese',
+    "native": '简体中文'
+  }, {
+    code: 'cu',
+    name: 'Church Slavonic, Old Bulgarian, Old Church Slavonic'
+  }, {
+    code: 'cv',
+    name: 'Chuvash'
+  }, {
+    code: 'kw',
+    name: 'Cornish'
+  }, {
+    code: 'co',
+    name: 'Corsican'
+  }, {
+    code: 'cr',
+    name: 'Cree'
+  }, {
+    code: 'hr',
+    name: 'Croatian'
+  }, {
+    code: 'cs',
+    name: 'Czech'
+  }, {
+    code: 'da',
+    name: 'Danish'
+  }, {
+    code: 'dv',
+    name: 'Divehi, Dhivehi, Maldivian'
+  }, {
+    code: 'nl',
+    name: 'Dutch, Flemish'
+  }, {
+    code: 'dz',
+    name: 'Dzongkha'
+  }, {
+    code: 'en',
+    name: 'English',
+    "native": 'English'
+  }, {
+    code: 'eo',
+    name: 'Esperanto'
+  }, {
+    code: 'et',
+    name: 'Estonian'
+  }, {
+    code: 'ee',
+    name: 'Ewe'
+  }, {
+    code: 'fo',
+    name: 'Faroese'
+  }, {
+    code: 'fj',
+    name: 'Fijian'
+  }, {
+    code: 'fi',
+    name: 'Finnish'
+  }, {
+    code: 'fr',
+    name: 'French'
+  }, {
+    code: 'ff',
+    name: 'Fulah'
+  }, {
+    code: 'gd',
+    name: 'Gaelic, Scottish Gaelic'
+  }, {
+    code: 'gl',
+    name: 'Galician'
+  }, {
+    code: 'lg',
+    name: 'Ganda'
+  }, {
+    code: 'ka',
+    name: 'Georgian'
+  }, {
+    code: 'de',
+    name: 'German'
+  }, {
+    code: 'ki',
+    name: 'Gikuyu, Kikuyu'
+  }, {
+    code: 'el',
+    name: 'Greek (Modern)'
+  }, {
+    code: 'kl',
+    name: 'Greenlandic, Kalaallisut'
+  }, {
+    code: 'gn',
+    name: 'Guarani'
+  }, {
+    code: 'gu',
+    name: 'Gujarati'
+  }, {
+    code: 'ht',
+    name: 'Haitian, Haitian Creole'
+  }, {
+    code: 'ha',
+    name: 'Hausa'
+  }, {
+    code: 'he',
+    name: 'Hebrew'
+  }, {
+    code: 'hz',
+    name: 'Herero'
+  }, {
+    code: 'hi',
+    name: 'Hindi'
+  }, {
+    code: 'ho',
+    name: 'Hiri Motu'
+  }, {
+    code: 'hu',
+    name: 'Hungarian'
+  }, {
+    code: 'is',
+    name: 'Icelandic'
+  }, {
+    code: 'io',
+    name: 'Ido'
+  }, {
+    code: 'ig',
+    name: 'Igbo'
+  }, {
+    code: 'id',
+    name: 'Indonesian'
+  }, {
+    code: 'ia',
+    name: 'Interlingua (International Auxiliary Language Association)'
+  }, {
+    code: 'ie',
+    name: 'Interlingue'
+  }, {
+    code: 'iu',
+    name: 'Inuktitut'
+  }, {
+    code: 'ik',
+    name: 'Inupiaq'
+  }, {
+    code: 'ga',
+    name: 'Irish'
+  }, {
+    code: 'it',
+    name: 'Italian'
+  }, {
+    code: 'ja',
+    name: 'Japanese'
+  }, {
+    code: 'jv',
+    name: 'Javanese'
+  }, {
+    code: 'kn',
+    name: 'Kannada'
+  }, {
+    code: 'kr',
+    name: 'Kanuri'
+  }, {
+    code: 'ks',
+    name: 'Kashmiri'
+  }, {
+    code: 'kk',
+    name: 'Kazakh'
+  }, {
+    code: 'rw',
+    name: 'Kinyarwanda'
+  }, {
+    code: 'kv',
+    name: 'Komi'
+  }, {
+    code: 'kg',
+    name: 'Kongo'
+  }, {
+    code: 'ko',
+    name: 'Korean'
+  }, {
+    code: 'kj',
+    name: 'Kwanyama, Kuanyama'
+  }, {
+    code: 'ku',
+    name: 'Kurdish'
+  }, {
+    code: 'ky',
+    name: 'Kyrgyz'
+  }, {
+    code: 'lo',
+    name: 'Lao'
+  }, {
+    code: 'la',
+    name: 'Latin'
+  }, {
+    code: 'lv',
+    name: 'Latvian'
+  }, {
+    code: 'lb',
+    name: 'Letzeburgesch, Luxembourgish'
+  }, {
+    code: 'li',
+    name: 'Limburgish, Limburgan, Limburger'
+  }, {
+    code: 'ln',
+    name: 'Lingala'
+  }, {
+    code: 'lt',
+    name: 'Lithuanian'
+  }, {
+    code: 'lu',
+    name: 'Luba-Katanga'
+  }, {
+    code: 'mk',
+    name: 'Macedonian'
+  }, {
+    code: 'mg',
+    name: 'Malagasy'
+  }, {
+    code: 'ms',
+    name: 'Malay'
+  }, {
+    code: 'ml',
+    name: 'Malayalam'
+  }, {
+    code: 'mt',
+    name: 'Maltese'
+  }, {
+    code: 'gv',
+    name: 'Manx'
+  }, {
+    code: 'mi',
+    name: 'Maori'
+  }, {
+    code: 'mr',
+    name: 'Marathi'
+  }, {
+    code: 'mh',
+    name: 'Marshallese'
+  }, {
+    code: 'ro',
+    name: 'Moldovan, Moldavian, Romanian'
+  }, {
+    code: 'mn',
+    name: 'Mongolian'
+  }, {
+    code: 'na',
+    name: 'Nauru'
+  }, {
+    code: 'nv',
+    name: 'Navajo, Navaho'
+  }, {
+    code: 'nd',
+    name: 'Northern Ndebele'
+  }, {
+    code: 'ng',
+    name: 'Ndonga'
+  }, {
+    code: 'ne',
+    name: 'Nepali'
+  }, {
+    code: 'se',
+    name: 'Northern Sami'
+  }, {
+    code: 'no',
+    name: 'Norwegian'
+  }, {
+    code: 'nb',
+    name: 'Norwegian Bokmål'
+  }, {
+    code: 'nn',
+    name: 'Norwegian Nynorsk'
+  }, {
+    code: 'ii',
+    name: 'Nuosu, Sichuan Yi'
+  }, {
+    code: 'oc',
+    name: 'Occitan (post 1500)'
+  }, {
+    code: 'oj',
+    name: 'Ojibwa'
+  }, {
+    code: 'or',
+    name: 'Oriya'
+  }, {
+    code: 'om',
+    name: 'Oromo'
+  }, {
+    code: 'os',
+    name: 'Ossetian, Ossetic'
+  }, {
+    code: 'pi',
+    name: 'Pali'
+  }, {
+    code: 'pa',
+    name: 'Panjabi, Punjabi'
+  }, {
+    code: 'ps',
+    name: 'Pashto, Pushto'
+  }, {
+    code: 'fa',
+    name: 'Persian'
+  }, {
+    code: 'pl',
+    name: 'Polish'
+  }, {
+    code: 'pt',
+    name: 'Portuguese'
+  }, {
+    code: 'qu',
+    name: 'Quechua'
+  }, {
+    code: 'rm',
+    name: 'Romansh'
+  }, {
+    code: 'rn',
+    name: 'Rundi'
+  }, {
+    code: 'ru',
+    name: 'Russian'
+  }, {
+    code: 'sm',
+    name: 'Samoan'
+  }, {
+    code: 'sg',
+    name: 'Sango'
+  }, {
+    code: 'sa',
+    name: 'Sanskrit'
+  }, {
+    code: 'sc',
+    name: 'Sardinian'
+  }, {
+    code: 'sr',
+    name: 'Serbian'
+  }, {
+    code: 'sn',
+    name: 'Shona'
+  }, {
+    code: 'sd',
+    name: 'Sindhi'
+  }, {
+    code: 'si',
+    name: 'Sinhala, Sinhalese'
+  }, {
+    code: 'sk',
+    name: 'Slovak'
+  }, {
+    code: 'sl',
+    name: 'Slovenian'
+  }, {
+    code: 'so',
+    name: 'Somali'
+  }, {
+    code: 'st',
+    name: 'Sotho, Southern'
+  }, {
+    code: 'nr',
+    name: 'South Ndebele'
+  }, {
+    code: 'es',
+    name: 'Spanish, Castilian'
+  }, {
+    code: 'su',
+    name: 'Sundanese'
+  }, {
+    code: 'sw',
+    name: 'Swahili'
+  }, {
+    code: 'ss',
+    name: 'Swati'
+  }, {
+    code: 'sv',
+    name: 'Swedish'
+  }, {
+    code: 'tl',
+    name: 'Tagalog'
+  }, {
+    code: 'ty',
+    name: 'Tahitian'
+  }, {
+    code: 'tg',
+    name: 'Tajik'
+  }, {
+    code: 'ta',
+    name: 'Tamil'
+  }, {
+    code: 'tt',
+    name: 'Tatar'
+  }, {
+    code: 'te',
+    name: 'Telugu'
+  }, {
+    code: 'th',
+    name: 'Thai'
+  }, {
+    code: 'bo',
+    name: 'Tibetan'
+  }, {
+    code: 'ti',
+    name: 'Tigrinya'
+  }, {
+    code: 'to',
+    name: 'Tonga (Tonga Islands)'
+  }, {
+    code: 'ts',
+    name: 'Tsonga'
+  }, {
+    code: 'tn',
+    name: 'Tswana'
+  }, {
+    code: 'tr',
+    name: 'Turkish'
+  }, {
+    code: 'tk',
+    name: 'Turkmen'
+  }, {
+    code: 'tw',
+    name: 'Twi'
+  }, {
+    code: 'ug',
+    name: 'Uighur, Uyghur'
+  }, {
+    code: 'uk',
+    name: 'Ukrainian'
+  }, {
+    code: 'ur',
+    name: 'Urdu'
+  }, {
+    code: 'uz',
+    name: 'Uzbek'
+  }, {
+    code: 've',
+    name: 'Venda'
+  }, {
+    code: 'vi',
+    name: 'Vietnamese'
+  }, {
+    code: 'vo',
+    name: 'Volap_k'
+  }, {
+    code: 'wa',
+    name: 'Walloon'
+  }, {
+    code: 'cy',
+    name: 'Welsh'
+  }, {
+    code: 'fy',
+    name: 'Western Frisian'
+  }, {
+    code: 'wo',
+    name: 'Wolof'
+  }, {
+    code: 'xh',
+    name: 'Xhosa'
+  }, {
+    code: 'yi',
+    name: 'Yiddish'
+  }, {
+    code: 'yo',
+    name: 'Yoruba'
+  }, {
+    code: 'za',
+    name: 'Zhuang, Chuang'
+  }, {
+    code: 'zu',
+    name: 'Zulu'
+  }];
+  var getCookie = function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  };
+
+  var HTMLContent = function HTMLContent() {
+    return "\n        <div class=\"container p-edit\">\n            <div class=\"d-md-flex justify-content-between bd-highlight mb-3\">\n                <nav class=\"bc\" aria-label=\"breadcrumb\"></nav>\n                <div>\n                    <a class=\"preview-link nounderline d-md-inline-block d-none me-3\" target=\"_blank\" href=\"#\">".concat(__html('preview'), "<i class=\"mdi mdi-monitor\"></i></a>\n                    <button class=\"btn btn-primary btn-publish mt-3 mb-1 mt-md-0 mb-md-0\" type=\"button\">").concat(__html('Publish menu'), "</button>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-lg-12 grid-margin stretch-card\">\n\n                    <div class=\"api-key-warn alert alert-warning d-flex align-items-center d-none\" role=\"alert\">\n                        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" fill=\"currentColor\" class=\"bi bi-exclamation-triangle flex-shrink-0 me-2\" viewBox=\"0 0 16 16\">\n                            <path d=\"M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z\"/>\n                            <path d=\"M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z\"/>\n                        </svg>\n                        <div>\n                            ").concat(__html('Please define %1$API key%2$ with the following permissions "Frontend / Read &amp; write / Isolated".', '<a href="' + link('https://dashboard.kenzap.cloud/access/') + '">', '</a>'), "\n                        </div>\n                    </div>\n\n                    <div class=\"card border-white shadow-sm\">\n                        <div class=\"card-body\">\n                        <h4 class=\"card-title\">").concat(__html('Settings'), "</h4>\n                        <p class=\"form-text\">\n                            ").concat(__html('Go to %1$https://ecommerce.kenzap.cloud/product-list/%2$ecommerce%3$ dashboard to populate menu products.', '<code><a href="', '">', '</a></code>'), "\n                        </p>\n   \n                        <div class=\"qr-list mb-5 \">\n                            <div class=\"row table_number_cont d-none\">\n                                <div class=\"col-lg-4\">\n                                    <select id=\"table_number\" class=\"form-select inp\" data-type=\"select\" aria-label=\"Table number picker\">\n                                        <option selected>Table 1</option>\n                                    </select>\n                                    <p class=\"form-text\">").concat(__html('Pick table number to download the QR-code sticker.'), "</p>\n                                </div>\n                            </div>\n                            <div id=\"qr-main\" class=\"qr-cnt form-group mr-2\">\n                                <a href=\"#\" class=\"qr-download mb-3\">\n                                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" fill=\"currentColor\" class=\"bi bi-cloud-download\" viewBox=\"0 0 16 16\">\n                                        <path d=\"M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z\"/>\n                                        <path d=\"M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z\"/>\n                                    </svg>\n                                </a>\n                                <div class=\"qr-preview\"> </div>\n                                <div class=\"qr-note text-danger d-none\" style=\"\">").concat(__html('* qr-code updated'), "</div>\n                            </div>\n                        </div>\n\n                        <a href='data:image/svg+xml;utf8,<svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"10\"></circle></svg>' download=\"qr-menu.svg\" class=\"d-none d-link\">download</a>\n\n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title \">").concat(__html('Table selection'), "</h5>\n                            <p class=\"form-text mb-3\" style=\"\">").concat(__html('After changing table selection setting, please update your QR-code prints.'), "</p>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <div class=\"form-check\">\n                                        <label class=\"form-check-label status-publish form-label\">\n                                            <input type=\"radio\" class=\"form-check-input inp\" data-type=\"radio\" name=\"mode\" id=\"mode0\" value=\"0\" checked=\"true\"> ").concat(__html('Manual'), "\n                                            <p class=\"form-text\">").concat(__html('Force users to pick up table number upon checkout.'), "</p>\n                                        </label>\n                                    </div>\n                                    <div class=\"form-check\">\n                                        <label class=\"form-check-label status-publish form-label\">\n                                            <input type=\"radio\" class=\"form-check-input\" data-type=\"radio\" name=\"mode\" id=\"mode1\" value=\"1\"> ").concat(__html('Automatic'), "\n                                            <p class=\"form-text\">").concat(__html('Link table number directly with the QR-code sticker.'), "</p>\n\n                                            <div class=\"total_tables_cont d-none\">\n                                                <input id=\"total_tables\" class=\"form-control inp\" data-type=\"number\" type=\"number\" placeholder=\"").concat(__html('Total number of tables'), "\" value=\"10\" aria-label=\"total number of tables\">\n                                                <p class=\"form-text\">").concat(__html('Total number of tables. Each table has individual QR-code sticker.'), "</p>\n                                            </div>\n                                        </label>\n                                    </div>\n                                    <div class=\"form-check\">\n                                        <label class=\"form-check-label status-publish form-label\">\n                                            <input type=\"radio\" class=\"form-check-input\" data-type=\"radio\" name=\"mode\" id=\"mode2\" value=\"2\"> ").concat(__html('No table mode'), "\n                                            <p class=\"form-text\">").concat(__html('Do not ask users for table number upon checkout.'), "</p>\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>    \n                        </div>\n\n                        <div class=\"form-group mb-5\">\n                            <h5 class=\"card-title mb-3\">").concat(__html('Color palette'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-10\">\n                                    <ul id=\"palette\" class=\"palette inp\" data-type=\"palette\">\n                                        <li> <input type=\"color\" class=\"border border-secondary form-control form-control-color\" data-key=\"baseColorA\" value=\"#1941df\" style=\"width:50px\" title=\"Choose your base color\"> </li>\n                                        <li> <input type=\"color\" class=\"border border-secondary form-control form-control-color\" data-key=\"bgColorA\" value=\"#000000\" style=\"width:50px\" title=\"Main background color\"> </li>\n                                        <li> <input type=\"color\" class=\"border border-secondary form-control form-control-color\" data-key=\"bgColorB\" value=\"#494949\" style=\"width:50px\" title=\"Light background color\"> </li>\n                                        <li> <input type=\"color\" class=\"border border-secondary form-control form-control-color\" data-key=\"txtColorB\" value=\"#b8b8b8\" style=\"width:50px\" title=\"Secondary text color\"> </li>\n                                        <li> <input type=\"color\" class=\"border border-secondary form-control form-control-color\" data-key=\"txtColorC\" value=\"#ffffff\" style=\"width:50px\" title=\"Light text color\"> </li>\n                                        <li> <input type=\"color\" class=\"border border-secondary form-control form-control-color\" data-key=\"txtColorA\" value=\"#ffffff\" style=\"width:50px\" title=\"Main text color\"> </li>\n                                    </ul> \n                                    <div class=\"clearfix\"></div>\n                                    <p class=\"form-text\">").concat(__html('Click on block above to pick custom color'), "</p>\n                                </div>\n                            </div>\n                        </div>\n                    \n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title mb-3\">").concat(__html('Menu categories'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <textarea class=\"form-control inp\" id=\"categories\" data-type=\"textarea\" rows=\"8\"></textarea>\n                                    <p class=\"form-text\">").concat(__html('Provide one menu category per line. Categories are case-sensitive.'), " <a href=\"").concat(link('https://ecommerce.kenzap.cloud/product-list/'), "\">Available categories</a>.</p>\n                                </div>\n                            </div> \n                        </div>\n\n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title mb-3\">").concat(__html('Translations'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <div id=\"lang-badges\"></div>\n                                    <textarea class=\"form-control inp d-none\" id=\"locales\" data-type=\"textarea\" rows=\"4\"></textarea>\n                                    <p class=\"form-text\">").concat(__html('To add more translations go to '), " <a href=\"").concat(link('https://translate.kenzap.cloud/edit/?ext=qr-menu&slug=qr-menu'), "\">translation dashboard</a>.</p>\n                                </div>\n                            </div> \n                        </div>\n\n                        <div class=\"form-group mb-3\">\n                            <h5 class=\"card-title mb-3\">").concat(__html('Public link'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <div class=\"input-group\">\n                                        <div class=\"input-group input-group-lg\">\n                                            <input id=\"slug\" type=\"text\" data-type=\"text\" style=\"text-align:right;\" class=\"form-control val-tld inp\" aria-label=\"\">\n                                            <button class=\"btn btn-sm btn-outline-primary dropdown-toggle btn-tld\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">.kenzap.site</button>\n                                            <ul class=\"dropdown-menu dropdown-menu-end domain-list\">\n                                                <li><a class=\"dropdown-item\" href=\"#\" data-key='.kenzap.site'>.kenzap.site</a></li>\n                                                <li><a class=\"dropdown-item d-none\" href=\"#\" data-key='.warung.menu'>.warung.menu</a></li>\n                                                <li><a class=\"dropdown-item d-none\" href=\"#\" data-key='.kenzap.tech'>.kenzap.tech</a></li>\n                                                <li><hr class=\"dropdown-divider\"></li>\n                                                <li><a class=\"dropdown-item\" href=\"#\" data-key='custom'>My domain</a></li>\n                                            </ul>\n                                        </div>\n                                        <p class=\"form-text\">").concat(__html('Public link where users can preview your menu. Ex.: myresto.kenzap.site. For branded link visit '), " <a href=\"").concat(link('https://dashboard.kenzap.cloud/domain/'), "\">").concat(__html('domain dashboard'), "</a>.</p>\n                                        <ul class=\"p-links mt-3\">\n\n                                        </ul>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"form-group mb-3 d-none\">\n                            <h5 class=\"card-title mb-3\">").concat(__html('Public link'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <div class=\"input-group input-group-lg\">\n                                        <span class=\"input-group-text\" id=\"space-domain\">").concat('http://menu' + spaceID() + '.kenzap.site/', "</span>\n                                        <input type=\"text\" class=\"form-control d-none\" data-type=\"text\" aria-label=\"Menu link\" aria-describedby=\"inputGroup-sizing-lg\">\n                                    </div>\n                                    <p class=\"form-text\">").concat(__html('Public link where users can preview your menu. For branded link visit '), " <a href=\"").concat(link('https://dashboard.kenzap.cloud/domain/'), "\">domain dashboard</a></p>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title mb-3\">").concat(__html('Cart addition'), "</h5>\n                            <div class=\"row\">\n                                <div class=\"col-lg-6\">\n                                    <input id=\"max_addition\" type=\"range\" data-type=\"range\" value=\"10\" class=\"form-range inp\" min=\"0\" max=\"100\" >\n                                    <p class=\"form-text\">").concat(__html('Maximum number of items per cart. If set to 0 cart addition is disabled. Currently '), "<span id=\"max_addition_val\">0</span>.</p>\n                                </div>\n                            </div> \n                        </div>\n\n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title \">").concat(__html('Aggregate orders'), "</h5>\n                            <p class=\"form-text mb-3\" style=\"\">").concat(__html('Unite orders into one if table number is the same.'), "</p>\n                            <div class=\"row\">\n                                <div class=\"col-12\">\n                                    <div class=\"form-check mb-3\">\n                                        <input class=\"form-check-input inp\" name=\"aggregation\" type=\"checkbox\" data-type=\"checkbox\" value=\"1\" id=\"aggregation\">\n                                        <label class=\"form-check-label\" for=\"aggregation\">\n                                        ").concat(__html('Aggregate'), "\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title \">").concat(__html('Order management'), "</h5>\n                            <p class=\"form-text mb-3\" style=\"\">").concat(__html('Allow users to manage newly placed orders.'), "</p>\n                            <div class=\"row\">\n                                <div class=\"col-12\">\n                                    <div class=\"form-check mb-3\">\n                                        <input class=\"form-check-input inp\" name=\"orders_cancelable\" type=\"checkbox\" data-type=\"checkbox\" value=\"1\" id=\"orders_cancelable\">\n                                        <label class=\"form-check-label\" for=\"orders_cancelable\">\n                                        ").concat(__html('Allow order cancelation'), "\n                                        </label>\n                                        <p class=\"form-text mb-3\" style=\"\">").concat(__html('Allow users to cancel newly placed orders. Completed orders are not cancelable.'), "</p>\n                                    </div>\n                                </div>\n                                <div class=\"col-12\">\n                                    <div class=\"form-check mb-3\">\n                                        <input class=\"form-check-input inp\" name=\"orders_call_waiter\" type=\"checkbox\" data-type=\"checkbox\" value=\"1\" id=\"orders_call_waiter\">\n                                        <label class=\"form-check-label\" for=\"orders_call_waiter\">\n                                        ").concat(__html('Enable call waiter'), "\n                                        </label>\n                                        <p class=\"form-text mb-3\" style=\"\">").concat(__html('Enable call waiter feature. Enables bell icon linked with dashboard notification system.'), "</p>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title \">").concat(__html('Fast checkout'), "</h5>\n                            <p class=\"form-text mb-3\" style=\"\">").concat(__html('With fast checkout users can skip additional information entry and sign in.'), "</p>\n                            <div class=\"row\" id=\"fast_checkout\" data-type=\"radio\">\n                                <div class=\"col-lg-6\">\n                                    <div class=\"form-check\">\n                                        <label class=\"form-check-label status-publish form-label\">\n                                            <input type=\"radio\" class=\"form-check-input inp\" data-type=\"radio\" name=\"fast_checkout\" id=\"fast_checkout0\" value=\"0\"  > ").concat(__html('Default'), "\n                                            <p class=\"form-text\">").concat(__html('Ask for table number, additional notes and force users to sign in when necessary.'), "</p>\n                                        </label>\n                                    </div>\n                                    <div class=\"form-check\">\n                                        <label class=\"form-check-label status-publish form-label\">\n                                            <input type=\"radio\" class=\"form-check-input\" data-type=\"radio\" name=\"fast_checkout\" id=\"fast_checkout2\" value=\"2\" checked=\"true\"> ").concat(__html('Fast checkout'), "\n                                            <p class=\"form-text\">").concat(__html('Do not force users to sign in or enter additional information.'), "</p>\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>    \n                        </div>\n\n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title \">").concat(__html('Payment method'), "</h5>\n                            <p class=\"form-text mb-3\" style=\"\">").concat(__html('Payment collection methods.'), "</p>\n                            <div class=\"row\" >\n                                <div class=\"col-lg-6\">\n                                    <select id=\"payment_method\" class=\"form-select inp form-select-lg mb-3\" aria-label=\".form-select-lg example\" data-type=\"select\">\n                                        <option value=\"cash\" selected >").concat(__html('Cash Payment'), "</option>\n                                        <option value=\"xendit\">").concat(__html('Xendit (Indonesia)'), "</option>\n                                    </select>\n                                </div>\n                            </div>    \n                        </div>\n\n                        <div class=\"form-group mb-4\">\n                            <h5 class=\"card-title \">").concat(__html('Checkout input fields'), "</h5>\n                            <p class=\"form-text mb-3\" style=\"\">").concat(__html('Load extra checkout input fields.'), "</p>\n                            <div class=\"row\">\n                                <div class=\"col-12\">\n                                    <div class=\"form-check mb-3\">\n                                        <input class=\"form-check-input inp\" name=\"checkout_notes_field\" type=\"checkbox\" data-type=\"checkbox\" value=\"1\" id=\"checkout_notes_field\">\n                                        <label class=\"form-check-label\" for=\"checkout_notes_field\">\n                                        ").concat(__html('Notes'), "\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>   \n                            <div class=\"row\">\n                                <div class=\"col-12\">\n                                    <div class=\"form-check mb-3\">\n                                        <input class=\"form-check-input inp\" name=\"checkout_takeaway_field\" type=\"checkbox\" data-type=\"checkbox\" value=\"1\" id=\"checkout_takeaway_field\">\n                                        <label class=\"form-check-label\" for=\"checkout_takeaway_field\">\n                                        ").concat(__html('Take away'), "\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>   \n                            <div class=\"row\">\n                                <div class=\"col-12\">\n                                    <div class=\"form-check mb-3\">\n                                        <input class=\"form-check-input inp\" name=\"checkout_takeaway_phone_field\" type=\"checkbox\" data-type=\"checkbox\" value=\"1\" id=\"checkout_takeaway_phone_field\">\n                                        <label class=\"form-check-label\" for=\"checkout_takeaway_phone_field\">\n                                        ").concat(__html('Phone number'), "\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>   \n                            <div class=\"row\">\n                                <div class=\"col-12\">\n                                    <div class=\"form-check mb-3\">\n                                        <input class=\"form-check-input inp\" name=\"checkout_takeaway_address_field\" type=\"checkbox\" data-type=\"checkbox\" value=\"1\" id=\"checkout_takeaway_address_field\">\n                                        <label class=\"form-check-label\" for=\"checkout_takeaway_address_field\">\n                                        ").concat(__html('Address'), "\n                                        </label>\n                                    </div>\n                                </div>\n                            </div>   \n                        </div>\n\n                        <div class=\"table-responsive d-none\">\n                            <table class=\"table table-hover table-borderless align-middle table-striped table-p-list\" style=\"min-width: 800px;\">\n                                <thead>\n                                    <tr>\n                                    <th>").concat(__html('ID'), "</th>\n                                    <th>").concat(__html('Title'), "</th>\n                                    <th style=\"display:none;\">Zones</th>\n                                    <th style=\"display:none;\">Seats</th>\n                                    <th style=\"text-align:right;\"></th>\n                                    </tr>\n                                </thead>\n                                <tbody class=\"layout_list\">\n                                    <tr>\n                                    <td></td><td></td><td></td><td></td><td></td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n\n        <div class=\"modal\" tabindex=\"-1\">\n            <div class=\"modal-dialog\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <h5 class=\"modal-title\"></h5>\n                        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n                    </div>\n                    <div class=\"modal-body\">\n\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-primary btn-modal\"></button>\n                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\"></button>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"position-fixed bottom-0 p-2 m-4 end-0 align-items-center\">\n            <div class=\"toast hide align-items-center text-white bg-dark border-0\" role=\"alert\" aria-live=\"assertive\"\n                aria-atomic=\"true\" data-bs-delay=\"3000\">\n                <div class=\"d-flex\">\n                    <div class=\"toast-body\"></div>\n                    <button type=\"button\" class=\"btn-close btn-close-white me-2 m-auto\" data-bs-dismiss=\"toast\"\n                        aria-label=\"Close\"></button>\n                </div>\n            </div>\n        </div>\n        \n    ");
+  };
+
+  /**
+   *
+   * <table width="100%">
+   *     <tr>
+   *         <td>
+   *             <a href="https://github.com/rendaw/qrcode-generator-es6"><img src="https://raw.githubusercontent.com/primer/octicons/master/lib/svg/mark-github.svg?sanitize=true"> Github</a>
+   *         </td>
+   *         <td>
+   *             <a href="https://circleci.com/gh/rendaw/qrcode-generator-es6"><img alt="Build Status" src="https://circleci.com/gh/rendaw/qrcode-generator-es6.svg?style=svg"></a>
+   *         </td>
+   * </table>
+   *
+   * ### How to use:
+   *
+   * First run:
+   *
+   * ```
+   * npm install --save qrcode-generator-es6
+   * ```
+   *
+   * Then use it in your code like:
+   *
+   * ```
+   * import qrcode from './qrcode.js';
+   *
+   * const qr = new qrcode(0, 'H');
+   * qr.addData('This is my data');
+   * qr.make();
+   * my_element.innerHTML = qr.createSvgTag({});
+   * ```
+   *
+   * @module qrcode-generator-es6
+   */
+  //---------------------------------------------------------------------
+  //
+  // QR Code Generator for JavaScript
+  //
+  // Copyright (c) 2009 Kazuhiko Arase
+  //
+  // URL: http://www.d-project.com/
+  //
+  // Licensed under the MIT license:
+  //	http://www.opensource.org/licenses/mit-license.php
+  //
+  // The word 'QR Code' is registered trademark of
+  // DENSO WAVE INCORPORATED
+  //	http://www.denso-wave.com/qrcode/faqpatent-e.html
+  //
+  //---------------------------------------------------------------------
+
+  const PAD0 = 0xec;
+  const PAD1 = 0x11;
+
+  /**
+   * Displays a QR code. Set the code data with `addData` and, call `make` and then call `createSvgTag` or `createImgTag`.
+   *
+   * See `gallery.html` for an example.
+   *
+   * @param {integer} typeNumber The minimum QR code type number from 1 to 40.  Using 0 allows any QR code type number.
+   * @param {String} errorCorrectionLevel 'L','M','Q','H'
+   */
+  class qrcode {
+    constructor(typeNumber, errorCorrectionLevel) {
+      this._typeNumber = typeNumber;
+      this._errorCorrectionLevel = QRErrorCorrectionLevel[errorCorrectionLevel];
+      this._modules = null;
+      this._moduleCount = 0;
+      this._dataCache = null;
+      this._dataList = [];
+
+      this.makeImpl = (test, maskPattern) => {
+        this._moduleCount = this._typeNumber * 4 + 17;
+        this._modules = (function(moduleCount) {
+          let modules = new Array(moduleCount);
+          for (let row = 0; row < moduleCount; row += 1) {
+            modules[row] = new Array(moduleCount);
+            for (let col = 0; col < moduleCount; col += 1) {
+              modules[row][col] = null;
+            }
+          }
+          return modules;
+        })(this._moduleCount);
+
+        this.setupPositionProbePattern(0, 0);
+        this.setupPositionProbePattern(this._moduleCount - 7, 0);
+        this.setupPositionProbePattern(0, this._moduleCount - 7);
+        this.setupPositionAdjustPattern();
+        this.setupTimingPattern();
+        this.setupTypeInfo(test, maskPattern);
+
+        if (this._typeNumber >= 7) {
+          this.setupTypeNumber(test);
+        }
+
+        if (this._dataCache == null) {
+          this._dataCache = this.createData(
+            this._typeNumber,
+            this._errorCorrectionLevel,
+            this._dataList
+          );
+        }
+
+        this.mapData(this._dataCache, maskPattern);
+      };
+
+      this.setupPositionProbePattern = (row, col) => {
+        for (let r = -1; r <= 7; r += 1) {
+          if (row + r <= -1 || this._moduleCount <= row + r) continue;
+
+          for (let c = -1; c <= 7; c += 1) {
+            if (col + c <= -1 || this._moduleCount <= col + c) continue;
+
+            if (
+              (0 <= r && r <= 6 && (c == 0 || c == 6)) ||
+              (0 <= c && c <= 6 && (r == 0 || r == 6)) ||
+              (2 <= r && r <= 4 && 2 <= c && c <= 4)
+            ) {
+              this._modules[row + r][col + c] = true;
+            } else {
+              this._modules[row + r][col + c] = false;
+            }
+          }
+        }
+      };
+
+      this.getBestMaskPattern = () => {
+        let minLostPoint = 0;
+        let pattern = 0;
+
+        for (let i = 0; i < 8; i += 1) {
+          this.makeImpl(true, i);
+
+          let lostPoint = QRUtil.getLostPoint(this);
+
+          if (i == 0 || minLostPoint > lostPoint) {
+            minLostPoint = lostPoint;
+            pattern = i;
+          }
+        }
+
+        return pattern;
+      };
+
+      this.setupTimingPattern = () => {
+        for (let r = 8; r < this._moduleCount - 8; r += 1) {
+          if (this._modules[r][6] != null) {
+            continue;
+          }
+          this._modules[r][6] = r % 2 == 0;
+        }
+
+        for (let c = 8; c < this._moduleCount - 8; c += 1) {
+          if (this._modules[6][c] != null) {
+            continue;
+          }
+          this._modules[6][c] = c % 2 == 0;
+        }
+      };
+
+      this.setupPositionAdjustPattern = () => {
+        let pos = QRUtil.getPatternPosition(this._typeNumber);
+
+        for (let i = 0; i < pos.length; i += 1) {
+          for (let j = 0; j < pos.length; j += 1) {
+            let row = pos[i];
+            let col = pos[j];
+
+            if (this._modules[row][col] != null) {
+              continue;
+            }
+
+            for (let r = -2; r <= 2; r += 1) {
+              for (let c = -2; c <= 2; c += 1) {
+                if (
+                  r == -2 ||
+                  r == 2 ||
+                  c == -2 ||
+                  c == 2 ||
+                  (r == 0 && c == 0)
+                ) {
+                  this._modules[row + r][col + c] = true;
+                } else {
+                  this._modules[row + r][col + c] = false;
+                }
+              }
+            }
+          }
+        }
+      };
+
+      this.setupTypeNumber = test => {
+        let bits = QRUtil.getBCHTypeNumber(this._typeNumber);
+
+        for (let i = 0; i < 18; i += 1) {
+          const mod = !test && ((bits >> i) & 1) == 1;
+          this._modules[Math.floor(i / 3)][
+            (i % 3) + this._moduleCount - 8 - 3
+          ] = mod;
+        }
+
+        for (let i = 0; i < 18; i += 1) {
+          const mod = !test && ((bits >> i) & 1) == 1;
+          this._modules[(i % 3) + this._moduleCount - 8 - 3][
+            Math.floor(i / 3)
+          ] = mod;
+        }
+      };
+
+      this.setupTypeInfo = (test, maskPattern) => {
+        let data = (this._errorCorrectionLevel << 3) | maskPattern;
+        let bits = QRUtil.getBCHTypeInfo(data);
+
+        // vertical
+        for (let i = 0; i < 15; i += 1) {
+          const mod = !test && ((bits >> i) & 1) == 1;
+
+          if (i < 6) {
+            this._modules[i][8] = mod;
+          } else if (i < 8) {
+            this._modules[i + 1][8] = mod;
+          } else {
+            this._modules[this._moduleCount - 15 + i][8] = mod;
+          }
+        }
+
+        // horizontal
+        for (let i = 0; i < 15; i += 1) {
+          const mod = !test && ((bits >> i) & 1) == 1;
+
+          if (i < 8) {
+            this._modules[8][this._moduleCount - i - 1] = mod;
+          } else if (i < 9) {
+            this._modules[8][15 - i - 1 + 1] = mod;
+          } else {
+            this._modules[8][15 - i - 1] = mod;
+          }
+        }
+
+        // fixed module
+        this._modules[this._moduleCount - 8][8] = !test;
+      };
+
+      this.mapData = (data, maskPattern) => {
+        let inc = -1;
+        let row = this._moduleCount - 1;
+        let bitIndex = 7;
+        let byteIndex = 0;
+        let maskFunc = QRUtil.getMaskFunction(maskPattern);
+
+        for (let col = this._moduleCount - 1; col > 0; col -= 2) {
+          if (col == 6) col -= 1;
+
+          while (true) {
+            for (let c = 0; c < 2; c += 1) {
+              if (this._modules[row][col - c] == null) {
+                let dark = false;
+
+                if (byteIndex < data.length) {
+                  dark = ((data[byteIndex] >>> bitIndex) & 1) == 1;
+                }
+
+                let mask = maskFunc(row, col - c);
+
+                if (mask) {
+                  dark = !dark;
+                }
+
+                this._modules[row][col - c] = dark;
+                bitIndex -= 1;
+
+                if (bitIndex == -1) {
+                  byteIndex += 1;
+                  bitIndex = 7;
+                }
+              }
+            }
+
+            row += inc;
+
+            if (row < 0 || this._moduleCount <= row) {
+              row -= inc;
+              inc = -inc;
+              break;
+            }
+          }
+        }
+      };
+
+      this.createBytes = (buffer, rsBlocks) => {
+        let offset = 0;
+
+        let maxDcCount = 0;
+        let maxEcCount = 0;
+
+        let dcdata = new Array(rsBlocks.length);
+        let ecdata = new Array(rsBlocks.length);
+
+        for (let r = 0; r < rsBlocks.length; r += 1) {
+          let dcCount = rsBlocks[r].dataCount;
+          let ecCount = rsBlocks[r].totalCount - dcCount;
+
+          maxDcCount = Math.max(maxDcCount, dcCount);
+          maxEcCount = Math.max(maxEcCount, ecCount);
+
+          dcdata[r] = new Array(dcCount);
+
+          for (let i = 0; i < dcdata[r].length; i += 1) {
+            dcdata[r][i] = 0xff & buffer.getBuffer()[i + offset];
+          }
+          offset += dcCount;
+
+          let rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+          let rawPoly = qrPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+          let modPoly = rawPoly.mod(rsPoly);
+          ecdata[r] = new Array(rsPoly.getLength() - 1);
+          for (let i = 0; i < ecdata[r].length; i += 1) {
+            let modIndex = i + modPoly.getLength() - ecdata[r].length;
+            ecdata[r][i] = modIndex >= 0 ? modPoly.getAt(modIndex) : 0;
+          }
+        }
+
+        let totalCodeCount = 0;
+        for (let i = 0; i < rsBlocks.length; i += 1) {
+          totalCodeCount += rsBlocks[i].totalCount;
+        }
+
+        let data = new Array(totalCodeCount);
+        let index = 0;
+
+        for (let i = 0; i < maxDcCount; i += 1) {
+          for (let r = 0; r < rsBlocks.length; r += 1) {
+            if (i < dcdata[r].length) {
+              data[index] = dcdata[r][i];
+              index += 1;
+            }
+          }
+        }
+
+        for (let i = 0; i < maxEcCount; i += 1) {
+          for (let r = 0; r < rsBlocks.length; r += 1) {
+            if (i < ecdata[r].length) {
+              data[index] = ecdata[r][i];
+              index += 1;
+            }
+          }
+        }
+
+        return data;
+      };
+
+      this.createData = (typeNumber, errorCorrectionLevel, dataList) => {
+        let rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectionLevel);
+
+        let buffer = qrBitBuffer();
+
+        for (let i = 0; i < dataList.length; i += 1) {
+          let data = dataList[i];
+          buffer.put(data.getMode(), 4);
+          buffer.put(
+            data.getLength(),
+            QRUtil.getLengthInBits(data.getMode(), typeNumber)
+          );
+          data.write(buffer);
+        }
+
+        // calc num max data.
+        let totalDataCount = 0;
+        for (let i = 0; i < rsBlocks.length; i += 1) {
+          totalDataCount += rsBlocks[i].dataCount;
+        }
+
+        if (buffer.getLengthInBits() > totalDataCount * 8) {
+          throw "code length overflow. (" +
+            buffer.getLengthInBits() +
+            ">" +
+            totalDataCount * 8 +
+            ")";
+        }
+
+        // end code
+        if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+          buffer.put(0, 4);
+        }
+
+        // padding
+        while (buffer.getLengthInBits() % 8 != 0) {
+          buffer.putBit(false);
+        }
+
+        // padding
+        while (true) {
+          if (buffer.getLengthInBits() >= totalDataCount * 8) {
+            break;
+          }
+          buffer.put(PAD0, 8);
+
+          if (buffer.getLengthInBits() >= totalDataCount * 8) {
+            break;
+          }
+          buffer.put(PAD1, 8);
+        }
+
+        return this.createBytes(buffer, rsBlocks);
+      };
+    }
+
+    addData(data, mode) {
+      mode = mode || "Byte";
+
+      let newData = null;
+
+      switch (mode) {
+        case "Numeric":
+          newData = qrNumber(data);
+          break;
+        case "Alphanumeric":
+          newData = qrAlphaNum(data);
+          break;
+        case "Byte":
+          newData = qr8BitByte(data);
+          break;
+        case "Kanji":
+          newData = qrKanji(data);
+          break;
+        default:
+          throw "mode:" + mode;
+      }
+
+      this._dataList.push(newData);
+      this._dataCache = null;
+    }
+
+    /**
+     * @returns {boolean} true if the module at `row, col` is dark.
+     */
+    isDark(row, col) {
+      if (
+        row < 0 ||
+        this._moduleCount <= row ||
+        col < 0 ||
+        this._moduleCount <= col
+      ) {
+        throw row + "," + col;
+      }
+      return this._modules[row][col];
+    }
+
+    /**
+     * @returns {integer} The module count in one dimension of the QR code.  The total number of modules is the square of this value.
+     */
+    getModuleCount() {
+      return this._moduleCount;
+    }
+
+    /**
+     * Call this when done adding data before getting the generated QR code image.
+     */
+    make() {
+      if (this._typeNumber < 1) {
+        let typeNumber = 1;
+
+        for (; typeNumber < 40; typeNumber++) {
+          let rsBlocks = QRRSBlock.getRSBlocks(
+            typeNumber,
+            this._errorCorrectionLevel
+          );
+          let buffer = qrBitBuffer();
+
+          for (let i = 0; i < this._dataList.length; i++) {
+            let data = this._dataList[i];
+            buffer.put(data.getMode(), 4);
+            buffer.put(
+              data.getLength(),
+              QRUtil.getLengthInBits(data.getMode(), typeNumber)
+            );
+            data.write(buffer);
+          }
+
+          let totalDataCount = 0;
+          for (let i = 0; i < rsBlocks.length; i++) {
+            totalDataCount += rsBlocks[i].dataCount;
+          }
+
+          if (buffer.getLengthInBits() <= totalDataCount * 8) {
+            break;
+          }
+        }
+
+        this._typeNumber = typeNumber;
+      }
+
+      this.makeImpl(false, this.getBestMaskPattern());
+    }
+
+    /**
+     * @param {Object} args
+     * @param {function} [args.drawCell] A callback with arguments `column, row, x, y` to draw a cell.  `x, y` are the coordinates to draw it at.  `c, y` are the QR code module indexes.  Returns the svg element child string for the cell.
+     * @param {function} [args.cellColor] A callback which returns the color for the cell.  By default, a function that returns `black`.  Unused if `drawCell` is provided.
+     * @param {integer} [args.margin] The margin to draw around the QR code, by number of cells.
+     * @param {Object} [args.bg] The background. White by default.
+     * @param {boolean} args.bg.enabled Draw a background
+     * @param {String} args.bg.fill Fill color of the background
+     * @param {Object} [args.obstruction] An image to place in the center of the QR code.
+     * @param {integer} args.obstruction.width Width of the obstruction as a percentage of QR code width.
+     * @param {integer} args.obstruction.height Height of the obstruction as a percentage of QR code height.
+     * @param {String} args.obstruction.path The path of the obstruction image. Exclusive with svgData.
+     * @param {String} args.obstruction.svgData The SVG data to embed as an obstruction. Must start with `<svg`. Exclusive with path.
+     * @returns {String} An svg tag as a string.
+     */
+    createSvgTag({ drawCell, cellColor, cellSize, margin, bg, obstruction }) {
+      drawCell =
+        drawCell ||
+        ((c, r, x, y) =>
+          "<rect " +
+          'width="' +
+          cellSize +
+          '" ' +
+          'height="' +
+          cellSize +
+          '" ' +
+          'x="' +
+          x +
+          '" ' +
+          'y="' +
+          y +
+          '" ' +
+          'fill="' +
+          cellColor(c, r) +
+          '" ' +
+          'shape-rendering="crispEdges" ' +
+          " />");
+      cellColor = cellColor || (() => "black");
+      cellSize = cellSize || 2;
+      margin = typeof margin == "undefined" ? cellSize * 4 : margin;
+      let size = this.getModuleCount() * cellSize + margin * 2;
+      let qrSvg = "";
+
+      qrSvg += '<svg version="1.1"';
+      qrSvg += ' xmlns="http://www.w3.org/2000/svg"';
+      qrSvg += ' xmlns:xlink="http://www.w3.org/1999/xlink"';
+      qrSvg += ' viewBox="0 0 ' + size + " " + size + '" ';
+      qrSvg += ' preserveAspectRatio="xMinYMin meet">';
+      if (!bg) {
+        bg = {
+          enabled: true,
+          fill: "white"
+        };
+      }
+      if (bg.enabled) {
+        qrSvg +=
+          '<rect width="100%" height="100%" fill="' + bg.fill + '" x="0" y="0"/>';
+      }
+
+      const modCount = this.getModuleCount();
+      const totalSize = modCount * cellSize + margin * 2;
+      let obstructionCRStart, obstructionCREnd;
+      if (obstruction) {
+        const { width, height } = obstruction;
+        const spans = [Math.ceil(width * modCount), Math.ceil(height * modCount)];
+        obstructionCRStart = spans.map(s => Math.floor(modCount / 2 - s / 2));
+        obstructionCREnd = spans.map(s => Math.ceil(modCount / 2 + s / 2));
+      }
+
+      for (let r = 0; r < modCount; r += 1) {
+        const mr = r * cellSize + margin;
+        for (let c = 0; c < modCount; c += 1) {
+          const mc = c * cellSize + margin;
+          if (
+            obstruction &&
+            c >= obstructionCRStart[0] &&
+            c < obstructionCREnd[0] &&
+            r >= obstructionCRStart[1] &&
+            r < obstructionCREnd[1]
+          ) {
+            if (c == obstructionCRStart[0] && r == obstructionCRStart[1]) {
+              const img_attrs =
+                'x="' +
+                (totalSize * (1.0 - obstruction.width) * 0.5).toFixed(3) +
+                '" ' +
+                'y="' +
+                (totalSize * (1.0 - obstruction.height) * 0.5).toFixed(3) +
+                '" ' +
+                'width="' +
+                (totalSize * obstruction.width).toFixed(3) +
+                '" ' +
+                'height="' +
+                (totalSize * obstruction.height).toFixed(3) +
+                '" ' +
+                'preserveAspectRatio="xMidYMid meet" ';
+              if (obstruction.path) {
+                qrSvg +=
+                  "<image " +
+                  img_attrs +
+                  'xlink:href="' +
+                  obstruction.path +
+                  '" />';
+              } else {
+                qrSvg += "<svg " + img_attrs + obstruction.svgData.substring(4);
+              }
+            }
+          } else if (this.isDark(r, c)) {
+            qrSvg += drawCell(c, r, mc, mr);
+          }
+        }
+      }
+
+      qrSvg += "</svg>";
+
+      return qrSvg;
+    }
+
+    /**
+     * @param {integer} cellSize The size of a module in pixels.
+     * @param {integer} margin The margin to draw around the QR code in pixels.
+     * @returns {String} An img tag as a string.
+     */
+    createImgTag(cellSize, margin) {
+      cellSize = cellSize || 2;
+      margin = typeof margin == "undefined" ? cellSize * 4 : margin;
+
+      let size = this.getModuleCount() * cellSize + margin * 2;
+      let min = margin;
+      let max = size - margin;
+      let self = this;
+
+      return createImgTag(size, size, function(x, y) {
+        if (min <= x && x < max && min <= y && y < max) {
+          let c = Math.floor((x - min) / cellSize);
+          let r = Math.floor((y - min) / cellSize);
+          return self.isDark(r, c) ? 0 : 1;
+        } else {
+          return 1;
+        }
+      });
+    }
+  }
+
+  /**
+   *
+   */
+  const stringToBytesFuncs = {
+    default: function(s) {
+      let bytes = [];
+      for (let i = 0; i < s.length; i += 1) {
+        let c = s.charCodeAt(i);
+        bytes.push(c & 0xff);
+      }
+      return bytes;
+    }
+  };
+
+  /**
+   *
+   */
+  const stringToBytes = stringToBytesFuncs["default"];
+
+  //---------------------------------------------------------------------
+  // qrcode.createStringToBytes
+  //---------------------------------------------------------------------
+
+  /**
+   *
+   */
+  const QRMode = {
+    MODE_NUMBER: 1 << 0,
+    MODE_ALPHA_NUM: 1 << 1,
+    MODE_8BIT_BYTE: 1 << 2,
+    MODE_KANJI: 1 << 3
+  };
+
+  /**
+   *
+   */
+  const QRErrorCorrectionLevel = {
+    L: 1,
+    M: 0,
+    Q: 3,
+    H: 2
+  };
+
+  /**
+   *
+   */
+  const QRMaskPattern = {
+    PATTERN000: 0,
+    PATTERN001: 1,
+    PATTERN010: 2,
+    PATTERN011: 3,
+    PATTERN100: 4,
+    PATTERN101: 5,
+    PATTERN110: 6,
+    PATTERN111: 7
+  };
+
+  //---------------------------------------------------------------------
+  // QRUtil
+  //---------------------------------------------------------------------
+
+  const QRUtil = (function() {
+    const PATTERN_POSITION_TABLE = [
+      [],
+      [6, 18],
+      [6, 22],
+      [6, 26],
+      [6, 30],
+      [6, 34],
+      [6, 22, 38],
+      [6, 24, 42],
+      [6, 26, 46],
+      [6, 28, 50],
+      [6, 30, 54],
+      [6, 32, 58],
+      [6, 34, 62],
+      [6, 26, 46, 66],
+      [6, 26, 48, 70],
+      [6, 26, 50, 74],
+      [6, 30, 54, 78],
+      [6, 30, 56, 82],
+      [6, 30, 58, 86],
+      [6, 34, 62, 90],
+      [6, 28, 50, 72, 94],
+      [6, 26, 50, 74, 98],
+      [6, 30, 54, 78, 102],
+      [6, 28, 54, 80, 106],
+      [6, 32, 58, 84, 110],
+      [6, 30, 58, 86, 114],
+      [6, 34, 62, 90, 118],
+      [6, 26, 50, 74, 98, 122],
+      [6, 30, 54, 78, 102, 126],
+      [6, 26, 52, 78, 104, 130],
+      [6, 30, 56, 82, 108, 134],
+      [6, 34, 60, 86, 112, 138],
+      [6, 30, 58, 86, 114, 142],
+      [6, 34, 62, 90, 118, 146],
+      [6, 30, 54, 78, 102, 126, 150],
+      [6, 24, 50, 76, 102, 128, 154],
+      [6, 28, 54, 80, 106, 132, 158],
+      [6, 32, 58, 84, 110, 136, 162],
+      [6, 26, 54, 82, 110, 138, 166],
+      [6, 30, 58, 86, 114, 142, 170]
+    ];
+    const G15 =
+      (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0);
+    const G18 =
+      (1 << 12) |
+      (1 << 11) |
+      (1 << 10) |
+      (1 << 9) |
+      (1 << 8) |
+      (1 << 5) |
+      (1 << 2) |
+      (1 << 0);
+    const G15_MASK = (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1);
+
+    let _this = {};
+
+    let getBCHDigit = function(data) {
+      let digit = 0;
+      while (data != 0) {
+        digit += 1;
+        data >>>= 1;
+      }
+      return digit;
+    };
+
+    _this.getBCHTypeInfo = function(data) {
+      let d = data << 10;
+      while (getBCHDigit(d) - getBCHDigit(G15) >= 0) {
+        d ^= G15 << (getBCHDigit(d) - getBCHDigit(G15));
+      }
+      return ((data << 10) | d) ^ G15_MASK;
+    };
+
+    _this.getBCHTypeNumber = function(data) {
+      let d = data << 12;
+      while (getBCHDigit(d) - getBCHDigit(G18) >= 0) {
+        d ^= G18 << (getBCHDigit(d) - getBCHDigit(G18));
+      }
+      return (data << 12) | d;
+    };
+
+    _this.getPatternPosition = function(typeNumber) {
+      return PATTERN_POSITION_TABLE[typeNumber - 1];
+    };
+
+    _this.getMaskFunction = function(maskPattern) {
+      switch (maskPattern) {
+        case QRMaskPattern.PATTERN000:
+          return function(i, j) {
+            return (i + j) % 2 == 0;
+          };
+        case QRMaskPattern.PATTERN001:
+          return function(i, _) {
+            return i % 2 == 0;
+          };
+        case QRMaskPattern.PATTERN010:
+          return function(i, j) {
+            return j % 3 == 0;
+          };
+        case QRMaskPattern.PATTERN011:
+          return function(i, j) {
+            return (i + j) % 3 == 0;
+          };
+        case QRMaskPattern.PATTERN100:
+          return function(i, j) {
+            return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 == 0;
+          };
+        case QRMaskPattern.PATTERN101:
+          return function(i, j) {
+            return ((i * j) % 2) + ((i * j) % 3) == 0;
+          };
+        case QRMaskPattern.PATTERN110:
+          return function(i, j) {
+            return (((i * j) % 2) + ((i * j) % 3)) % 2 == 0;
+          };
+        case QRMaskPattern.PATTERN111:
+          return function(i, j) {
+            return (((i * j) % 3) + ((i + j) % 2)) % 2 == 0;
+          };
+
+        default:
+          throw "bad maskPattern:" + maskPattern;
+      }
+    };
+
+    _this.getErrorCorrectPolynomial = function(errorCorrectLength) {
+      let a = qrPolynomial([1], 0);
+      for (let i = 0; i < errorCorrectLength; i += 1) {
+        a = a.multiply(qrPolynomial([1, QRMath.gexp(i)], 0));
+      }
+      return a;
+    };
+
+    _this.getLengthInBits = function(mode, type) {
+      if (1 <= type && type < 10) {
+        // 1 - 9
+
+        switch (mode) {
+          case QRMode.MODE_NUMBER:
+            return 10;
+          case QRMode.MODE_ALPHA_NUM:
+            return 9;
+          case QRMode.MODE_8BIT_BYTE:
+            return 8;
+          case QRMode.MODE_KANJI:
+            return 8;
+          default:
+            throw "mode:" + mode;
+        }
+      } else if (type < 27) {
+        // 10 - 26
+
+        switch (mode) {
+          case QRMode.MODE_NUMBER:
+            return 12;
+          case QRMode.MODE_ALPHA_NUM:
+            return 11;
+          case QRMode.MODE_8BIT_BYTE:
+            return 16;
+          case QRMode.MODE_KANJI:
+            return 10;
+          default:
+            throw "mode:" + mode;
+        }
+      } else if (type < 41) {
+        // 27 - 40
+
+        switch (mode) {
+          case QRMode.MODE_NUMBER:
+            return 14;
+          case QRMode.MODE_ALPHA_NUM:
+            return 13;
+          case QRMode.MODE_8BIT_BYTE:
+            return 16;
+          case QRMode.MODE_KANJI:
+            return 12;
+          default:
+            throw "mode:" + mode;
+        }
+      } else {
+        throw "type:" + type;
+      }
+    };
+
+    _this.getLostPoint = function(qrcode) {
+      let moduleCount = qrcode.getModuleCount();
+
+      let lostPoint = 0;
+
+      // LEVEL1
+
+      for (let row = 0; row < moduleCount; row += 1) {
+        for (let col = 0; col < moduleCount; col += 1) {
+          let sameCount = 0;
+          let dark = qrcode.isDark(row, col);
+
+          for (let r = -1; r <= 1; r += 1) {
+            if (row + r < 0 || moduleCount <= row + r) {
+              continue;
+            }
+
+            for (let c = -1; c <= 1; c += 1) {
+              if (col + c < 0 || moduleCount <= col + c) {
+                continue;
+              }
+
+              if (r == 0 && c == 0) {
+                continue;
+              }
+
+              if (dark == qrcode.isDark(row + r, col + c)) {
+                sameCount += 1;
+              }
+            }
+          }
+
+          if (sameCount > 5) {
+            lostPoint += 3 + sameCount - 5;
+          }
+        }
+      }
+
+      // LEVEL2
+
+      for (let row = 0; row < moduleCount - 1; row += 1) {
+        for (let col = 0; col < moduleCount - 1; col += 1) {
+          let count = 0;
+          if (qrcode.isDark(row, col)) count += 1;
+          if (qrcode.isDark(row + 1, col)) count += 1;
+          if (qrcode.isDark(row, col + 1)) count += 1;
+          if (qrcode.isDark(row + 1, col + 1)) count += 1;
+          if (count == 0 || count == 4) {
+            lostPoint += 3;
+          }
+        }
+      }
+
+      // LEVEL3
+
+      for (let row = 0; row < moduleCount; row += 1) {
+        for (let col = 0; col < moduleCount - 6; col += 1) {
+          if (
+            qrcode.isDark(row, col) &&
+            !qrcode.isDark(row, col + 1) &&
+            qrcode.isDark(row, col + 2) &&
+            qrcode.isDark(row, col + 3) &&
+            qrcode.isDark(row, col + 4) &&
+            !qrcode.isDark(row, col + 5) &&
+            qrcode.isDark(row, col + 6)
+          ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      for (let col = 0; col < moduleCount; col += 1) {
+        for (let row = 0; row < moduleCount - 6; row += 1) {
+          if (
+            qrcode.isDark(row, col) &&
+            !qrcode.isDark(row + 1, col) &&
+            qrcode.isDark(row + 2, col) &&
+            qrcode.isDark(row + 3, col) &&
+            qrcode.isDark(row + 4, col) &&
+            !qrcode.isDark(row + 5, col) &&
+            qrcode.isDark(row + 6, col)
+          ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      // LEVEL4
+
+      let darkCount = 0;
+
+      for (let col = 0; col < moduleCount; col += 1) {
+        for (let row = 0; row < moduleCount; row += 1) {
+          if (qrcode.isDark(row, col)) {
+            darkCount += 1;
+          }
+        }
+      }
+
+      let ratio =
+        Math.abs((100 * darkCount) / moduleCount / moduleCount - 50) / 5;
+      lostPoint += ratio * 10;
+
+      return lostPoint;
+    };
+
+    return _this;
+  })();
+
+  //---------------------------------------------------------------------
+  // QRMath
+  //---------------------------------------------------------------------
+
+  let QRMath = (function() {
+    let EXP_TABLE = new Array(256);
+    let LOG_TABLE = new Array(256);
+
+    // initialize tables
+    for (let i = 0; i < 8; i += 1) {
+      EXP_TABLE[i] = 1 << i;
+    }
+    for (let i = 8; i < 256; i += 1) {
+      EXP_TABLE[i] =
+        EXP_TABLE[i - 4] ^ EXP_TABLE[i - 5] ^ EXP_TABLE[i - 6] ^ EXP_TABLE[i - 8];
+    }
+    for (let i = 0; i < 255; i += 1) {
+      LOG_TABLE[EXP_TABLE[i]] = i;
+    }
+
+    let _this = {};
+
+    _this.glog = function(n) {
+      if (n < 1) {
+        throw "glog(" + n + ")";
+      }
+
+      return LOG_TABLE[n];
+    };
+
+    _this.gexp = function(n) {
+      while (n < 0) {
+        n += 255;
+      }
+
+      while (n >= 256) {
+        n -= 255;
+      }
+
+      return EXP_TABLE[n];
+    };
+
+    return _this;
+  })();
+
+  //---------------------------------------------------------------------
+  // qrPolynomial
+  //---------------------------------------------------------------------
+
+  function qrPolynomial(num, shift) {
+    if (typeof num.length == "undefined") {
+      throw num.length + "/" + shift;
+    }
+
+    let _num = (function() {
+      let offset = 0;
+      while (offset < num.length && num[offset] == 0) {
+        offset += 1;
+      }
+      let _num = new Array(num.length - offset + shift);
+      for (let i = 0; i < num.length - offset; i += 1) {
+        _num[i] = num[i + offset];
+      }
+      return _num;
+    })();
+
+    let _this = {};
+
+    _this.getAt = function(index) {
+      return _num[index];
+    };
+
+    _this.getLength = function() {
+      return _num.length;
+    };
+
+    _this.multiply = function(e) {
+      let num = new Array(_this.getLength() + e.getLength() - 1);
+
+      for (let i = 0; i < _this.getLength(); i += 1) {
+        for (let j = 0; j < e.getLength(); j += 1) {
+          num[i + j] ^= QRMath.gexp(
+            QRMath.glog(_this.getAt(i)) + QRMath.glog(e.getAt(j))
+          );
+        }
+      }
+
+      return qrPolynomial(num, 0);
+    };
+
+    _this.mod = function(e) {
+      if (_this.getLength() - e.getLength() < 0) {
+        return _this;
+      }
+
+      let ratio = QRMath.glog(_this.getAt(0)) - QRMath.glog(e.getAt(0));
+
+      let num = new Array(_this.getLength());
+      for (let i = 0; i < _this.getLength(); i += 1) {
+        num[i] = _this.getAt(i);
+      }
+
+      for (let i = 0; i < e.getLength(); i += 1) {
+        num[i] ^= QRMath.gexp(QRMath.glog(e.getAt(i)) + ratio);
+      }
+
+      // recursive call
+      return qrPolynomial(num, 0).mod(e);
+    };
+
+    return _this;
+  }
+
+  //---------------------------------------------------------------------
+  // QRRSBlock
+  //---------------------------------------------------------------------
+
+  const QRRSBlock = (function() {
+    let RS_BLOCK_TABLE = [
+      // L
+      // M
+      // Q
+      // H
+
+      // 1
+      [1, 26, 19],
+      [1, 26, 16],
+      [1, 26, 13],
+      [1, 26, 9],
+
+      // 2
+      [1, 44, 34],
+      [1, 44, 28],
+      [1, 44, 22],
+      [1, 44, 16],
+
+      // 3
+      [1, 70, 55],
+      [1, 70, 44],
+      [2, 35, 17],
+      [2, 35, 13],
+
+      // 4
+      [1, 100, 80],
+      [2, 50, 32],
+      [2, 50, 24],
+      [4, 25, 9],
+
+      // 5
+      [1, 134, 108],
+      [2, 67, 43],
+      [2, 33, 15, 2, 34, 16],
+      [2, 33, 11, 2, 34, 12],
+
+      // 6
+      [2, 86, 68],
+      [4, 43, 27],
+      [4, 43, 19],
+      [4, 43, 15],
+
+      // 7
+      [2, 98, 78],
+      [4, 49, 31],
+      [2, 32, 14, 4, 33, 15],
+      [4, 39, 13, 1, 40, 14],
+
+      // 8
+      [2, 121, 97],
+      [2, 60, 38, 2, 61, 39],
+      [4, 40, 18, 2, 41, 19],
+      [4, 40, 14, 2, 41, 15],
+
+      // 9
+      [2, 146, 116],
+      [3, 58, 36, 2, 59, 37],
+      [4, 36, 16, 4, 37, 17],
+      [4, 36, 12, 4, 37, 13],
+
+      // 10
+      [2, 86, 68, 2, 87, 69],
+      [4, 69, 43, 1, 70, 44],
+      [6, 43, 19, 2, 44, 20],
+      [6, 43, 15, 2, 44, 16],
+
+      // 11
+      [4, 101, 81],
+      [1, 80, 50, 4, 81, 51],
+      [4, 50, 22, 4, 51, 23],
+      [3, 36, 12, 8, 37, 13],
+
+      // 12
+      [2, 116, 92, 2, 117, 93],
+      [6, 58, 36, 2, 59, 37],
+      [4, 46, 20, 6, 47, 21],
+      [7, 42, 14, 4, 43, 15],
+
+      // 13
+      [4, 133, 107],
+      [8, 59, 37, 1, 60, 38],
+      [8, 44, 20, 4, 45, 21],
+      [12, 33, 11, 4, 34, 12],
+
+      // 14
+      [3, 145, 115, 1, 146, 116],
+      [4, 64, 40, 5, 65, 41],
+      [11, 36, 16, 5, 37, 17],
+      [11, 36, 12, 5, 37, 13],
+
+      // 15
+      [5, 109, 87, 1, 110, 88],
+      [5, 65, 41, 5, 66, 42],
+      [5, 54, 24, 7, 55, 25],
+      [11, 36, 12, 7, 37, 13],
+
+      // 16
+      [5, 122, 98, 1, 123, 99],
+      [7, 73, 45, 3, 74, 46],
+      [15, 43, 19, 2, 44, 20],
+      [3, 45, 15, 13, 46, 16],
+
+      // 17
+      [1, 135, 107, 5, 136, 108],
+      [10, 74, 46, 1, 75, 47],
+      [1, 50, 22, 15, 51, 23],
+      [2, 42, 14, 17, 43, 15],
+
+      // 18
+      [5, 150, 120, 1, 151, 121],
+      [9, 69, 43, 4, 70, 44],
+      [17, 50, 22, 1, 51, 23],
+      [2, 42, 14, 19, 43, 15],
+
+      // 19
+      [3, 141, 113, 4, 142, 114],
+      [3, 70, 44, 11, 71, 45],
+      [17, 47, 21, 4, 48, 22],
+      [9, 39, 13, 16, 40, 14],
+
+      // 20
+      [3, 135, 107, 5, 136, 108],
+      [3, 67, 41, 13, 68, 42],
+      [15, 54, 24, 5, 55, 25],
+      [15, 43, 15, 10, 44, 16],
+
+      // 21
+      [4, 144, 116, 4, 145, 117],
+      [17, 68, 42],
+      [17, 50, 22, 6, 51, 23],
+      [19, 46, 16, 6, 47, 17],
+
+      // 22
+      [2, 139, 111, 7, 140, 112],
+      [17, 74, 46],
+      [7, 54, 24, 16, 55, 25],
+      [34, 37, 13],
+
+      // 23
+      [4, 151, 121, 5, 152, 122],
+      [4, 75, 47, 14, 76, 48],
+      [11, 54, 24, 14, 55, 25],
+      [16, 45, 15, 14, 46, 16],
+
+      // 24
+      [6, 147, 117, 4, 148, 118],
+      [6, 73, 45, 14, 74, 46],
+      [11, 54, 24, 16, 55, 25],
+      [30, 46, 16, 2, 47, 17],
+
+      // 25
+      [8, 132, 106, 4, 133, 107],
+      [8, 75, 47, 13, 76, 48],
+      [7, 54, 24, 22, 55, 25],
+      [22, 45, 15, 13, 46, 16],
+
+      // 26
+      [10, 142, 114, 2, 143, 115],
+      [19, 74, 46, 4, 75, 47],
+      [28, 50, 22, 6, 51, 23],
+      [33, 46, 16, 4, 47, 17],
+
+      // 27
+      [8, 152, 122, 4, 153, 123],
+      [22, 73, 45, 3, 74, 46],
+      [8, 53, 23, 26, 54, 24],
+      [12, 45, 15, 28, 46, 16],
+
+      // 28
+      [3, 147, 117, 10, 148, 118],
+      [3, 73, 45, 23, 74, 46],
+      [4, 54, 24, 31, 55, 25],
+      [11, 45, 15, 31, 46, 16],
+
+      // 29
+      [7, 146, 116, 7, 147, 117],
+      [21, 73, 45, 7, 74, 46],
+      [1, 53, 23, 37, 54, 24],
+      [19, 45, 15, 26, 46, 16],
+
+      // 30
+      [5, 145, 115, 10, 146, 116],
+      [19, 75, 47, 10, 76, 48],
+      [15, 54, 24, 25, 55, 25],
+      [23, 45, 15, 25, 46, 16],
+
+      // 31
+      [13, 145, 115, 3, 146, 116],
+      [2, 74, 46, 29, 75, 47],
+      [42, 54, 24, 1, 55, 25],
+      [23, 45, 15, 28, 46, 16],
+
+      // 32
+      [17, 145, 115],
+      [10, 74, 46, 23, 75, 47],
+      [10, 54, 24, 35, 55, 25],
+      [19, 45, 15, 35, 46, 16],
+
+      // 33
+      [17, 145, 115, 1, 146, 116],
+      [14, 74, 46, 21, 75, 47],
+      [29, 54, 24, 19, 55, 25],
+      [11, 45, 15, 46, 46, 16],
+
+      // 34
+      [13, 145, 115, 6, 146, 116],
+      [14, 74, 46, 23, 75, 47],
+      [44, 54, 24, 7, 55, 25],
+      [59, 46, 16, 1, 47, 17],
+
+      // 35
+      [12, 151, 121, 7, 152, 122],
+      [12, 75, 47, 26, 76, 48],
+      [39, 54, 24, 14, 55, 25],
+      [22, 45, 15, 41, 46, 16],
+
+      // 36
+      [6, 151, 121, 14, 152, 122],
+      [6, 75, 47, 34, 76, 48],
+      [46, 54, 24, 10, 55, 25],
+      [2, 45, 15, 64, 46, 16],
+
+      // 37
+      [17, 152, 122, 4, 153, 123],
+      [29, 74, 46, 14, 75, 47],
+      [49, 54, 24, 10, 55, 25],
+      [24, 45, 15, 46, 46, 16],
+
+      // 38
+      [4, 152, 122, 18, 153, 123],
+      [13, 74, 46, 32, 75, 47],
+      [48, 54, 24, 14, 55, 25],
+      [42, 45, 15, 32, 46, 16],
+
+      // 39
+      [20, 147, 117, 4, 148, 118],
+      [40, 75, 47, 7, 76, 48],
+      [43, 54, 24, 22, 55, 25],
+      [10, 45, 15, 67, 46, 16],
+
+      // 40
+      [19, 148, 118, 6, 149, 119],
+      [18, 75, 47, 31, 76, 48],
+      [34, 54, 24, 34, 55, 25],
+      [20, 45, 15, 61, 46, 16]
+    ];
+
+    let qrRSBlock = function(totalCount, dataCount) {
+      let _this = {};
+      _this.totalCount = totalCount;
+      _this.dataCount = dataCount;
+      return _this;
+    };
+
+    let _this = {};
+
+    let getRsBlockTable = function(typeNumber, errorCorrectionLevel) {
+      switch (errorCorrectionLevel) {
+        case QRErrorCorrectionLevel.L:
+          return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+        case QRErrorCorrectionLevel.M:
+          return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+        case QRErrorCorrectionLevel.Q:
+          return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+        case QRErrorCorrectionLevel.H:
+          return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+        default:
+          return undefined;
+      }
+    };
+
+    _this.getRSBlocks = function(typeNumber, errorCorrectionLevel) {
+      let rsBlock = getRsBlockTable(typeNumber, errorCorrectionLevel);
+
+      if (typeof rsBlock == "undefined") {
+        throw "bad rs block @ typeNumber:" +
+          typeNumber +
+          "/errorCorrectionLevel:" +
+          errorCorrectionLevel;
+      }
+
+      let length = rsBlock.length / 3;
+
+      let list = [];
+
+      for (let i = 0; i < length; i += 1) {
+        let count = rsBlock[i * 3 + 0];
+        let totalCount = rsBlock[i * 3 + 1];
+        let dataCount = rsBlock[i * 3 + 2];
+
+        for (let j = 0; j < count; j += 1) {
+          list.push(qrRSBlock(totalCount, dataCount));
+        }
+      }
+
+      return list;
+    };
+
+    return _this;
+  })();
+
+  //---------------------------------------------------------------------
+  // qrBitBuffer
+  //---------------------------------------------------------------------
+
+  let qrBitBuffer = function() {
+    let _buffer = [];
+    let _length = 0;
+
+    let _this = {};
+
+    _this.getBuffer = function() {
+      return _buffer;
+    };
+
+    _this.getAt = function(index) {
+      let bufIndex = Math.floor(index / 8);
+      return ((_buffer[bufIndex] >>> (7 - (index % 8))) & 1) == 1;
+    };
+
+    _this.put = function(num, length) {
+      for (let i = 0; i < length; i += 1) {
+        _this.putBit(((num >>> (length - i - 1)) & 1) == 1);
+      }
+    };
+
+    _this.getLengthInBits = function() {
+      return _length;
+    };
+
+    _this.putBit = function(bit) {
+      let bufIndex = Math.floor(_length / 8);
+      if (_buffer.length <= bufIndex) {
+        _buffer.push(0);
+      }
+
+      if (bit) {
+        _buffer[bufIndex] |= 0x80 >>> _length % 8;
+      }
+
+      _length += 1;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrNumber
+  //---------------------------------------------------------------------
+
+  let qrNumber = function(data) {
+    let _mode = QRMode.MODE_NUMBER;
+    let _data = data;
+
+    let _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(_) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+      let data = _data;
+
+      let i = 0;
+
+      while (i + 2 < data.length) {
+        buffer.put(strToNum(data.substring(i, i + 3)), 10);
+        i += 3;
+      }
+
+      if (i < data.length) {
+        if (data.length - i == 1) {
+          buffer.put(strToNum(data.substring(i, i + 1)), 4);
+        } else if (data.length - i == 2) {
+          buffer.put(strToNum(data.substring(i, i + 2)), 7);
+        }
+      }
+    };
+
+    const strToNum = function(s) {
+      let num = 0;
+      for (let i = 0; i < s.length; i += 1) {
+        num = num * 10 + chatToNum(s.charAt(i));
+      }
+      return num;
+    };
+
+    const chatToNum = function(c) {
+      if ("0" <= c && c <= "9") {
+        return c.charCodeAt(0) - "0".charCodeAt(0);
+      }
+      throw "illegal char :" + c;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrAlphaNum
+  //---------------------------------------------------------------------
+
+  const qrAlphaNum = function(data) {
+    let _mode = QRMode.MODE_ALPHA_NUM;
+    let _data = data;
+
+    let _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(_) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+      let s = _data;
+
+      let i = 0;
+
+      while (i + 1 < s.length) {
+        buffer.put(getCode(s.charAt(i)) * 45 + getCode(s.charAt(i + 1)), 11);
+        i += 2;
+      }
+
+      if (i < s.length) {
+        buffer.put(getCode(s.charAt(i)), 6);
+      }
+    };
+
+    const getCode = function(c) {
+      if ("0" <= c && c <= "9") {
+        return c.charCodeAt(0) - "0".charCodeAt(0);
+      } else if ("A" <= c && c <= "Z") {
+        return c.charCodeAt(0) - "A".charCodeAt(0) + 10;
+      } else {
+        switch (c) {
+          case " ":
+            return 36;
+          case "$":
+            return 37;
+          case "%":
+            return 38;
+          case "*":
+            return 39;
+          case "+":
+            return 40;
+          case "-":
+            return 41;
+          case ".":
+            return 42;
+          case "/":
+            return 43;
+          case ":":
+            return 44;
+          default:
+            throw "illegal char :" + c;
+        }
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qr8BitByte
+  //---------------------------------------------------------------------
+
+  const qr8BitByte = function(data) {
+    let _mode = QRMode.MODE_8BIT_BYTE;
+    let _bytes = stringToBytes(data);
+
+    let _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(_) {
+      return _bytes.length;
+    };
+
+    _this.write = function(buffer) {
+      for (let i = 0; i < _bytes.length; i += 1) {
+        buffer.put(_bytes[i], 8);
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrKanji
+  //---------------------------------------------------------------------
+
+  const qrKanji = function(data) {
+    let _mode = QRMode.MODE_KANJI;
+
+    let stringToBytes = stringToBytesFuncs["SJIS"];
+    if (!stringToBytes) {
+      throw "sjis not supported.";
+    }
+    !(function(c, code) {
+      // self test for sjis support.
+      let test = stringToBytes(c);
+      if (test.length != 2 || ((test[0] << 8) | test[1]) != code) {
+        throw "sjis not supported.";
+      }
+    })("\u53cb", 0x9746);
+
+    let _bytes = stringToBytes(data);
+
+    let _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(_) {
+      return ~~(_bytes.length / 2);
+    };
+
+    _this.write = function(buffer) {
+      let data = _bytes;
+
+      let i = 0;
+
+      while (i + 1 < data.length) {
+        let c = ((0xff & data[i]) << 8) | (0xff & data[i + 1]);
+
+        if (0x8140 <= c && c <= 0x9ffc) {
+          c -= 0x8140;
+        } else if (0xe040 <= c && c <= 0xebbf) {
+          c -= 0xc140;
+        } else {
+          throw "illegal char at " + (i + 1) + "/" + c;
+        }
+
+        c = ((c >>> 8) & 0xff) * 0xc0 + (c & 0xff);
+
+        buffer.put(c, 13);
+
+        i += 2;
+      }
+
+      if (i < data.length) {
+        throw "illegal char at " + (i + 1);
+      }
+    };
+
+    return _this;
+  };
+
+  //=====================================================================
+  // GIF Support etc.
+  //
+
+  //---------------------------------------------------------------------
+  // byteArrayOutputStream
+  //---------------------------------------------------------------------
+
+  let byteArrayOutputStream = function() {
+    let _bytes = [];
+
+    let _this = {};
+
+    _this.writeByte = function(b) {
+      _bytes.push(b & 0xff);
+    };
+
+    _this.writeShort = function(i) {
+      _this.writeByte(i);
+      _this.writeByte(i >>> 8);
+    };
+
+    _this.writeBytes = function(b, off, len) {
+      off = off || 0;
+      len = len || b.length;
+      for (let i = 0; i < len; i += 1) {
+        _this.writeByte(b[i + off]);
+      }
+    };
+
+    _this.writeString = function(s) {
+      for (let i = 0; i < s.length; i += 1) {
+        _this.writeByte(s.charCodeAt(i));
+      }
+    };
+
+    _this.toByteArray = function() {
+      return _bytes;
+    };
+
+    _this.toString = function() {
+      let s = "";
+      s += "[";
+      for (let i = 0; i < _bytes.length; i += 1) {
+        if (i > 0) {
+          s += ",";
+        }
+        s += _bytes[i];
+      }
+      s += "]";
+      return s;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64EncodeOutputStream
+  //---------------------------------------------------------------------
+
+  let base64EncodeOutputStream = function() {
+    let _buffer = 0;
+    let _buflen = 0;
+    let _length = 0;
+    let _base64 = "";
+
+    let _this = {};
+
+    let writeEncoded = function(b) {
+      _base64 += String.fromCharCode(encode(b & 0x3f));
+    };
+
+    const encode = function(n) {
+      if (n < 0) ; else if (n < 26) {
+        return 0x41 + n;
+      } else if (n < 52) {
+        return 0x61 + (n - 26);
+      } else if (n < 62) {
+        return 0x30 + (n - 52);
+      } else if (n == 62) {
+        return 0x2b;
+      } else if (n == 63) {
+        return 0x2f;
+      }
+      throw "n:" + n;
+    };
+
+    _this.writeByte = function(n) {
+      _buffer = (_buffer << 8) | (n & 0xff);
+      _buflen += 8;
+      _length += 1;
+
+      while (_buflen >= 6) {
+        writeEncoded(_buffer >>> (_buflen - 6));
+        _buflen -= 6;
+      }
+    };
+
+    _this.flush = function() {
+      if (_buflen > 0) {
+        writeEncoded(_buffer << (6 - _buflen));
+        _buffer = 0;
+        _buflen = 0;
+      }
+
+      if (_length % 3 != 0) {
+        // padding
+        let padlen = 3 - (_length % 3);
+        for (let i = 0; i < padlen; i += 1) {
+          _base64 += "=";
+        }
+      }
+    };
+
+    _this.toString = function() {
+      return _base64;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // gifImage (B/W)
+  //---------------------------------------------------------------------
+
+  let gifImage = function(width, height) {
+    let _width = width;
+    let _height = height;
+    let _data = new Array(width * height);
+
+    let _this = {};
+
+    _this.setPixel = function(x, y, pixel) {
+      _data[y * _width + x] = pixel;
+    };
+
+    _this.write = function(out) {
+      //---------------------------------
+      // GIF Signature
+
+      out.writeString("GIF87a");
+
+      //---------------------------------
+      // Screen Descriptor
+
+      out.writeShort(_width);
+      out.writeShort(_height);
+
+      out.writeByte(0x80); // 2bit
+      out.writeByte(0);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Global Color Map
+
+      // black
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+
+      // white
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+
+      //---------------------------------
+      // Image Descriptor
+
+      out.writeString(",");
+      out.writeShort(0);
+      out.writeShort(0);
+      out.writeShort(_width);
+      out.writeShort(_height);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Local Color Map
+
+      //---------------------------------
+      // Raster Data
+
+      let lzwMinCodeSize = 2;
+      let raster = getLZWRaster(lzwMinCodeSize);
+
+      out.writeByte(lzwMinCodeSize);
+
+      let offset = 0;
+
+      while (raster.length - offset > 255) {
+        out.writeByte(255);
+        out.writeBytes(raster, offset, 255);
+        offset += 255;
+      }
+
+      out.writeByte(raster.length - offset);
+      out.writeBytes(raster, offset, raster.length - offset);
+      out.writeByte(0x00);
+
+      //---------------------------------
+      // GIF Terminator
+      out.writeString(";");
+    };
+
+    let bitOutputStream = function(out) {
+      let _out = out;
+      let _bitLength = 0;
+      let _bitBuffer = 0;
+
+      let _this = {};
+
+      _this.write = function(data, length) {
+        if (data >>> length != 0) {
+          throw "length over";
+        }
+
+        while (_bitLength + length >= 8) {
+          _out.writeByte(0xff & ((data << _bitLength) | _bitBuffer));
+          length -= 8 - _bitLength;
+          data >>>= 8 - _bitLength;
+          _bitBuffer = 0;
+          _bitLength = 0;
+        }
+
+        _bitBuffer = (data << _bitLength) | _bitBuffer;
+        _bitLength = _bitLength + length;
+      };
+
+      _this.flush = function() {
+        if (_bitLength > 0) {
+          _out.writeByte(_bitBuffer);
+        }
+      };
+
+      return _this;
+    };
+
+    const getLZWRaster = function(lzwMinCodeSize) {
+      let clearCode = 1 << lzwMinCodeSize;
+      let endCode = (1 << lzwMinCodeSize) + 1;
+      let bitLength = lzwMinCodeSize + 1;
+
+      // Setup LZWTable
+      let table = lzwTable();
+
+      for (let i = 0; i < clearCode; i += 1) {
+        table.add(String.fromCharCode(i));
+      }
+      table.add(String.fromCharCode(clearCode));
+      table.add(String.fromCharCode(endCode));
+
+      let byteOut = byteArrayOutputStream();
+      let bitOut = bitOutputStream(byteOut);
+
+      // clear code
+      bitOut.write(clearCode, bitLength);
+
+      let dataIndex = 0;
+
+      let s = String.fromCharCode(_data[dataIndex]);
+      dataIndex += 1;
+
+      while (dataIndex < _data.length) {
+        let c = String.fromCharCode(_data[dataIndex]);
+        dataIndex += 1;
+
+        if (table.contains(s + c)) {
+          s = s + c;
+        } else {
+          bitOut.write(table.indexOf(s), bitLength);
+
+          if (table.size() < 0xfff) {
+            if (table.size() == 1 << bitLength) {
+              bitLength += 1;
+            }
+
+            table.add(s + c);
+          }
+
+          s = c;
+        }
+      }
+
+      bitOut.write(table.indexOf(s), bitLength);
+
+      // end code
+      bitOut.write(endCode, bitLength);
+
+      bitOut.flush();
+
+      return byteOut.toByteArray();
+    };
+
+    const lzwTable = function() {
+      let _map = {};
+      let _size = 0;
+
+      let _this = {};
+
+      _this.add = function(key) {
+        if (_this.contains(key)) {
+          throw "dup key:" + key;
+        }
+        _map[key] = _size;
+        _size += 1;
+      };
+
+      _this.size = function() {
+        return _size;
+      };
+
+      _this.indexOf = function(key) {
+        return _map[key];
+      };
+
+      _this.contains = function(key) {
+        return typeof _map[key] != "undefined";
+      };
+
+      return _this;
+    };
+
+    return _this;
+  };
+
+  const createImgTag = function(width, height, getPixel, alt) {
+    let gif = gifImage(width, height);
+    for (let y = 0; y < height; y += 1) {
+      for (let x = 0; x < width; x += 1) {
+        gif.setPixel(x, y, getPixel(x, y));
+      }
+    }
+
+    let b = byteArrayOutputStream();
+    gif.write(b);
+
+    let base64 = base64EncodeOutputStream();
+    let bytes = b.toByteArray();
+    for (let i = 0; i < bytes.length; i += 1) {
+      base64.writeByte(bytes[i]);
+    }
+    base64.flush();
+
+    let img = "";
+    img += "<img";
+    img += '\u0020src="';
+    img += "data:image/gif;base64,";
+    img += base64;
+    img += '"';
+    img += '\u0020width="';
+    img += width;
+    img += '"';
+    img += '\u0020height="';
+    img += height;
+    img += '"';
+    if (alt) {
+      img += '\u0020alt="';
+      img += alt;
+      img += '"';
+    }
+    img += "/>";
+
+    return img;
+  };
+
+  // multibyte support
+  stringToBytesFuncs["UTF-8"] = function(s) {
+    // http://stackoverflow.com/questions/18729405/how-to-convert-utf8-string-to-byte-array
+    function toUTF8Array(str) {
+      let utf8 = [];
+      for (let i = 0; i < str.length; i++) {
+        let charcode = str.charCodeAt(i);
+        if (charcode < 0x80) utf8.push(charcode);
+        else if (charcode < 0x800) {
+          utf8.push(0xc0 | (charcode >> 6), 0x80 | (charcode & 0x3f));
+        } else if (charcode < 0xd800 || charcode >= 0xe000) {
+          utf8.push(
+            0xe0 | (charcode >> 12),
+            0x80 | ((charcode >> 6) & 0x3f),
+            0x80 | (charcode & 0x3f)
+          );
+        }
+        // surrogate pair
+        else {
+          i++;
+          // UTF-16 encodes 0x10000-0x10FFFF by
+          // subtracting 0x10000 and splitting the
+          // 20 bits of 0x0-0xFFFFF into two halves
+          charcode =
+            0x10000 + (((charcode & 0x3ff) << 10) | (str.charCodeAt(i) & 0x3ff));
+          utf8.push(
+            0xf0 | (charcode >> 18),
+            0x80 | ((charcode >> 12) & 0x3f),
+            0x80 | ((charcode >> 6) & 0x3f),
+            0x80 | (charcode & 0x3f)
+          );
+        }
+      }
+      return utf8;
+    }
+    return toUTF8Array(s);
+  };
+
+  var _this = {
+    state: {
+      firstLoad: true,
+      html: '',
+      data: {},
+      ecommerce_settings: {},
+      available_locales: [],
+      tldType: '.kenzap.site',
+      newQR: false,
+      baseURL: '',
+      downloadName: 'qr-menu.svg',
+      API_key: '',
+      ajaxQueue: 0
+    },
+    init: function init() {
+      _this.getData();
+      _this.getQRHTML();
+      _this.getQRJS();
+      _this.getQRCSS();
+    },
+    getData: function getData() {
+      if (_this.state.firstLoad) showLoader();
+      fetch('https://api-v1.kenzap.cloud/', {
+        method: 'post',
+        headers: H(),
+        body: JSON.stringify({
+          query: {
+            keys: {
+              type: 'api-key',
+              keys: ['121']
+            },
+            locale: {
+              type: 'locale',
+              source: ['extension'],
+              key: 'qr-menu'
+            },
+            settings: {
+              type: 'get',
+              key: 'qrmenu-settings',
+              fields: ['mode', 'palette', 'categories', 'locales', 'max_addition', 'slug', 'total_tables', 'table_number', 'aggregation', 'orders_cancelable', 'fast_checkout', 'payment_method', 'checkout_takeaway_field', 'checkout_takeaway_phone_field', 'checkout_takeaway_address_field', 'checkout_notes_field', 'orders_call_waiter', 'updated']
+            },
+            ecommerce_settings: {
+              type: 'get',
+              key: 'ecommerce-settings',
+              fields: ['currency', 'currency_symb', 'currency_symb_loc', 'tax_calc', 'tax_auto_rate', 'tax_percent', 'tax_display', 'fee_calc', 'fee_percent', 'fee_display', 'add_products', 'add_products_list']
+            },
+            available_locales: {
+              type: 'find',
+              key: 'locale-qr-menu',
+              fields: ['_id', 'language', 'location', 'locale', 'ext', 'updated']
+            }
+          }
+        })
+      }).then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        if (response.success) {
+          initHeader(response);
+          _this.loadHomeStructure();
+          _this.renderPage(response);
+          _this.initListeners();
+          _this.initFooter();
+          _this.state.firstLoad = false;
+        } else {
+          parseApiError(response);
+        }
+      })["catch"](function (error) {
+        console.error('Error:', error);
+      });
+    },
+    getQRHTML: function getQRHTML() {
+      fetch('/feed/index.html', {
+        method: 'get',
+        headers: {}
+      }).then(function (response) {
+        return response.text();
+      }).then(function (response) {
+        _this.state.html = response;
+      })["catch"](function (error) {
+        console.error('Error:', error);
+      });
+    },
+    getQRJS: function getQRJS() {
+      fetch('/feed/index.js', {
+        method: 'get',
+        headers: {}
+      }).then(function (response) {
+        return response.text();
+      }).then(function (response) {
+        _this.state.js = response;
+      })["catch"](function (error) {
+        console.error('Error:', error);
+      });
+    },
+    getQRCSS: function getQRCSS() {
+      fetch('/feed/styles.css', {
+        method: 'get',
+        headers: {}
+      }).then(function (response) {
+        return response.text();
+      }).then(function (response) {
+        _this.state.css = response;
+      })["catch"](function (error) {
+        console.error('Error:', error);
+      });
+    },
+    renderPage: function renderPage(response) {
+      initBreadcrumbs([{
+        link: link('https://dashboard.kenzap.cloud?launcher=qr-menu'),
+        text: __html('Dashboard')
+      }, {
+        text: __html('QR menu')
+      }]);
+      _this.state.data = response.settings;
+      _this.state.ecommerce_settings = response.ecommerce_settings;
+      _this.state.available_locales = response.available_locales;
+      var languages_html = "";
+      _this.state.available_locales.forEach(function (lang, i) {
+        var l = languages.filter(function (obj) {
+          return obj.code === lang.language;
+        });
+        _this.state.available_locales[i].language = l[0].name;
+        _this.state.available_locales[i].language_native = l[0]["native"] ? __html(l[0]["native"]) : l[0].name;
+        languages_html += "<span data-code=\"".concat(lang, "\" data-language=\"").concat(l[0].name, "\" data-language-native=\"").concat(__attr(l[0]["native"]), "\" class=\"badge rounded-pill me-2 mb-2 bg-primary fs-6\">").concat(__html(l[0].name), "</span>");
+      });
+      document.querySelector("#lang-badges").innerHTML = languages_html;
+      for (var field in response.settings) {
+        if (typeof response.settings[field] === "undefined") continue;
+        if (response.settings[field] == "") continue;
+        if (document.querySelector("#" + field)) switch (document.querySelector("#" + field).dataset.type) {
+          case 'text':
+          case 'email':
+          case 'emails':
+          case 'number':
+          case 'select':
+          case 'textarea':
+            document.querySelector("#" + field).value = response.settings[field];
+            break;
+          case 'range':
+            document.querySelector("#" + field).value = response.settings[field];
+            document.querySelector("#" + field + '_val').innerHTML = response.settings[field];
+            break;
+          case 'palette':
+            for (var p in response.settings[field]) {
+              document.querySelector('[data-key="' + p + '"]').value = response.settings[field][p];
+              document.querySelector('[data-key="' + p + '"]').style.backgroundColor = response.settings[field][p];
+            }
+            break;
+          case 'radio':
+            if (response.settings[field]) document.querySelector("#" + field + response.settings[field]).setAttribute('checked', true);
+            break;
+          case 'checkbox':
+            if (response.settings[field]) document.querySelector("#" + field).setAttribute('checked', response.settings[field] == 'true' ? true : false);
+            break;
+        }
+      }
+      _this.listeners.modeRefresh();
+      hideLoader();
+    },
+    initListeners: function initListeners() {
+      onClick('.rename-layout', _this.listeners.renameLayout);
+      onClick('.duplicate-layout', _this.listeners.duplicateLayout);
+      onClick('.remove-layout', _this.listeners.removeLayout);
+      onClick('.qr-download', _this.listeners.qrDownload);
+      onChange('.palette input', _this.listeners.paletteRefresh);
+      onChange('#max_addition', _this.listeners.maxAdditionRange);
+      onChange('#total_tables', _this.listeners.totalTablesRefresh);
+      onChange('#table_number', _this.listeners.tableNumberRefresh);
+      onChange('[name="mode"]', _this.listeners.modeRefresh);
+      onChange('#checkout_takeaway_field', _this.listeners.toggleTakeaway);
+      if (!_this.state.firstLoad) return;
+      onClick('.btn-publish', _this.listeners.publish);
+      onClick('.domain-list li a', _this.listeners.domainChange);
+      onClick('.btn-modal', _this.listeners.modalSuccessBtn);
+      _this.listeners.hashRequest();
+      _this.listeners.setDefaults();
+    },
+    listeners: {
+      publish: function publish(e) {
+        e.preventDefault();
+        if (document.querySelector('#slug').value.length < 4) {
+          alert(__html('Please provide a longer public link'));
+          return;
+        }
+        if (document.querySelector('#categories').value.length < 3) {
+          alert(__html('Please provide at least one menu category'));
+          return;
+        }
+        showLoader();
+        var data = {};
+        var _iterator = _createForOfIteratorHelper(document.querySelectorAll('.inp')),
+          _step;
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var s = _step.value;
+            switch (s.dataset.type) {
+              case 'text':
+              case 'email':
+              case 'emails':
+              case 'number':
+              case 'select':
+              case 'textarea':
+                data[s.id] = s.value;
+                break;
+              case 'range':
+                data[s.id] = s.value;
+                break;
+              case 'radio':
+                data[s.getAttribute('name')] = s.parentElement.parentElement.parentElement.querySelector('input:checked').value;
+                break;
+              case 'checkbox':
+                data[s.getAttribute('name')] = s.checked;
+                break;
+              case 'palette':
+                if (data[s.id] == null) data[s.id] = {};
+                var _iterator2 = _createForOfIteratorHelper(s.querySelectorAll('input')),
+                  _step2;
+                try {
+                  for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                    var p = _step2.value;
+                    data[s.id][p.dataset.key] = p.value;
+                  }
+                } catch (err) {
+                  _iterator2.e(err);
+                } finally {
+                  _iterator2.f();
+                }
+                break;
+            }
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+        if (_this.state.data.mode != data.mode) _this.state.newQR = true;
+        if (_this.state.data.slug != data.slug) _this.state.newQR = true;
+        _this.state.data = data;
+        _this.preProcessHTML();
+        fetch('https://api-v1.kenzap.cloud/', {
+          method: 'post',
+          headers: H(),
+          body: JSON.stringify({
+            query: {
+              settings: {
+                type: 'set',
+                key: 'qrmenu-settings',
+                data: data
+              }
+            }
+          })
+        }).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          if (response.success) {
+            toast('Applying changes');
+            if (_this.state.newQR) {
+              _this.refreshURL();
+              document.querySelector('.qr-note').classList.remove('d-none');
+            }
+            hideLoader();
+          } else {
+            parseApiError(response);
+          }
+        })["catch"](function (error) {
+          console.error('Error:', error);
+        });
+      },
+      hashRequest: function hashRequest(e) {
+        if (window.location.hash == '#preview') {
+          var _link = document.querySelector('.preview-link');
+          window.location.replace(_link.getAttribute('href'));
+        }
+        if (window.location.hash == '#qrcode') {
+          var _link2 = document.querySelector('.qr-download');
+          simulateClick(_link2);
+        }
+      },
+      setDefaults: function setDefaults(e) {
+        if (_this.state.available_locales.length == 0) _this.state.available_locales = [{
+          'language': 'English',
+          'lang': 'en'
+        }];
+        if (document.querySelector("#slug").value == '') document.querySelector("#slug").value = 'menu' + spaceID();
+      },
+      paletteRefresh: function paletteRefresh(e) {
+        e.preventDefault();
+        e.currentTarget.style.backgroundColor = e.currentTarget.value;
+      },
+      maxAdditionRange: function maxAdditionRange(e) {
+        document.querySelector('#max_addition_val').innerHTML = e.currentTarget.value;
+      },
+      totalTablesRefresh: function totalTablesRefresh(e) {
+        _this.listeners.genTableSelect();
+      },
+      tableNumberRefresh: function tableNumberRefresh(e) {
+        _this.refreshURL();
+      },
+      modeRefresh: function modeRefresh(e) {
+        var mode = parseInt(document.querySelector('[name="mode"]').parentElement.parentElement.parentElement.querySelector('input:checked').value);
+        if (mode == 1) {
+          document.querySelector('.total_tables_cont').classList.remove('d-none');
+          document.querySelector('.table_number_cont').classList.remove('d-none');
+          _this.listeners.genTableSelect();
+        } else {
+          document.querySelector('.total_tables_cont').classList.add('d-none');
+          document.querySelector('.table_number_cont').classList.add('d-none');
+        }
+        _this.refreshURL();
+      },
+      genTableSelect: function genTableSelect(e) {
+        var total_tables = document.querySelector('#total_tables').value;
+        if (total_tables == '') total_tables = 1;
+        var options = "<option value=\"1\" selected>".concat(__html('Table'), " #1</option>");
+        for (var i = 1; i < total_tables; i++) {
+          options += "<option value=\"".concat(i + 1, "\">").concat(__html('Table'), " #").concat(i + 1, "</option>");
+        }
+        document.querySelector('#table_number').innerHTML = options;
+      },
+      qrDownload: function qrDownload(e) {
+        e.preventDefault();
+        var qr_svg = e.currentTarget.parentNode.querySelector('.qr-preview').innerHTML;
+        var svg_data_uri = 'data:image/svg+xml;utf8,' + qr_svg;
+        var link = document.querySelector('.d-link');
+        link.setAttribute('href', svg_data_uri);
+        link.setAttribute('download', _this.state.downloadName);
+        simulateClick(link);
+      },
+      domainChange: function domainChange(e) {
+        e.preventDefault();
+        var btn = document.querySelector('.btn-tld');
+        btn.innerHTML = e.currentTarget.innerHTML;
+        _this.state.tldType = e.currentTarget.dataset.key;
+      },
+      toggleTakeaway: function toggleTakeaway(e) {},
+      modalSuccessBtn: function modalSuccessBtn(e) {
+        _this.listeners.modalSuccessBtnFunc(e);
+      },
+      modalSuccessBtnFunc: null
+    },
+    preProcessHTML: function preProcessHTML() {
+      var limit = 1000;
+      var offset = 0;
+      var query = {
+        items: {
+          type: 'find',
+          key: 'ecommerce-product',
+          fields: ['_id', 'img', 'status', 'price', 'priced', 'title', 'cats', 'sdesc', 'ldesc', 'variations', 'updated'],
+          limit: limit,
+          offset: offset,
+          sortby: {
+            field: 'created',
+            order: 'ASC'
+          }
+        },
+        settings: {
+          type: 'get',
+          key: 'qrmenu-settings',
+          fields: ['mode', 'palette', 'max_addition', 'slug', 'total_tables', 'table_number', 'aggregation', 'orders_cancelable', 'fast_checkout', 'payment_method', 'checkout_takeaway_field', 'checkout_takeaway_phone_field', 'checkout_takeaway_address_field', 'checkout_notes_field', 'orders_call_waiter', 'categories']
+        }
+      };
+      _this.state.available_locales.forEach(function (lang, e) {
+        query['locale_' + lang.locale] = {
+          type: 'locale',
+          locales: [{
+            key: 'qr-menu',
+            source: 'extension',
+            locale: lang.locale
+          }, {
+            key: 'ecommerce',
+            source: 'extension',
+            locale: lang.locale
+          }, {
+            key: 'ecommerce',
+            source: 'content',
+            locale: lang.locale
+          }]
+        };
+      });
+      fetch('https://api-v1.kenzap.cloud/', {
+        method: 'post',
+        headers: H(),
+        body: JSON.stringify({
+          query: query
+        })
+      }).then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        if (response.success) {
+          _this.renderMenuHTML(response);
+        } else {
+          parseApiError(response);
+        }
+      })["catch"](function (error) {
+        parseApiError(error);
+      });
+    },
+    publishMenu: function publishMenu(locale, html, js, css) {
+      var d = document;
+      var data = {};
+      data.domain = d.querySelector('#slug').value + _this.state.tldType;
+      if (window.location.host.indexOf("localhost") == 0) {
+        data.files = [{
+          type: 'raw',
+          data: html,
+          name: 'index.html'
+        }, {
+          type: 'raw',
+          data: js,
+          name: 'index.js'
+        }, {
+          type: 'raw',
+          data: css,
+          name: 'styles.css'
+        }];
+      } else {
+        data.files = [{
+          type: 'raw',
+          data: html,
+          name: 'index.html'
+        }, {
+          type: 'github',
+          url: 'https://raw.githubusercontent.com/kenzap/qr-menu/main/public/feed/index.js'
+        }, {
+          type: 'github',
+          url: 'https://raw.githubusercontent.com/kenzap/qr-menu/main/public/feed/styles.css'
+        }];
+      }
+      data.files_etc = [];
+      var params = new URLSearchParams();
+      params.append("cmd", "publish_site_v2");
+      params.append("key", "qrmenu");
+      params.append("flush", false);
+      params.append("folder", locale);
+      params.append("data", JSON.stringify(data));
+      params.append("html", html);
+      params.append("sid", spaceID());
+      params.append("token", getCookie('kenzap_token'));
+      fetch('https://siteapi.kenzap.cloud/v1/', {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/x-www-form-urlencoded'
+        },
+        body: params
+      }).then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        hideLoader();
+        if (response.success) ; else {
+          parseApiError(response);
+        }
+      })["catch"](function (error) {
+        console.error('Error:', error);
+      });
+    },
+    flushHTML: function flushHTML(response) {
+      var d = document;
+      var data = {};
+      data.domain = d.querySelector('#slug').value + _this.state.tldType;
+      data.files = [];
+      data.files_etc = [];
+      var params = new URLSearchParams();
+      params.append("cmd", "publish_site");
+      params.append("key", "qrmenu");
+      params.append("flush", true);
+      params.append("folder", "");
+      params.append("data", JSON.stringify(data));
+      params.append("html", "");
+      params.append("sid", spaceID());
+      params.append("token", getCookie('kenzap_token'));
+      fetch('https://siteapi.kenzap.cloud/v1/', {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/x-www-form-urlencoded'
+        },
+        body: params
+      }).then(function (response_flush) {
+        return response_flush.json();
+      }).then(function (response_flush) {
+        hideLoader();
+        if (response_flush.success) {
+          _this.refreshURL();
+          _this.renderMenuHTML(response);
+        } else {
+          parseApiError(response);
+        }
+      })["catch"](function (error) {
+        console.error('Error:', error);
+      });
+    },
+    genQR: function genQR(sel, domain) {
+      var qr = new qrcode(0, 'H');
+      qr.addData(domain);
+      qr.make();
+      document.querySelector(sel).innerHTML = qr.createSvgTag({});
+    },
+    renderMenuHTML: function renderMenuHTML(response) {
+      console.log(response.settings);
+      var i = 1;
+      _this.state.available_locales.forEach(function (lang) {
+        var customizer = "\n                        <!-- Customizer start -->\n                        <style>\n                            :root {\n                                --txtColorA: ".concat(_this.state.data.palette.txtColorA, ";;\n                                --txtColorB: ").concat(_this.state.data.palette.txtColorB, ";\n                                --txtColorC: ").concat(_this.state.data.palette.txtColorC, ";\n                                --bgColorA: ").concat(_this.state.data.palette.bgColorA, ";\n                                --bgColorB: ").concat(_this.state.data.palette.bgColorB, ";\n                                --bgColorC: #000000;\n                                --linkColorA: #1941DF;\n                                --linkColorB: #1941dfd0;\n                                --baseColorA: ").concat(_this.state.data.palette.baseColorA, ";\n                                --baseColorB: #1941df;\n                                --accColorA: #1941df;\n                                --accColorB: #1941df;\n                                --grayColorA: #F7F7F7;\n                                --grayColorB: #c0c0c0;\n                                --grayColorC: #818181;\n                            }\n                            body{\n                                font-family: Poppins, sans-serif\n                            }\n                        </style>\n                        <script>\n                            const API_KEY = '").concat(_this.state.API_key, "';\n                            let config = {\"price\":{\"fee_calc\":\"").concat(_this.state.ecommerce_settings.fee_calc ? _this.state.ecommerce_settings.fee_calc : "", "\",\"fee_percent\":\"").concat(_this.state.ecommerce_settings.fee_percent ? _this.state.ecommerce_settings.fee_percent : "", "\",\"fee_display\":\"").concat(_this.state.ecommerce_settings.fee_display ? _this.state.ecommerce_settings.fee_display : "", "\",\"tax_calc\":\"").concat(_this.state.ecommerce_settings.tax_calc ? _this.state.ecommerce_settings.tax_calc : "", "\",\"tax_percent\":\"").concat(_this.state.ecommerce_settings.tax_percent ? _this.state.ecommerce_settings.tax_percent : "", "\",\"tax_display\":\"").concat(_this.state.ecommerce_settings.tax_display ? _this.state.ecommerce_settings.tax_display : "", "\",\"currency\":\"").concat(_this.state.ecommerce_settings.currency ? _this.state.ecommerce_settings.currency : "USD", "\",\"symbol\":\"").concat(_this.state.ecommerce_settings.currency_symb ? _this.state.ecommerce_settings.currency_symb : "$", "\",\"style\":\"").concat(_this.state.ecommerce_settings.currency_symb_loc ? _this.state.ecommerce_settings.currency_symb_loc : "left", "\"},\"cart\":{\"max_addition\":").concat(_this.state.data.max_addition, "},\"PREFIX\":\"/menu\",\"domain\":\"").concat(_this.state.baseURL, "\",\"fast_checkout\":\"").concat(_this.state.data.fast_checkout, "\",\"payment_method\":\"").concat(_this.state.data.payment_method, "\",\"aggregation\":\"").concat(_this.state.data.aggregation, "\",\"orders_cancelable\":\"").concat(_this.state.data.orders_cancelable, "\",\"sid\":\"").concat(spaceID(), "\",\"available_locales\":").concat(JSON.stringify(_this.state.available_locales), ",\"add_products\":\"").concat(_this.state.ecommerce_settings.add_products ? _this.state.ecommerce_settings.add_products : "", "\",\"add_products_list\":\"").concat(_this.state.ecommerce_settings.add_products_list ? _this.state.ecommerce_settings.add_products_list : "", "\",\"moreButton\":true};\n                            let products = ").concat(JSON.stringify(response.items), ";\n                            let settings = ").concat(JSON.stringify(response.settings), ";\n                            let i18n = {\"state\":{\"locale\": ").concat(JSON.stringify(response['locale_' + lang.locale]), " } };\n                        </script>");
+        var html = _this.state.html.substring(0, _this.state.html.indexOf('<!-- Customizer start -->')) + customizer + _this.state.html.substring(_this.state.html.indexOf('<!-- Customizer end -->'), _this.state.html.length);
+        html = html.replace(/{{timestamp}}/g, Math.floor(Date.now() / 1000));
+        setTimeout(function (locale, html) {
+          _this.publishMenu(locale, html, _this.state.js, _this.state.css);
+        }, i * 100, lang.locale, html);
+        i++;
+      });
+      toast('Menu published');
+    },
+    refreshURL: function refreshURL() {
+      var mode = parseInt(document.querySelector('[name="mode"]').parentElement.parentElement.parentElement.querySelector('input:checked').value);
+      var tn = document.querySelector('#table_number').value;
+      if (tn == '') tn = 1;
+      var postfix = '';
+      _this.state.downloadName = 'qr-menu.svg';
+      switch (mode) {
+        case 0:
+          break;
+        case 1:
+          postfix = '?table=' + tn;
+          _this.state.downloadName = 'qr-menu-table-' + tn + '.svg';
+          break;
+        case 2:
+          postfix = '?table=0';
+          _this.state.downloadName = 'qr-menu-no-table-mode.svg';
+          break;
+      }
+      _this.state.baseURL = 'http://' + _this.state.data.slug + _this.state.tldType + postfix;
+      document.querySelector('.p-links').innerHTML = "";
+      var burlqr = "";
+      _this.state.available_locales.forEach(function (lang, i) {
+        var l = 'http://' + _this.state.data.slug + _this.state.tldType + '/' + lang.locale + '/' + postfix;
+        if (burlqr == "") burlqr = l;
+        _this.state.available_locales[i].link = l;
+        var link = '<li><a target="_blank" data-locale="' + lang.locale + '" href="' + l + '">' + l + '</a></li>';
+        var div = document.createElement('div');
+        div.innerHTML = link;
+        document.querySelector('.p-links').append(div);
+      });
+      document.querySelector('.preview-link').setAttribute('href', burlqr);
+      _this.genQR('.qr-preview', burlqr);
+    },
+    loadHomeStructure: function loadHomeStructure() {
+      if (!_this.state.firstLoad) return;
+      document.querySelector('#contents').innerHTML = HTMLContent();
+    },
+    initFooter: function initFooter$1() {
+      initFooter(__html('Created by %1$Kenzap%2$. ❤️ Licensed %3$GPL3%4$.', '<a class="text-muted" href="https://kenzap.com/" target="_blank">', '</a>', '<a class="text-muted" href="https://github.com/kenzap/qr-menu" target="_blank">', '</a>'), '');
+    }
+  };
+  _this.init();
+
+})();
+//# sourceMappingURL=index.js.map
